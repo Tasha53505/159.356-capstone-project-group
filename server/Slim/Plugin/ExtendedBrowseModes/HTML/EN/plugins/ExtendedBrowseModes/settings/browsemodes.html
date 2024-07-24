@@ -1,0 +1,92 @@
+[% PROCESS settings/header.html %]
+
+	[% WRAPPER setting title="PLUGIN_EXTENDED_BROWSEMODES" desc="" %]
+		<table width="100%">
+			[% IF needsClient %]
+			<tr>
+				<th>[% "ENABLE" | string %][% "COLON" | string %]&nbsp;</th>
+				<th>[% "NAME" | string %]</th>
+				<th colspan="4"></th>
+			</tr>
+			[% END %]
+		[% FOREACH menu = menu_items; menu_no = loop.count %]
+			[% IF !needsClient && !menu.feed && menu.id != '_new_'; NEXT; END %]
+
+			[% IF (menu.feed || menu.id == '_new_') && !seen %]
+			<tr>
+				[% IF needsClient %]
+				<th colspan="2">&nbsp;</th>
+				[% ELSE %]
+				<th></th>
+				<th width="20%">[% "NAME" | string %]</th>
+				[% END %]
+				<th>[% "PLUGIN_EXTENDED_BROWSEMODES_APPLY_TO" | string %]</th>
+				<th>[% "PLUGIN_EXTENDED_BROWSEMODES_BROWSE_BY" | string %]</th>
+				<th width="20%">[% "PLUGIN_EXTENDED_BROWSEMODES_ROLES" | string %]</th>
+				<th width="20%">[% "PLUGIN_EXTENDED_BROWSEMODES_RELEASE_TYPE" | string %]</th>
+				<th width="20%">[% "GENRES" | string %][% "COLON" | string %]</th>
+				<th>[% IF menu.id != '_new_' %][% "DELETE" | string %][% "COLON" | string %][% END %]</th>
+			</tr>
+			[% seen = 1; END %]
+			<tr>
+				<td style="text-align:center;">
+					[% IF needsClient && menu.name %]<input type="checkbox" name="enabled[% menu_no %]" id="enabled[% menu_no %]" [% IF menu.enabled %]checked="checked"[% END %] value="1" class="stdedit" />[% END %]
+					<input type="hidden" name="id[% menu_no %]" value="[% menu.id | html %]" />
+				</td>
+				[% IF !menu.feed && menu.id != '_new_' %]
+					<td colspan="6"><label for="enabled[% menu_no %]">[% menu.name | getstring %]</label></td>
+				[% ELSE %]
+					<td><input type="text" name="name[% menu_no %]" value="[% menu.name | html %]" style="width: 98%;" class="stdedit" /></td>
+					<td>
+						<select class="stdedit" name="libraryid[% menu_no %]" style="margin-top:0">
+							<option value="">[% "SUB_LIBRARY" | string %]</option>
+							<option value="-1" [% IF menu.params.library_id == -1 %]selected[% END %]>[% "ALL_LIBRARY" | string %]</option>
+							[% FOREACH library = libraries %]
+							<option value="[% library.key %]" [% IF menu.params.library_id == library.key %]selected[% END %]>[% library.value | html %]</option>
+							[% END %]
+						</select>
+					</td>
+					<td>
+						<select class="stdedit" name="feed[% menu_no %]" style="margin-top:0">
+							<option value="0">&nbsp;</option>
+							<option value="albums" [% IF menu.feed == 'albums' %]selected[% END %]>[% "ALBUMS" | string %]</option>
+							<option value="artists" [% IF menu.feed == 'artists' %]selected[% END %]>[% "ARTISTS" | string %]</option>
+						</select>
+					</td>
+					<td><input type="text" name="roleid[% menu_no %]" value="[% menu.params.role_id | html %]" style="width: 98%;" class="stdedit" /></td>
+					<td><input type="text" name="releasetype[% menu_no %]" value="[% menu.params.release_type | html %]" style="width: 98%;" class="stdedit" /></td>
+					<td><input type="text" name="genreid[% menu_no %]" value="[% menu.params.genre_id | html %]" style="width: 98%;" class="stdedit" /></td>
+					<td style="text-align:center;">[% IF menu.name %]<input type="checkbox" name="delete[% menu_no %]" class="stdedit" />[% END %]</td>
+				[% END %]
+			</tr>
+		[% END %]
+			<tr><td>&nbsp;</td><td colspan="5">[% "PLUGIN_EXTENDED_BROWSEMODES_CONTRIBUTOR_HINT" | string %] [% roles.join(', ') %]</td></tr>
+			<tr><td>&nbsp;</td><td colspan="5">[% "PLUGIN_EXTENDED_BROWSEMODES_RELEASE_TYPE_HINT" | string %] [% release_types.join(', ') %]</td></tr>
+			<tr><td>&nbsp;</td><td colspan="5">[% "GENRES" | string %][% "COLON" | string %] [% genre_list.join(', ') %]</td></tr>
+		</table>
+	[% END %]
+
+	[% IF needsClient %]
+		<input type="hidden" name="pref_enableLosslessPreferred" value="[% prefs.pref_enableLosslessPreferred || 0 %]" />
+		<input type="hidden" name="pref_enableAudioBooks" value="[% prefs.pref_enableAudioBooks || 0 %]" />
+		<input type="hidden" name="pref_audioBooksGenres" value="[% prefs.pref_audioBooksGenres || '' %]" />
+	[% ELSE %]
+		[% WRAPPER settingSection %]
+			[% WRAPPER settingGroup title="VIRTUALLIBRARIES" desc="SETUP_LIBRARY_VIEWS_DESC" %]
+				<input type="checkbox" name="pref_enableLosslessPreferred" id="enableLosslessPreferred" [% IF
+					prefs.pref_enableLosslessPreferred %]checked="checked" [% END %] value="1" class="stdedit" />
+				<label for="enableLosslessPreferred">[% "PLUGIN_EXTENDED_BROWSEMODES_LOSSLESS_PREFERRED" | string %]</label>
+				<br/>
+				[% "PLUGIN_EXTENDED_BROWSEMODES_LOSSLESS_PREFERRED_DESC" | string %]
+			[% END %]
+			[% WRAPPER settingGroup title="" desc="" %]
+				<input type="checkbox" name="pref_enableAudioBooks" id="enableAudioBooks" [% IF
+					prefs.pref_enableAudioBooks %]checked="checked" [% END %] value="1" class="stdedit" />
+				<label for="enableAudioBooks">[% "PLUGIN_EXTENDED_BROWSEMODES_AUDIOBOOKS_DESC" | string %]</label>
+				<br/>
+				<input type="text" name="pref_audioBooksGenres" id="audioBooksGenres" value="[% prefs.pref_audioBooksGenres | html %]" style="width: 99%"></input>
+			[% END %]
+		[% END %]
+	[% END %]
+
+[% PROCESS settings/footer.html %]

@@ -1,0 +1,339 @@
+# String file for Podcast plugin
+
+PLUGIN_PODCAST
+	CS	Podcasty
+	DA	Podcasts
+	DE	Podcasts
+	EN	Podcasts
+	ES	Podcasts
+	FI	Podcast-lähetykset
+	FR	Podcasts
+	HE	פריטי Podcast
+	IT	Podcast
+	NL	Podcasts
+	NO	Podkaster
+	PL	Podcasty
+	RU	Подкасты
+	SV	Poddsändningar
+
+PODCAST_PLAYER
+	CS	Přehrávač podcastů
+	DA	Podcastafspiller
+	DE	Podcast Player
+	EN	Podcast Player
+	ES	Reproductor de podcasts
+	FI	Podcast-soitin
+	FR	Lecteur de podcast
+	IT	Lettore podcast
+	NL	Podcast Speler
+	NO	Podkast-spiller
+	PL	Odtwarzacz podcastów
+	RU	Плеер подкастов
+	SV	Poddsändningsspelare
+
+PLUGIN_PODCAST_DESC
+	CS	Přístup k podcastům
+	DA	Adgang til podcasts
+	DE	Zugang zu Podcasts
+	EN	Access to Podcasts
+	ES	Acceso a Podcasts
+	FI	Podcastien käyttö
+	FR	Accès aux podcasts
+	IT	Accesso ai podcast
+	NL	Toegang tot Podcasts
+	NO	Tilgang til podkaster
+	PL	Dostęp do podcastów
+	RU	Доступ к подкастам
+	SV	Tillgång till poddsändningar
+
+PODCAST_NOTHING_TO_PLAY
+	CS	Nic k přehrání
+	DA	Der er ikke noget at spille
+	DE	Kein Material vorhanden
+	EN	Nothing to play
+	ES	Nada para reproducir
+	FI	Ei soitettavaa
+	FR	Aucun podcast à lire
+	HE	אין פריטים להפעלה
+	IT	Niente da riprodurre
+	NL	Niets om af te spelen
+	NO	Ingenting å spille av
+	PL	Brak elementów do odtworzenia
+	RU	Нет песен для воспроизведения
+	SV	Det finns inget att spela.
+
+PODCAST_GROUP_DESC
+	CS	Zásuvný modul prohlížeč podcastů vám umožňuje prohlížet a poslouchat podcasty.
+	DA	Udvidelsesmodulet til podcasts giver dig mulighed for at se og høre podcasts.
+	DE	Mit dem Podcast-Browser können Sie Podcasts wiedergeben.
+	EN	The Podcast Browser plugin allows you to view and listen to podcasts.
+	ES	El complemento Examinador de podcasts permite ver y escuchar podcasts.
+	FI	Podcast-selainlaajennus mahdollistaa podcast-lähetysten katselun ja kuuntelun.
+	FR	L'extra Podcast vous permet d'afficher et d'écouter des podcasts.
+	HE	יישום ה-Plugin 'דפדפן Podcast' מאפשר לך להציג ולהאזין לפריטי Podcast.
+	IT	Il plugin Podcast Browser consente di visualizzare e ascoltare podcast.
+	NL	Met de Podcast plug-in kun je podcasts bekijken en beluisteren.
+	NO	Med plugin-modulen for podkastlesing kan du se og høre på podkaster.
+	PL	Dodatek Przeglądarka podcastów umożliwia wyświetlanie i słuchanie podcastów.
+	RU	Подключаемый модуль "Браузер подкастов" позволяет просматривать и прослушивать подкасты.
+	SV	Med plugin-programmet för poddsändningsläsaren kan du visa och lyssna på poddsändningar.
+
+PODCAST_RESET_BUTTON
+	CS	Resetovat
+	DA	Nulstil
+	DE	Zurücksetzen
+	EN	Reset
+	ES	Restablecer
+	FI	Palauta
+	FR	Réinitialiser
+	HE	איפוס
+	IT	Reimposta
+	NL	Opnieuw instellen
+	NO	Tilbakestill
+	PL	Resetuj
+	RU	Сброс
+	SV	Återställ
+
+PODCAST_RESETTING
+	CS	Obnovuji výchozí podcasty
+	DA	Standardpodcasts bliver valgt igen
+	DE	Standard-Podcasts werden wiederhergestellt
+	EN	Resetting to default podcasts
+	ES	Restableciendo podcasts predeterminados
+	FI	Palautetaan oletus-podcasteihin
+	FR	Réinitialisation des podcasts par défaut
+	HE	איפוס לפריטי ה-Podcast המוגדרים כברירת מחדל
+	IT	Reimpostazione dei podcast predefiniti
+	NL	Standaard podcasts worden opnieuw ingesteld
+	NO	Tilbakestiller til standardpodkaster
+	PL	Przywracanie podcastów domyślnych
+	RU	Восстановление подкастов по умолчанию
+	SV	Återställer till standardpoddsändningarna
+
+PODCAST_FEEDS_CHANGE
+	CS	Seznam podcastů změněn.
+	DA	Podcastlisten er ændret.
+	DE	Die Podcast-Liste wurde geändert.
+	EN	Podcast list changed.
+	ES	La lista de podcasts ha cambiado.
+	FI	Podcast-luetteloa muutettiin.
+	FR	Liste des podcasts modifiée.
+	HE	רשימת פריטי ה-Podcast השתנתה.
+	IT	Elenco Podcast modificato.
+	NL	Podcast lijst gewijzigd.
+	NO	Podkast-liste endret.
+	PL	Lista podcastów została zmieniona.
+	RU	Список подкастов изменен.
+	SV	Poddsändningslistan har ändrats.
+
+SETUP_PLUGIN_PODCAST_RESET
+	CS	Obnovit výchozí podcasty
+	DA	Gendan standardpodcasts
+	DE	Standard-Podcasts zurücksetzen
+	EN	Reset default Podcasts
+	ES	Restablecer podcasts predeterminados
+	FI	Palauta oletus-podcastit
+	FR	Rétablir la liste des podcasts par défaut
+	HE	איפוס פריטי Podcast המוגדרים כברירת מחדל
+	IT	Reimposta podcast predefiniti
+	NL	Standaard podcasts opnieuw instellen
+	NO	Tilbakestill standardpodkaster
+	PL	Przywróć podcasty domyślne
+	RU	Восстановить подкасты по умолчанию
+	SV	Återställ till standardpoddsändningarna
+
+SETUP_PLUGIN_PODCAST_ADD_FEED
+	CS	Přidat nový kanál:
+	DA	Tilføj et nyt feed:
+	DE	Neuen Feed hinzufügen:
+	EN	Add a new feed:
+	ES	Agregar fuente nueva:
+	FI	Lisää uusi syöte:
+	FR	Ajouter un flux :
+	IT	Aggiungi nuovo feed:
+	NL	Nieuwe feed toevoegen:
+	NO	Legg til en ny feed:
+	PL	Dodaj nowe źródło:
+	RU	Добавить новый веб-канал:
+	SV	Lägg till nytt flöde:
+
+SETUP_PLUGIN_PODCAST_EXISTING_FEEDS
+	CS	Stávající kanály:
+	DA	Eksisterende feeds:
+	DE	Eingetragene Feeds:
+	EN	Existing feeds:
+	ES	Fuentes existentes:
+	FI	Olemassa olevat syötteet:
+	FR	Flux existants :
+	IT	Feed esistenti:
+	NL	Bestaande feed:
+	NO	Eksisterende feeder:
+	PL	Istniejące źródła:
+	RU	Существующие веб-каналы:
+	SV	Befintliga flöden:
+
+SETUP_PLUGIN_PODCAST_INVALID_FEED
+	CS	Neplatný kanál - %s
+	DA	Ugyldigt feed - %s
+	DE	Ungültiger Feed - %s
+	EN	Invalid Feed - %s
+	ES	Fuente no válida - %s
+	FI	Virheellinen syöte - %s
+	FR	Flux incorrect - %s
+	IT	Feed non valido. %s
+	NL	Ongeldige feed - %s
+	NO	Ugyldig feed: %s
+	PL	Nieprawidłowe źródło — %s
+	RU	Недействительный веб-канал — %s
+	SV	Ogiltigt flöde – %s
+
+PLUGIN_PODCAST_PLAY_FROM_BEGINNING
+	CS	Přehrát od začátku
+	DE	Vom Anfang an wiedergeben
+	EN	Play from the beginning
+	FR	Lire depuis le début
+	NL	Speel af vanaf het begin
+	NO	Spill av fra begynnelsen
+	PL	Odtwórz od początku
+
+PLUGIN_PODCAST_PLAY_FROM_POSITION_X
+	CS	Přehrát z poslední pozice (%s)
+	DE	Von der letzten Position wiedergeben (%s)
+	EN	Play from last position (%s)
+	FR	Lire depuis la dernière position (%s)
+	NL	Speel af vanaf laatste positie (%s)
+	NO	Spill videre fra siste posisjon (%s)
+	PL	Wznów od ostatniej pozycji (%s)
+
+PLUGIN_PODCAST_SKIP_BACK_SECS
+	CS	Skok o několid sekund zpět
+	DE	Zurückspringen um X Sekunden
+	EN	Jump back seconds
+	FR	Revenir en arrière de X secondes
+	NL	Spring seconden terug
+	NO	Hopp sekunder tilbake
+	PL	Przewijanie do tyłu
+
+PLUGIN_PODCAST_SKIP_BACK_DESC
+	CS	Kontextová nabídka podcastů nabízí možnost rychlého skoku zpět v rámci podcastu. Ve výchozím nastavení tato možnost přeskočí o 15 sekund zpět.
+	DE	Das Kontextmenü bietet in Podcasts die Möglichkeit, schnell zurückzuspringen. Standardmässig sind dies 15 Sekunden. Geben Sie hier an, wie weit Sie zurückspringen wollen.
+	EN	The podcasts context menu offers an option to jump back quickly within the podcast. By default this option skips back by 15 seconds.
+	FR	Le menu contextuel des podcasts offre une option pour revenir rapidement en arrière dans le podcast. Par défaut, cette option recule de 15 secondes.
+	NL	In het contextmenu van de podcast kun je snel terugspringen in de podcast. Standaard spring je 15 seconden terug.
+	NO	Kontekstmenyen for podkaster tilbyr å kjapt hoppe tilbake i podkasten. Standardspranget er 15 sekunder. Angi hvor langt spranget skal være.
+	PL	Menu kontekstowe podcastu zawiera opcję do szybkiego przewinięcia do tyłu. Domyślnie ta opcja przewija o 15 sekund do tyłu.
+
+PLUGIN_PODCAST_SKIP_BACK
+	CS	Skok o %s sekund zpět
+	DE	%s Sekunden zurück springen
+	EN	Jump back %s seconds
+	FR	Revenir en arrière de %s secondes
+	NL	Spring %s seconden terug
+	NO	Hopp %s sekunder tilbake
+	PL	Przewiń do tyłu o %s sekund
+
+PLUGIN_PODCAST_RECENTLY_PLAYED
+	CS	Nedávno přehrávané
+	DE	Zuletzt wiedergegeben
+	EN	Recently played
+	FR	Pistes récentes
+	NL	Recent afgespeeld
+
+PLUGIN_PODCAST_SEARCH
+	CS	Prohledat kanály
+	DE	Shows suchen
+	EN	Search feeds
+	FR	Rechercher des flux
+	NL	Zoek feeds
+
+PLUGIN_PODCAST_PROVIDER
+	CS	Poskytovatel podcastů
+	DE	Podcastverzeichnis
+	EN	Podcast provider
+	FR	Fournisseur de Podcast
+	NL	Podcast aanbieder
+
+PLUGIN_PODCAST_PROVIDER_DESC
+	CS	Nastavit poskytovatele podcastových kanálů (agregátor).
+	DE	Wählen Sie das Podcastverzeichnis (Aggregator).
+	EN	Set the Podcast feeds provider (aggregator).
+	FR	Configurez le fournisseur (concentrateur) de Podcasts
+	NL	Configureer de podcast feed aanbieder (aggregator)
+
+PLUGIN_PODCAST_SEARCH_FAILED
+	CS	Vyhledávání se nezdařilo
+	DE	Suche fehlgeschlagen
+	EN	Search failed
+	FR	Echec de recherche
+	NL	Zoeken mislukt
+
+PLUGIN_PODCAST_WHATSNEW
+	CS	Nové epizody za posledních %s dní
+	DE	Neue Episoden der letzten %s Tage
+	EN	New episodes of the last %s days
+	FR	Nouveaux épisodes des %s derniers jours
+	NL	Nieuwe afleveringen van de laatste %s dagen
+
+PLUGIN_PODCAST_AUTHOR
+	CS	Autor:
+	DE	Autor:
+	DE	Herausgeber:
+	EN	Author:
+	FR	Auteur :
+	NL	Auteur:
+
+PLUGIN_PODCAST_WHATSNEW_DESC
+	CS	Nastavte, kolik dní zpětně se mají hledat nové epizody, a maximální počet epizod na tok. Všimněte si, že ručně přidané kanály nemusí být poskytovatelem sledovány
+	DE	Definieren Sie, wieviele Tage und Anzahl Episoden pro Show zurück verfolgt werden soll. Beachten Sie, dass manuell erfasste Podcasts diese Einstellungen u.U. nicht berücksichtigen können.
+	EN	Set how many days to look back for new episodes and maximum number of episodes per flow. Note that manually added feeds might not be tracked by provider
+	FR	Définit l'ancienneté maximale des nouveaux épisodes (en jours) et le nombre maximum par flux. Notez que les flux ajoutés manuellement peuvent ne pas être suivis par le fournisseur.
+	NL	Stel het maximale aantal afleveringen en de hoeveelheid dagen die je wilt terugkijken voor het traceren van nieuwe afleveringen in. Houd er rekening mee dat handmatig toegevoegde feeds mogelijk niet worden bijgehouden door de aanbieder.
+
+PLUGIN_PODCAST_NEWSINCE
+	CS	Počet dnů historie
+	DE	Anzahl Tage im Verlauf
+	EN	Number of history days
+	FR	Nombre de jours d'historique
+	NL	Aantal dagen terug
+
+PLUGIN_PODCAST_MAXNEW
+	CS	Počet nových epizod na kanál
+	DE	Anzahl neuer Episoden pro Show
+	EN	Number of new episodes per feed
+	FR	Nombre de nouveaux épisodes par flux
+	NL	Aantal nieuwe afleveringen per feed
+
+PLUGIN_PODCAST_COUNTRY_DESC
+	CS	Omezit vyhledávání na zemi (volitelné)
+	DE	Suche auf ein Land beschränken (optional)
+	EN	Limit search to a country (optional)
+	FR	Limite la recherche à un pays (optionnel)
+	NL	Zoekopdracht beperken tot een land (optioneel)
+
+PLUGIN_PODCAST_COUNTRY
+	CS	Země
+	DE	Land
+	EN	Country
+	FR	Pays
+	NL	Land
+
+PLUGIN_PODCAST_SUBSCRIBE
+	CS	Přihlásit se k odběru '%s'
+	DE	Podcast '%s' abonnieren
+	EN	Subscribe to '%s'
+	FR	S'abonner à '%s'
+	NL	Abonneren op '%s'
+
+PLUGIN_PODCAST_UNSUBSCRIBE
+	CS	Odhlásit se z odběru '%s'
+	DE	Von Podcast '%s' abmelden
+	EN	Unsubscribe from '%s'
+	FR	Se désabonner de '%s'
+	NL	Afmelden van '%s'
+
+PLUGIN_PODCAST_DONE
+	CS	Přihlášeno/odhlášeno z kanálu...
+	DE	Abonnement angepasst...
+	EN	Subscribed/Unsubscribed from show...
+	FR	Abonné/Désabonné ...
+	NL	Abonneren/Afmelden...
