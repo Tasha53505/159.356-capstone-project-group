@@ -125,14 +125,13 @@
 	[%- END %]
 	</ul>
 </div>
-[% PROCESS pagefooter.html %]
-[% END %]
+
 
     <div class="overallContainer">
         <div class="overallPlaylistContainer">
             <div class="overallHeadersContainer">
                 <div class="player">
-                    <h2>Player</h2>
+                    <h2>Home</h2>
                     <ul>
                         <li>My Music</li>
                         <hr />
@@ -166,8 +165,6 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M9 17V4h10v13M9 8h10"/></g></svg>
     </button>
     <script src="script.js"></script>
-</body>
-</html>
 
 
 <style>
@@ -188,18 +185,28 @@
 }
 
 .overallContainer {
-    background-color: #ccccce;
+    /* background-color: #ccccce; */
     width: 60%;
     height: 20vh;
     display: flex;
-    justify-content: center;
+    position: relative;
+    /* justify-content: center; */
 }
 
 .overallPlaylistContainer {
     background-color: #20294B;
-    height: 100vh; /*Adjusts to any screen-size on desktop to always take up 100% view height */
+    height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
     width: 45%;
-    border-radius: 1em;
+    border-radius: 0em 1em 1em 0em;
+    transition: transform 0.5s ease-in-out; /* Slide animation */
+}
+
+.overallPlaylistContainer.hidden {
+    transform: translateX(-100%); /* Slide animation when Music button is clicked*/
+}
+
+.animationBtn.hidden {
+    margin-left: 0; /* animation button will move WITH the overallBtn Container */
 }
 
 .player h2 {
@@ -232,7 +239,7 @@ hr {
 .accordionButton {
     background: none!important;
     border: none;
-    padding: 0!important;
+    padding: 0 !important;
     cursor: pointer;
     font-size: 1em;
 
@@ -253,6 +260,7 @@ hr {
 
 }
 
+
 .pluginExample {
     background: #EFF8FC;
     width: 2em;
@@ -268,6 +276,9 @@ hr {
     padding: 1em;
     border-radius: 0% 30% 30% 0%;
     margin-top: 10%;
+    margin-left: 27%;
+    transition: 0.6s ;
+    z-index: -5;
 }
 
 .accordionPanel {
@@ -283,6 +294,69 @@ hr {
     max-height: 50vh; 
     padding: 18px;
 }
+
+
+/* PLUGIN AREA */
+/* When pluginExample is clicked, these become active.*/
+.newPluginContainer {
+    background-color: #1b2444;
+    height: 100vh;
+    width: 27%;
+    border-radius: 0em 1em 1em 0em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.5s forwards;
+    display: none; /* Invisible until a plugin is clicked */
+    z-index: 10; /* will always be on top of Player */
+}
+
+.newPluginContainer h3 {
+    text-align: center;
+    font-weight: 400;
+    margin-top: 5%;
+    font-size: 1.5rem;
+}
+
+.shownewPluginContainer {
+    display: block;
+}
+
+/* Back button */
+.backButton {
+    background-color: #0456C6;
+    color: #EFF8FC;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right{
+from{
+transform: translate3d(100%, 0, 0);
+visibility: visible;
+}
+to{
+transform: translate3d(0, 0, 0);
+}
+}
+
 </style>
 <script>
 var accordion = document.getElementsByClassName("accordion");
@@ -300,7 +374,56 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    var plugins = document.querySelectorAll('.pluginExample');
+    plugins.forEach(function (plugin) {
+        plugin.addEventListener('click', function () {
+            console.log("please work");
+            var newContainer = document.createElement('div');
+            newContainer.classList.add('newPluginContainer');
+            
+            // Adds back buttun icon
+            newContainer.innerHTML = 
+                `<h3>Plugin X</h3>
+                <button class="backButton"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024"><path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/><path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/></svg>
+                    </button>`
+            ;
+            
+            document.body.appendChild(newContainer);
+            
+            // Fixes error where it may be displayed UNDERNEATH, this gives it a timeout so the DOM waits for the changes to be applied.
+            setTimeout(function () {
+                newContainer.classList.add('shownewPluginContainer');
+            }, 10);
+
+            // Back Button
+            newContainer.querySelector('.backButton').addEventListener('click', function () {
+                newContainer.classList.remove('shownewPluginContainer');
+                setTimeout(function () {
+                    newContainer.remove();
+                }, 500); // Animation time + back functionality i.e "removes the container" until pressed again.
+            });
+        });
+    });
 });
+
+    var animationBtn = document.querySelector('.animationBtn');
+    var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
+
+    animationBtn.addEventListener('click', function () {
+        overallPlaylistContainer.classList.toggle('hidden');
+        animationBtn.classList.toggle('hidden');
+        if (overallPlaylistContainer.classList.contains('hidden')) {
+            animationBtn.style.marginLeft = '0'; // Moves to the very left
+        } else {
+            animationBtn.style.marginLeft = '27%'; // Makes it so that it resets to the original position
+        }
+    });
+
+
 
 
 </script>
+
+[% PROCESS pagefooter.html %]
+[% END %]
