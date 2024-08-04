@@ -1,11 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
 "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
 <head>
 	[% PROCESS standardheader.html %]
-	<link rel="stylesheet" href="playlistHome.css">
-
 </head>
+	<frameset cols="50%,50%">
+		<frame src="home.html?player=[% playerURI %]" name="browser">
+		<frame src="status.html?player=[% playerURI %]" name="status">
+	</frameset>
+
+	</html>
+ -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,52 +20,50 @@
 	<title>Document</title>
 </head>
 <body>
+
+	
+    <div class="overallContainer">
+        <div class="overallPlaylistContainer">
+            <div class="overallHeadersContainer">
+                <div class="player">
+                    <h2>Home</h2>
+                    <ul>
+                        <li>My Music</li>
+                        <hr />
+                    </ul>
+                    <ul class="pluginsAccordion">
+                        <button class="accordionButton">Plugins</button>
+                        <div class="accordionPanel">
+                            <div class="pluginsContainer">
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+
+                                <div class="pluginExample"></div>                                
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                            </div>
+                        
+                        </div>
+                        <hr />
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="animationBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M9 17V4h10v13M9 8h10"/></g></svg>
+    </button>
+
+
+
 	
 </body>
+    <!-- <script src="script.js"></script> -->
+	<script src="playlistHome.js"></script>
 </html>
-
-<body>
-
-<div class="overallContainer">
-	<div class="overallPlaylistContainer">
-		<div class="overallHeadersContainer">
-			<div class="player">
-				<h2>Home</h2>
-				<ul>
-					<li>My Music</li>
-					<hr />
-				</ul>
-				<ul class="pluginsAccordion">
-					<button class="accordionButton">Plugins</button>
-					<div class="accordionPanel">
-						<div class="pluginsContainer">
-							<div class="pluginExample"></div>
-							<div class="pluginExample"></div>
-							<div class="pluginExample"></div>
-							<div class="pluginExample"></div>
-							<div class="pluginExample"></div>
-
-							<div class="pluginExample"></div>                                
-							<div class="pluginExample"></div>
-							<div class="pluginExample"></div>
-							<div class="pluginExample"></div>
-							<div class="pluginExample"></div>
-						</div>
-					
-					</div>
-					<hr />
-
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
-<button class="animationBtn">
-	<svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M9 17V4h10v13M9 8h10"/></g></svg>
-</button>
-</body>
-<!-- <script src="script.js"></script> -->
-<script src="playlistHome.js"></script>
-	</html>
-
-
