@@ -1,0 +1,189 @@
+   /* Colours:
+ 20294B (dark blue) 
+ 470037 for headings (hope that makes sense).  
+ also uses Oladra colour 284771 for headings.
+ EFF8FC (white)
+ Highlights, links, buttons are 0456C6
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Poetsen+One&display=swap');
+
+* {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    color: #EFF8FC;
+}
+
+.overallContainer {
+    /* background-color: #ccccce; */
+    width: 60%;
+    height: 20vh;
+    display: flex;
+    position: relative;
+    /* justify-content: center; */
+}
+
+.overallPlaylistContainer {
+    background-color: #20294B;
+    height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
+    width: 45%;
+    border-radius: 0em 1em 1em 0em;
+    transition: transform 0.5s ease-in-out; /* Slide animation */
+}
+
+.overallPlaylistContainer.hidden {
+    transform: translateX(-100%); /* Slide animation when Music button is clicked*/
+}
+
+.animationBtn.hidden {
+    margin-left: 0; /* animation button will move WITH the overallBtn Container */
+}
+
+.player h2 {
+    text-align: center;
+    font-weight: 400;
+    margin-top: 3%;
+}
+
+ul li {
+    text-decoration: none;
+    list-style-type: none;
+    margin-top: 5%;
+}
+
+hr {
+    width: 80%;
+    height: 0.2em;
+    border-radius: 50px;
+    margin-top: 0.5em;
+    background-color: #151d3a;
+    border-color: #151d3a;
+}
+
+/* Accordion for Plugins */
+.pluginsAccordion a {
+    text-decoration: none;
+
+}
+
+.accordionButton {
+    background: none!important;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    font-size: 1em;
+
+}
+
+.active, .accordionButton:hover {
+  background-color: #ccc; 
+
+}
+
+.pluginsContainer {
+    display: flex;
+    padding: 1em;
+    width: 80%;
+    height: 60%;
+    flex-wrap: wrap;
+
+
+}
+
+
+.pluginExample {
+    background: #EFF8FC;
+    width: 2em;
+    height: 2em;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+/* Animation */
+.animationBtn {
+    background-color: #0456C6;
+    border: none;
+    padding: 1em;
+    border-radius: 0% 30% 30% 0%;
+    margin-top: 10%;
+    margin-left: 27%;
+    transition: 0.6s ;
+    z-index: -5;
+}
+
+.accordionPanel {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #20294B;
+    padding: 0 18px;
+    border-radius: 0 0 10px 10px;
+    transition: max-height 0.7s ease-in-out, padding 0.4s ease-in-out;
+}
+
+.accordionPanel.show {
+    max-height: 50vh; 
+    padding: 18px;
+}
+
+
+/* PLUGIN AREA */
+/* When pluginExample is clicked, these become active.*/
+.newPluginContainer {
+    background-color: #1b2444;
+    height: 100vh;
+    width: 27%;
+    border-radius: 0em 1em 1em 0em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.5s forwards;
+    display: none; /* Invisible until a plugin is clicked */
+    z-index: 10; /* will always be on top of Player */
+}
+
+.newPluginContainer h3 {
+    text-align: center;
+    font-weight: 400;
+    margin-top: 5%;
+    font-size: 1.5rem;
+}
+
+.shownewPluginContainer {
+    display: block;
+}
+
+/* Back button */
+.backButton {
+    background-color: #0456C6;
+    color: #EFF8FC;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right{
+from{
+transform: translate3d(100%, 0, 0);
+visibility: visible;
+}
+to{
+transform: translate3d(0, 0, 0);
+}
+}
+
