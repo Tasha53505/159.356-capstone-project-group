@@ -1,5 +1,6 @@
 
 [%- IF ajaxRequest -%]
+	[%- IF ajaxRequest -%]
 	<pre>
 	[% PROCESS ajaxHome.txt %]
 	</pre>
@@ -12,7 +13,9 @@
 [% END %]
 
 [% pageHeaderMenu = BLOCK %]
+
 <link rel="stylesheet" href="playlistHome.css">
+
 
 	<div class="statusarea">
 		<div id="scanWarning" [% IF NOT warn %]style="display:none"[% END %]><b>[% "NOTE" | string %]</b> [% "HOME_SCAN_WARNING" | string %]</div>
@@ -170,8 +173,7 @@
 	<script src="playlistHome.js"></script>
 
 
-
-
-
 [% PROCESS pagefooter.html %]
 [% END %]
+
+
