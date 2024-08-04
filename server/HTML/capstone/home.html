@@ -171,74 +171,9 @@
     </button>
     <!-- <script src="script.js"></script> -->
 
-<script>
-	var accordion = document.getElementsByClassName("accordion");
-var i;
-document.addEventListener('DOMContentLoaded', function () {
-    var accordions = document.querySelectorAll('.accordionButton');
-    accordions.forEach(function (accordion) {
-        accordion.addEventListener('click', function () {
-            this.classList.toggle('active');
-            var accordionPanel = this.nextElementSibling;
-            if (accordionPanel.classList.contains('show')) {
-                accordionPanel.classList.remove('show');
-            } else {
-                accordionPanel.classList.add('show');
-            }
-        });
-    });
 
-    var plugins = document.querySelectorAll('.pluginExample');
-    plugins.forEach(function (plugin) {
-        plugin.addEventListener('click', function () {
-            console.log("please work");
-            var newContainer = document.createElement('div');
-            newContainer.classList.add('newPluginContainer');
-            
-            // Adds back buttun icon
-            newContainer.innerHTML = 
-                `<h3>Plugin X</h3>
-                <button class="backButton"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024"><path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/><path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/></svg>
-                    </button>`
-            ;
-            
-            document.body.appendChild(newContainer);
-            
-            // Fixes error where it may be displayed UNDERNEATH, this gives it a timeout so the DOM waits for the changes to be applied.
-            setTimeout(function () {
-                newContainer.classList.add('shownewPluginContainer');
-            }, 10);
-
-            // Back Button
-            newContainer.querySelector('.backButton').addEventListener('click', function () {
-                newContainer.classList.remove('shownewPluginContainer');
-                setTimeout(function () {
-                    newContainer.remove();
-                }, 500); // Animation time + back functionality i.e "removes the container" until pressed again.
-            });
-        });
-    });
-});
-
-    var animationBtn = document.querySelector('.animationBtn');
-    var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
-
-    animationBtn.addEventListener('click', function () {
-        overallPlaylistContainer.classList.toggle('hidden');
-        animationBtn.classList.toggle('hidden');
-        if (overallPlaylistContainer.classList.contains('hidden')) {
-            animationBtn.style.marginLeft = '0'; // Moves to the very left
-        } else {
-            animationBtn.style.marginLeft = '27%'; // Makes it so that it resets to the original position
-        }
-    });
-
-
-
-
-</script>
 [% PROCESS pagefooter.html %]
-<!-- <script src="playlistHome.js"></script> -->
+	<script src="playlistHome.js"></script>
 
 [% END %]
 
