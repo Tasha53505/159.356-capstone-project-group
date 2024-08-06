@@ -1,0 +1,45 @@
+   /* Colours:
+ 20294B (dark blue)
+ 470037 for headings (hope that makes sense).
+ also uses Oladra colour 284771 for headings.
+ EFF8FC (white)
+ Highlights, links, buttons are 0456C6
+*/
+
+   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Poetsen+One&display=swap');
+
+
+* {
+    font-family: "Inter", sans-serif;
+    margin: 2px;
+    padding: 2px;
+    box-sizing: border-box;
+    background-color: #20294B;
+}
+
+.playerContainer {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 50vh;
+}
+
+.album {
+    display: flex;
+    color: #EFF8FC;
+    background-color: #0456C6;
+    aspect-ratio: 1 / 1;
+    width: 15vw;
+    position:relative;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: transform 0.2s ease, border-radius 0.4s ease;
+}
+
+.album.circle{
+    border-radius: 50%;
+}
