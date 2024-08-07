@@ -219,3 +219,59 @@ transform: translate3d(0, 0, 0);
 .MusiclistContainer.show {
     bottom: 0; /* Slide up into view */
 }
+
+/* Media Queries */
+@media only screen and (max-width: 600px) {
+    h2 {
+        font-size: 15px;
+    }
+
+    ul li {
+        font-size: 13px;
+        }
+
+    .pluginExample {    
+      width: 1.5em;  
+      height: 1.5em;  
+    }
+    
+    .overallPlaylistContainer {
+        width: 100%;
+    }
+    .pluginsContainer {
+        width: 40%;
+    }
+    .accordionButton {
+        font-size: 14px;
+    }
+
+  }
+  @media only screen and (max-width: 800px) {
+    h2 {
+        font-size: 15px;
+    }
+
+    ul li {
+        font-size: 13px;
+        }
+
+    .pluginExample {    
+      width: 1.5em;  
+      height: 1.5em;  
+    }
+    
+    .overallPlaylistContainer {
+        width: 100%;
+    }
+    .pluginsContainer {
+        width: 40%;
+    }
+    .accordionButton {
+        font-size: 14px;
+    }
+
+    .animationBtn {
+        margin-left: 60%;
+    }
+
+  }
