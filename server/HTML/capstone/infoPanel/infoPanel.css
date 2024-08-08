@@ -17,14 +17,50 @@
     width: 90%
 }
 
-.infoPanel {
+.infoPanel.active {
     /* background-color: #ccccce; */
     float: right;
 
     width: 30%;
+    height: 100vh;
 
     background-color: #20294B;
     border-radius: 1em 0em 0em 1em;
+
+    display: block;
+
+    overflow-y: scroll;
+}
+
+.infoPanel {
+    overflow: hidden;
+    display: none;
+}
+
+.infoArtistPanel.active {
+    float: right;
+    width: 30%;
+    height: 100vh;
+
+    background-color: #20294B;
+    border-radius: 1em 0em 0em 1em;
+
+    display: block;
+
+    overflow-y: scroll;
+}
+
+.infoArtistPanel {
+    overflow: hidden;
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #0456C6;
+    border-radius: 1em;
 }
 
 .infoPanelContent h2 {
@@ -48,14 +84,6 @@ hr {
     padding: 10%;
 }
 
-.infoPanel.hidden {
-    width: 0;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    overflow: hidden;
-}
-
 h2 {
     text-align: center;
 }
@@ -63,13 +91,17 @@ h2 {
 .infoPanelBtn {
     background-color: #0456C6;
     border: none;
-    padding: 1em;
+    padding: 0.1em;
+    margin-top: 1em;
     float: right;
-    margin-top: 10%;
     border-radius: 30% 0% 0% 30%;
     z-index: -5;
 }
 
 .infoPanelBtn.hidden {
     margin-right: 0;
+}
+
+.changePanelBtn {
+    background-color: #0456C6;
 }
