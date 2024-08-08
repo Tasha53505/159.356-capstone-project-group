@@ -44,21 +44,47 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
-});
 
-    var animationBtn = document.querySelector('.animationBtn');
-    var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
+    var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
+    var MusiclistContainer = document.querySelector('.MusiclistContainer');
 
-    animationBtn.addEventListener('click', function () {
-        overallPlaylistContainer.classList.toggle('hidden');
-        animationBtn.classList.toggle('hidden');
-        if (overallPlaylistContainer.classList.contains('hidden')) {
-            animationBtn.style.marginLeft = '0'; // Moves to the very left
+    animationMusiclistBtn.addEventListener('click', function () {
+        if (MusiclistContainer.classList.contains('show')) {
+            MusiclistContainer.classList.remove('show');
+            animationMusiclistBtn.style.bottom = '0';
         } else {
-            animationBtn.style.marginLeft = '27%'; // Makes it so that it resets to the original position
+            MusiclistContainer.classList.add('show');
+            animationMusiclistBtn.style.bottom = '50vh';
         }
     });
 
+});
+
+
+animationBtn.addEventListener('click', function () {
+    overallPlaylistContainer.classList.toggle('hidden');
+    animationBtn.classList.toggle('hidden');
+    if (overallPlaylistContainer.classList.contains('hidden')) {
+        animationBtn.style.marginLeft = '0'; // Moves to the very left
+    } else {
+        animationBtn.style.marginLeft = '27%'; // Makes it so that it resets to the original position
+    } 
+});
+
+//Updates button for media query
+function updateAnimationBtnMargin() {
+    if (window.matchMedia("(max-width: 800px)").matches) {
+        animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
+    } else {
+        animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
+    }
+}
+
+// Initial call
+updateAnimationBtnMargin();
+
+// Update on window resize
+window.addEventListener('resize', updateAnimationBtnMargin);
 
 
 
