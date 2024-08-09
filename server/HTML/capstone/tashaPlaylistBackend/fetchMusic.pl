@@ -2,7 +2,7 @@ use strict
 use warnings
 use JSON 
 
-my $musicDirectory = 'capstone\tashaPlaylistBackend\testMusic'; 
+my $musicDirectory = 'C:\Program Files\Squeezebox\server\HTML\capstone\tashaPlaylistBackend\testMusic'; 
 opendir(my $dh, $musicDirectory) || die "cannot open file directory: $!" # $dh reads musicDirectorys content. If not found, Die gives an error. --> $! means a specifc error message
 
 my @files;
