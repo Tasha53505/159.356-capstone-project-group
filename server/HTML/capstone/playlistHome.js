@@ -87,6 +87,15 @@ updateAnimationBtnMargin();
 window.addEventListener('resize', updateAnimationBtnMargin);
 
 
+// Code to FETCH Music 
+
+
+
+
+
+
+
+
 
 
 //Steve's code:
