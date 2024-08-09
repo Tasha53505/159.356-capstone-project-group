@@ -30,11 +30,41 @@
                     <h2>Home</h2>
                     <ul>
                         <li>My Music</li>
+						[% BLOCK galleryitem; itemSize = item.size -%]
+<li class="thumbwrap" [%- IF anchor %]id="anchor[% anchor | uri %]"[%- END -%] style="width:[% itemSize + 20 %]px;">
+	<div class="selectorMarker" onmouseover="Highlighter.highlight(this);" id="db[% Math.rand(1) %]_selector">
+		<div class="thumbwrap">
+
+			<div class="thumbArtwork" style="width:[% itemSize %]px;height:[% itemSize %]px;">
+				[% IF item.extid; serviceIcon = OnlineServices.getIconForId(item.extid); IF serviceIcon %]<img src="[% serviceIcon %]" class="extIdImg">[% END; END %]
+				[% IF item.weblink %]
+					<a href="[% item.weblink %]" target="_blank" [% slideshowHelpers %]>
+				[% ELSIF item.simpleAlbumLink %]
+					<a href="[% webroot %]clixmlbrowser/clicmd=browselibrary+items&amp;mode=tracks&amp;linktitle=[% stringALBUM %]%20([% item.album | uri %])&amp;album_id=[% item.id %]&amp;player=[% playerURI %]/" class="browseItemLink">
+				[% ELSIF item.type != 'text' %]
+					<a href="[% path %]?[% searchquery %]index=[% index _ (start + loop.index) %]&amp;player=[% playerURI %][% IF sess %]&amp;sess=[% sess; END %]" class="browseItemLink">
+				[% ELSIF item.type == "text" && item.image %]
+					<a href="[% UNLESS item.image.match("^(\/|http)") %][% webroot %][% END %][% item.image %]" target="_blank" [% slideshowHelpers %]>
+				[% END %]
+				[% PROCESS "thumbnailItemImg" item.icon = (item.icon || "/music/0/cover") height="$itemSize" style = 'style="max-width:' _ itemSize _ 'px;max-height:' _ itemSize _ 'px;"' %]</a>
+
+				<span class="browsedbControls">
+					[%- PROCESS $controls -%]
+				</span>
+			</div>
+
+			<div class="artworkText" style="width:[% itemSize %]px;"><span style="width:[% itemSize %]px;">
+				[%- content %]
+			</span></div>
+
+		</div></div>
+	</li>
+[%- END %]
 
                         <hr />
                     </ul>
                     <ul class="pluginsAccordion">
-                        <button class="accordionButton">Plugins TEST</button>
+                        <button class="accordionButton">Plugins</button>
                         <div class="accordionPanel">
                             <div class="pluginsContainer">
                                 <div class="pluginExample"></div>
