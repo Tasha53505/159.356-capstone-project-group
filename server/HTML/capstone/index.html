@@ -30,18 +30,7 @@
                     <h2>Home</h2>
                     <ul>
                         <li>My Music</li>
-[% noPlaylistCover = "Squeezebox-noPlaylistCover"; noPlaylistCover = cookies.$noPlaylistCover.value %] [% IF hasPagebar %]
-[% PROCESS pagebar useJS="Main.playlist.load" %]
-[% END %]
-[% IF playercount < 1 %]
-[% PROCESS status_noclients.html ajaxUpdate=1 %]
-[% ELSE %] [% IF playlist_items %] [% FOREACH item = playlist_items %] [% PROCESS status_list.html %] [% END %] [% ELSE %]
-[% "EMPTY" | string %]
 
-[% END %] [% END %]
-[% IF playercount > 0 %]
-[% IF pageinfo.totalDuration; "TOTAL_TIME" | string; " " _ pageinfo.totalDuration; END %]  [% IF current_playlist %]   [% "CURRENT_PLAYLIST" | string %][% stringCOLON %] [% current_playlist_name %] [% IF current_playlist_modified %]([% "MODIFIED" | string %])[% END %] [% END %] 
-[% END %]
                         <hr />
                     </ul>
                     <ul class="pluginsAccordion">
