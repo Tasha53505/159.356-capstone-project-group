@@ -89,8 +89,14 @@ window.addEventListener('resize', updateAnimationBtnMargin);
 
 // Code to FETCH Music 
 document.getElementById('myMusic').addEventListener('click', function() {
-    fetch(fetchMusic.pl) // HTTP request to fetch "fetchMusic.pl"
-    .then(response => response.json()) // Waits for server to respond and converts response data to JSON
+    fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
+    then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error.  status is: ${response.status}`);
+        }
+        return response.json();
+    })
+    // Waits for server to respond and converts response data to JSON
     .then(data => { // The file names (data) if any
         let musicList = document.getElementById('musicList'); // Gets my musicList ID so it knows where to go
         musicList.innerHTML = '<ul>'; // Adds an inner Unordered list
