@@ -15,9 +15,8 @@
 } */
 
 .myMusicContainer {
-    /* display: flex; */
+    display: flex;
     float: left;
-    position: relative;
 }
 
 .overallContainer {
@@ -30,7 +29,8 @@
 }
 
 .overallPlaylistContainer {
-    background-color: #20294B;
+    /* background-color: #20294B; */
+    background-color: pink;
     height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
     width: 45%;
     border-radius: 0em 1em 1em 0em;
@@ -144,7 +144,7 @@ hr {
     left: 0;
     animation: fadeIn 0.5s forwards;
     display: none; /* Invisible until a plugin is clicked */
-    z-index: 5; /* will always be on top of Player */
+    z-index: 10; /* will always be on top of Player */
 }
 
 .newPluginContainer h3 {
@@ -154,7 +154,7 @@ hr {
     font-size: 1.5rem;
 }
 
-.newPluginContainer.shownewPluginContainer  {
+.shownewPluginContainer {
     display: block;
 }
 
