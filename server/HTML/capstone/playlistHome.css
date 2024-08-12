@@ -15,8 +15,9 @@
 } */
 
 .myMusicContainer {
-    display: flex;
+    /* display: flex; */
     float: left;
+    position: relative;
 }
 
 .overallContainer {
@@ -143,7 +144,7 @@ hr {
     left: 0;
     animation: fadeIn 0.5s forwards;
     display: none; /* Invisible until a plugin is clicked */
-    z-index: 10; /* will always be on top of Player */
+    z-index: 5; /* will always be on top of Player */
 }
 
 .newPluginContainer h3 {
@@ -153,7 +154,7 @@ hr {
     font-size: 1.5rem;
 }
 
-.shownewPluginContainer {
+.newPluginContainer.shownewPluginContainer  {
     display: block;
 }
 
