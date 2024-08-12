@@ -87,6 +87,9 @@ updateAnimationBtnMargin();
 window.addEventListener('resize', updateAnimationBtnMargin);
 
 
+
+
+
 // Code to FETCH Music 
 document.getElementById('myMusic').addEventListener('click', function() {
     fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
