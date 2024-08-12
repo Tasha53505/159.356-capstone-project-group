@@ -14,85 +14,171 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Capstone project</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
     <link rel="stylesheet" href="playlistHome.css">
+    <link rel="stylesheet" href="benplayer.css">
+    <link rel="stylesheet" href="infoPanel.css">
 </head>
+
 <body>
+    <div class="myMusicContainer">
+        <div class="overallContainer">
+            <div class="overallPlaylistContainer">
+                <div class="overallHeadersContainer">
+                    <div class="player">
+                        <h2>Home</h2>
+                        <ul>
+                            <li>My Music</li>
+                            <a href="" id="musicList">Music goes under here when clicked</a>
 
-	
-    <div class="overallContainer">
-        <div class="overallPlaylistContainer">
-            <div class="overallHeadersContainer">
-                <div class="player">
-                    <h2>Home</h2>
-                    <ul>
-                        <li>My Music</li>
-						<a href="" id="musicList">Music goes under here when clicked</a>
+                            <hr />
+                        </ul>
+                        <ul class="pluginsAccordion">
+                            <button class="accordionButton">Plugins</button>
+                            <div class="accordionPanel">
+                                <div class="pluginsContainer">
+                                    <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
 
-                        <hr />
-                    </ul>
-                    <ul class="pluginsAccordion">
-                        <button class="accordionButton">Plugins</button>
-                        <div class="accordionPanel">
-                            <div class="pluginsContainer">
-                                <div class="pluginExample"></div>
-                                <div class="pluginExample"></div>
-                                <div class="pluginExample"></div>
-                                <div class="pluginExample"></div>
-                                <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
+                                    <div class="pluginExample"></div>
+                                </div>
 
-                                <div class="pluginExample"></div>                                
-                                <div class="pluginExample"></div>
-                                <div class="pluginExample"></div>
-                                <div class="pluginExample"></div>
-                                <div class="pluginExample"></div>
                             </div>
-                        
-                        </div>
-                        <hr />
+                            <hr />
 
-                    </ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="animationBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24">
+                <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0" />
+                    <path d="M9 17V4h10v13M9 8h10" />
+                </g>
+            </svg>
+        </button>
+    </div>
+    <div class="mainContainer">
+        <div class="albumContainer">
+            <div class="album">cover</div>
+        </div>
+        <div class="textContainer">
+            <h1>Title of the song</h1>
+            <h2>Name of the artist</h2>
+        </div>
+        <div class="playerContainer">
+            <div class="player">
+                <div class="bar"></div>
+                <div class="progress"></div>
+                <div class="buttons">
+                    <div class="control">⮯</div>
+                    <div class="control">◀</div>
+                    <div class="control">▷</div>
+                    <div class="control">▶</div>
+                    <div class="control">⭮</div>
                 </div>
             </div>
         </div>
     </div>
-    <button class="animationBtn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M9 17V4h10v13M9 8h10"/></g></svg>
-    </button>
+    <div class="musicInfoPanel">
+        <div class="infoPanel">
+            <div class="infoPanelContainer">
+                <img class="infoPanelImage" src="HybridTheory.jpg" alt="info icon">
+                <div class="infoPanelContent">
+                    <h2 class="artistHeader2">Song Title</h2>
+                    <p>Artist: Artist Name</p>
+                    <hr>
+                    <p>Album: Album Title</p>
+                    <hr>
+                    <p>Genre: Album Genre</p>
+                    <hr>
+                    <p>Year: Release Year</p>
+                    <hr>
+                    <p>Comment: This is a comment</p>
+                    <hr>
+                    <p>File Format: file type</p>
+                    <hr>
+                    <p>Duration: Length of Song</p>
+                    <hr>
+                    <p>Bitrate: Bitrate of Song</p>
+                    <hr>
+                    <p>Sample Rate: Samplerate of Song</p>
+                    <hr>
+                    <p>Sample Size: </p>
+                    <hr>
+                    <p>File Length:</p>
+                    <hr>
+                    <p>Play Count:</p>
+                    <hr>
+                    <p>Location:</p>
+                    <hr>
+                    <p>Date Modified:</p>
+                </div>
+            </div>
+        </div>
+        <div class="infoArtistPanel">
+            <div class="infoPanelContainer">
+                <img class="infoPanelImage" src="HybridTheory.jpg" alt="info icon">
+                <div class="infoPanelContent">
+                    <h2>Artist Name</h2>
+                    <p>Album 1</p>
+                    <hr>
+                    <p>Album 2</p>
+                    <hr>
+                    <p>Album 3</p>
+                </div>
+            </div>
+        </div>
+        <button class="infoPanelBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24">
+                <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="16" x2="12" y2="12" />
+                    <line x1="12" y1="8" x2="12" y2="8" />
+                </g>
+            </svg>
+        </button>
+    </div>
+    <div class="playlistContainer">
+        <div class="MusiclistContainer">
+            <h2>Music Play List</h2>
+        </div>
+        <button class="animationMusiclistBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6em" height="3em"
+                viewBox="0 0 34 34" fill="none">
+                <g clip-path="url(#clip-path-0_106)">
+                    <g opacity="0">
+                        <path d="M34 34L0 34L0 0L34 0L34 34Z" fill="#FFFFFF">
+                        </path>
+                    </g>
+                    <path
+                        d="M7.40921 15.0716C7.52816 15.2151 7.67425 15.3336 7.83911 15.4205C8.00397 15.5074 8.18437 15.561 8.36996 15.5781C8.55555 15.5952 8.74269 15.5755 8.92067 15.5202C9.09864 15.4649 9.26396 15.375 9.40714 15.2558L15.5851 10.1142L15.5851 26.9128C15.5851 27.2885 15.7344 27.6487 16.0002 27.9143C16.2659 28.18 16.6263 28.3292 17.0021 28.3292C17.3779 28.3292 17.7383 28.18 18.0041 27.9143C18.2698 27.6487 18.4191 27.2885 18.4191 26.9128L18.4191 10.1142L24.5971 15.2558C24.7404 15.3748 24.9057 15.4645 25.0836 15.5197C25.2616 15.5748 25.4487 15.5944 25.6342 15.5773C25.8197 15.5602 26 15.5068 26.1649 15.42C26.3298 15.3332 26.4759 15.2149 26.595 15.0716C26.7141 14.9284 26.8038 14.7632 26.859 14.5853C26.9142 14.4074 26.9338 14.2204 26.9167 14.0349C26.8996 13.8495 26.8461 13.6692 26.7593 13.5044C26.6725 13.3396 26.5541 13.1936 26.4108 13.0745L17.909 5.99249L17.6964 5.86501L17.5122 5.76587C17.1839 5.63924 16.8203 5.63924 16.492 5.76587L16.3078 5.86501L16.0952 5.99249L7.59342 13.0745C7.44993 13.1934 7.33133 13.3395 7.2444 13.5042C7.15746 13.669 7.10391 13.8494 7.08679 14.0349C7.06968 14.2204 7.08935 14.4075 7.14468 14.5854C7.2 14.7633 7.2899 14.9285 7.40921 15.0716L7.40921 15.0716Z"
+                        fill="#FFFFFF">
+                    </path>
+                </g>
+                <defs>
+                    <clipPath id="clip-path-0_106">
+                        <path d="M0 34L34 34L34 0L0 0L0 34Z" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+        </button>
 
-
-    <!-- <button class="animationBtn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M9 17V4h10v13M9 8h10"/></g></svg>
-    </button> -->
-
-	<div class="MusiclistContainer">
-		<h2>Music Play List</h2>
-	</div>
-	<button class="animationMusiclistBtn">
-		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6em" height="3em" viewBox="0 0 34 34" fill="none">
-			<g  clip-path="url(#clip-path-0_106)">
-			<g opacity="0">
-			<path d="M34 34L0 34L0 0L34 0L34 34Z"   fill="#FFFFFF" >
-			</path>
-			</g>
-			<path d="M7.40921 15.0716C7.52816 15.2151 7.67425 15.3336 7.83911 15.4205C8.00397 15.5074 8.18437 15.561 8.36996 15.5781C8.55555 15.5952 8.74269 15.5755 8.92067 15.5202C9.09864 15.4649 9.26396 15.375 9.40714 15.2558L15.5851 10.1142L15.5851 26.9128C15.5851 27.2885 15.7344 27.6487 16.0002 27.9143C16.2659 28.18 16.6263 28.3292 17.0021 28.3292C17.3779 28.3292 17.7383 28.18 18.0041 27.9143C18.2698 27.6487 18.4191 27.2885 18.4191 26.9128L18.4191 10.1142L24.5971 15.2558C24.7404 15.3748 24.9057 15.4645 25.0836 15.5197C25.2616 15.5748 25.4487 15.5944 25.6342 15.5773C25.8197 15.5602 26 15.5068 26.1649 15.42C26.3298 15.3332 26.4759 15.2149 26.595 15.0716C26.7141 14.9284 26.8038 14.7632 26.859 14.5853C26.9142 14.4074 26.9338 14.2204 26.9167 14.0349C26.8996 13.8495 26.8461 13.6692 26.7593 13.5044C26.6725 13.3396 26.5541 13.1936 26.4108 13.0745L17.909 5.99249L17.6964 5.86501L17.5122 5.76587C17.1839 5.63924 16.8203 5.63924 16.492 5.76587L16.3078 5.86501L16.0952 5.99249L7.59342 13.0745C7.44993 13.1934 7.33133 13.3395 7.2444 13.5042C7.15746 13.669 7.10391 13.8494 7.08679 14.0349C7.06968 14.2204 7.08935 14.4075 7.14468 14.5854C7.2 14.7633 7.2899 14.9285 7.40921 15.0716L7.40921 15.0716Z"   fill="#FFFFFF" >
-			</path>
-			</g>
-			<defs>
-			<clipPath id="clip-path-0_106">
-			<path d="M0 34L34 34L34 0L0 0L0 34Z" fill="white"/>
-			</clipPath>
-			</defs>
-			</svg>			
-	</button>
-
-
-
-	
+    </div>
 </body>
-    <!-- <script src="script.js"></script> -->
-	<script src="playlistHome.js"></script>
+<script src="benplayer.js"></script>
+<script src="playlistHome.js"></script>
+
 </html>
