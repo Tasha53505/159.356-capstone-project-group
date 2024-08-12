@@ -16,15 +16,18 @@
 
 .myMusicContainer {
     display: flex;
-    float: right;
+    /* float: right; */
+    position: relative;
+    width: 100%;
 }
 
 .overallContainer {
     /* background-color: #ccccce; */
     width: 60%;
-    height: 20vh;
+    height: 100vh; /* Full VP height */
     display: flex;
     position: relative;
+    flex-direction: column;
     justify-content: start;
 }
 
@@ -89,7 +92,7 @@ hr {
 .pluginsContainer {
     display: flex;
     padding: 1em;
-    width: 80%;
+    width: 100%; /* Full width */
     height: 60%;
     flex-wrap: wrap;
 
@@ -114,7 +117,7 @@ hr {
     margin-top: 10%;
     margin-left: 27%;
     transition: 0.6s ;
-    z-index: -5;
+    z-index: 10; /*changed from -5  to hopefully fix dissappearing */
 }
 
 .accordionPanel {
@@ -139,7 +142,7 @@ hr {
     height: 100vh;
     width: 27%;
     border-radius: 0em 1em 1em 0em;
-    position: absolute;
+    position: fixed; /* changed to fixed so that it stays */
     top: 0;
     left: 0;
     animation: fadeIn 0.5s forwards;
