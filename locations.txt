@@ -1,0 +1,6 @@
+As of 11/08/24
+All locations are within the Capstone skin (server/HTML/capstone)
+
+Left and bottom sections: Currently live on the server. (localhost:9000/capstone/)
+Middle section: In the folder benWork
+Right section: In the folder infoPanel
