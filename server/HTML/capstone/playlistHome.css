@@ -113,7 +113,8 @@ hr {
 
 /* Animation */
 .animationBtn {
-    background-color: #0456C6;
+    /* background-color: #0456C6; */
+    background-color: #cce1ff;
     border: none;
     padding: 1em;
     border-radius: 0% 30% 30% 0%;
