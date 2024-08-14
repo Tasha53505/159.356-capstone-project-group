@@ -1,6 +1,7 @@
 var accordion = document.getElementsByClassName("accordion");
 var i;
 document.addEventListener('DOMContentLoaded', function () {
+    // Handle accordion functionality
     var accordions = document.querySelectorAll('.accordionButton');
     accordions.forEach(function (accordion) {
         accordion.addEventListener('click', function () {
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Handle plugin click functionality
     var plugins = document.querySelectorAll('.pluginExample');
     plugins.forEach(function (plugin) {
         plugin.addEventListener('click', function () {
@@ -44,18 +46,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
-    var MusiclistContainer = document.querySelector('.MusiclistContainer');
+    // Handle overall playlist and animation button
+    var animationMusiclistBtn = document.querySelector('.animationBtn');
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
 
     animationMusiclistBtn.addEventListener('click', function () {
-        if (MusiclistContainer.classList.contains('show')) {
-            MusiclistContainer.classList.remove('show');
-            overallPlaylistContainer.classList.remove('show'); // Hide overall playlist container
+        if (overallPlaylistContainer.classList.contains('show')) {
+            overallPlaylistContainer.classList.remove('show');
             animationMusiclistBtn.style.bottom = '0';
         } else {
-            MusiclistContainer.classList.add('show');
-            overallPlaylistContainer.classList.add('show'); // Show overall playlist container
+            overallPlaylistContainer.classList.add('show');
             animationMusiclistBtn.style.bottom = '50vh';
         }
     });
@@ -63,9 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Media query handling
     function updateAnimationBtnMargin() {
         if (window.matchMedia("(max-width: 800px)").matches) {
-            animationMusiclistBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
+            animationMusiclistBtn.style.marginLeft = overallPlaylistContainer.classList.contains('show') ? '60%' : '0';
         } else {
-            animationMusiclistBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
+            animationMusiclistBtn.style.marginLeft = overallPlaylistContainer.classList.contains('show') ? '27%' : '0';
         }
     }
 
@@ -76,23 +76,23 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
-// Code to FETCH Music 
-document.getElementById('myMusic').addEventListener('click', function() {
-    fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error.  status is: ${response.status}`);
-        }
-        return response.json();
-    })
-    // Waits for server to respond and converts response data to JSON
-    .then(data => { // The file names (data) if any
-        let musicList = document.getElementById('musicList'); // Gets my musicList ID so it knows where to go
-        musicList.innerHTML = '<ul>'; // Adds an inner Unordered list
-        data.forEach(file => {
-            musicList.innerHTML += `<li>${file}</li>`; // For loop for displaying each file
-        });
-        musicList.innerHTML += `</ul>`; // End of Unordered list
-    })
-    .catch(error => console.log("There was an error grabbing music. Error: ", error)); // If errors were found, console.log them.
-});
+// // Code to FETCH Music 
+// document.getElementById('myMusic').addEventListener('click', function() {
+//     fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error(`HTTP error.  status is: ${response.status}`);
+//         }
+//         return response.json();
+//     })
+//     // Waits for server to respond and converts response data to JSON
+//     .then(data => { // The file names (data) if any
+//         let musicList = document.getElementById('musicList'); // Gets my musicList ID so it knows where to go
+//         musicList.innerHTML = '<ul>'; // Adds an inner Unordered list
+//         data.forEach(file => {
+//             musicList.innerHTML += `<li>${file}</li>`; // For loop for displaying each file
+//         });
+//         musicList.innerHTML += `</ul>`; // End of Unordered list
+//     })
+//     .catch(error => console.log("There was an error grabbing music. Error: ", error)); // If errors were found, console.log them.
+// });
