@@ -37,7 +37,7 @@
     /* background-color: #20294B; */
     background-color: #1547ff;
     height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
-    width: 45%;
+    width: 100%; /*Changed from 45% */
     border-radius: 0em 1em 1em 0em;
     transition: transform 0.5s ease-in-out; /* Slide animation */
     z-index: 3;
@@ -45,6 +45,7 @@
 
 .overallPlaylistContainer.hidden {
     transform: translateX(-100%); /* Slide animation when Music button is clicked*/
+    width: 45%; /* Originally wasn't here */
 }
 
 .animationBtn.hidden {
