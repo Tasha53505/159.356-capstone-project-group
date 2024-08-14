@@ -6,46 +6,34 @@
  Highlights, links, buttons are 0456C6
 */
 
-/* @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Poetsen+One&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Poetsen+One&display=swap');
 
-/* * {
+* {
     margin: 0;
     font-family: "Inter", sans-serif;
     color: #EFF8FC;
-} */
-
-/* Tasha start */
-
-.myMusicContainer {
-    display: flex;
-    /* float: right; */
-    position: relative;
-    width: 100%;
 }
 
 .overallContainer {
     /* background-color: #ccccce; */
     width: 60%;
-    height: 100vh; /* Full VP height */
+    height: 20vh;
     display: flex;
     position: relative;
-    flex-direction: column;
-    justify-content: start;
+    /* justify-content: center; */
 }
 
 .overallPlaylistContainer {
-    /* background-color: #20294B; */
-    background-color: #1547ff;
+    background-color: #20294B;
     height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
-    width: 100%; /*Changed from 45% */
+    width: 45%;
     border-radius: 0em 1em 1em 0em;
+    transform: translateX(-100%); /*start off hidden */
     transition: transform 0.5s ease-in-out; /* Slide animation */
-    z-index: 3;
 }
 
 .overallPlaylistContainer.hidden {
     transform: translateX(-100%); /* Slide animation when Music button is clicked*/
-    width: 45%; /* Originally wasn't here */
 }
 
 .animationBtn.hidden {
@@ -96,7 +84,7 @@ hr {
 .pluginsContainer {
     display: flex;
     padding: 1em;
-    width: 100%; /* Full width */
+    width: 80%;
     height: 60%;
     flex-wrap: wrap;
 
@@ -114,15 +102,15 @@ hr {
 
 /* Animation */
 .animationBtn {
-    /* background-color: #0456C6; */
-    background-color: #cce1ff;
+    background-color: #0456C6;
     border: none;
     padding: 1em;
     border-radius: 0% 30% 30% 0%;
     margin-top: 10%;
-    margin-left: 27%;
+    /* margin-left: 27%; */
+    margin-left: 0; /* Starts off hugging the left side of paghe*/
     transition: 0.6s ;
-    z-index: 10; /*changed from -5  to hopefully fix dissappearing */
+    z-index: -5;
 }
 
 .accordionPanel {
@@ -132,7 +120,6 @@ hr {
     padding: 0 18px;
     border-radius: 0 0 10px 10px;
     transition: max-height 0.7s ease-in-out, padding 0.4s ease-in-out;
-    display: none;
 }
 
 .accordionPanel.show {
@@ -148,7 +135,7 @@ hr {
     height: 100vh;
     width: 27%;
     border-radius: 0em 1em 1em 0em;
-    position: fixed; /* changed to fixed so that it stays */
+    position: absolute;
     top: 0;
     left: 0;
     animation: fadeIn 0.5s forwards;
@@ -202,7 +189,6 @@ transform: translate3d(0, 0, 0);
 }
 }
 
-
 .animationMusiclistBtn {
     background-color: #0456C6;
     border: none;
@@ -217,9 +203,6 @@ transform: translate3d(0, 0, 0);
     cursor: pointer;
 
 }
-/* Tasha end */
-
-
 
 .MusiclistContainer {
     width: 100%;
@@ -296,4 +279,36 @@ transform: translate3d(0, 0, 0);
   }
 
 
-  
+  /* Steve's code
+  .animationMusiclistBtn {
+    background-color: #0456C6;
+    border: none;
+    padding: 1em;
+    border-radius: 30% 30% 0% 0%;
+    transition: bottom 0.6s ease-in-out;
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+
+}
+
+.MusiclistContainer {
+    width: 100%;
+    height: 50vh;
+    background-color: #20294B;
+    position: fixed;
+    bottom: -50vh;
+    left: 0;
+    transition: bottom 0.6s ease-in-out;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.MusiclistContainer.show {
+    bottom: 0; 
+} */
