@@ -277,7 +277,7 @@ transform: translate3d(0, 0, 0);
   }
 
 
-  /* Steve's code */
+  /* Steve's code
   .animationMusiclistBtn {
     background-color: #0456C6;
     border: none;
@@ -298,15 +298,15 @@ transform: translate3d(0, 0, 0);
     height: 50vh;
     background-color: #20294B;
     position: fixed;
-    bottom: -50vh; /* Initially hidden */
+    bottom: -50vh;
     left: 0;
     transition: bottom 0.6s ease-in-out;
     z-index: 5;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start;
 }
 
 .MusiclistContainer.show {
-    bottom: 0; /* Slide up into view */
-}
+    bottom: 0; 
+} */
