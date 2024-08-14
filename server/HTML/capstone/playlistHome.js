@@ -119,16 +119,16 @@ document.getElementById('myMusic').addEventListener('click', function() {
 
 //Steve's code:
 
-var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
-var MusiclistContainer = document.querySelector('.MusiclistContainer');
+// var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
+// var MusiclistContainer = document.querySelector('.MusiclistContainer');
 
-animationMusiclistBtn.addEventListener('click', function () {
-    if (MusiclistContainer.classList.contains('show')) {
-        MusiclistContainer.classList.remove('show');
-        animationMusiclistBtn.style.bottom = '0';
-    } else {
-        MusiclistContainer.classList.add('show');
-        animationMusiclistBtn.style.bottom = '50vh';
-    }
-});
+// animationMusiclistBtn.addEventListener('click', function () {
+//     if (MusiclistContainer.classList.contains('show')) {
+//         MusiclistContainer.classList.remove('show');
+//         animationMusiclistBtn.style.bottom = '0';
+//     } else {
+//         MusiclistContainer.classList.add('show');
+//         animationMusiclistBtn.style.bottom = '50vh';
+//     }
+// });
 
