@@ -34,7 +34,8 @@
 }
 
 .overallPlaylistContainer {
-    background-color: #20294B;
+    /* background-color: #20294B; */
+    background-color: #1547ff;
     height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
     width: 45%;
     border-radius: 0em 1em 1em 0em;
@@ -214,6 +215,7 @@ transform: translate3d(0, 0, 0);
 
 }
 /* Tasha end */
+
 
 
 .MusiclistContainer {
