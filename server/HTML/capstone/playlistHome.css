@@ -28,6 +28,7 @@
     height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
     width: 45%;
     border-radius: 0em 1em 1em 0em;
+    transform: translateX(-100%); /*start off hidden */
     transition: transform 0.5s ease-in-out; /* Slide animation */
 }
 
@@ -106,7 +107,8 @@ hr {
     padding: 1em;
     border-radius: 0% 30% 30% 0%;
     margin-top: 10%;
-    margin-left: 27%;
+    /* margin-left: 27%; */
+    margin-left: 0; /* Starts off hugging the left side of paghe*/
     transition: 0.6s ;
     z-index: -5;
 }

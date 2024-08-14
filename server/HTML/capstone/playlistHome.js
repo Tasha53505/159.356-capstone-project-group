@@ -60,31 +60,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
+    var animationBtn = document.querySelector('.animationBtn');
+    
+    // Set initial state (only the button should be visible)
+    overallPlaylistContainer.classList.add('hidden');
+    animationBtn.classList.remove('hidden');
 
-animationBtn.addEventListener('click', function () {
-    overallPlaylistContainer.classList.toggle('hidden');
-    animationBtn.classList.toggle('hidden');
-    if (overallPlaylistContainer.classList.contains('hidden')) {
-        animationBtn.style.marginLeft = '0'; // Moves to the very left
-    } else {
-        animationBtn.style.marginLeft = '27%'; // Makes it so that it resets to the original position
-    } 
-});
+    // Event listener for the animation button
+    animationBtn.addEventListener('click', function () {
+        overallPlaylistContainer.classList.toggle('hidden');
+        animationBtn.classList.toggle('hidden');
+        if (overallPlaylistContainer.classList.contains('hidden')) {
+            animationBtn.style.marginLeft = '0'; // Moves to the very left
+        } else {
+            animationBtn.style.marginLeft = '27%'; // Resets to the original position
+        } 
+    });
 
-//Updates button for media query
-function updateAnimationBtnMargin() {
-    if (window.matchMedia("(max-width: 800px)").matches) {
-        animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
-    } else {
-        animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
+    // Media query handling
+    function updateAnimationBtnMargin() {
+        if (window.matchMedia("(max-width: 800px)").matches) {
+            animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
+        } else {
+            animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
+        }
     }
-}
 
-// Initial call
-updateAnimationBtnMargin();
+    // Initial call
+    updateAnimationBtnMargin();
 
-// Update on window resize
-window.addEventListener('resize', updateAnimationBtnMargin);
+    // Update on window resize
+    window.addEventListener('resize', updateAnimationBtnMargin);
+});
 
 
 // Code to FETCH Music 
