@@ -195,7 +195,7 @@ transform: translate3d(0, 0, 0);
     padding: 1em;
     border-radius: 30% 30% 0% 0%;
     transition: bottom 0.6s ease-in-out;
-    z-index: 10;
+    z-index: 5;
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -212,7 +212,7 @@ transform: translate3d(0, 0, 0);
     bottom: -50vh; /* Initially hidden */
     left: 0;
     transition: bottom 0.6s ease-in-out;
-    z-index: 5;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align items to the top */
