@@ -291,7 +291,7 @@ transform: translate3d(0, 0, 0);
     display: flex;
     justify-content: space-between;
     padding: 1em;
-    background-color: #0456C6;
+    background-color: #1b2444;
     color: #EFF8FC;
 }
 
@@ -345,7 +345,7 @@ transform: translate3d(0, 0, 0);
 }
 
 .toggleModeButton {
-    background-color: #151d3a;
+    background-color: #0456C6;
     color: #EFF8FC;
     padding: 1em;
     border: #111a38 solid 1%;
