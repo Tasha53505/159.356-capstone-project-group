@@ -121,7 +121,7 @@ hr {
     margin: 0;
     /* margin-left: 0; Starts off hugging the left side of paghe */
     transition: 0.6s ;
-    z-index: -5;
+    z-index: 10;
 }
 
 .accordionPanel {
