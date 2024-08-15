@@ -89,6 +89,7 @@ hr {
     align-items: center;
     justify-content: space-between; 
     text-align: center;
+    padding: 1em;
 }
 
 .homeTitleContainer h2 {
