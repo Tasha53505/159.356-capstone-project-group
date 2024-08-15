@@ -28,7 +28,7 @@ body {
     display: flex;
     position: relative;
     /* justify-content: center; */
-    display: none;
+    /* display: none; */
 }
 
 .overallPlaylistContainer {
