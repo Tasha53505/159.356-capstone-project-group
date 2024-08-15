@@ -81,11 +81,9 @@ hr {
 
 }
 
-/* .settingsButton {
-    display: block;
-    text-align: center;
-
-} */
+.settingsContainer svg {
+    margin-left: auto;
+}
 
 
 .homeTitle {
