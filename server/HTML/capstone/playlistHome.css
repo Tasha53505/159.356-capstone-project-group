@@ -19,13 +19,7 @@
 } */
 
 .overallContainer {
-    /* background-color: #ccccce; */
-    /* width: 60%; */
-    /* width: 100%; */
-    /* width: 30%;  */
-     /* width: 45%;   */
      width: auto; /* Sticks with the animation panel */
-    /* height: 20vh; */
     height: 100vh;
     display: flex;
     position: relative;
@@ -113,8 +107,7 @@ hr {
 
 /* Animation  button - TASHA */
 .animationBtn {
-    /* background-color: #0456C6; */
-    background-color: #fcb1ff;
+    background-color: #0456C6;
     border: none;
     padding: 1em;
     border-radius: 0% 30% 30% 0%;
