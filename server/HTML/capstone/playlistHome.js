@@ -132,7 +132,6 @@ document.getElementById('myMusic').addEventListener('click', function() {
 
 
 // --------------- Settings Button ------------------------
-// --------------- Settings Button ------------------------
 document.getElementById('settingsButton').addEventListener('click', function() {
     // Check if the settings container already exists
     var existingContainer = document.querySelector('.settingsContainerClicked');
@@ -164,7 +163,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 <label for="modeToggle" class="toggleLabel">
                     <span class="toggleSlider"></span>
                 </label>
-            <span class="toggleText">Advanced Mode</span>
+            <span class="toggleText">Basic Mode</span>
         </div>
 
         </div>
@@ -228,10 +227,10 @@ var toggleText = settingsContainer.querySelector('.toggleText');
 modeToggle.addEventListener('change', function() {
     isAdvancedMode = this.checked;
     if (isAdvancedMode) {
-        toggleText.textContent = 'Basic Mode';
+        toggleText.textContent = 'Advanced Mode';
         addAdvancedTab();
     } else {
-        toggleText.textContent = 'Advanced Mode';
+        toggleText.textContent = 'Basic Mode';
         removeAdvancedTab();
     }
 
@@ -264,8 +263,8 @@ modeToggle.addEventListener('change', function() {
                 document.getElementById('advanced').classList.add('active');
             });
 
-            // Automatically click the advanced tab if it's added
-            advancedButton.click();
+            // // Automatically click the advanced tab if it's added
+            // advancedButton.click();
         }
     }
 
