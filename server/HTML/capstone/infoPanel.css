@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Poetsen+One&display=swap');
 
-* {
+/* {
     margin: 0;
     font-family: 'Inter', sans-serif;
     color: #EFF8EF
+} */
+
+.musicInfoPanel {
+    float: right;
 }
 
 .infoPanelImage {
@@ -19,10 +23,10 @@
 
 .infoPanel.active {
     /* background-color: #ccccce; */
-    float: right;
-
-    width: 30%;
+    width: 75%;
     height: 100vh;
+
+    float: right;
 
     background-color: #20294B;
     border-radius: 1em 0em 0em 1em;
@@ -38,9 +42,10 @@
 }
 
 .infoArtistPanel.active {
-    float: right;
-    width: 30%;
+    width: 75%;
     height: 100vh;
+
+    float: right;
 
     background-color: #20294B;
     border-radius: 1em 0em 0em 1em;
@@ -67,15 +72,6 @@
     padding-bottom: 1em;
 }
 
-hr {
-    width: 100%;
-    height: 0.2em;
-    border-radius: 50px;
-    margin-top: 0.5em;
-    background-color: #151d3a;
-    border-color: #151d3a;
-}
-
 .infoPanelContent {
     background-color: #20294B;
 }
@@ -84,24 +80,16 @@ hr {
     padding: 10%;
 }
 
-h2 {
+.artistHeader2 {
     text-align: center;
 }
 
 .infoPanelBtn {
+    float: right;
     background-color: #0456C6;
     border: none;
-    padding: 0.1em;
-    margin-top: 1em;
-    float: right;
+    padding: 0.5em;
+    margin-top: 100%;
     border-radius: 30% 0% 0% 30%;
-    z-index: -5;
-}
-
-.infoPanelBtn.hidden {
-    margin-right: 0;
-}
-
-.changePanelBtn {
-    background-color: #0456C6;
+    z-index: 5;
 }

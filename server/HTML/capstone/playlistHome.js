@@ -62,22 +62,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
+    var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
     
     // Set initial state (only the button should be visible)
+    overallContainer.style.display = 'none';  // overallContainer is hidden initially
+
     overallPlaylistContainer.classList.add('hidden');
     animationBtn.classList.remove('hidden');
 
     // Event listener for the animation button
     animationBtn.addEventListener('click', function () {
-        overallPlaylistContainer.classList.toggle('hidden');
-        animationBtn.classList.toggle('hidden');
-        if (overallPlaylistContainer.classList.contains('hidden')) {
-            animationBtn.style.marginLeft = '0'; // Moves to the very left
+        // Toggle the display of the overallContainer
+        if (overallContainer.style.display === 'none') {
+            overallContainer.style.display = 'flex';
+            setTimeout(function() {
+                overallPlaylistContainer.classList.remove('hidden');
+            }, 10);  // Delay to ensure flex is applied before animation
         } else {
-            animationBtn.style.marginLeft = '27%'; // Resets to the original position
-        } 
+            overallPlaylistContainer.classList.add('hidden');
+            setTimeout(function() {
+                overallContainer.style.display = 'none';
+            }, 500); // Wait for the animation to finish before hiding
+        }
+
+        animationBtn.classList.toggle('hidden');
+        updateAnimationBtnMargin();
     });
+
 
     // Media query handling
     function updateAnimationBtnMargin() {
