@@ -81,10 +81,31 @@ hr {
 
 }
 
-.settingsButton {
+/* .settingsButton {
     display: block;
     text-align: center;
 
+} */
+
+
+.homeTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.homeTitle h2 {
+    margin-right: 1rem; /* Adds margin between the h2 and the settings icon */
+}
+
+.homeTitle svg {
+    margin-right: 1rem; /* Adds some space between the svg and the button */
+}
+
+.settingsButton {
+    margin-left: auto; /* Pushes the settings button to the right  */
+    text-align: center;
+    font-size: 1em;
 }
 
 .active, .accordionButton:hover {
