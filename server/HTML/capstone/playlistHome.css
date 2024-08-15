@@ -23,12 +23,12 @@ body {
     /* width: 60%; */
     /* width: 100%; */
     /* width: 30%;  */
-     width: 0%;  
+     width: 45%;  
     height: 20vh;
     display: flex;
     position: relative;
     /* justify-content: center; */
-    /* display: none; */
+    display: none;
 }
 
 .overallPlaylistContainer {
