@@ -267,7 +267,9 @@ transform: translate3d(0, 0, 0);
 }
 
 /* -------------------------- SETTINGS AREA -------------------------- */
-.settingsContainer {
+
+
+.settingsContainerClicked {
     background-color: #1b2444;
     border-radius: 0em 1em 1em 0em;
     position: absolute;
@@ -276,7 +278,7 @@ transform: translate3d(0, 0, 0);
     width: 35%;
     height: 100%;
     z-index: 10;
-    /* display: none; Invisible until settings are cl opened */
+    display: none; /* Invisible until settings are cl opened */
     animation: fadeIn 0.5s forwards;
 }
 

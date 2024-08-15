@@ -136,7 +136,7 @@ document.getElementById('myMusic').addEventListener('click', function() {
 document.getElementById('settingsButton').addEventListener('click', function() {
     // Create the new settings container
     var settingsContainer = document.createElement('div');
-    settingsContainer.classList.add('settingsContainer');
+    settingsContainer.classList.add('settingsContainerClicked');
     
     // Add HTML for the settings content with tabs and advanced toggle
     settingsContainer.innerHTML = `
