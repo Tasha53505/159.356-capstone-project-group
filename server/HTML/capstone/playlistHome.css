@@ -81,6 +81,11 @@ hr {
 
 }
 
+.settingsButton {
+    display: inline;
+
+}
+
 .active, .accordionButton:hover {
   background-color: #ccc; 
 
