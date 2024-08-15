@@ -104,7 +104,8 @@ hr {
 
 /* Animation */
 .animationBtn {
-    background-color: #0456C6;
+    /* background-color: #0456C6; */
+    background-color: #fcb1ff;
     border: none;
     padding: 1em;
     border-radius: 0% 30% 30% 0%;
@@ -192,6 +193,10 @@ transform: translate3d(0, 0, 0);
 }
 }
 
+
+
+/* ---------- */
+
 .animationMusiclistBtn {
     background-color: #0456C6;
     border: none;
@@ -201,7 +206,7 @@ transform: translate3d(0, 0, 0);
     z-index: 10;
     position: fixed;
     bottom: 0;
-    /* left: 50%; */
+    left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
 
