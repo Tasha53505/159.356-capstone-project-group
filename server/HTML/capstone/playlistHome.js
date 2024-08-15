@@ -170,15 +170,15 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         <div class="settingsContent">
             <div class="tabContent" id="music">
                 <!-- Music settings content goes here -->
-                <p>Music settings content</p>
+                <p class="settingsTextContent">Music settings content</p>
             </div>
             <div class="tabContent" id="plugins">
                 <!-- Plugins settings content goes here -->
-                <p>Plugins settings content</p>
+                <p class="settingsTextContent">Plugins settings content</p>
             </div>
             <div class="tabContent" id="basic-info">
                 <!-- Basic settings & Information content goes here -->
-                <p>Basic Settings | Information content</p>
+                <p class="settingsTextContent">Basic Settings | Information content</p>
             </div>
             <!-- Advanced content will be added dynamically -->
         </div>
@@ -239,7 +239,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             var advancedContent = document.createElement('div');
             advancedContent.classList.add('tabContent');
             advancedContent.id = 'advanced';
-            advancedContent.innerHTML = '<p>Advanced settings content</p>';
+            advancedContent.innerHTML = '<p class="settingsTextContent">Advanced settings content</p>';
 
             var contentContainer = settingsContainer.querySelector('.settingsContent');
             contentContainer.appendChild(advancedContent);
