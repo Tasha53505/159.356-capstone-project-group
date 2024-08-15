@@ -81,6 +81,39 @@ hr {
 
 }
 
+
+
+
+.homeTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    text-align: center;
+    padding: 1em;
+}
+
+.homeTitleContainer h2 {
+    text-align: center;
+    margin-left: 2rem;
+}
+
+
+.settingsButton {
+    display: flex;
+    align-items: center; /* Aligns text and SVG vertically */
+    background: none!important;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 1rem;
+}
+
+.settingsButton svg {
+    vertical-align: middle; /* Aligns the SVG with the middle of the text */
+    margin-right: 0.5em; /* Adds spacing between the SVG and text */
+}
+
 .active, .accordionButton:hover {
   background-color: #ccc; 
 
@@ -138,8 +171,9 @@ hr {
 /* When pluginExample is clicked, these become active.*/
 .newPluginContainer {
     background-color: #1b2444;
-    height: 100vh;
-    width: 27%;
+    height: 100%;
+    /* width: 27%; */
+    width: 35%;
     border-radius: 0em 1em 1em 0em;
     position: absolute;
     top: 0;
