@@ -132,21 +132,18 @@ document.getElementById('myMusic').addEventListener('click', function() {
 
 
 // --------------- Settings Button ------------------------
+// Event listener for the settings button
 document.getElementById('settingsButton').addEventListener('click', function() {
-    // Check if the settings container already exists
     var existingContainer = document.querySelector('.settingsContainerClicked');
     
     if (existingContainer) {
-        // If the container already exists, just show it
         existingContainer.classList.add('showSettings');
         return;
     }
 
-    // Create the new settings container
     var settingsContainer = document.createElement('div');
     settingsContainer.classList.add('settingsContainerClicked', 'showSettings');
     
-    // Add HTML for the settings content with tabs and advanced toggle
     settingsContainer.innerHTML = `
         <div class="settingsHeader">
             <button class="backButtonSettings">
@@ -158,84 +155,76 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
             <h2>Settings</h2>
             
-         <div class="toggleSwitch">
-            <input type="checkbox" id="modeToggle" />
+            <div class="toggleSwitch">
+                <input type="checkbox" id="modeToggle" />
                 <label for="modeToggle" class="toggleLabel">
                     <span class="toggleSlider"></span>
                 </label>
-            <span class="toggleText">Advanced Mode</span>
-        </div>
-
+                <span class="toggleText">Advanced Mode</span>
+            </div>
         </div>
         <div class="settingsTabs">
             <button class="tabButton active" data-tab="music">Music</button>
             <button class="tabButton" data-tab="plugins">Plugins</button>
             <button class="tabButton" data-tab="basic-info">Basic Settings | Information</button>
-            <!-- Advanced tab will be added dynamically if you toggle it -->
         </div>
         <div class="settingsContent">
             <div class="tabContent" id="music">
-                <!-- Music settings content goes here -->
                 <p class="settingsTextContent"> My Music </p>
                 <p class="settingsTextContent"> Itunes </p>
                 <p class="settingsTextContent"> Interface and Player</p>
             </div>
             <div class="tabContent" id="plugins">
-                <!-- Plugins settings content goes here -->
                 <p class="settingsTextContent">Manage Plugins</p>
             </div>
             <div class="tabContent" id="basic-info">
-                <!-- Basic settings & Information content goes here -->
                 <p class="settingsTextContent">Basic Settings</p>
                 <p class="settingsTextContent">Information (i.e system Information</p>
             </div>
-            <!-- Advanced content will be added dynamically -->
         </div>
     `;
 
     document.body.appendChild(settingsContainer);
 
-    // Add event listener for the back button
     settingsContainer.querySelector('.backButtonSettings').addEventListener('click', function() {
         settingsContainer.classList.remove('showSettings');
         setTimeout(function() {
             settingsContainer.remove();
-        }, 500); // Animation time
+        }, 500);
     });
 
-    // Add event listeners for tab buttons
-    var tabButtons = settingsContainer.querySelectorAll('.tabButton');
-    var tabContents = settingsContainer.querySelectorAll('.tabContent');
+    function updateTabListeners() {
+        tabButtons = settingsContainer.querySelectorAll('.tabButton');
+        tabContents = settingsContainer.querySelectorAll('.tabContent');
 
-    tabButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-    
-            this.classList.add('active');
-            document.getElementById(this.getAttribute('data-tab')).classList.add('active');
+        tabButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+        
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-tab')).classList.add('active');
+            });
         });
-    });
-    
-
-  // Add event listener for the advanced mode toggle switch
-var isAdvancedMode = false;
-var modeToggle = settingsContainer.querySelector('#modeToggle');
-var toggleText = settingsContainer.querySelector('.toggleText');
-
-modeToggle.addEventListener('change', function() {
-    isAdvancedMode = this.checked;
-    if (isAdvancedMode) {
-        toggleText.textContent = 'Advanced Mode';
-        addAdvancedTab();
-    } else {
-        toggleText.textContent = 'Advanced Mode';
-        removeAdvancedTab();
     }
 
+    updateTabListeners();
+
+    var isAdvancedMode = false;
+    var modeToggle = settingsContainer.querySelector('#modeToggle');
+    var toggleText = settingsContainer.querySelector('.toggleText');
+
+    modeToggle.addEventListener('change', function() {
+        isAdvancedMode = this.checked;
+        if (isAdvancedMode) {
+            toggleText.textContent = 'Advanced Mode';
+            addAdvancedTab();
+        } else {
+            toggleText.textContent = 'Advanced Mode';
+            removeAdvancedTab();
+        }
     });
 
-    // Function to add the Advanced tab
     function addAdvancedTab() {
         if (!document.querySelector('.tabButton[data-tab="advanced"]')) {
             var advancedButton = document.createElement('button');
@@ -254,30 +243,20 @@ modeToggle.addEventListener('change', function() {
             var contentContainer = settingsContainer.querySelector('.settingsContent');
             contentContainer.appendChild(advancedContent);
 
-            advancedButton.addEventListener('click', function() {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-            
-                this.classList.add('active');
-                document.getElementById('advanced').classList.add('active');
-            });
+            updateTabListeners();
 
-            // Automatically click the advanced tab if it's added
             advancedButton.click();
         }
     }
 
-    // Function to remove the Advanced tab
     function removeAdvancedTab() {
         var advancedButton = document.querySelector('.tabButton[data-tab="advanced"]');
         if (advancedButton) {
             advancedButton.remove();
             document.getElementById('advanced').remove();
+            updateTabListeners();
         }
     }
 
-    // Show the first tab by default
     document.querySelector('.tabButton[data-tab="music"]').click();
 });
-
-
