@@ -347,8 +347,8 @@ transform: translate3d(0, 0, 0);
 .toggleModeButton {
     background-color: #0456C6;
     color: #EFF8FC;
-    padding: 1em;
-    border-radius: 2%;
+    padding: 0.5em 1em;
+    border-radius: 1em;
 }
 
 @keyframes fadeIn {
