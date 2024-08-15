@@ -209,15 +209,14 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
     tabButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-            var tabId = this.getAttribute('data-tab');
-
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
-
+    
             this.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+            document.getElementById(this.getAttribute('data-tab')).classList.add('active');
         });
     });
+    
 
   // Add event listener for the advanced mode toggle switch
 var isAdvancedMode = false;
@@ -258,13 +257,13 @@ modeToggle.addEventListener('change', function() {
             advancedButton.addEventListener('click', function() {
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
-
+            
                 this.classList.add('active');
                 document.getElementById('advanced').classList.add('active');
             });
 
-            // // Automatically click the advanced tab if it's added
-            // advancedButton.click();
+            // Automatically click the advanced tab if it's added
+            advancedButton.click();
         }
     }
 
