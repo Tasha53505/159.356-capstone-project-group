@@ -163,7 +163,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 <label for="modeToggle" class="toggleLabel">
                     <span class="toggleSlider"></span>
                 </label>
-            <span class="toggleText">Basic Mode</span>
+            <span class="toggleText">Advanced Mode</span>
         </div>
 
         </div>
@@ -229,7 +229,7 @@ modeToggle.addEventListener('change', function() {
         toggleText.textContent = 'Advanced Mode';
         addAdvancedTab();
     } else {
-        toggleText.textContent = 'Basic Mode';
+        toggleText.textContent = 'Advanced Mode';
         removeAdvancedTab();
     }
 
