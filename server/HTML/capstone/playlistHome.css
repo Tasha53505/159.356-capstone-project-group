@@ -84,14 +84,14 @@ hr {
 
 
 
-.homeTitle {
+.homeTitleContainer {
     display: flex;
     align-items: center;
     justify-content: space-between; 
     text-align: center;
 }
 
-.homeTitle h2 {
+.homeTitleContainer h2 {
     text-align: center;
 }
 
