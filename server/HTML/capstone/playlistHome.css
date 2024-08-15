@@ -167,9 +167,9 @@ hr {
 /* When pluginExample is clicked, these become active.*/
 .newPluginContainer {
     background-color: #1b2444;
-    height: 100vh;
+    height: 100%;
     /* width: 27%; */
-    width: 38%;
+    width: 36%;
     border-radius: 0em 1em 1em 0em;
     position: absolute;
     top: 0;
