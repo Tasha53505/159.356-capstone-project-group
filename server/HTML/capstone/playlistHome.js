@@ -159,7 +159,14 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
             <h2>Settings</h2>
             
-            <button class="toggleModeButton">Switch to Advanced Mode</button>
+         <div class="toggleSwitch">
+            <input type="checkbox" id="modeToggle" />
+                <label for="modeToggle" class="toggleLabel">
+                    <span class="toggleSlider"></span>
+                </label>
+            <span class="toggleText">Advanced Mode</span>
+        </div>
+
         </div>
         <div class="settingsTabs">
             <button class="tabButton active" data-tab="music">Music</button>
@@ -170,15 +177,18 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         <div class="settingsContent">
             <div class="tabContent" id="music">
                 <!-- Music settings content goes here -->
-                <p class="settingsTextContent">Music settings content</p>
+                <p class="settingsTextContent"> My Music </p>
+                <p class="settingsTextContent"> Itunes </p>
+                <p class="settingsTextContent"> Interface and Player</p>
             </div>
             <div class="tabContent" id="plugins">
                 <!-- Plugins settings content goes here -->
-                <p class="settingsTextContent">Plugins settings content</p>
+                <p class="settingsTextContent">Manage Plugins</p>
             </div>
             <div class="tabContent" id="basic-info">
                 <!-- Basic settings & Information content goes here -->
-                <p class="settingsTextContent">Basic Settings | Information content</p>
+                <p class="settingsTextContent">Basic Settings</p>
+                <p class="settingsTextContent">Information (i.e system Information</p>
             </div>
             <!-- Advanced content will be added dynamically -->
         </div>
@@ -210,19 +220,21 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         });
     });
 
-    // Add event listener for the advanced mode toggle button
-    var isAdvancedMode = false;
-    var toggleModeButton = settingsContainer.querySelector('.toggleModeButton');
+  // Add event listener for the advanced mode toggle switch
+var isAdvancedMode = false;
+var modeToggle = settingsContainer.querySelector('#modeToggle');
+var toggleText = settingsContainer.querySelector('.toggleText');
 
-    toggleModeButton.addEventListener('click', function() {
-        isAdvancedMode = !isAdvancedMode;
-        if (isAdvancedMode) {
-            toggleModeButton.textContent = 'Switch to Basic Mode';
-            addAdvancedTab();
-        } else {
-            toggleModeButton.textContent = 'Switch to Advanced Mode';
-            removeAdvancedTab();
-        }
+modeToggle.addEventListener('change', function() {
+    isAdvancedMode = this.checked;
+    if (isAdvancedMode) {
+        toggleText.textContent = 'Basic Mode';
+        addAdvancedTab();
+    } else {
+        toggleText.textContent = 'Advanced Mode';
+        removeAdvancedTab();
+    }
+
     });
 
     // Function to add the Advanced tab

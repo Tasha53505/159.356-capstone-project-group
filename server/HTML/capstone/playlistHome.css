@@ -344,17 +344,54 @@ transform: translate3d(0, 0, 0);
     display: block;
 }
 
-.toggleModeButton {
+.toggleSwitch {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.toggleSwitch input[type="checkbox"] {
+    display: none;
+}
+
+.toggleLabel {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggleLabel .toggleSlider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 21px;
+    height: 21px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.toggleSwitch input[type="checkbox"]:checked + .toggleLabel {
     background-color: #0456C6;
+}
+
+.toggleSwitch input[type="checkbox"]:checked + .toggleLabel .toggleSlider {
+    transform: translateX(25px);
+}
+
+.toggleText {
     color: #EFF8FC;
-    padding: 0.7em;
-    border-radius: 0.5em;
-    border: transparent;
+    font-weight: bold;
 }
 
 
+
 .settingsTextContent {
-    background-color: none;
+    background-color: #1b2444;
 
 }
 
