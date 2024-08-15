@@ -132,11 +132,12 @@ document.getElementById('myMusic').addEventListener('click', function() {
 
 
 // --------------- Settings Button ------------------------
+// --------------- Settings Button ------------------------
 document.getElementById('settingsButton').addEventListener('click', function() {
     // Create the new settings container
     var settingsContainer = document.createElement('div');
     settingsContainer.classList.add('settingsContainer');
-
+    
     // Add HTML for the settings content with tabs and advanced toggle
     settingsContainer.innerHTML = `
         <div class="settingsHeader">
@@ -257,3 +258,5 @@ document.getElementById('settingsButton').addEventListener('click', function() {
     // Show the first tab by default
     document.querySelector('.tabButton[data-tab="music"]').click();
 });
+
+

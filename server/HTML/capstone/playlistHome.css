@@ -266,6 +266,92 @@ transform: translate3d(0, 0, 0);
     bottom: 0; /* Slide up into view */
 }
 
+/* -------------------------- SETTINGS AREA -------------------------- */
+.settingsContainer {
+    background-color: #1b2444;
+    border-radius: 0em 1em 1em 0em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 100%;
+    z-index: 10;
+    display: none; /* Invisible until settings are opened */
+    animation: fadeIn 0.5s forwards;
+}
+
+.settingsHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: #0456C6;
+    color: #EFF8FC;
+}
+
+.settingsHeader h2 {
+    margin: 0;
+}
+
+.settingsTabs {
+    display: flex;
+    background-color: #1b2444;
+    padding: 0.5em;
+}
+
+.tabButton {
+    background: none;
+    border: none;
+    color: #EFF8FC;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.tabButton.active {
+    background-color: #0456C6;
+    border-radius: 0.5em;
+}
+
+.settingsContent {
+    padding: 1em;
+}
+
+.tabContent {
+    display: none; /* Hidden by default */
+}
+
+.tabContent.active {
+    display: block;
+}
+
+.backButton {
+    background-color: #0456C6;
+    color: #EFF8FC;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.showSettings {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+
+
+
+
+
+
+
+
+
 /* Media Queries */
 @media only screen and (max-width: 600px) {
     h2 {
