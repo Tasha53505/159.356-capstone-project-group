@@ -134,9 +134,18 @@ document.getElementById('myMusic').addEventListener('click', function() {
 // --------------- Settings Button ------------------------
 // --------------- Settings Button ------------------------
 document.getElementById('settingsButton').addEventListener('click', function() {
+    // Check if the settings container already exists
+    var existingContainer = document.querySelector('.settingsContainerClicked');
+    
+    if (existingContainer) {
+        // If the container already exists, just show it
+        existingContainer.classList.add('showSettings');
+        return;
+    }
+
     // Create the new settings container
     var settingsContainer = document.createElement('div');
-    settingsContainer.classList.add('settingsContainerClicked');
+    settingsContainer.classList.add('settingsContainerClicked', 'showSettings');
     
     // Add HTML for the settings content with tabs and advanced toggle
     settingsContainer.innerHTML = `
