@@ -131,7 +131,10 @@ document.getElementById('myMusic').addEventListener('click', function() {
 }) 
 
 
-
+// --------------- Settings Button ------------------------
+  document.getElementById('settingsButton').addEventListener('click', function() {
+        window.location.href = 'settings.html';
+    });
 
 
 
