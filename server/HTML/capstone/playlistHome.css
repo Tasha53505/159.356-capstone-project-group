@@ -72,7 +72,7 @@ hr {
 
 }
 
-.accordionButton {
+.accordionButton,  .settingsButton {
     background: none!important;
     border: none;
     padding: 0 !important;
