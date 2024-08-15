@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
+    var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
     
     // Set initial state (only the button should be visible)
@@ -74,10 +75,14 @@ document.addEventListener('DOMContentLoaded', function () {
         animationBtn.classList.toggle('hidden');
         if (overallPlaylistContainer.classList.contains('hidden')) {
             animationBtn.style.marginLeft = '0'; // Moves to the very left
+            
         } else {
             animationBtn.style.marginLeft = '27%'; // Resets to the original position
+            overallContainer.style.display = 'block';
+
         } 
     });
+
 
     // Media query handling
     function updateAnimationBtnMargin() {
