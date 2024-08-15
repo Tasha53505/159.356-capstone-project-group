@@ -61,27 +61,22 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
-    var overallContainer = document.querySelector('.overallContainer');
-    var animationBtn = document.querySelector('.animationBtn');
-    
-    // Set initial state (only the button should be visible)
-    overallPlaylistContainer.classList.add('hidden');
-    animationBtn.classList.remove('hidden');
+    var overallContainer = document.getElementById('overallContainer');
+    var animationBtn = document.getElementById('animationBtn');
 
-    // Event listener for the animation button
     animationBtn.addEventListener('click', function () {
-        overallPlaylistContainer.classList.toggle('hidden');
-        animationBtn.classList.toggle('hidden');
-        if (overallPlaylistContainer.classList.contains('hidden')) {
-            animationBtn.style.marginLeft = '0'; // Moves to the very left
-            
+        if (overallContainer.classList.contains('showOverallContainer')) {
+            // Hide overallContainer and reset button position
+            overallContainer.classList.remove('showOverallContainer');
+            animationBtn.classList.remove('hidden');
         } else {
-            animationBtn.style.marginLeft = '27%'; // Resets to the original position
-            overallContainer.style.display = 'block';
-
-        } 
+            // Show overallContainer and move the button
+            overallContainer.classList.add('showOverallContainer');
+            animationBtn.classList.add('hidden');
+        }
     });
+});
+
 
 
     // Media query handling
