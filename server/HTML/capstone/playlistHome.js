@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Set initial state (only the button should be visible)
     overallContainer.style.display = 'none';  // overallContainer is hidden initially
+
     overallPlaylistContainer.classList.add('hidden');
     animationBtn.classList.remove('hidden');
 
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         animationBtn.classList.toggle('hidden');
         updateAnimationBtnMargin();
     });
+
 
     // Media query handling
     function updateAnimationBtnMargin() {
