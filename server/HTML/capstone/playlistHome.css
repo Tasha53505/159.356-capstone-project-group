@@ -348,8 +348,7 @@ transform: translate3d(0, 0, 0);
     background-color: #0456C6;
     color: #EFF8FC;
     padding: 1em;
-    border: #111a38 solid 1%;
-    border-radius: 1%;
+    border-radius: 2%;
 }
 
 @keyframes fadeIn {
