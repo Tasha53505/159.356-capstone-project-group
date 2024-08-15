@@ -72,7 +72,7 @@ hr {
 
 }
 
-.accordionButton,  .settingsButton {
+.accordionButton {
     background: none!important;
     border: none;
     padding: 0 !important;
@@ -98,13 +98,16 @@ hr {
     margin-right: 1rem; /* Adds margin between the h2 and the settings icon */
 }
 
-.homeTitle svg {
-    /* margin-right: 1rem; Adds some space between the svg and the button */
-}
 
 .settingsButton {
     margin-left: auto; /* Pushes the settings button to the right  */
     text-align: center;
+    font-size: 1em;
+
+    background: none!important;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
     font-size: 1em;
 }
 
