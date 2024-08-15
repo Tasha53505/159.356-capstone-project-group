@@ -88,10 +88,11 @@ hr {
     display: flex;
     align-items: center;
     justify-content: space-between; 
+    text-align: center;
 }
 
 .homeTitle h2 {
-    margin-left: 1rem; /* Adds margin between the h2 and the settings icon */
+    text-align: center;
 }
 
 
