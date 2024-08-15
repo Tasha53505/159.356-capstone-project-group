@@ -330,7 +330,7 @@ transform: translate3d(0, 0, 0);
     display: block;
 }
 
-.backButton {
+.backButtonSettings {
     background-color: #0456C6;
     color: #EFF8FC;
     border: none;
