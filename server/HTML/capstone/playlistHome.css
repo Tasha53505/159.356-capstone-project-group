@@ -99,7 +99,7 @@ hr {
 }
 
 .homeTitle svg {
-    margin-right: 1rem; /* Adds some space between the svg and the button */
+    /* margin-right: 1rem; Adds some space between the svg and the button */
 }
 
 .settingsButton {
