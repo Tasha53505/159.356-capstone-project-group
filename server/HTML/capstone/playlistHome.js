@@ -163,7 +163,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <button class="tabButton active" data-tab="music">Music</button>
             <button class="tabButton" data-tab="plugins">Plugins</button>
             <button class="tabButton" data-tab="basic-info">Basic Settings | Information</button>
-            <!-- Advanced tab will be added dynamically -->
+            <!-- Advanced tab will be added dynamically if you toggle it -->
         </div>
         <div class="settingsContent">
             <div class="tabContent" id="music">

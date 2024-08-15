@@ -344,6 +344,14 @@ transform: translate3d(0, 0, 0);
     display: block;
 }
 
+.toggleModeButton {
+    background-color: #151d3a;
+    color: #EFF8FC;
+    padding: 1em;
+    border: #111a38 solid 1%;
+    border-radius: 1%;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
