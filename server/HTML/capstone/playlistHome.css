@@ -24,6 +24,7 @@
     display: flex;
     position: relative;
     /* justify-content: center; */
+    display: none;
 }
 
 .overallPlaylistContainer {
