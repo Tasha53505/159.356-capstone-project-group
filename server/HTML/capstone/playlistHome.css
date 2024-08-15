@@ -96,15 +96,18 @@ hr {
 
 
 .settingsButton {
-    margin-left: auto; /* Pushes the settings button to the right  */
-    text-align: center;
-    font-size: 1em;
-
+    display: flex;
+    align-items: center; /* Aligns text and SVG vertically */
     background: none!important;
     border: none;
     padding: 0 !important;
     cursor: pointer;
     font-size: 1em;
+}
+
+.settingsButton svg {
+    vertical-align: middle; /* Aligns the SVG with the middle of the text */
+    margin-right: 0.5em; /* Adds spacing between the SVG and text */
 }
 
 .active, .accordionButton:hover {
