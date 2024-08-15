@@ -276,7 +276,7 @@ transform: translate3d(0, 0, 0);
     width: 35%;
     height: 100%;
     z-index: 10;
-    display: none; /* Invisible until settings are opened */
+    /* display: none; Invisible until settings are cl opened */
     animation: fadeIn 0.5s forwards;
 }
 
