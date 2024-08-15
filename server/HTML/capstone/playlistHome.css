@@ -25,7 +25,8 @@
     /* width: 30%;  */
      /* width: 45%;   */
      width: auto; /* Sticks with the animation panel */
-    height: 20vh;
+    /* height: 20vh; */
+    height: 100vh;
     display: flex;
     position: relative;
     /* justify-content: center; */
