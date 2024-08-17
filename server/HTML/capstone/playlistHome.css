@@ -133,11 +133,11 @@ hr {
 /* ------------ My Music CSS --------------- */
 .allMusicSelect {
     flex-direction: column;
-    background: #EFF8FC;
     width: 100%;
-    height: auto;
-    margin-left: 5%;
-    margin-top: 5%;
+    padding: 0.5em;
+    margin-left: 3%;
+    margin-top: 2%;
+    color: #EFF8FC;
 
 
 }
