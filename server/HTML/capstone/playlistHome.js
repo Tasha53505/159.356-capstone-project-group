@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
-// ------------------------ Code to fetch all Music ------------------------
+// ------------------------ Code to fetch all Songs ------------------------
 document.getElementById('allSongs').addEventListener('click', function() {
     // Create a new container for the songs
     var newAllSongsContainer = document.createElement('div');
@@ -120,7 +120,7 @@ document.getElementById('allSongs').addEventListener('click', function() {
             </button>
         <div id="musicList"></div>`; // Container to display the music list
 
-    document.body.appendChild(newSongsContainer);
+    document.body.appendChild(newAllSongsContainer);
 
     // Show the new container
     setTimeout(function () {
@@ -136,7 +136,7 @@ document.getElementById('allSongs').addEventListener('click', function() {
         return response.json();
     })
     .then(data => {
-        let musicList = newSongsContainer.querySelector('#musicList');
+        let musicList = newAllSongsContainer.querySelector('#musicList');
         musicList.innerHTML = '<ul>';
         data.forEach(file => {
             musicList.innerHTML += `<li>${file}</li>`;
@@ -146,10 +146,10 @@ document.getElementById('allSongs').addEventListener('click', function() {
     .catch(error => console.log("There was an error grabbing music. Error: ", error));
 
     // Back Button functionality
-    newSongsContainer.querySelector('.backButton').addEventListener('click', function () {
-        newSongsContainer.classList.remove('showNewSongsContainer');
+    newAllSongsContainer.querySelector('.backButton').addEventListener('click', function () {
+        newAllSongsContainer.classList.remove('shownewAllSongsContainer');
         setTimeout(function () {
-            newSongsContainer.remove();
+            newAllSongsContainer.remove();
         }, 500); // Animation time + back functionality
     });
 });
