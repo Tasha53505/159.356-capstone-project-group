@@ -4,7 +4,7 @@ use warnings;
 use JSON;
 
 # Set up the music directory
-my $musicDirectory = 'C:/Program Files/Songs'; # Note: Forward slashes or double backslashes are required for Windows paths.
+my $musicDirectory = 'C:\\Program Files\\Songs'; 
 opendir(my $dh, $musicDirectory) || die "Cannot open file directory: $!";
 
 # Read and filter the music files
