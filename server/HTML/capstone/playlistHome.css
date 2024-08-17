@@ -67,7 +67,7 @@ hr {
 }
 
 /* Accordion for Plugins */
-.pluginsAccordion a {
+.accordionContainer a {
     text-decoration: none;
 
 }
