@@ -107,8 +107,58 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
+// ------------------------ Code to fetch all Music ------------------------
+document.getElementById('allSongs').addEventListener('click', function() {
+    // Create a new container for the songs
+    var newSongsContainer = document.createElement('div');
+    newSongsContainer.classList.add('newSongsContainer');
 
-// Code to FETCH Music 
+    // Add back button and header
+    newSongsContainer.innerHTML = 
+        `<h3>Songs</h3>
+        <button class="backButton"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024"><path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/><path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/></svg>
+            </button>
+        <div id="musicList"></div>`; // Container to display the music list
+
+    document.body.appendChild(newSongsContainer);
+
+    // Show the new container
+    setTimeout(function () {
+        newSongsContainer.classList.add('showNewSongsContainer');
+    }, 10);
+
+    // Fetch music and display in the newSongsContainer
+    fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error.  Status is: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        let musicList = newSongsContainer.querySelector('#musicList');
+        musicList.innerHTML = '<ul>';
+        data.forEach(file => {
+            musicList.innerHTML += `<li>${file}</li>`;
+        });
+        musicList.innerHTML += '</ul>';
+    })
+    .catch(error => console.log("There was an error grabbing music. Error: ", error));
+
+    // Back Button functionality
+    newSongsContainer.querySelector('.backButton').addEventListener('click', function () {
+        newSongsContainer.classList.remove('showNewSongsContainer');
+        setTimeout(function () {
+            newSongsContainer.remove();
+        }, 500); // Animation time + back functionality
+    });
+});
+
+
+
+
+
+// Code to FETCH All 
 document.getElementById('myMusic').addEventListener('click', function() {
     fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
     then(response => {

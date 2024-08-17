@@ -1,9 +1,10 @@
+
 #!/usr/bin/perl
 use strict;
 use warnings;
 use JSON;
 
-my $musicDirectory = 'C:/Program Files/Squeezebox/server/HTML/capstone/tashaPlaylistBackend/testMusic'; # Need to find better way to get directory, different for others (potentially use FindBin).
+my $musicDirectory = 'C:\Program Files\Songs'; # Need to find better way to get directory, different for others (potentially use FindBin).
 opendir(my $dh, $musicDirectory) || die "cannot open file directory: $!"; # $dh reads musicDirectorys content. If not found, Die gives an error. --> $! means a specifc error message
 
 my @files;
