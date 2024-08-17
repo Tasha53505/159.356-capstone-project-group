@@ -140,12 +140,13 @@ document.getElementById('allSongs').addEventListener('click', function() {
     .then(data => {
         let musicList = newAllSongsContainer.querySelector('#musicList');
         musicList.innerHTML = '<ul>';
-        data.forEach(file => {
+        data.files.forEach(file => {  // Access the 'files' array within the 'data' object
             musicList.innerHTML += `<li>${file}</li>`;
         });
         musicList.innerHTML += '</ul>';
     })
     .catch(error => console.log("There was an error grabbing music. Error: ", error));
+
 
     // Back Button functionality
     newAllSongsContainer.querySelector('.backButton').addEventListener('click', function () {
