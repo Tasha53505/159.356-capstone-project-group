@@ -182,7 +182,7 @@ hr {
 
 /* PLUGIN AREA */
 /* When pluginExample is clicked, these become active.*/
-.newPluginContainer {
+.newPluginContainer, .newAllSongsContainer {
     background-color: #1b2444;
     height: 100%;
     /* width: 27%; */
@@ -196,14 +196,14 @@ hr {
     z-index: 10; /* will always be on top of Player */
 }
 
-.newPluginContainer h3 {
+.newPluginContainer h3, .newAllSongsContainer h3 {
     text-align: center;
     font-weight: 400;
     margin-top: 5%;
     font-size: 1.5rem;
 }
 
-.shownewPluginContainer {
+.shownewPluginContainer, .shownewAllSongsContainer {
     display: block;
 }
 
