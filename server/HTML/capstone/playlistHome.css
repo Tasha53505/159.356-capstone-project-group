@@ -130,6 +130,19 @@ hr {
 }
 
 
+/* ------------ My Music CSS --------------- */
+.allMusicSelect {
+    flex-direction: column;
+    background: #EFF8FC;
+    width: 100%;
+    height: auto;
+    margin-left: 5%;
+    margin-top: 5%;
+
+
+}
+
+
 .pluginExample, .radioExample {
     background: #EFF8FC;
     width: 2em;
