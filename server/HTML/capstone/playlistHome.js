@@ -160,27 +160,27 @@ document.getElementById('allSongs').addEventListener('click', function() {
 
 
 
-// Code to FETCH All 
-document.getElementById('myMusic').addEventListener('click', function() {
-    fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
-    then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error.  status is: ${response.status}`);
-        }
-        return response.json();
-    })
-    // Waits for server to respond and converts response data to JSON
-    .then(data => { // The file names (data) if any
-        let musicList = document.getElementById('musicList'); // Gets my musicList ID so it knows where to go
-        musicList.innerHTML = '<ul>'; // Adds an inner Unordered list
-        data.forEach(file => {
-            musicList.innerHTML += `<li>${file}</li>`; // For loop for displaying rach file
-        });
-        musicList.innerHTML += `</ul>`; // End of Unordered list
-    })
-    .catch(error => console.log("There was an error grabbing music. Error: ", error)); // If errors were found, console.log them.
+// // Code to FETCH All 
+// document.getElementById('myMusic').addEventListener('click', function() {
+//     fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
+//     then(response => {
+//         if (!response.ok) {
+//             throw new Error(`HTTP error.  status is: ${response.status}`);
+//         }
+//         return response.json();
+//     })
+//     // Waits for server to respond and converts response data to JSON
+//     .then(data => { // The file names (data) if any
+//         let musicList = document.getElementById('musicList'); // Gets my musicList ID so it knows where to go
+//         musicList.innerHTML = '<ul>'; // Adds an inner Unordered list
+//         data.forEach(file => {
+//             musicList.innerHTML += `<li>${file}</li>`; // For loop for displaying rach file
+//         });
+//         musicList.innerHTML += `</ul>`; // End of Unordered list
+//     })
+//     .catch(error => console.log("There was an error grabbing music. Error: ", error)); // If errors were found, console.log them.
 
-}) 
+// }) 
 
 
 // --------------- Settings Button ------------------------
