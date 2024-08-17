@@ -1,52 +1,26 @@
 
-# #!/usr/bin/perl
-# use strict;
-# use warnings;
-# use JSON;
-# use CGI qw(:standard);
-
-
-# my $musicDirectory = 'C:\Program Files\Songs'; # Need to find better way to get directory, different for others (potentially use FindBin).
-# opendir(my $dh, $musicDirectory) || die "cannot open file directory: $!"; # $dh reads musicDirectorys content. If not found, Die gives an error. --> $! means a specifc error message
-
-# my @files;
-# while(readdir $dh) { #loops over all content in directory
-#     next unless /\.(m4a|aif|dff|flac|ogg|wav)$/; #Regex pattern for file types --> Skips to next file if mp3, wav doesn't match
-#     push @files, $_; #Any files with those endings are found, pushes it to the array.
-# }
-# closedir $dh;
-
-# #Adding debugging statements for console log
-# my %response = (
-#     files => \@files,
-#     log => "Music has been fetched. No Errors"
-# );
-
-# print "Content-Type: application/json\n\n";
-# print encode_json(\%response);
-
-
 #!/usr/bin/perl
-
 use strict;
 use warnings;
 use JSON;
 use CGI qw(:standard);
 
-# Set the correct content type
-print header('application/json');
 
-# Define the music directory path
-my $music_dir = 'C:/Program Files/Songs';
+my $musicDirectory = 'C:\Program Files\Songs'; # Need to find better way to get directory, different for others (potentially use FindBin).
+opendir(my $dh, $musicDirectory) || die "cannot open file directory: $!"; # $dh reads musicDirectorys content. If not found, Die gives an error. --> $! means a specifc error message
 
-# Open the directory
-opendir(my $dir, $music_dir) or die "Could not open '$music_dir' for reading: $!\n";
+my @files;
+while(readdir $dh) { #loops over all content in directory
+    next unless /\.(m4a|aif|dff|flac|ogg|wav)$/; #Regex pattern for file types --> Skips to next file if mp3, wav doesn't match
+    push @files, $_; #Any files with those endings are found, pushes it to the array.
+}
+closedir $dh;
 
-# Read files and filter out directories
-my @files = grep { -f "$music_dir/$_" } readdir($dir);
+#Adding debugging statements for console log
+my %response = (
+    files => \@files,
+    log => "Music has been fetched. No Errors"
+);
 
-# Close the directory
-closedir($dir);
-
-# Output the files in JSON format
-print encode_json({ files => \@files });
+print "Content-Type: application/json\n\n";
+print encode_json(\%response);
