@@ -130,7 +130,7 @@ document.getElementById('allSongs').addEventListener('click', function() {
     }, 10);
 
     // Fetch music and display in the newSongsContainer
-    fetch('C:/Program Files/Squeezebox/server/HTML/capstone')
+    fetch('capstone/fetch.pl')
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error.  Status is: ${response.status}`);
