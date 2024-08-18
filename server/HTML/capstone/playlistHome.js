@@ -107,28 +107,71 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
+// ------------------------ Code to fetch all Songs ------------------------
+document.getElementById('allSongs').addEventListener('click', function() {
+    // Create a new container for the songs
+    var newAllSongsContainer = document.createElement('div');
+    newAllSongsContainer.classList.add('newAllSongsContainer');
 
-// Code to FETCH Music 
-document.getElementById('myMusic').addEventListener('click', function() {
-    fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
-    then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error.  status is: ${response.status}`);
-        }
-        return response.json();
-    })
-    // Waits for server to respond and converts response data to JSON
-    .then(data => { // The file names (data) if any
-        let musicList = document.getElementById('musicList'); // Gets my musicList ID so it knows where to go
-        musicList.innerHTML = '<ul>'; // Adds an inner Unordered list
-        data.forEach(file => {
-            musicList.innerHTML += `<li>${file}</li>`; // For loop for displaying rach file
-        });
-        musicList.innerHTML += `</ul>`; // End of Unordered list
-    })
-    .catch(error => console.log("There was an error grabbing music. Error: ", error)); // If errors were found, console.log them.
+    // Add back button and header
+    newAllSongsContainer.innerHTML = 
+        `<h3>Songs</h3>
 
-}) 
+        <button class="backButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+                <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
+                <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
+            </svg>
+        </button>
+        <div id="musicList"></div>`; 
+
+    // Append the new container to the body
+    document.body.appendChild(newAllSongsContainer);
+
+    // Clone the songsList element to avoid issues with the original
+    var songsList = document.querySelector('.songsList').cloneNode(true);
+    songsList.style.display = 'block'; // Ensure it is visible in the new container
+    newAllSongsContainer.querySelector('#musicList').appendChild(songsList);
+
+    // Show the new container
+    setTimeout(function () {
+        newAllSongsContainer.classList.add('shownewAllSongsContainer');
+    }, 10);
+
+    // Back Button functionality
+    newAllSongsContainer.querySelector('.backButton').addEventListener('click', function () {
+        newAllSongsContainer.classList.remove('shownewAllSongsContainer');
+        setTimeout(function () {
+            newAllSongsContainer.remove();
+        }, 500); // Animation time + back functionality
+    });
+});
+
+
+
+
+
+// // Code to FETCH All 
+// document.getElementById('myMusic').addEventListener('click', function() {
+//     fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
+//     then(response => {
+//         if (!response.ok) {
+//             throw new Error(`HTTP error.  status is: ${response.status}`);
+//         }
+//         return response.json();
+//     })
+//     // Waits for server to respond and converts response data to JSON
+//     .then(data => { // The file names (data) if any
+//         let musicList = document.getElementById('musicList'); // Gets my musicList ID so it knows where to go
+//         musicList.innerHTML = '<ul>'; // Adds an inner Unordered list
+//         data.forEach(file => {
+//             musicList.innerHTML += `<li>${file}</li>`; // For loop for displaying rach file
+//         });
+//         musicList.innerHTML += `</ul>`; // End of Unordered list
+//     })
+//     .catch(error => console.log("There was an error grabbing music. Error: ", error)); // If errors were found, console.log them.
+
+// }) 
 
 
 // --------------- Settings Button ------------------------
