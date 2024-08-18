@@ -53,20 +53,38 @@
  
                                     <div class="allMusicSelect" id="allSongs" >Songs</div>
                                     <div class="songsList">
-                         
-                                        [% BLOCK contentitem -%]
-                                        <div class="selectorMarker [% addClasses %]" onmouseover="Highlighter.highlight(this);" id="db[% Math.rand(1) %]_selector">
-                                            <div class="[% lineclass || 'browsedbListItem' %][% IF (hasArtwork && !artwork) %] itemWithCover[% END %]" [%- IF anchor %]id="anchor[% anchor | uri %]"[%- END -%]>
-                                                <div style="overflow:auto">[%- content %]</div>
-                                                <span class="browsedbControls">
-                                                    [%- IF rightcontrols && rightcontrols != controls; PROCESS $rightcontrols; END %]
-                                                    [%- IF leftcontrols && leftcontrols != controls; PROCESS $leftcontrols; END %]
-                                                    [%- IF controls; PROCESS $controls; END %]
-                                                </span>
-                                            </div>
+<!--                          
+                                        [% BLOCK trackinfo %]
+                                        [% IF item.currentsong %][% item.noHref=1 %]<b>[% END %]
+                                    
+                                        [% IF item.infohref %]
+                                            <a [% item.infohref %] target="browser" class="browseItemLink">[% ( item.text || item.title ) | html %]</a>
+                                        [% ELSIF item.num || item.num == 0 %]
+                                            [% UNLESS item.noHref %]<a [% PROCESS songinfoItemHRef %] target="browser">[% END %]
+                                            [% item.title | html %][% UNLESS item.noHref %]</a>[% END %]
+                                        [% ELSIF item.item || !item.defined('level') && item.itemobj %]
+                                            <a [% PROCESS songinfoItemHRef %] target="browser" class="browseItemLink">[% item.text | html %]</a>
+                                        [% ELSIF item.songtitle %]
+                                            <a [% PROCESS songinfoItemHRef %] target="browser" class="browseItemLink">[% item.songtitle | html %]</a>
+                                        [% ELSE %]
+                                            [% item.text | html %]
+                                        [% END %]
+                                        
+                                        [% IF item.includeArtist && (artist = item.artistsWithAttributes ? item.artistsWithAttributes.0 : item.itemobj.artist) && artist.name != item.noArtist; PROCESS artistsAsHTML.html itemobj = item.itemobj; END %]
+                                        
+                                        [% IF item.includeAlbum && (albumTitle = item.albumTitle || (item.itemobj.album && item.itemobj.album.title)) && albumTitle != item.noAlbum && albumTitle != "" %][% stringFROM %]
+                                        <a [% PROCESS albumItemHRef %] target="browser" class="browseItemLink">[% albumTitle | html %]</a>[% END %]
+                                        [% IF item.currentsong %]</b>[% END %]
+                                    [% END %]
+                                                              -->
+                                    [% BLOCK songInfoItem %]
+                                        <div id="[% title %]">
+                                            <span class="songInfoTitle">
+                                                [% IF title; title | string; stringCOLON; END %]
+                                            </span>
+                                            <span class="songInfoText">[% item %]</span>
                                         </div>
-                                        [%- END %]
-                                                                                
+                                    [% END %]
                                     
                                     </div>
                                                                         <hr />
