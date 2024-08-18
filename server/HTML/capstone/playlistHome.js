@@ -123,17 +123,17 @@ document.getElementById('allSongs').addEventListener('click', function() {
                 <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
             </svg>
         </button>
-        <div id="musicList"></div>`; // Container to display the music list from FetchMusic.pl
+        <div id="musicList"></div>`; 
 
-    // Append the songs list to the new container
-    var songsList = document.querySelector('.songsList');
-    songsList.style.display = 'block';
-    newAllSongsContainer.querySelector('#musicList').appendChild(songsList);
-
-    // Append the new container to the body or another container
+    // Append the new container to the body
     document.body.appendChild(newAllSongsContainer);
 
-    // Show the new container with an optional delay for animation
+    // Clone the songsList element to avoid issues with the original
+    var songsList = document.querySelector('.songsList').cloneNode(true);
+    songsList.style.display = 'block'; // Ensure it is visible in the new container
+    newAllSongsContainer.querySelector('#musicList').appendChild(songsList);
+
+    // Show the new container
     setTimeout(function () {
         newAllSongsContainer.classList.add('shownewAllSongsContainer');
     }, 10);
@@ -146,6 +146,8 @@ document.getElementById('allSongs').addEventListener('click', function() {
         }, 500); // Animation time + back functionality
     });
 });
+
+
 
 
 

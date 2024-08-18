@@ -139,6 +139,31 @@ hr {
     color: #EFF8FC;
 }
 
+.songsList {
+    display: none; /* Ensure it's hidden by default */
+    z-index: 20; /* Ensure it's above other content */
+}
+
+.newAllSongsContainer {
+    /* Add styles for newAllSongsContainer here */
+    /* Example styles */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Overlay effect */
+    z-index: 100; /* Ensure it's above other elements */
+    overflow: auto; /* Allow scrolling if content overflows */
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.newAllSongsContainer.shownewAllSongsContainer {
+    opacity: 1;
+}
+
+
 
 
 /* ------------ My Music CSS END --------------- */
@@ -222,6 +247,8 @@ hr {
 }
 
 
+
+
 /* ANIMATIONS */
 @keyframes fadeIn {
     from {
@@ -279,9 +306,6 @@ transform: translate3d(0, 0, 0);
     bottom: 0; /* Slide up into view */
 }
 
-.songsList {
-    display: none;
-}
 
 /* -------------------------- SETTINGS AREA -------------------------- */
 
