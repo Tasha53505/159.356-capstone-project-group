@@ -116,17 +116,7 @@ document.getElementById('allSongs').addEventListener('click', function() {
     // Add back button and header
     newAllSongsContainer.innerHTML = 
         `<h3>Songs</h3>
-                  [% pagetitle = "BROWSE_MUSIC" | string %] [% PROCESS standardheader.html %]
-                                    [% IF playercount == '0' %] [% ELSE %] [% "CURRENT_PLAYLIST" | string %][% stringCOLON %][% IF current_playlist %][% current_playlist_name %] [% IF current_playlist_modified %]([% "MODIFIED" | string %])[% END %][% END %] [% img = '' %][% IF cansave %][% PROCESS savePlaylistLink %] | [% END %][% PROCESS downloadPlaylistLink %] | [% PROCESS clearPlaylistLink %] [% END %] [% IF pageinfo.totalpages && pageinfo.totalpages > 1 %][% PROCESS pagebar %][% END %]
-                                    [% IF playercount == '0' %]
-                                    [% "NO_PLAYER_DETAILS" | string %]
-                                    
-                                    [% ELSE %] [% IF playlist_items %] [% FOREACH item = playlist_items %] [% PROCESS status_list.html %] [% END %] [% ELSE %]
-                                    [% "EMPTY" | string %]
-                                    
-                                    [% END %] [% END %]
-                                    [% IF pageinfo.totalpages && pageinfo.totalpages > 1 %][% PROCESS pagebar %][% END %]
-                                
+
         <button class="backButton">
             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
                 <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
@@ -135,14 +125,18 @@ document.getElementById('allSongs').addEventListener('click', function() {
         </button>
         <div id="musicList"></div>`; // Container to display the music list from FetchMusic.pl
 
+    // Append the songs list to the new container
+    var songsList = document.querySelector('.songsList');
+    songsList.style.display = 'block';
+    newAllSongsContainer.querySelector('#musicList').appendChild(songsList);
+
+    // Append the new container to the body or another container
     document.body.appendChild(newAllSongsContainer);
 
-    // Show the new container
+    // Show the new container with an optional delay for animation
     setTimeout(function () {
         newAllSongsContainer.classList.add('shownewAllSongsContainer');
     }, 10);
-
-    
 
     // Back Button functionality
     newAllSongsContainer.querySelector('.backButton').addEventListener('click', function () {
@@ -152,7 +146,6 @@ document.getElementById('allSongs').addEventListener('click', function() {
         }, 500); // Animation time + back functionality
     });
 });
-
 
 
 

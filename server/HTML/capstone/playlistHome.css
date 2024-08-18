@@ -279,6 +279,10 @@ transform: translate3d(0, 0, 0);
     bottom: 0; /* Slide up into view */
 }
 
+.songsList {
+    display: none;
+}
+
 /* -------------------------- SETTINGS AREA -------------------------- */
 
 
