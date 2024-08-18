@@ -144,8 +144,6 @@ hr {
 }
 
 .newAllSongsContainer {
-    /* Add styles for newAllSongsContainer here */
-    /* Example styles */
     position: fixed;
     top: 0;
     left: 0;
@@ -162,6 +160,21 @@ hr {
     opacity: 1;
 }
 
+.noInfoFound,
+.noArtistFound,
+.noAlbumFound,
+.noPlayerDetails,
+.noPlaylistFound,
+.noPlaylistItems {
+    color: #EFF8FC;
+    background-color: rgba(0, 0, 0, 0.8); /* Match the overlay effect */
+    padding: 1em;
+    border-radius: 8px;
+    text-align: center;
+    margin: 1em 0;
+    font-style: italic;
+    font-size: 1.2em;
+}
 
 
 
