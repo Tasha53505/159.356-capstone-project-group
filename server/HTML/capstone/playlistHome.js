@@ -129,8 +129,12 @@ document.getElementById('allSongs').addEventListener('click', function() {
         newAllSongsContainer.classList.add('shownewAllSongsContainer');
     }, 10);
 
+    const fetchUrl = 'server/HTML/capstone/fetchMusic.pl';
+    console.log("Fetching music from:", fetchUrl);
+
+
     // Fetch music and display in the newSongsContainer
-    fetch('server/HTML/capstone/fetchMusic.pl')
+    fetch(fetchUrl)
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error.  Status is: ${response.status}`);
