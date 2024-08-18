@@ -140,8 +140,7 @@ hr {
 }
 
 .songsList {
-    display: none; /* Ensure it's hidden by default */
-    z-index: 20; /* Ensure it's above other content */
+    display: none; 
 }
 
 .newAllSongsContainer {
