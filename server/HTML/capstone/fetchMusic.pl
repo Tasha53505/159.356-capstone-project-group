@@ -4,13 +4,13 @@ use warnings;
 use JSON;
 
 # Set up the music directory
-my $musicDirectory = 'C:\\Program Files\\Songs'; 
+my $musicDirectory = 'server/HTML/capstone'; 
 opendir(my $dh, $musicDirectory) || die "Cannot open file directory: $!";
 
 # Read and filter the music files
 my @files;
 while (readdir $dh) {
-    next unless /\.(m4a|aif|dff|flac|ogg|wav)$/; # Regex pattern for file types
+    next unless /\.(m4a|aif|dff|flac|ogg|wav|mp3)$/; # Regex pattern for file types
     push @files, $_;
 }
 closedir $dh;
@@ -37,7 +37,7 @@ my %response = (
     log => "Music has been fetched. No Errors",
     html_output => $html_output
 );
-
+ 
 # Print the JSON response
 print "Content-Type: application/json\n\n";
 print encode_json(\%response);
