@@ -116,10 +116,12 @@ document.getElementById('allSongs').addEventListener('click', function() {
     // Add back button and header
     newAllSongsContainer.innerHTML = 
         `<h3>Songs</h3>
-        <button class="backButton"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024"><path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/><path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/></svg>
+        <button class="backButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+                <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
+                <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
+            </svg>
         </button>
-
-
         <div id="musicList"></div>`; // Container to display the music list from FetchMusic.pl
 
     document.body.appendChild(newAllSongsContainer);
@@ -129,28 +131,51 @@ document.getElementById('allSongs').addEventListener('click', function() {
         newAllSongsContainer.classList.add('shownewAllSongsContainer');
     }, 10);
 
-    const fetchUrl = 'server/HTML/capstone/fetchMusic.pl';
+    const fetchUrl = 'fetchMusic.pl'; // Update with the correct URL to your Perl script
     console.log("Fetching music from:", fetchUrl);
-
 
     // Fetch music and display in the newSongsContainer
     fetch(fetchUrl)
     .then(response => {
         if (!response.ok) {
-            throw new Error(`HTTP error.  Status is: ${response.status}`);
+            throw new Error(`HTTP error. Status is: ${response.status}`);
         }
         return response.json();
     })
     .then(data => {
         let musicList = newAllSongsContainer.querySelector('#musicList');
-        musicList.innerHTML = '<ul>';
-        data.files.forEach(file => {  // Access the 'files' array within the 'data' object
-            musicList.innerHTML += `<li>${file}</li>`;
-        });
-        musicList.innerHTML += '</ul>';
+
+        // Checking if there are any players
+        if (data.playercount == '0') {
+            musicList.innerHTML = '<p>No player details available</p>';
+        } else {
+            // Add current playlist details if available
+            let playlistInfo = `<p>Current Playlist: ${data.current_playlist_name || 'Unknown'} 
+                ${data.current_playlist_modified ? '(Modified)' : ''}</p>`;
+            
+            // Include save, download, and clear links if applicable
+            if (data.cansave) {
+                playlistInfo += `<p><a href="${data.savePlaylistLink}">Save</a> | 
+                                 <a href="${data.downloadPlaylistLink}">Download</a> | 
+                                 <a href="${data.clearPlaylistLink}">Clear</a></p>`;
+            }
+            
+            musicList.innerHTML = playlistInfo;
+
+            // Check if playlist items exist
+            if (data.playlist_items && data.playlist_items.length > 0) {
+                let itemsHtml = '<ul>';
+                data.playlist_items.forEach(item => {
+                    itemsHtml += `<li>${item}</li>`; // Replace this with actual item rendering
+                });
+                itemsHtml += '</ul>';
+                musicList.innerHTML += itemsHtml;
+            } else {
+                musicList.innerHTML += '<p>Empty</p>';
+            }
+        }
     })
     .catch(error => console.log("There was an error grabbing music. Error: ", error));
-
 
     // Back Button functionality
     newAllSongsContainer.querySelector('.backButton').addEventListener('click', function () {
@@ -160,7 +185,6 @@ document.getElementById('allSongs').addEventListener('click', function() {
         }, 500); // Animation time + back functionality
     });
 });
-
 
 
 
