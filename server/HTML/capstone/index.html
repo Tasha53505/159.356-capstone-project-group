@@ -54,22 +54,19 @@
                                     <div class="allMusicSelect" id="allSongs" >Songs</div>
                                     <div class="songsList">
                          
-                                     [% pagetitle = "BROWSE_MUSIC" | string %]
-                                        [% PROCESS standardheader.html %]
-                                        [% IF playercount == '0' %]
-                                            [% "NO_PLAYER_DETAILS" | string %]
-                                        [% ELSE %]
-                                            [% "CURRENT_PLAYLIST" | string %][% stringCOLON %][% IF current_playlist %][% current_playlist_name %] [% IF current_playlist_modified %]([% "MODIFIED" | string %])[% END %][% END %] 
-                                            [% img = '' %][% IF cansave %][% PROCESS savePlaylistLink %] | [% END %][% PROCESS downloadPlaylistLink %] | [% PROCESS clearPlaylistLink %] 
-                                        [% END %]
-                                        [% IF pageinfo.totalpages && pageinfo.totalpages > 1 %][% PROCESS pagebar %][% END %]
-                                        [% IF playlist_items %]
-                                            [% FOREACH item = playlist_items %]
-                                                [% PROCESS status_list.html %]
-                                            [% END %]
-                                        [% ELSE %]
-                                            [% "EMPTY" | string %]
-                                        [% END %]                                           
+                                        [% BLOCK contentitem -%]
+                                        <div class="selectorMarker [% addClasses %]" onmouseover="Highlighter.highlight(this);" id="db[% Math.rand(1) %]_selector">
+                                            <div class="[% lineclass || 'browsedbListItem' %][% IF (hasArtwork && !artwork) %] itemWithCover[% END %]" [%- IF anchor %]id="anchor[% anchor | uri %]"[%- END -%]>
+                                                <div style="overflow:auto">[%- content %]</div>
+                                                <span class="browsedbControls">
+                                                    [%- IF rightcontrols && rightcontrols != controls; PROCESS $rightcontrols; END %]
+                                                    [%- IF leftcontrols && leftcontrols != controls; PROCESS $leftcontrols; END %]
+                                                    [%- IF controls; PROCESS $controls; END %]
+                                                </span>
+                                            </div>
+                                        </div>
+                                        [%- END %]
+                                                                                
                                     
                                     </div>
                                                                         <hr />

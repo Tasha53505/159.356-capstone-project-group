@@ -130,7 +130,7 @@ document.getElementById('allSongs').addEventListener('click', function() {
 
     // Clone the songsList element to avoid issues with the original
     var songsList = document.querySelector('.songsList').cloneNode(true);
-    songsList.style.display = 'block'; // Ensure it is visible in the new container
+    songsList.style.display = 'block'; // Display it
     newAllSongsContainer.querySelector('#musicList').appendChild(songsList);
 
     // Show the new container
