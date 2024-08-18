@@ -49,7 +49,16 @@
                             <button class="accordionButton">My Music</button>
                             <div class="accordionPanel">
                                 <div class="allMusicContainer">                               
-
+                                    [% pagetitle = "BROWSE_MUSIC" | string %] [% PROCESS standardheader.html %]
+                                    [% IF playercount == '0' %] [% ELSE %] [% "CURRENT_PLAYLIST" | string %][% stringCOLON %][% IF current_playlist %][% current_playlist_name %] [% IF current_playlist_modified %]([% "MODIFIED" | string %])[% END %][% END %] [% img = '' %][% IF cansave %][% PROCESS savePlaylistLink %] | [% END %][% PROCESS downloadPlaylistLink %] | [% PROCESS clearPlaylistLink %] [% END %] [% IF pageinfo.totalpages && pageinfo.totalpages > 1 %][% PROCESS pagebar %][% END %]
+                                    [% IF playercount == '0' %]
+                                    [% "NO_PLAYER_DETAILS" | string %]
+                                    
+                                    [% ELSE %] [% IF playlist_items %] [% FOREACH item = playlist_items %] [% PROCESS status_list.html %] [% END %] [% ELSE %]
+                                    [% "EMPTY" | string %]
+                                    
+                                    [% END %] [% END %]
+                                    [% IF pageinfo.totalpages && pageinfo.totalpages > 1 %][% PROCESS pagebar %][% END %]
                                 
                                     <div class="allMusicSelect" id="allSongs" >Songs</div>
                                     <hr />
