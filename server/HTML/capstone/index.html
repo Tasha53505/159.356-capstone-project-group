@@ -53,12 +53,13 @@
  
                                     <div class="allMusicSelect" id="allSongs" >Songs</div>
                                     <div class="songsList">
-                         
-                                        songcount|[% song_count %]
-                                        artistcount|[% artist_count %]
-                                        albumcount|[% album_count %]
-                                        
-                                        [% BLOCK trackinfo %]
+                                        <div style="margin: 3rem;">
+                                            You have: [% song_count %] Songs Total.
+                                            <!-- artistcount|[% artist_count %]
+                                            albumcount|[% album_count %] -->
+                                        </div>
+                              
+                                        <!-- [% BLOCK trackinfo %]
                                         [% IF item.currentsong %][% item.noHref=1 %]<b>[% END %]
                                     
                                         [% IF item.infohref %]
@@ -79,7 +80,7 @@
                                         [% IF item.includeAlbum && (albumTitle = item.albumTitle || (item.itemobj.album && item.itemobj.album.title)) && albumTitle != item.noAlbum && albumTitle != "" %][% stringFROM %]
                                         <a [% PROCESS albumItemHRef %] target="browser" class="browseItemLink">[% albumTitle | html %]</a>[% END %]
                                         [% IF item.currentsong %]</b>[% END %]
-                                    [% END %]
+                                    [% END %] -->
                                                              
                                     [% BLOCK songInfoItem %]
                                         <div id="[% title %]">

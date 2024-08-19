@@ -137,6 +137,12 @@ hr {
     /* padding: 0.5em; */
     /* margin-top: 0.5%; */
     color: #EFF8FC;
+    cursor: pointer;
+}
+
+.allMusicSelect:hover {
+    color: #bbd3dd;
+    transition: 0.2s ease;
 }
 
 .songsList {
