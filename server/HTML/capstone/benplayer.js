@@ -25,6 +25,43 @@ document.querySelector('.album').addEventListener('click', function() {
     }
 });
 
+// PLAYBACK BUTTONS
+
+var audio = new Audio('okcomputer/04 - Exit Music (For A Film).mp3');
+
+function animateButton(button){
+    button.classList.add('animatePlay');
+    setTimeout(function(){
+        button.classList.remove('animatePlay');
+    }, 150);
+}
+
+document.getElementById('playPause').addEventListener('click', function(){
+    let button = this;
+    animateButton(button);
+    if(audio.paused){
+        button.classList.add('playButton');
+        button.classList.remove('pauseButton');
+        audio.play();
+    } else {
+        button.classList.remove('playButton');
+        button.classList.add('pauseButton');
+        audio.pause();
+    }
+})
+
+document.getElementById('repeatButton').addEventListener('click', function(){
+    animateButton(this);
+})
+document.getElementById('prevButton').addEventListener('click', function(){
+    animateButton(this);
+})
+document.getElementById('nextButton').addEventListener('click', function(){
+    animateButton(this);
+})
+document.getElementById('shuffleButton').addEventListener('click', function(){
+    animateButton(this);
+})
 
 // changeButton.addEventListener('click', function () {
 //     if ((artistPanel.classList.contains('active')) || (infoPanel.classList.contains('active'))) {

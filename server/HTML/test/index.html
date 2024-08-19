@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="/html/ext/resources/css/ext-all.css?r=[% revision %]" />
+
+		<script type="text/javascript" src="/html/ext/adapter/ext/ext-base.js?r=[% revision %]"></script>
+		<script type="text/javascript" src="/html/ext/ext-all.js?r=[% revision %]"></script>
+		<script type="text/javascript">[% PROCESS html/vars.js %]</script>
+		<script type="text/javascript" src="/html/SqueezeJS/Base.js?r=[% revision %]"></script>
+		<script type="text/javascript">[% PROCESS html/SqueezeJS/Strings.js %]</script>
+		<script type="text/javascript" src="/html/SqueezeJS/UI.js?r=[% revision %]"></script>
+
+		<script type="text/javascript">
+			Ext.onReady(function(){
+				SqueezeJS.Controller.init({
+					player: playerid
+				});
+
+				var maxHeight = Math.min(Ext.lib.Dom.getViewWidth(), Ext.lib.Dom.getViewHeight()) - 100; 
+				new SqueezeJS.UI.Coverart({
+					el: 'cover',
+					noLink: true,
+					size: maxHeight
+				});
+				Ext.get('cover').setHeight(maxHeight);
+
+				new SqueezeJS.UI.Buttons.PlayerDropdown({
+					renderTo: 'playerChooser'
+				});
+
+				new SqueezeJS.UI.CompoundTitle({
+					el: 'title',
+					noLink: true
+				});
+
+				new SqueezeJS.UI.Buttons.Rew({
+					renderTo: 'back'
+				});
+				new SqueezeJS.UI.Buttons.Fwd({
+					renderTo: 'next'
+				});
+			});
+		</script>
+
+		<style>
+			#cover {
+				margin-top: 25px;
+				text-align: center;
+			}
+			#info {
+				width: 100%;
+				margin-top: 25px;
+				text-align: center;
+				font-family: sans-serif;
+			}
+		</style>
+
+		<title>SqueezeJS demo page</title>
+	</head>
+<body>
+	<div id="cover"></div>
+	<table id="info">
+		<tr>
+			<td id="playerChooser"></td>
+			<td id="title"></td>
+			<td id="back"></td><td id="next"></td>
+		</tr>
+	</table>
+</body>
+</html>
