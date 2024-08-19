@@ -1,0 +1,62 @@
+[
+   {
+      "artist" : "Radiohead",
+      "title" : "Airbag",
+      "file" : "okcomputer\\01 - Airbag.mp3"
+   },
+   {
+      "artist" : "Radiohead",
+      "title" : "Paranoid Android",
+      "file" : "okcomputer\\02 - Paranoid Android.mp3"
+   },
+   {
+      "title" : "Subterranean Homesick Alien",
+      "artist" : "Radiohead",
+      "file" : "okcomputer\\03 - Subterranean Homesick Alien.mp3"
+   },
+   {
+      "file" : "okcomputer\\04 - Exit Music (For A Film).mp3",
+      "artist" : "Radiohead",
+      "title" : "Exit Music (For A Film)"
+   },
+   {
+      "file" : "okcomputer\\05 - Let Down.mp3",
+      "artist" : "Radiohead",
+      "title" : "Let Down"
+   },
+   {
+      "file" : "okcomputer\\06 - Karma Police.mp3",
+      "artist" : "Radiohead",
+      "title" : "Karma Police"
+   },
+   {
+      "file" : "okcomputer\\07 - Fitter Happier.mp3",
+      "title" : "Fitter Happier",
+      "artist" : "Radiohead"
+   },
+   {
+      "title" : "Electioneering",
+      "artist" : "Radiohead",
+      "file" : "okcomputer\\08 - Electioneering.mp3"
+   },
+   {
+      "title" : "Climbing Up The Walls",
+      "artist" : "Radiohead",
+      "file" : "okcomputer\\09 - Climbing Up The Walls.mp3"
+   },
+   {
+      "file" : "okcomputer\\10 - No Surprises.mp3",
+      "title" : "No Surprises",
+      "artist" : "Radiohead"
+   },
+   {
+      "title" : "Lucky",
+      "artist" : "Radiohead",
+      "file" : "okcomputer\\11 - Lucky.mp3"
+   },
+   {
+      "file" : "okcomputer\\12 - The Tourist.mp3",
+      "title" : "The Tourist",
+      "artist" : "Radiohead"
+   }
+]
