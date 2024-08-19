@@ -148,30 +148,92 @@ document.getElementById('allSongs').addEventListener('click', function() {
 });
 
 
+// ------------------------ Code to fetch all Albums ------------------------
+document.getElementById('allAlbums').addEventListener('click', function() {
+    // Create a new container for the songs
+    var newAllAlbumsContainer = document.createElement('div');
+    newAllAlbumsContainer.classList.add('newAllAlbumsContainer');
+
+    // Add back button and header
+    newAllAlbumsContainer.innerHTML = 
+        `<h3>Albums</h3>
+
+        <button class="backButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+                <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
+                <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
+            </svg>
+        </button>
+        <div id="musicList"></div>`; 
+
+    // Append the new container to the body
+    document.body.appendChild(newAllAlbumsContainer);
+
+    // Clone the songsList element to avoid issues with the original
+    var albumsList = document.querySelector('.albumsList').cloneNode(true);
+    albumsList.style.display = 'block'; // Display it
+    newAllAlbumsContainer.querySelector('#musicList').appendChild(albumsList);
+
+    // Show the new container
+    setTimeout(function () {
+        newAllAlbumsContainer.classList.add('shownewAllAlbumsContainer');
+    }, 10);
+
+    // Back Button functionality
+    newAllAlbumsContainer.querySelector('.backButton').addEventListener('click', function () {
+        newAllAlbumsContainer.classList.remove('shownewAllAlbumsContainer');
+        setTimeout(function () {
+            newAllAlbumsContainer.remove();
+        }, 500); // Animation time + back functionality
+    });
+});
 
 
 
-// // Code to FETCH All 
-// document.getElementById('myMusic').addEventListener('click', function() {
-//     fetch('server/HTML/capstone/tashaPlaylistBackend/fetchMusic.pl') // HTTP request to fetch "fetchMusic.pl"
-//     then(response => {
-//         if (!response.ok) {
-//             throw new Error(`HTTP error.  status is: ${response.status}`);
-//         }
-//         return response.json();
-//     })
-//     // Waits for server to respond and converts response data to JSON
-//     .then(data => { // The file names (data) if any
-//         let musicList = document.getElementById('musicList'); // Gets my musicList ID so it knows where to go
-//         musicList.innerHTML = '<ul>'; // Adds an inner Unordered list
-//         data.forEach(file => {
-//             musicList.innerHTML += `<li>${file}</li>`; // For loop for displaying rach file
-//         });
-//         musicList.innerHTML += `</ul>`; // End of Unordered list
-//     })
-//     .catch(error => console.log("There was an error grabbing music. Error: ", error)); // If errors were found, console.log them.
+// ------------------------ Code to fetch all Artists  ------------------------
+document.getElementById('allArtists').addEventListener('click', function() {
+    // Create a new container for the songs
+    var newAllArtistsContainer = document.createElement('div');
+    newAllArtistsContainer.classList.add('newAllArtistsContainer');
 
-// }) 
+    // Add back button and header
+    newAllArtistsContainer.innerHTML = 
+        `<h3>Artists</h3>
+
+        <button class="backButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+                <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
+                <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
+            </svg>
+        </button>
+        <div id="musicList"></div>`; 
+
+    // Append the new container to the body
+    document.body.appendChild(newAllArtistsContainer);
+
+    // Clone the songsList element to avoid issues with the original
+    var artistsList = document.querySelector('.artistsList').cloneNode(true);
+    artistsList.style.display = 'block'; // Display it
+    newAllArtistsContainer.querySelector('#musicList').appendChild(artistsList);
+
+    // Show the new container
+    setTimeout(function () {
+        newAllArtistsContainer.classList.add('shownewAllArtistsContainer');
+    }, 10);
+
+    // Back Button functionality
+    newAllArtistsContainer.querySelector('.backButton').addEventListener('click', function () {
+        newAllArtistsContainer.classList.remove('shownewAllArtistsContainer');
+        setTimeout(function () {
+            newAllArtistsContainer.remove();
+        }, 500); // Animation time + back functionality
+    });
+});
+
+
+
+
+
 
 
 // --------------- Settings Button ------------------------
@@ -274,23 +336,40 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             advancedButton.classList.add('tabButton');
             advancedButton.setAttribute('data-tab', 'advanced');
             advancedButton.textContent = 'Advanced';
-
+    
             var tabsContainer = settingsContainer.querySelector('.settingsTabs');
             tabsContainer.appendChild(advancedButton);
-
+    
             var advancedContent = document.createElement('div');
             advancedContent.classList.add('tabContent');
             advancedContent.id = 'advanced';
-            advancedContent.innerHTML = '<p class="settingsTextContent">Advanced settings content</p>';
-
+            advancedContent.classList.add('active'); // Make sure it's shown when added
+    
+            // Create a new div to hold the content of `.advancedSettingsPlugin`
+            var advancedSettingsPluginContent = document.createElement('div');
+            advancedSettingsPluginContent.classList.add('advancedSettingsPlugin');
+            
+            // Add the advancedSettingsPlugin content to the new div
+            var originalAdvancedSettingsPlugin = document.querySelector('.advancedSettingsPlugin');
+            if (originalAdvancedSettingsPlugin) {
+                // Clone the original content to avoid removing it from its original place
+                advancedSettingsPluginContent.innerHTML = originalAdvancedSettingsPlugin.innerHTML;
+            }
+    
+            advancedContent.appendChild(advancedSettingsPluginContent);
+    
             var contentContainer = settingsContainer.querySelector('.settingsContent');
             contentContainer.appendChild(advancedContent);
-
+    
+            // Set the display style to block
+            advancedSettingsPluginContent.style.display = 'block';
+    
             updateTabListeners();
-
+    
             advancedButton.click();
         }
     }
+    
 
     function removeAdvancedTab() {
         var advancedButton = document.querySelector('.tabButton[data-tab="advanced"]');

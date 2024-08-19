@@ -137,31 +137,35 @@ hr {
     /* padding: 0.5em; */
     /* margin-top: 0.5%; */
     color: #EFF8FC;
+    cursor: pointer;
 }
 
-.songsList {
+.allMusicSelect:hover {
+    color: #bbd3dd;
+    transition: 0.2s ease;
+}
+
+.songsList, .albumsList, .artistsList {
     display: none; 
 }
 
-.newAllSongsContainer {
-    /* Add styles for newAllSongsContainer here */
-    /* Example styles */
-    position: fixed;
+.newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer {
+    background-color: #1b2444;
+    height: 100%;
+    /* width: 27%; */
+    width: 35%;
+    border-radius: 0em 1em 1em 0em;
+    position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8); /* Overlay effect */
-    z-index: 100; /* Ensure it's above other elements */
-    overflow: auto; /* Allow scrolling if content overflows */
-    opacity: 0;
-    transition: opacity 0.5s;
+    animation: fadeIn 0.5s forwards;
+    display: none; /* Invisible until a plugin is clicked */
+    z-index: 10; /* will always be on top of Player */
 }
 
-.newAllSongsContainer.shownewAllSongsContainer {
+.newAllSongsContainer.shownewAllSongsContainer, .newAllAlbumsContainer.shownewAllAlbumsContainer, .newAllArtistsContainer.shownewAllArtistsContainer {
     opacity: 1;
 }
-
 
 
 
@@ -220,14 +224,14 @@ hr {
     z-index: 10; /* will always be on top of Player */
 }
 
-.newPluginContainer h3, .newAllSongsContainer h3 {
+.newPluginContainer h3, .newAllSongsContainer h3, .newAllArtistsContainer h3, .newAllAlbumsContainer h3 {
     text-align: center;
     font-weight: 400;
     margin-top: 5%;
     font-size: 1.5rem;
 }
 
-.shownewPluginContainer, .shownewAllSongsContainer {
+.shownewPluginContainer, .shownewAllSongsContainer, .newAllArtistsContainer, .newAllAlbumsContainer {
     display: block;
 }
 
@@ -435,6 +439,17 @@ transform: translate3d(0, 0, 0);
     background-color: #1b2444;
 
 }
+
+
+.advancedSettingsPlugin {
+    display: none;
+    background-color: #1b2444;
+}
+.advancedSettingsPlugin select {
+    background-color: #1b2444;
+
+}
+
 
 @keyframes fadeIn {
     from { opacity: 0; }
