@@ -22,6 +22,66 @@
     <link rel="stylesheet" href="benplayer.css">
     <link rel="stylesheet" href="infoPanel.css">
     
+    <script type="text/javascript" src="/html/ext/adapter/ext/ext-base.js?r=[% revision %]"></script>
+    <script type="text/javascript" src="/html/ext/ext-all.js?r=[% revision %]"></script>
+    <script type="text/javascript">[% PROCESS html/vars.js %]</script>
+    <script type="text/javascript" src="/html/SqueezeJS/Base.js?r=[% revision %]"></script>
+    <script type="text/javascript">[% PROCESS html/SqueezeJS/Strings.js %]</script>
+    <script type="text/javascript" src="/html/SqueezeJS/UI.js?r=[% revision %]"></script>
+    <script type ="text/javascript">
+        Ext.onReady(function(){
+            SqueezeJS.Controller.init({
+                player : playerid
+            });
+
+            // Cover
+            var maxHeight = Math.min(Ext.lib.Dom.getViewWidth(), Ext.lib.Dom.getViewHeight() * .35); 
+			new SqueezeJS.UI.Coverart({
+				el: 'coverart',
+				noLink: true,
+				size: maxHeight
+			});
+            Ext.get('coverart').setHeight(maxHeight);
+
+            // Display name
+            new SqueezeJS.UI.RawTitle({
+                el: 'title',
+                noLink: true
+            });
+
+            // Display artist
+            new SqueezeJS.UI.Contributors({
+                el: 'artist',
+                noLink: true
+            });
+
+            // Back & Forward Buttons
+            new SqueezeJS.UI.Buttons.Rew({
+                renderTo: 'prevButton',
+                noText: true,
+            });
+            new SqueezeJS.UI.Buttons.Fwd({
+                renderTo: 'nextButton',
+                noText: true,
+            });
+
+            // Play Button
+            new SqueezeJS.UI.Buttons.Play({
+                renderTo: 'playPause',
+                noText: true
+            });
+
+            // Timers
+            new SqueezeJS.UI.Playtime({
+                el: 'playtime',
+                noLink: true
+            });
+            new SqueezeJS.UI.PlaytimeRemaining({
+                el: 'maxtime',
+                noLink: true
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -193,36 +253,42 @@
 
     <div class="mainContainer">
         <div class="albumContainer">
-            <div class="album">cover</div>
+            <div class="album">
+                <div id = "coverart"></div>
+            </div>
         </div>
         <div class="textContainer">
-            <h1>Title of the song</h1>
-            <h2>Name of the artist</h2>
+            <h1 id ="title"></h1>
+            <h2 id ="artist"></h2>
         </div>
         <div class="playerContainer">
             <div class="player">
                 <div class="bar"></div>
                 <div class="progress"></div>
+                <div class="timeInfo">
+                    <p class="playtime" id="playtime"></p>
+                    <p class="maxtime" id="maxtime"></p>
+                </div>
                 <div class="buttons">
                     <div class="control">
-                        <button id="repeatButton" class="repeatButton">   
-                        </button>
+                        <div id="repeatButton" class="repeatButton">   
+                        </div>
                     </div>
                     <div class="control">
-                        <button id="prevButton" class="prevButton">   
-                        </button>
+                        <div id="prevButton" class="prevButton">   
+                        </div>
                     </div>
                     <div class="control">
-                        <button id="playPause" class="pauseButton">   
-                        </button>
+                        <div id="playPause" class="playButton">   
+                        </div>
                     </div>
                     <div class="control">
-                        <button id="nextButton" class="nextButton">   
-                        </button>
+                        <div id="nextButton" class="nextButton">   
+                        </div>
                     </div>
                     <div class="control">
-                        <button id="shuffleButton" class="shuffleButton">   
-                        </button>
+                        <div id="shuffleButton" class="shuffleButton">   
+                        </div>
                     </div>
                 </div>
             </div>

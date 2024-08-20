@@ -61,6 +61,15 @@ body {
     transition: transform 0.2s ease, border-radius 0.4s ease;
     font-weight: 800;
     font-size: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+#coverart {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .album.circle{
@@ -167,7 +176,6 @@ body {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="white" d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6l6 6z"/></svg>') no-repeat center center;
     background-size: contain;
     transition: transform 0.15s ease-in-out;
-
 }
 
 .nextButton{
@@ -206,5 +214,26 @@ body {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="white" d="M17 17H7v-3l-4 4l4 4v-3h12v-6h-2M7 7h10v3l4-4l-4-4v3H5v6h2z"/></svg>') no-repeat center center;
     background-size: contain;
     transition: transform 0.15s ease-in-out;
+}
 
+.playButton button, .pauseButton button, .nextButton button, .prevButton button, .shuffleButton button, .repeatButton button {
+    opacity: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+.timeInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.playtime{
+    padding-left: 1em;
+}
+
+.maxtime{
+    padding-right:1em;
 }

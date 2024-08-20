@@ -4,16 +4,18 @@ var infoPanelBtn = document.querySelector('.infoPanelBtn');
 var infoPanel = document.querySelector('.infoPanel');
 var artistPanel = document.querySelector('.infoArtistPanel');
 var coverDisplay = document.querySelector('.album');
+var artist = true;
 
 document.querySelector('.album').addEventListener('click', function() {
+    if(artist){
+        artist = false;
+    } else {
+        artist = true;
+    }
+    console.log('artist: ', artist);
     let album = this;
     album.classList.toggle('circle');
     album.style.transform = 'scale(1.1)';
-    if(album.textContent === "cover"){
-        album.textContent = "artist";
-    } else {
-        album.textContent = "cover";
-    }
     setTimeout(function(){
         album.style.transform = 'scale(1)';
     }, 200)
@@ -27,8 +29,6 @@ document.querySelector('.album').addEventListener('click', function() {
 
 // PLAYBACK BUTTONS
 
-var audio = new Audio('okcomputer/04 - Exit Music (For A Film).mp3');
-
 function animateButton(button){
     button.classList.add('animatePlay');
     setTimeout(function(){
@@ -39,14 +39,12 @@ function animateButton(button){
 document.getElementById('playPause').addEventListener('click', function(){
     let button = this;
     animateButton(button);
-    if(audio.paused){
+    if(this.classList.contains('pauseButton')){
         button.classList.add('playButton');
         button.classList.remove('pauseButton');
-        audio.play();
     } else {
         button.classList.remove('playButton');
         button.classList.add('pauseButton');
-        audio.pause();
     }
 })
 
@@ -76,9 +74,9 @@ document.getElementById('shuffleButton').addEventListener('click', function(){
 // });
 
 infoPanelBtn.addEventListener('click', function () {
-    if (!(infoPanelBtn.classList.contains('hidden')) && (coverDisplay.textContent == 'cover')) {
+    if (!(infoPanelBtn.classList.contains('hidden')) && (artist)) {
         infoPanel.classList.toggle('active');
-    } else if (!(infoPanelBtn.classList.contains('hidden')) && (coverDisplay.textContent == 'artist')) {
+    } else if (!(infoPanelBtn.classList.contains('hidden')) && (!artist)) {
         artistPanel.classList.toggle('active');
     } else {
         //do nothing
