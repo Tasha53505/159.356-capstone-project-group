@@ -35,13 +35,10 @@
             });
 
             // Cover
-            var maxHeight = Math.min(Ext.lib.Dom.getViewWidth(), Ext.lib.Dom.getViewHeight() * .35); 
-			new SqueezeJS.UI.Coverart({
-				el: 'coverart',
-				noLink: true,
-				size: maxHeight
-			});
-            Ext.get('coverart').setHeight(maxHeight);
+            new SqueezeJS.UI.Coverart({
+                el: 'coverart',
+                noLink: true,
+            });
 
             // Display name
             new SqueezeJS.UI.RawTitle({

@@ -33,6 +33,7 @@ body {
     align-items:center;
     text-align:center;
     width: 100%;
+    min-height: 75%;
 }
 
 .albumContainer {
@@ -48,8 +49,7 @@ body {
     color: #EFF8FC;
     background-color: #20294B;
     aspect-ratio: 1 / 1;
-    width: 35vw;
-    max-width: 450px;
+    width: 25vw;
     min-width: 350px;
     position:relative;
     align-items: center;
@@ -62,14 +62,21 @@ body {
     font-weight: 800;
     font-size: 25px;
     overflow: hidden;
-    position: relative;
+}
+
+#coverart img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
 }
 
 #coverart {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center;
+    overflow: hidden;
+    position: relative;
 }
 
 .album.circle{
@@ -105,7 +112,8 @@ body {
 
 .player {
     width: 35vw;
-    height: 20vh;
+    min-width: 400px;
+    height: 18vh;
     border-radius: 20px;
     display:grid;
     background-color: #20294B;
@@ -121,7 +129,9 @@ body {
     overflow: hidden;
     align-self:end;
     justify-self:center;
-    margin:5%;
+    margin-left:5%;
+    margin-right: 5%;
+    margin-top: 3%;
 }
 
 .buttons {
@@ -230,10 +240,12 @@ body {
     justify-content: space-between;
 }
 
-.playtime{
-    padding-left: 1em;
+.playtime {
+    margin-bottom:2px;
+    padding-left: 10%;
 }
 
-.maxtime{
-    padding-right:1em;
+.maxtime {
+    margin-bottom:2px;
+    padding-right: 10%;
 }
