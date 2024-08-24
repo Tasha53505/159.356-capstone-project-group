@@ -457,6 +457,16 @@ transform: translate3d(0, 0, 0);
     to { opacity: 1; }
 }
 
+/* ----------- Basic Settings Start --------------- */
+.basicSettings {
+    display: none;
+}
+
+.basicSettingsContent {
+    background-color: #1b2444;
+
+}
+
 
 /* ----------- Settings End --------------- */
 

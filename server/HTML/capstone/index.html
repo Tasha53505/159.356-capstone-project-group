@@ -131,6 +131,44 @@
                                     [% END %]
                                     [% PROCESS settings/footer.html %]
                                 </div>
+
+                                <div class="basicSettings">
+                                  <div>
+                                    <div class="language" style="background-color: aqua;">
+                                        [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
+                                        [% languageoptions.$option %]
+                                        [% END %] 
+                                    </div>
+                                      
+                                    <div class="mediaLibrary" style="background-color: pink;">
+                                        [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
+                                        [% prefs.pref_libraryname | html %]
+                                        [% END %] [% END %] 
+                                    </div>
+                                    <div class="mediaFolders" style="background-color: rgb(32, 32, 32);">
+                                        [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
+                                        [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
+                                        [% mediadir.path %]
+
+                                                [% IF mediadir.path %][% END %]
+                                        [% END %]  
+                                    </div>
+                                    <div class="playListsFolder" style="background-color: rgb(216, 216, 216);">
+                                        [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
+                                        [% prefs.pref_playlistdir | html %]
+                                        [% END %] [% END %] 
+                                    </div>
+                                    <div class="rescanMedia" style="background-color: rgb(148, 123, 106);">
+                                        [% WRAPPER setting title="SETUP_RESCAN" desc="SETUP_RESCAN_DESC" %] 
+                                        [% option.value | string %]
+                                        
+
+                                        [% IF scanning %][% "SETUP_VIEW_SCANNING" | string %][% ELSE %][% "SETUP_VIEW_NOT_SCANNING" | string %][% END %] [% END %]
+                                    </div>
+
+                                  </div>
+                                </div>
+
                         </div>
              
                 </div>

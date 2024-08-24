@@ -283,8 +283,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 <p class="settingsTextContent">Manage Plugins</p>
             </div>
             <div class="tabContent" id="basic-info">
-                <p class="settingsTextContent">Basic Settings</p>
-                <p class="settingsTextContent">Information (i.e system Information</p>
+                <div class="basicSettingsContent"> </div>
             </div>
         </div>
     `;
@@ -311,6 +310,16 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 document.getElementById(this.getAttribute('data-tab')).classList.add('active');
             });
         });
+
+    // Add the content of `.basicSettings` to `.basicSettingsContent`
+    var basicSettingsContent = settingsContainer.querySelector('.basicSettingsContent');
+    var basicSettings = document.querySelector('.basicSettings').innerHTML;
+
+    // Set the inner HTML of `.basicSettingsContent` and make it visible
+    basicSettingsContent.innerHTML = basicSettings;
+    basicSettingsContent.style.display = 'block'; // Ensure it's visible
+    
+
     }
 
     updateTabListeners();
@@ -381,4 +390,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
     }
 
     document.querySelector('.tabButton[data-tab="music"]').click();
+
+
+
 });
