@@ -133,39 +133,84 @@
                                 </div>
 
                                 <div class="basicSettings">
-                                  <div>
-                                    <div class="language" style="background-color: aqua;">
-                                        [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
-                                        [% languageoptions.$option %]
-                                        [% END %] 
+                                    <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
+                                    <div class="basicSettingsTabs">
+                                        <button class="basicSettingsTabButton active" data-tab="language">Language</button>
+                                        <button class="basicSettingsTabButton" data-tab="mediaLibrary">Media Library</button>
+                                        <button class="basicSettingsTabButton" data-tab="mediaFolders">Media Folders</button>
+                                        <button class="basicSettingsTabButton" data-tab="playListsFolder">Playlists Folder</button>
+                                        <button class="basicSettingsTabButton" data-tab="rescanMedia">Rescan Media</button>
                                     </div>
+                                    <div class="settingsContent">
+                                        <div class="basicSettingsTabContent" id="language" style="display: block;">
+                                            <div class="language" style="display: block;">
+                                                [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
+                                                [% languageoptions.$option %]
+                                                <select class="stdedit" name="pref_language" id="language">
+        
+                
+                                                    <option value="DA">Dansk</option>
+                                                    <option value="DE">Deutsch</option>
+                                                    <option selected="selected" value="EN">English</option>
+                                                    <option value="EN_GB">English (British) *</option>
+                                                    <option value="ES">Español</option>
+                                                    <option value="FR">Français</option>
+                                                    <option value="IT">Italiano</option>
+                                                    <option value="NL">Nederlands</option>
+                                                    <option value="NO">Norsk</option>
+                                                    <option value="PL">Polski</option>
+                                                    <option value="PT">Português *</option>
+                                                    <option value="FI">Suomi</option>
+                                                    <option value="SV">Svenska</option>
+                                                    <option value="CS">Česky</option>
+                                                    <option value="RU">Русский</option>
+                                                    <option value="HE">עברית *</option>
+                                                    <option value="JA">日本語 *</option>
+                                                    <option value="ZH_CN">简体中文 *</option>
+                                                </select>
+                                                [% END %] 
+                                            </div>
+                                        </div>
+                                        <div class="basicSettingsTabContent" id="mediaLibrary">
+                                            <div class="mediaLibrary" style="background-color: pink;">
+                                                [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
+                                                [% prefs.pref_libraryname | html %]
+                                                [% END %] [% END %] 
+                                            </div>
+                                        </div>
+                                        <div class="basicSettingsTabContent" id="mediaFolders">
+                                            <div class="mediaFolders" style="background-color: rgb(32, 32, 32);">
+                                                [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
+                                                [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
+                                                [% mediadir.path %]
+        
+                                                        [% IF mediadir.path %][% END %]
+                                                [% END %]  
+                                            </div>
+                                        </div>
+                                        <div class="basicSettingsTabContent" id="playListsFolder">
+                                            <div class="playListsFolder" style="background-color: rgb(216, 216, 216);">
+                                                [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
+                                                [% prefs.pref_playlistdir | html %]
+                                                [% END %] [% END %] 
+                                            </div>
+                                        </div>
+                                        <div class="basicSettingsTabContent" id="rescanMedia">
+                                            <div class="rescanMedia" style="background-color: rgb(148, 123, 106);">
+                                                [% WRAPPER setting title="SETUP_RESCAN" desc="SETUP_RESCAN_DESC" %] 
+                                                [% option.value | string %]
+                                                
+                                                [% IF scanning %][% "SETUP_VIEW_SCANNING" | string %][% ELSE %][% "SETUP_VIEW_NOT_SCANNING" | string %][% END %] [% END %]
+                                            </div>
+        
+                                        </div>
+                                 
+                                    
                                       
-                                    <div class="mediaLibrary" style="background-color: pink;">
-                                        [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
-                                        [% prefs.pref_libraryname | html %]
-                                        [% END %] [% END %] 
-                                    </div>
-                                    <div class="mediaFolders" style="background-color: rgb(32, 32, 32);">
-                                        [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
-                                        [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
-                                        [% mediadir.path %]
-
-                                                [% IF mediadir.path %][% END %]
-                                        [% END %]  
-                                    </div>
-                                    <div class="playListsFolder" style="background-color: rgb(216, 216, 216);">
-                                        [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
-                                        [% prefs.pref_playlistdir | html %]
-                                        [% END %] [% END %] 
-                                    </div>
-                                    <div class="rescanMedia" style="background-color: rgb(148, 123, 106);">
-                                        [% WRAPPER setting title="SETUP_RESCAN" desc="SETUP_RESCAN_DESC" %] 
-                                        [% option.value | string %]
-                                        
-
-                                        [% IF scanning %][% "SETUP_VIEW_SCANNING" | string %][% ELSE %][% "SETUP_VIEW_NOT_SCANNING" | string %][% END %] [% END %]
-                                    </div>
-
+                                   
+                                   
+                                   
+                                   
                                   </div>
                                 </div>
 

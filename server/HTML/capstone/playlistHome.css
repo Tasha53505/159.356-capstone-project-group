@@ -310,7 +310,7 @@ transform: translate3d(0, 0, 0);
 }
 
 
-/* -------------------------- SETTINGS AREA -------------------------- */
+/* ------------------------------ SETTINGS AREA ------------------------------ */
 
 
 .settingsContainerClicked {
@@ -457,7 +457,7 @@ transform: translate3d(0, 0, 0);
     to { opacity: 1; }
 }
 
-/* ----------- Basic Settings Start --------------- */
+/* ----------- Basic Settings Start ----------- */
 .basicSettings {
     display: none;
 }
@@ -467,8 +467,45 @@ transform: translate3d(0, 0, 0);
 
 }
 
+/* Initially hide all tabContent sections */
+.basicSettingsTabContent {
+    display: none;
+}
 
-/* ----------- Settings End --------------- */
+/* Display the active tabContent */
+.basicSettingsTabContent.active {
+    color: #EFF8FC;
+    display: block;
+
+    
+}
+
+
+.basicSettingsTabLanguage, .basicSettingsTabButton {
+    background-color: #1b2444;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 0.7em;
+
+}
+
+.basicSettingsTabLanguage.active, .basicSettingsTabButton.active {
+    display: inline;
+    background-color: #0456C6; 
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 0.7em;
+    
+}
+
+/* ----------- Basic Settings End ----------- */
+
+
+
+/* ------------------------------ Settings End ------------------------------ */
 
 
 

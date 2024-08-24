@@ -311,14 +311,31 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             });
         });
 
-    // Add the content of `.basicSettings` to `.basicSettingsContent`
-    var basicSettingsContent = settingsContainer.querySelector('.basicSettingsContent');
-    var basicSettings = document.querySelector('.basicSettings').innerHTML;
+        // Add the content of `.basicSettings` to `.basicSettingsContent`
+        const basicSettingsContent = settingsContainer.querySelector('.basicSettingsContent');
+        const basicSettings = document.querySelector('.basicSettings').innerHTML;
 
-    // Set the inner HTML of `.basicSettingsContent` and make it visible
-    basicSettingsContent.innerHTML = basicSettings;
-    basicSettingsContent.style.display = 'block'; // Ensure it's visible
+        // Set the inner HTML of `.basicSettingsContent` and make it visible
+        basicSettingsContent.innerHTML = basicSettings;
+        basicSettingsContent.style.display = 'block'; // Ensure it's visible
+
+        
+    // ----------------------- Basic Settings Content  -----------------------
+    document.querySelectorAll('.basicSettingsTabButton').forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons and contents
+            document.querySelectorAll('.basicSettingsTabButton').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.basicSettingsTabContent').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
     
+    document.querySelector('.basicSettingsTabButton.active')?.click();
+    // ----------------------- Basic Settings Content  END  -----------------------
 
     }
 
@@ -394,3 +411,4 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
 });
+
