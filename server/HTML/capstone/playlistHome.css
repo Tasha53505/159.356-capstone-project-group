@@ -464,24 +464,42 @@ transform: translate3d(0, 0, 0);
 
 .basicSettingsContent {
     background-color: #1b2444;
+    display: block;
 
 }
 
 /* Initially hide all tabContent sections */
-.basicSettingsTabContent {
+.basicSettingsLanguageTab, 
+.basicSettingsMediaLibraryTab, 
+.basicSettingsMediaFoldersTab, 
+.basicSettingsPlaylistsTab, 
+.basicSettingsRescanMediaTab   {
     display: none;
 }
 
-/* Display the active tabContent */
-.basicSettingsTabContent.active {
-    color: #EFF8FC;
-    display: block;
 
-    
+/* Display the first tab content by default */
+.basicSettingsLanguageTab {
+    display: inline;
+}
+
+/* On Click of active buttons, display content */
+.basicSettingsLanguageTab.active, 
+.basicSettingsMediaLibraryTab.active, 
+.basicSettingsMediaFoldersTab.active, 
+.basicSettingsPlaylistsTab.active, 
+.basicSettingsRescanMediaTab.active   {
+    display: inline;
 }
 
 
-.basicSettingsTabLanguage, .basicSettingsTabButton {
+
+.basicSettingsLanguageTabButton, 
+.basicSettingsMediaLibraryTabButton,
+.basicSettingsMediaFoldersTabButton,
+.basicSettingsPlaylistsTabButton,
+.basicSettingsRescanMediaTabButton {
+    display: inline;
     background-color: #1b2444;
     border: none;
     padding: 0.5em 1em;
@@ -491,7 +509,11 @@ transform: translate3d(0, 0, 0);
 
 }
 
-.basicSettingsTabLanguage.active, .basicSettingsTabButton.active {
+.basicSettingsLanguageTabButton.active, 
+.basicSettingsMediaLibraryTabButton.active, 
+.basicSettingsMediaFoldersTab.active,
+.basicSettingsPlaylistsTab.active,
+.basicSettingsRescanMediaTab.active {
     display: inline;
     background-color: #0456C6; 
     border: none;

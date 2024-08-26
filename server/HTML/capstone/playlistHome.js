@@ -275,15 +275,15 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         </div>
         <div class="settingsContent">
             <div class="tabContent" id="music">
-                <p class="settingsTextContent"> My Music </p>
-                <p class="settingsTextContent"> Itunes </p>
-                <p class="settingsTextContent"> Interface and Player</p>
+                <p class="settingsTextContent">My Music</p>
+                <p class="settingsTextContent">Itunes</p>
+                <p class="settingsTextContent">Interface and Player</p>
             </div>
             <div class="tabContent" id="plugins">
                 <p class="settingsTextContent">Manage Plugins</p>
             </div>
             <div class="tabContent" id="basic-info">
-                <div class="basicSettingsContent"> </div>
+                <div class="basicSettingsContent"></div>
             </div>
         </div>
     `;
@@ -298,46 +298,90 @@ document.getElementById('settingsButton').addEventListener('click', function() {
     });
 
     function updateTabListeners() {
-        tabButtons = settingsContainer.querySelectorAll('.tabButton');
-        tabContents = settingsContainer.querySelectorAll('.tabContent');
-
+        const tabButtons = settingsContainer.querySelectorAll('.tabButton');
+        const tabContents = settingsContainer.querySelectorAll('.tabContent');
+        
         tabButtons.forEach(function(button) {
             button.addEventListener('click', function() {
+                // Remove the active class from all buttons and contents
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
         
+                // Add the active class to the clicked button
                 this.classList.add('active');
-                document.getElementById(this.getAttribute('data-tab')).classList.add('active');
+        
+                // Show the corresponding tab content
+                const activeTab = document.getElementById(this.getAttribute('data-tab'));
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                }
             });
         });
-
+    
         // Add the content of `.basicSettings` to `.basicSettingsContent`
         const basicSettingsContent = settingsContainer.querySelector('.basicSettingsContent');
         const basicSettings = document.querySelector('.basicSettings').innerHTML;
-
-        // Set the inner HTML of `.basicSettingsContent` and make it visible
-        basicSettingsContent.innerHTML = basicSettings;
-        basicSettingsContent.style.display = 'block'; // Ensure it's visible
-
-        
-    // ----------------------- Basic Settings Content  -----------------------
-    document.querySelectorAll('.basicSettingsTabButton').forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons and contents
-            document.querySelectorAll('.basicSettingsTabButton').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.basicSettingsTabContent').forEach(content => content.classList.remove('active'));
-            
-            // Add active class to clicked button and corresponding content
-            this.classList.add('active');
-            const tabId = this.getAttribute('data-tab');
-            document.getElementById(tabId).classList.add('active');
-        });
-    });
     
-    document.querySelector('.basicSettingsTabButton.active')?.click();
-    // ----------------------- Basic Settings Content  END  -----------------------
+        basicSettingsContent.innerHTML = basicSettings;
+// ----------------------- Basic Settings Tab Switching -----------------------
+const buttonClasses = [
+    '.basicSettingsLanguageTabButton',
+    '.basicSettingsMediaLibraryTabButton',
+    '.basicSettingsMediaFoldersTabButton',
+    '.basicSettingsPlaylistsTabButton',
+    '.basicSettingsRescanMediaTabButton'
+];
+const basicSettingsTabsButtons = document.querySelectorAll(buttonClasses.join(', '));
+
+const contentClasses = [
+    '.basicSettingsLanguageTab',
+    '.basicSettingsMediaLibraryTab',
+    '.basicSettingsMediaFoldersTab',
+    '.basicSettingsPlaylistsTab',
+    '.basicSettingsRescanMediaTab'
+];
+const basicSettingsTabsContent = document.querySelectorAll(contentClasses.join(', '));
+
+// Function to hide all tab contents
+function hideAllTabs() {
+    basicSettingsTabsContent.forEach(tab => {
+        tab.style.display = 'none';
+    });
+}
+
+// Add click event listeners to each tab button
+basicSettingsTabsButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        // Hide all tab contents
+        hideAllTabs();
+
+        // Remove active class from all buttons
+        basicSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Show the selected tab content and add the active class to the clicked button
+        const selectedTabId = this.getAttribute('data-tab');
+        const selectedTabContent = document.getElementById(selectedTabId);
+        console.log(selectedTabId); // Debyu
+
+        if (selectedTabContent) {
+            selectedTabContent.style.display = 'block';
+        }
+
+        this.classList.add('active');
+    });
+});
+
+// Trigger click on the Language tab button to display its content by default
+const languageTabButton = document.querySelector('.basicSettingsLanguageTabButton');
+if (languageTabButton) {
+    languageTabButton.click();
+}
+// ----------------------- Basic Settings Tab Switching END -----------------------
+
+
 
     }
+    
 
     updateTabListeners();
 
