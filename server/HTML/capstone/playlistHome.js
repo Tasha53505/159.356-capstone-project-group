@@ -341,19 +341,32 @@ const contentClasses = [
     '.basicSettingsRescanMediaTab'
 ];
 const basicSettingsTabsContent = document.querySelectorAll(contentClasses.join(', '));
-
 // Function to hide all tab contents
-function hideAllTabs() {
+function hideAllTabsContent() {
     basicSettingsTabsContent.forEach(tab => {
-        tab.style.display = 'none';
+        tab.style.display = 'none'; 
+        tab.classList.remove('active'); // Remove active class
     });
+}
+
+// Function to show the .basicSettings container
+function showBasicSettings() {
+    document.querySelector('.basicSettings').style.display = 'block';
+}
+
+// Function to hide the .basicSettings container
+function hideBasicSettings() {
+    document.querySelector('.basicSettings').style.display = 'none';
 }
 
 // Add click event listeners to each tab button
 basicSettingsTabsButtons.forEach(button => {
     button.addEventListener('click', function() {
+        // Show .basicSettings container
+        showBasicSettings();
+
         // Hide all tab contents
-        hideAllTabs();
+        hideAllTabsContent();
 
         // Remove active class from all buttons
         basicSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
@@ -361,15 +374,22 @@ basicSettingsTabsButtons.forEach(button => {
         // Show the selected tab content and add the active class to the clicked button
         const selectedTabId = this.getAttribute('data-tab');
         const selectedTabContent = document.getElementById(selectedTabId);
-        console.log(selectedTabId); // Debyu
+        console.log("Selected tab ID:", selectedTabId); // Debug
+        console.log("Selected tab content:", selectedTabContent); // Debug
 
         if (selectedTabContent) {
-            selectedTabContent.style.display = 'block';
+            selectedTabContent.style.display = 'block'; // Show the selected tab content
+            selectedTabContent.classList.add('active'); // Add active class to the selected tab content
+        } else {
+            console.error("No content found for tab ID:", selectedTabId); // Error
         }
-
-        this.classList.add('active');
+        
+        this.classList.add('active'); // Add active class to the clicked button
     });
+    hideBasicSettings();
 });
+
+
 
 // Trigger click on the Language tab button to display its content by default
 const languageTabButton = document.querySelector('.basicSettingsLanguageTabButton');
@@ -377,8 +397,6 @@ if (languageTabButton) {
     languageTabButton.click();
 }
 // ----------------------- Basic Settings Tab Switching END -----------------------
-
-
 
     }
     

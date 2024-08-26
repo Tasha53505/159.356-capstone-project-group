@@ -456,44 +456,49 @@ transform: translate3d(0, 0, 0);
     from { opacity: 0; }
     to { opacity: 1; }
 }
-
 /* ----------- Basic Settings Start ----------- */
 .basicSettings {
-    display: none;
+    display: none; 
+}
+
+.basicSettingsTest {
+    display: block;
+}
+
+.basicSettingsTabs {
+    display: block;
 }
 
 .basicSettingsContent {
     background-color: #1b2444;
-    display: block;
-
 }
 
-/* Initially hide all tabContent sections */
+/* Hide content in beginning */
 .basicSettingsLanguageTab, 
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
-.basicSettingsRescanMediaTab   {
+.basicSettingsRescanMediaTab {
     display: none;
-}
+    border: 2px solid red; /*  */
 
+}
 
 /* Display the first tab content by default */
 .basicSettingsLanguageTab {
-    display: inline;
+    display: block; 
 }
 
-/* On Click of active buttons, display content */
+/* Active tab content should be displayed */
 .basicSettingsLanguageTab.active, 
 .basicSettingsMediaLibraryTab.active, 
 .basicSettingsMediaFoldersTab.active, 
 .basicSettingsPlaylistsTab.active, 
-.basicSettingsRescanMediaTab.active   {
-    display: inline;
+.basicSettingsRescanMediaTab.active {
+    display: block; /* Display the active tab content */
 }
 
-
-
+/* Button styles */
 .basicSettingsLanguageTabButton, 
 .basicSettingsMediaLibraryTabButton,
 .basicSettingsMediaFoldersTabButton,
@@ -506,24 +511,23 @@ transform: translate3d(0, 0, 0);
     border-radius: 0.5em;
     cursor: pointer;
     font-size: 0.7em;
-
 }
 
+/* Active button styles */
 .basicSettingsLanguageTabButton.active, 
 .basicSettingsMediaLibraryTabButton.active, 
-.basicSettingsMediaFoldersTab.active,
-.basicSettingsPlaylistsTab.active,
-.basicSettingsRescanMediaTab.active {
-    display: inline;
-    background-color: #0456C6; 
+.basicSettingsMediaFoldersTabButton.active,
+.basicSettingsPlaylistsTabButton.active,
+.basicSettingsRescanMediaTabButton.active {
+    background-color: #0456C6;
     border: none;
     border-radius: 0.5em;
     cursor: pointer;
     font-size: 0.7em;
-    
 }
 
 /* ----------- Basic Settings End ----------- */
+
 
 
 
