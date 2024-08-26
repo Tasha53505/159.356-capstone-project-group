@@ -206,18 +206,10 @@
                                             </div>
         
                                         </div>
-                                 
-                                    
-                                      
-                                   
-                                   
-                                   
-                                   
+        
                                   </div>
                                 </div>
                             <!------------- Basic Settings Language Tab Content End ------------->
-
-
                         </div>
              
                 </div>
@@ -234,9 +226,9 @@
                                         <div style="margin: 3rem;">
                                             You have: [% song_count %]  total. <br>
                                            Artist  [% " " _ stringBY _ " " %] [%- FILTER null %] [% IF item.artists; contributorsText = item.artists; ELSE %] [% contributorsText = [ item.artist ] %] [% contributors = item.artistsWithAttributes || itemobj.artistsWithAttributes %] [% FOREACH contributorTuple IN contributors %] [% contributorsText.push(contributorTuple.name) %] [% END %] [% END; END -%] [% contributorsText.join(', ') %]:
-                             
-                               
-                                            
+                                           <div id="browsedbList" style="height: 330px;">  </div>  
+
+                            
                                         </div>
                                       </div>
 
@@ -248,9 +240,6 @@
                                          
                                          <!-- [% album_count %] [% "WITH" | string %] [% song_count %] [% stringBY %] [% artist_count %] 
                                          [% IF albumDuration %]([% "LENGTH" | string %][% stringCOLON %] [% albumDuration %])[% END %] -->
-
-
-                               
 
 
                                         </div>
