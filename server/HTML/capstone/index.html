@@ -105,6 +105,7 @@
                                 Settings </button>
 
                                 <div class="advancedSettingsPlugin">
+                                    <!-- [% PROCESS settings/header.html %]  -->
                                     [% "SETUP_GROUP_PLUGINS" | string %]
                                     [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
                                     [% FOREACH plugin = sortedPlugins %]
@@ -128,6 +129,7 @@
                                     [% END %]
                                     [% END %]
                                     [% END %]
+                                    <!-- [% PROCESS settings/footer.html %] -->
                                 </div>
 
                                 <div class="basicSettings">
@@ -142,6 +144,7 @@
                                         <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
                                     </div>
                                     <div class="settingsContent">
+
                                         <div class="basicSettingsLanguageTab" id="language">
                                             <div class="language">
                                                 [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
@@ -171,15 +174,17 @@
                                                 [% END %] 
                                             </div>
                                         </div>
+
                                         <div class="basicSettingsMediaLibraryTab" id="mediaLibrary">
-                                            <div class="mediaLibrary" style="background-color: pink;">
+                                            <div class="mediaLibrary" >
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
                                                 [% prefs.pref_libraryname | html %]
                                                 [% END %] [% END %] 
                                             </div>
                                         </div>
+
                                         <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
-                                            <div class="mediaFolders" style="background-color: rgb(32, 32, 32);">
+                                            <div class="mediaFolders">
                                                 [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
                                                 [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
                                                 [% mediadir.path %]
@@ -189,14 +194,14 @@
                                             </div>
                                         </div>
                                         <div class="basicSettingsPlaylistsTab" id="playlistsFolder">
-                                            <div class="playListsFolder" style="background-color: rgb(216, 216, 216);">
+                                            <div class="playListsFolder">
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
                                                 [% prefs.pref_playlistdir | html %]
                                                 [% END %] [% END %] 
                                             </div>
                                         </div>
                                         <div class="basicSettingsRescanMediaTab" id="rescanMedia">
-                                            <div class="rescanMedia" style="background-color: rgb(148, 123, 106);">
+                                            <div class="rescanMedia" >
                                                 [% WRAPPER setting title="SETUP_RESCAN" desc="SETUP_RESCAN_DESC" %] 
                                                 [% option.value | string %]
                                                 

@@ -480,14 +480,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab {
     display: none;
-    border: 2px solid red; /*  */
 
 }
 
-/* Display the first tab content by default */
-.basicSettingsLanguageTab {
-    display: block; 
-}
 
 /* Active tab content should be displayed */
 .basicSettingsLanguageTab.active, 
@@ -496,7 +491,97 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab.active, 
 .basicSettingsRescanMediaTab.active {
     display: block; /* Display the active tab content */
+    background-color: #3A456D; /* Darker background for contrast */
+    padding: 1em;
+    border-radius: 10px;
+    color: #ecf0f1;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    max-width: 400px;
 }
+
+
+/* ---- Basic Settings Language Tab Start ---- */
+
+.basicSettingsLanguageTab {
+    display: block; /* Makes it so that Language tab is displayed first */ 
+    background-color: #3A456D; /* Darker background for contrast */
+    padding: 1em;
+    border-radius: 10px;
+    color: #ecf0f1;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    max-width: 400px;
+
+}
+
+/* Header styling */
+.basicSettingsLanguageTab h2 {
+    margin-bottom: 0.5em;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+/* Styling for the language dropdown container */
+.language {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+/* Styling for the dropdown */
+select.stdedit {
+    background-color: #20294B; /* Darker background for dropdown */
+    color: #ecf0f1;
+    border: 1px solid #3676cf; /* Border color */
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Dropdown hover and focus styling */
+select.stdedit:hover,
+select.stdedit:focus {
+    background-color: #20294B;
+    border-color: #0456C6; /* Lighter border color on hover/focus */
+    outline: none;
+}
+
+/* Option styling */
+select.stdedit option {
+    background-color: #20294B;
+    color: #ecf0f1;
+}
+
+/* Wrapper and description text styling */
+.setting {
+    margin-bottom: 1em;
+}
+
+.setting.title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+.setting.desc {
+    font-size: 0.9em;
+    color: #bdc3c7;
+}
+
+
+/* ---- Basic Settings Language Tab Start ---- */
+
+
+/* ---- Basic Settings Language Tab End ---- */
+
+/* ---- Basic Settings Buttons Start ---- */
 
 /* Button styles */
 .basicSettingsLanguageTabButton, 
@@ -525,6 +610,7 @@ transform: translate3d(0, 0, 0);
     cursor: pointer;
     font-size: 0.7em;
 }
+/* ---- Basic Settings Buttons End ---- */
 
 /* ----------- Basic Settings End ----------- */
 
