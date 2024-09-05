@@ -614,7 +614,44 @@ select.stdedit option {
 
 /* ----------- Basic Settings End ----------- */
 
+/* ---------------------- SAVE BUTTON ---------------------- */
+/* Styling for the 'Save Settings' button container */
+#prefsSubmit {
+    text-align: center;
+    margin-top: 1.5em;
+}
 
+/* Styling for the 'Save Settings' button */
+#prefsSubmit input#saveSettings {
+    background-color: #0456C6; 
+    color: #ecf0f1; /* Light text color to match the theme */
+    border: none;
+    border-radius: 5px;
+    padding: 0.8em 1.5em;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+/* Hover and focus effects */
+#prefsSubmit input#saveSettings:hover,
+#prefsSubmit input#saveSettings:focus {
+    background-color: #1266db; /* Slightly lighter blue on hover/focus */
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+    outline: none;
+}
+
+/* Disabled button styling */
+#prefsSubmit input#saveSettings:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* ---------------------- SAVE BUTTON END ---------------------- */
 
 
 /* ------------------------------ Settings End ------------------------------ */

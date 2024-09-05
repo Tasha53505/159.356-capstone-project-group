@@ -149,6 +149,9 @@
                                             <div class="language">
                                                 [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
                                                 [% languageoptions.$option %]
+                                        
+                                                </select>
+                                
                                                 <select class="stdedit" name="pref_language" id="language">
         
                 
@@ -189,7 +192,7 @@
                                                 [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
                                                 [% mediadir.path %]
         
-                                                        [% IF mediadir.path %][% END %]
+                                                [% IF mediadir.path %][% END %]
                                                 [% END %]  
                                             </div>
                                         </div>
@@ -211,6 +214,11 @@
                                         </div>
         
                                   </div>
+
+                                    <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+                                        <input type="hidden" name="saveSettings" value="1">
+                                    </div>
+
                                 </div>
                             <!------------- Basic Settings Language Tab Content End ------------->
                         </div>
