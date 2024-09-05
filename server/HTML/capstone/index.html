@@ -105,7 +105,6 @@
                                 Settings </button>
 
                                 <div class="advancedSettingsPlugin">
-                                    [% PROCESS settings/header.html %]
                                     [% "SETUP_GROUP_PLUGINS" | string %]
                                     [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
                                     [% FOREACH plugin = sortedPlugins %]
@@ -129,7 +128,6 @@
                                     [% END %]
                                     [% END %]
                                     [% END %]
-                                    [% PROCESS settings/footer.html %]
                                 </div>
 
                                 <div class="basicSettings">
