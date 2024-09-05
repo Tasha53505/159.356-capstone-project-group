@@ -359,10 +359,10 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         }
 
         // Function to hide the .basicSettings container
-        function showBasicSettings() {
+        function hideBasicSettings() {
             const basicSettingsContainer = settingsContainer.querySelector('.basicSettings');
             if (basicSettingsContainer) {
-                basicSettingsContainer.style.display = 'block';
+                basicSettingsContainer.style.display = 'none';
             } else {
                 console.error('Basic settings container not found.');
             }
