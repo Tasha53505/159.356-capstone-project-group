@@ -257,9 +257,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                     <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
                 </svg>
             </button>
-
             <h2>Settings</h2>
-            
             <div class="toggleSwitch">
                 <input type="checkbox" id="modeToggle" />
                 <label for="modeToggle" class="toggleLabel">
@@ -274,7 +272,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <button class="tabButton" data-tab="basic-info">Basic Settings | Information</button>
         </div>
         <div class="settingsContent">
-            <div class="tabContent" id="music">
+            <div class="tabContent active" id="music">
                 <p class="settingsTextContent">My Music</p>
                 <p class="settingsTextContent">Itunes</p>
                 <p class="settingsTextContent">Interface and Player</p>
@@ -317,90 +315,93 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 }
             });
         });
-    
+
         // Add the content of `.basicSettings` to `.basicSettingsContent`
         const basicSettingsContent = settingsContainer.querySelector('.basicSettingsContent');
         const basicSettings = document.querySelector('.basicSettings').innerHTML;
-    
         basicSettingsContent.innerHTML = basicSettings;
-// ----------------------- Basic Settings Tab Switching -----------------------
-const buttonClasses = [
-    '.basicSettingsLanguageTabButton',
-    '.basicSettingsMediaLibraryTabButton',
-    '.basicSettingsMediaFoldersTabButton',
-    '.basicSettingsPlaylistsTabButton',
-    '.basicSettingsRescanMediaTabButton'
-];
-const basicSettingsTabsButtons = document.querySelectorAll(buttonClasses.join(', '));
-
-const contentClasses = [
-    '.basicSettingsLanguageTab',
-    '.basicSettingsMediaLibraryTab',
-    '.basicSettingsMediaFoldersTab',
-    '.basicSettingsPlaylistsTab',
-    '.basicSettingsRescanMediaTab'
-];
-const basicSettingsTabsContent = document.querySelectorAll(contentClasses.join(', '));
-// Function to hide all tab contents
-function hideAllTabsContent() {
-    basicSettingsTabsContent.forEach(tab => {
-        tab.style.display = 'none'; 
-        tab.classList.remove('active'); // Remove active class
-    });
-}
-
-// Function to show the .basicSettings container
-function showBasicSettings() {
-    document.querySelector('.basicSettings').style.display = 'block';
-}
-
-// Function to hide the .basicSettings container
-function hideBasicSettings() {
-    document.querySelector('.basicSettings').style.display = 'none';
-}
-
-// Add click event listeners to each tab button
-basicSettingsTabsButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        // Show .basicSettings container
-        showBasicSettings();
-
-        // Hide all tab contents
-        hideAllTabsContent();
-
-        // Remove active class from all buttons
-        basicSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
-
-        // Show the selected tab content and add the active class to the clicked button
-        const selectedTabId = this.getAttribute('data-tab');
-        const selectedTabContent = document.getElementById(selectedTabId);
-        console.log("Selected tab ID:", selectedTabId); // Debug
-        console.log("Selected tab content:", selectedTabContent); // Debug
-
-        if (selectedTabContent) {
-            selectedTabContent.style.display = 'block'; // Show the selected tab content
-            selectedTabContent.classList.add('active'); // Add active class to the selected tab content
-        } else {
-            console.error("No content found for tab ID:", selectedTabId); // Error
-        }
         
-        this.classList.add('active'); // Add active class to the clicked button
-    });
-    hideBasicSettings();
-});
+        // Initialize Basic Settings Tab Switching
+        const buttonClasses = [
+            '.basicSettingsLanguageTabButton',
+            '.basicSettingsMediaLibraryTabButton',
+            '.basicSettingsMediaFoldersTabButton',
+            '.basicSettingsPlaylistsTabButton',
+            '.basicSettingsRescanMediaTabButton'
+        ];
+        const basicSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClasses.join(', '));
 
+        const contentClasses = [
+            '.basicSettingsLanguageTab',
+            '.basicSettingsMediaLibraryTab',
+            '.basicSettingsMediaFoldersTab',
+            '.basicSettingsPlaylistsTab',
+            '.basicSettingsRescanMediaTab'
+        ];
+        const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
 
+        // Function to hide all tab contents
+        function hideAllTabsContent() {
+            basicSettingsTabsContent.forEach(tab => {
+                tab.style.display = 'none'; 
+                tab.classList.remove('active'); // Remove active class
+            });
+        }
 
-// Trigger click on the Language tab button to display its content by default
-const languageTabButton = document.querySelector('.basicSettingsLanguageTabButton');
-if (languageTabButton) {
-    languageTabButton.click();
-}
-// ----------------------- Basic Settings Tab Switching END -----------------------
+        // Function to show the .basicSettings container
+        function showBasicSettings() {
+            const basicSettingsContainer = settingsContainer.querySelector('.basicSettings');
+            if (basicSettingsContainer) {
+                basicSettingsContainer.style.display = 'block';
+            } else {
+                console.error('Basic settings container not found.');
+            }
+        }
 
+        // Function to hide the .basicSettings container
+        function showBasicSettings() {
+            const basicSettingsContainer = settingsContainer.querySelector('.basicSettings');
+            if (basicSettingsContainer) {
+                basicSettingsContainer.style.display = 'block';
+            } else {
+                console.error('Basic settings container not found.');
+            }
+        }
+        // Add click event listeners to each tab button
+        basicSettingsTabsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Show .basicSettings container
+                showBasicSettings();
+
+                // Hide all tab contents
+                hideAllTabsContent();
+
+                // Remove active class from all buttons
+                basicSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Show the selected tab content and add the active class to the clicked button
+                const selectedTabId = this.getAttribute('data-tab');
+                const selectedTabContent = settingsContainer.querySelector(`#${selectedTabId}`);
+                if (selectedTabContent) {
+                    selectedTabContent.style.display = 'block'; // Show the selected tab content
+                    selectedTabContent.classList.add('active'); // Add active class to the selected tab content
+                } else {
+                    console.error("No content found for tab ID:", selectedTabId); // Error
+                }
+                
+                this.classList.add('active'); // Add active class to the clicked button
+            });
+        });
+        hideBasicSettings();
+
+        // Trigger click on the Language tab button to display its content by default
+        const languageTabButton = settingsContainer.querySelector('.basicSettingsLanguageTabButton');
+        if (languageTabButton) {
+            languageTabButton.click();
+        }
     }
-    
 
+    // Initialize the tab listeners after the container is added
     updateTabListeners();
 
     var isAdvancedMode = false;
@@ -469,8 +470,6 @@ if (languageTabButton) {
     }
 
     document.querySelector('.tabButton[data-tab="music"]').click();
-
-
-
 });
+
 
