@@ -148,6 +148,22 @@ document.getElementById('allSongs').addEventListener('click', function() {
 });
 
 
+// Play Songs
+function playSong(url) {
+
+    fetch(url)
+      .then(response => response.text())
+      .then(data => {
+        console.log("Song playback started");
+
+      })
+      .catch(error => console.error("Error playing song:", error));
+  }
+
+
+
+
+
 // ------------------------ Code to fetch all Albums ------------------------
 document.getElementById('allAlbums').addEventListener('click', function() {
     // Create a new container for the songs
