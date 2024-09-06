@@ -657,7 +657,76 @@ select.stdedit option {
 /* ------------------------------ Settings End ------------------------------ */
 
 
+/* --------------------------- Songs CSS start --------------------------- */
+.browsedbListItem {
+    background-color: #3A456D;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    flex-wrap: wrap; /* Allows wrapping for responsiveness */
+}
 
+.browsedbListItem:hover {
+    background-color: #2d3a5d;
+}
+
+.browsedbLeftControls {
+    display: flex;
+    align-items: center;
+    margin-right: 15px; /* Space between controls and song name */
+}
+
+.browsedbLeftControls a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px; /* Space between icons */
+}
+
+.browsedbLeftControls a svg {
+    width: 2em;
+    height: 2em;
+}
+
+.browsedbRightControls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.browsedbRightControls span a {
+    display: inline-block;
+    margin-left: 10px; /* Space between "Save" button and other elements */
+    border: 1px solid #0456C6;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.browsedbRightControls span a:hover {
+    background-color: #0456C6;
+    color: #ffffff;
+}
+
+.browsedbRightControls span {
+    display: none; /* Hidden by default */
+}
+
+/* Hide unnecessary elements in a single line layout */
+.browsedbListItem a {
+    flex-grow: 1; /* Ensures song name takes up remaining space */
+    text-decoration: none;
+    color: #ffffff;
+}
+
+
+
+
+
+/* --------------------------- Songs CSS END --------------------------- */
 
 
 

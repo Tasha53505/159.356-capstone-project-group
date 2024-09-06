@@ -194,6 +194,37 @@
         
                                                 [% IF mediadir.path %][% END %]
                                                 [% END %]  
+
+                                                <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="mediadirs0" value="C:\Program Files\Songs" size="40">
+                                                <input type="button" value="Browse" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
+                                                <br />
+                                                <br />
+                                                <input name="pref_rescan_mediadir0" type="submit" value="Rescan" class="stdclick disableOnScan">
+                                                [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %]
+                                                <table border="0" cellspacing="0">
+                                                    <tr>
+                                                        <th>[% 'FOLDER' | string %]</th>
+                                                        <th>[% 'MUSIC' | string %]&nbsp;&nbsp;</th>
+                                                        <th>&nbsp;</th>
+                                                    </tr>
+
+                                                    [% FOREACH mediadir = mediadirs %]
+                                                    <tr>
+                                                        <td class="[% odd ? "odd" : "even" %]">
+                                                            <input type="text" class="stdedit selectFolder" name="pref_mediadirs[% loop.index %]" id="mediadirs[% loop.index %]" value="[% mediadir.path %]" size="40"><br/>&nbsp;
+                                                        </td>
+                                                        <td class="[% odd ? "odd" : "even" %]" align="center">
+                                                            <input type=checkbox [% IF !mediadir.audio %]checked="1" [% END %] class="stdedit" name="pref_ignoreInAudioScan[% loop.index %]" id="ignoreInAudioScan[% loop.index %]" value="1" />
+                                                        </td>
+                                                        <td class="[% odd ? "odd" : "even" %]" align="center" style="padding: 0 5px">
+                                                            [% IF mediadir.path %]<input name="pref_rescan_mediadir[% loop.index %]" type=submit value="[% "SETUP_RESCAN_BUTTON" | string %]" class="stdclick disableOnScan" [% IF scanning %]disabled[% END %] />[% END %]
+                                                        </td>
+                                                    </tr>
+                                                    [% END %]
+                                                </table>
+                                            [% END %]
+
+
                                             </div>
                                         </div>
                                         <div class="basicSettingsPlaylistsTab" id="playlistsFolder">
@@ -212,8 +243,11 @@
                                             </div>
         
                                         </div>
+
+                                        
         
                                   </div>
+
 
                                     <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
                                         <input type="hidden" name="saveSettings" value="1">
@@ -247,7 +281,7 @@
                                             [% contributorsText.join(', ') %]:
                                             <div id="browsedbList" style="background-color: #1b2444;"></div>
                                     
-                                            [% UNLESS leftControls; leftControls = 'browsecontrols'; END %] 
+                                            <!-- [% UNLESS leftControls; leftControls = 'browsecontrols'; END %] 
                                             [% WRAPPER contentitem 
                                                 leftcontrols=leftControls 
                                                 itemobj=item.itemobj 
@@ -262,12 +296,12 @@
                                                 href=item.href 
                                             %] 
                                             [% UNLESS itemInfoTemplate; itemInfoTemplate = 'iteminfo'; END; PROCESS $itemInfoTemplate %] 
-                                            [% END -%]
+                                            [% END -%] -->
                                     
                                             <div class="">
                                                 <div class="browsedbListItem">
                                                     <span class="browsedbLeftControls">
-                                                        <a href="index.html?action=playall&amp;index=0f4a5065&amp;player=&amp;sess=" target="status">Play</a>
+                                                        <a href="">Play</a>
                                                         <a href="index.html?action=addall&amp;index=0f4a5065&amp;player=&amp;sess=" target="status">Add to Current Playlist</a>
                                                     </span>    
                                                     All Songs
@@ -280,24 +314,175 @@
                                                 onmouseout="hideElements(['controls0f4a5065.0'])">
 
 
-                                                <div class="">
-                                                    <div class="browsedbListItem">
-                                                        <span class="browsedbLeftControls">
-                                                            <a href="index.html?action=play&amp;index=0f4a5065.0&amp;player=&amp;sess=" target="status">Play</a>
-                                                            <a href="index.html?action=add&amp;index=0f4a5065.0&amp;player=&amp;sess=" target="status">Add to Current Playlist</a>
-                                                            <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=1&amp;linktitle=Information%20(AAC%20-%2044_16%20-%2001%20-%20Mutineer.m4a)/&amp;player=" target="browser">More</a>
-                                                        </span>
-                                                        <a href="index.html?index=0f4a5065.0&amp;player=&amp;sess=">
-                                                            AAC - 44_16 - 01 - Mutineer.m4a
+                                                <div class="browsedbListItem">
+                                                    <span class="browsedbLeftControls">
+                                                        <a href="#" onclick="playSong('http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=play&index=50aa122c.1&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">
+                                                            <!-- PLAY Icon SVG -->
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                                                <path fill="#EFF8FC" fill-opacity="0" stroke="#EFF8FC" stroke-dasharray="40" stroke-dashoffset="40" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l10 6l-10 6Z">
+                                                                    <animate fill="freeze" attributeName="fill-opacity" begin="0.5s" dur="0.5s" values="0;1"/>
+                                                                    <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="40;0"/>
+                                                                </path>
+                                                            </svg>
                                                         </a>
-                                                        <span class="browsedbRightControls">
-                                                            <span id="controls0f4a5065.0" style="display: none;">
-                                                                <a href="javascript:void(0);" onclick="ajaxUpdate('index.html', 'action=favadd&amp;index=0f4a5065.0&amp;start=0&amp;sess=')">Save</a>
-                                                            </span>
+                                                        <a href="index.html?action=add&amp;index=0f4a5065&amp;player=&amp;sess=" target="status">
+                                                            <!-- Plus (Add to current playlist) Icon SVG -->
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                                                <g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                                                    <path d="M5 12h14">
+                                                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/>
+                                                                    </path>
+                                                                    <path d="M12 5v14">
+                                                                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/>
+                                                                    </path>
+                                                                </g>
+                                                            </svg>
+                                                        </a>
+                                                        <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=1&amp;linktitle=Information%20(AAC%20-%2044_16%20-%2001%20-%20Mutineer.m4a)/&amp;player=" target="browser">
+                                                            <!-- More Icon SVG -->
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+                                                                <path fill="#EFF8FC" d="M176 416a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224"/>
+                                                            </svg>
+                                                        </a>
+                                                    </span>
+                                                    <a href="index.html?index=0f4a5065.0&amp;player=&amp;sess=">
+                                                        AAC - 44_16 - 01 - Mutineer.m4a
+                                                    </a>
+                                                    <span class="browsedbRightControls">
+                                                        <span id="controls0f4a5065.0" style="display: none;">
+                                                            <a href="javascript:void(0);" onclick="ajaxUpdate('index.html', 'action=favadd&amp;index=0f4a5065.0&amp;start=0&amp;sess=')">Save</a>
                                                         </span>
-                                                    </div>
+                                                    </span>
                                                 </div>
+
+
+                                        <div class="browsedbListItem">
+                                            <span class="browsedbLeftControls">
+                                                <a href="#" onclick="playSong('index.html?action=play&index=ddc8a52b.1&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">
+                                                    <!-- PLAY Icon SVG -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" id="playIcon" viewBox="0 0 24 24"><path fill="#EFF8FC" fill-opacity="0" stroke="#EFF8FC" stroke-dasharray="40" stroke-dashoffset="40" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l10 6l-10 6Z"><animate fill="freeze" attributeName="fill-opacity" begin="0.5s" dur="0.5s" values="0;1"/><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="40;0"/></path></svg>
+                                                    
+                                                    <!-- Pause Icon SVG -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" style="display: none;" id="pauseIcon" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="32" stroke-dashoffset="32" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 6h2v12h-2Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="32;0"/></path><path d="M15 6h2v12h-2Z"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="32;0"/></path></g></svg>
+                                                
+                                                </a>
+
+                                                <a href="index.html?action=add&amp;index=ddc8a52b.1&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=" target="status">
+                                                    <!-- Plus  (Add to current playlist) Icon SVG -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>
+
+                                                </a>
+                                                <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=2&amp;linktitle=Information%20(AIF%20-%2044_16%20-%2002%20-%20Mutineer.aif)/&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96" target="browser">
+                                                    <!-- More Icon SVG -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024"><path fill="#EFF8FC" d="M176 416a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224"/></svg>
+                                                
+                                                </a>
                                             </span>
+                                            <a href="index.html?index=ddc8a52b.1&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=">
+                                                AIF - 44_16 - 02 - Mutineer.aif
+                                            </a>
+                                            <span class="browsedbRightControls">
+                                                <span id="controlsddc8a52b.1" style="display: none;">
+                                                    <a href="javascript:void(0);" onclick="ajaxUpdate('index.html', 'action=favadd&amp;index=ddc8a52b.1&amp;start=0&amp;sess=')">Save</a>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <div class="browsedbListItem">
+                                            <span class="browsedbLeftControls">
+                                                <a href="#" onclick="playSong('index.html?action=play&index=ddc8a52b.2&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">
+                                                      <!-- PLAY Icon SVG -->
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="#EFF8FC" fill-opacity="0" stroke="#EFF8FC" stroke-dasharray="40" stroke-dashoffset="40" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l10 6l-10 6Z"><animate fill="freeze" attributeName="fill-opacity" begin="0.5s" dur="0.5s" values="0;1"/><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="40;0"/></path></svg>
+
+                                                </a>
+                                                <a href="index.html?action=add&amp;index=ddc8a52b.2&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=" target="status">
+                                                      <!-- Plus  (Add to current playlist) Icon SVG -->
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>
+                                                </a>
+
+                                                <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=3&amp;linktitle=Information%20(ALAC%20-%2044_16%20-%2003%20-%20Mutineer.m4a)/&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96" target="browser">
+                                                     <!-- More Icon SVG -->
+                                                     <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024"><path fill="#EFF8FC" d="M176 416a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224"/></svg>
+
+                                                </a>
+                                            </span>
+                                            <a href="index.html?index=ddc8a52b.2&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=">
+                                                ALAC - 44_16 - 03 - Mutineer.m4a
+                                            </a>
+                                            <span class="browsedbRightControls">
+                                                <span id="controlsddc8a52b.2" style="display: none;">
+                                                    <a href="javascript:void(0);" onclick="ajaxUpdate('index.html', 'action=favadd&amp;index=ddc8a52b.2&amp;start=0&amp;sess=')">Save</a>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <div class="browsedbListItem">
+                                            <span class="browsedbLeftControls">
+                                                <a href="#" onclick="playSong('index.html?action=play&index=ddc8a52b.3&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">
+                                                         <!-- PLAY Icon SVG -->
+                                                         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="#EFF8FC" fill-opacity="0" stroke="#EFF8FC" stroke-dasharray="40" stroke-dashoffset="40" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l10 6l-10 6Z"><animate fill="freeze" attributeName="fill-opacity" begin="0.5s" dur="0.5s" values="0;1"/><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="40;0"/></path></svg>
+
+
+                                                </a>
+                                                <a href="index.html?action=add&amp;index=ddc8a52b.3&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=" target="status">
+                                                    <!-- Plus  (Add to current playlist) Icon SVG -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>
+                                                </a>
+                                                <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=4&amp;linktitle=Information%20(DFF%20-%2064%20-%2004%20-%20Taquito%20Militar.dff)/&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96" target="browser">
+                                                    <!-- More Icon SVG -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024"><path fill="#EFF8FC" d="M176 416a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224"/></svg>
+
+                                                </a>
+                                            </span>
+                                            <a href="index.html?index=ddc8a52b.3&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=">
+                                                DFF - 64 - 04 - Taquito Militar.dff
+                                            </a>
+                                            <span class="browsedbRightControls">
+                                                <span id="controlsddc8a52b.3" style="display: none;">
+                                                    <a href="javascript:void(0);" onclick="ajaxUpdate('index.html', 'action=favadd&amp;index=ddc8a52b.3&amp;start=0&amp;sess=')">Save</a>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                                                                    
+
+
+
+
+                                            <!-- Not working at this point in time -->
+                                            <div class="browsedbListItem">
+                                                <span class="browsedbLeftControls">
+                                                    <a href="#" onclick="playSong('http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=play&index=c4ec732d.14&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">
+                                                        <!-- PLAY Icon SVG -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="#EFF8FC" fill-opacity="0" stroke="#EFF8FC" stroke-dasharray="40" stroke-dashoffset="40" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l10 6l-10 6Z"><animate fill="freeze" attributeName="fill-opacity" begin="0.5s" dur="0.5s" values="0;1"/><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="40;0"/></path></svg>
+
+
+                                                    </a>
+                                                    <a href="index.html?action=add&amp;index=c4ec732d.14&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=" target="status">
+                                                        <!-- Plus  (Add to current playlist) Icon SVG -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>                                                          
+                                                    </a>
+                                                    <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=15&amp;linktitle=Information%20(PGGB%20-%20705%20-%2015%20-%20Running%20Out%20of%20Time%20-%20186M.wav)/&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96" target="browser">
+                                                        <!-- More Icon SVG -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024"><path fill="#EFF8FC" d="M176 416a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224"/></svg>
+
+                                                    </a>
+                                                </span>
+                                            
+                                                <a href="index.html?index=c4ec732d.14&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=">
+                                                    PGGB - 705 - 15 - Running Out of Time - 186M.wav
+                                                </a>
+                                            
+                                                <span class="browsedbRightControls">
+                                                    <span id="controlsc4ec732d.14" style="display: none;">
+                                                        <a href="javascript:void(0);" onclick="ajaxUpdate('index.html', 'action=favadd&amp;index=c4ec732d.14&amp;start=0&amp;sess=')">Save</a>
+                                                    </span>
+                                                </span>
+                                            </div>                                           
+                                              
+
+
+                                            
                                     
                                             <span 
                                                 style="margin: 0px; padding: 0px; border: 0px;" 
@@ -306,6 +491,8 @@
                                                 class="__web-inspector-hide-shortcut__">
                                             </span>
                                         </div>
+
+                                        
                                     </div>
                                     
                                      <hr />

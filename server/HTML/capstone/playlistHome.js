@@ -148,6 +148,34 @@ document.getElementById('allSongs').addEventListener('click', function() {
 });
 
 
+// Play Songs
+function playSong(url) {
+    // You can use an XMLHttpRequest or Fetch API to call the URL without reloading the page
+    fetch(url)
+      .then(response => response.text())
+      .then(data => {
+        console.log("Song playback started");
+        // handle the response if needed
+      })
+      .catch(error => console.error("Error playing song:", error));
+  }
+
+
+  function togglePlayPause(element) {
+    const playIcon = element.querySelector('#playIcon');
+    const pauseIcon = element.querySelector('#pauseIcon');
+
+    if (playIcon.style.display === 'none') {
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+    } else {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+    }
+}
+
+
+
 // ------------------------ Code to fetch all Albums ------------------------
 document.getElementById('allAlbums').addEventListener('click', function() {
     // Create a new container for the songs
