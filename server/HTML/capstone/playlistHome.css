@@ -311,8 +311,6 @@ transform: translate3d(0, 0, 0);
 
 
 /* ------------------------------ SETTINGS AREA ------------------------------ */
-
-
 .settingsContainerClicked {
     background-color: #1b2444;
     border-radius: 0em 1em 1em 0em;
@@ -456,33 +454,36 @@ transform: translate3d(0, 0, 0);
     from { opacity: 0; }
     to { opacity: 1; }
 }
-/* ----------- Basic Settings Start ----------- */
-.basicSettings {
-    display: none; 
-}
+        /* ----------- Basic Settings Start ----------- */
+    .basicSettings {
+        display: none; 
+    }
 
-.basicSettingsTest {
-    display: block;
-}
+    
 
-.basicSettingsTabs {
-    display: block;
-}
+    .basicSettingsTabs {
+        display: block;
+    }
 
-.basicSettingsContent {
-    background-color: #1b2444;
-}
-
-/* Hide content in beginning */
+    .basicSettingsContent {
+        background-color: #1b2444;
+    }
+/* Common settings for all tabs */
 .basicSettingsLanguageTab, 
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab {
-    display: none;
-
+    display: none; /* Hide all tabs by default */
+    background-color: #3A456D; /* Darker background for inactive tabs */
+    padding: 1em;
+    border-radius: 10px;
+    color: #ecf0f1;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    max-width: 400px;
 }
-
 
 /* Active tab content should be displayed */
 .basicSettingsLanguageTab.active, 
@@ -490,98 +491,22 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaFoldersTab.active, 
 .basicSettingsPlaylistsTab.active, 
 .basicSettingsRescanMediaTab.active {
-    display: block; /* Display the active tab content */
-    background-color: #3A456D; /* Darker background for contrast */
-    padding: 1em;
-    border-radius: 10px;
-    color: #ecf0f1;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-    max-width: 400px;
+    display: block; /* Show the active tab content */
 }
 
 
-/* ---- Basic Settings Language Tab Start ---- */
-
-.basicSettingsLanguageTab {
-    display: block; /* Makes it so that Language tab is displayed first */ 
-    background-color: #3A456D; /* Darker background for contrast */
-    padding: 1em;
-    border-radius: 10px;
-    color: #ecf0f1;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-    max-width: 400px;
-
+.basicSettingsLanguageTab.active {
+    padding: 1em; 
+    background-color: #3A456D; 
 }
 
-/* Header styling */
-.basicSettingsLanguageTab h2 {
-    margin-bottom: 0.5em;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #ecf0f1;
+.basicSettingsLanguageTab,
+.basicSettingsMediaLibraryTab,
+.basicSettingsMediaFoldersTab,
+.basicSettingsPlaylistsTab,
+.basicSettingsRescanMediaTab {
+    background-color: #3A456D; 
 }
-
-/* Styling for the language dropdown container */
-.language {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-
-/* Styling for the dropdown */
-select.stdedit {
-    background-color: #20294B; /* Darker background for dropdown */
-    color: #ecf0f1;
-    border: 1px solid #3676cf; /* Border color */
-    border-radius: 5px;
-    padding: 0.5em 1em;
-    font-size: 1em;
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-/* Dropdown hover and focus styling */
-select.stdedit:hover,
-select.stdedit:focus {
-    background-color: #20294B;
-    border-color: #0456C6; /* Lighter border color on hover/focus */
-    outline: none;
-}
-
-/* Option styling */
-select.stdedit option {
-    background-color: #20294B;
-    color: #ecf0f1;
-}
-
-/* Wrapper and description text styling */
-.setting {
-    margin-bottom: 1em;
-}
-
-.setting.title {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #ecf0f1;
-}
-
-.setting.desc {
-    font-size: 0.9em;
-    color: #bdc3c7;
-}
-
-
-/* ---- Basic Settings Language Tab Start ---- */
-
-
-/* ---- Basic Settings Language Tab End ---- */
-
-/* ---- Basic Settings Buttons Start ---- */
 
 /* Button styles */
 .basicSettingsLanguageTabButton, 
@@ -589,8 +514,7 @@ select.stdedit option {
 .basicSettingsMediaFoldersTabButton,
 .basicSettingsPlaylistsTabButton,
 .basicSettingsRescanMediaTabButton {
-    display: inline;
-    background-color: #1b2444;
+    background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
     border-radius: 0.5em;
@@ -598,21 +522,141 @@ select.stdedit option {
     font-size: 0.7em;
 }
 
-/* Active button styles */
+
 .basicSettingsLanguageTabButton.active, 
 .basicSettingsMediaLibraryTabButton.active, 
 .basicSettingsMediaFoldersTabButton.active,
 .basicSettingsPlaylistsTabButton.active,
 .basicSettingsRescanMediaTabButton.active {
     background-color: #0456C6;
-    border: none;
     border-radius: 0.5em;
-    cursor: pointer;
-    font-size: 0.7em;
 }
-/* ---- Basic Settings Buttons End ---- */
 
-/* ----------- Basic Settings End ----------- */
+
+/* ---- Basic Settings Language Tab Start ---- */
+
+        .basicSettingsLanguageTab {
+            display: block; /* Makes it so that Language tab is displayed first */ 
+            background-color: #3A456D; /* Darker background for contrast */
+            padding: 1em;
+            border-radius: 10px;
+            color: #ecf0f1;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            max-width: 400px;
+
+        }
+
+        /* Header styling */
+        .basicSettingsLanguageTab h2 {
+            margin-bottom: 0.5em;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        /* Styling for the language dropdown container */
+        .language {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+
+        /* Styling for the dropdown */
+        select.stdedit {
+            background-color: #20294B; /* Darker background for dropdown */
+            color: #ecf0f1;
+            border: 1px solid #3676cf; /* Border color */
+            border-radius: 5px;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .stdedit, .rescanButton, .browseFolders  {
+            background-color: #20294B; /* Darker background for dropdown */
+            color: #ecf0f1;
+            border: 1px solid #3676cf; /* Border color */
+            border-radius: 5px;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Dropdown hover and focus styling */
+        select.stdedit:hover,
+        select.stdedit:focus {
+            background-color: #20294B;
+            border-color: #0456C6; /* Lighter border color on hover/focus */
+            outline: none;
+        }
+
+        /* Option styling */
+        select.stdedit option {
+            background-color: #20294B;
+            color: #ecf0f1;
+        }
+
+        /* Wrapper and description text styling */
+        .setting {
+            margin-bottom: 1em;
+        }
+
+        .setting.title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        .setting.desc {
+            font-size: 0.9em;
+            color: #bdc3c7;
+        }
+
+
+        /* ---- Basic Settings Language Tab Start ---- */
+        .stdedit
+
+        /* ---- Basic Settings Language Tab End ---- */
+
+        /* ---- Basic Settings Buttons Start ---- */
+
+        /* Button styles */
+        .basicSettingsLanguageTabButton, 
+        .basicSettingsMediaLibraryTabButton,
+        .basicSettingsMediaFoldersTabButton,
+        .basicSettingsPlaylistsTabButton,
+        .basicSettingsRescanMediaTabButton {
+            display: inline;
+            background-color: #1b2444;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
+            cursor: pointer;
+            font-size: 0.7em;
+        }
+
+        /* Active button styles */
+        .basicSettingsLanguageTabButton.active, 
+        .basicSettingsMediaLibraryTabButton.active, 
+        .basicSettingsMediaFoldersTabButton.active,
+        .basicSettingsPlaylistsTabButton.active,
+        .basicSettingsRescanMediaTabButton.active {
+            background-color: #0456C6;
+            border: none;
+            border-radius: 0.5em;
+            cursor: pointer;
+            font-size: 0.7em;
+        }
+        /* ---- Basic Settings Buttons End ---- */
+
+        /* ----------- Basic Settings End ----------- */
 
 /* ---------------------- SAVE BUTTON ---------------------- */
 /* Styling for the 'Save Settings' button container */
@@ -688,6 +732,13 @@ select.stdedit option {
 .browsedbLeftControls a svg {
     width: 2em;
     height: 2em;
+}
+
+.browsedbLeftControls a svg:hover {
+    background-color: #0456C6;
+    border-radius: 10%;
+    transition: 1s ease;
+    padding: 0.5%;
 }
 
 .browsedbRightControls {
