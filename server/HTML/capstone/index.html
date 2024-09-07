@@ -29,6 +29,8 @@
     <script type="text/javascript">[% PROCESS html/SqueezeJS/Strings.js %]</script>
     <script type="text/javascript" src="/html/SqueezeJS/UI.js?r=[% revision %]"></script>
     <script type ="text/javascript">
+
+        
         Ext.onReady(function(){
             SqueezeJS.Controller.init({
                 player : playerid
@@ -218,6 +220,8 @@ SqueezeJS.UI.FilesystemBrowser = {
                                     [% END %]
                                     [% END %]
                                     <!-- [% PROCESS settings/footer.html %] -->
+
+                                    
                                 </div>
 
                                 <div class="basicSettings">
@@ -237,12 +241,12 @@ SqueezeJS.UI.FilesystemBrowser = {
                                             <div class="language">
                                                 [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
                                                 [% languageoptions.$option %]
-                                        
+                                                [% END %] 
+
                                                 </select>
                                 
-                                                <select class="stdedit" name="pref_language" id="language">
-        
-                
+                                                <select class="stdedit" name="pref_language" id="languageSelect">
+
                                                     <option value="DA">Dansk</option>
                                                     <option value="DE">Deutsch</option>
                                                     <option selected="selected" value="EN">English</option>
@@ -262,7 +266,6 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                     <option value="JA">日本語 *</option>
                                                     <option value="ZH_CN">简体中文 *</option>
                                                 </select>
-                                                [% END %] 
                                             </div>
                                         </div>
 
@@ -346,6 +349,9 @@ SqueezeJS.UI.FilesystemBrowser = {
                                     <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div>
+                                    
+                                    <label data-translate="SETUP_LANGUAGE">Language</label>
+
 
                                 </div>
                             <!------------- Basic Settings Language Tab Content End ------------->
@@ -419,6 +425,7 @@ SqueezeJS.UI.FilesystemBrowser = {
 
                                                 <div class="browsedbListItem">
                                                     <span class="browsedbLeftControls">
+                                                      
                                                         <a href="#" onclick="playSong('http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=play&index=50aa122c.1&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">
                                                             <!-- PLAY Icon SVG -->
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -428,6 +435,7 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                                 </path>
                                                             </svg>
                                                         </a>
+
                                                         <a href="index.html?action=add&amp;index=0f4a5065&amp;player=&amp;sess=" target="status">
                                                             <!-- Plus (Add to current playlist) Icon SVG -->
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -441,12 +449,15 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                                 </g>
                                                             </svg>
                                                         </a>
+
                                                         <a href="/capstone/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=1&amp;linktitle=Information%20(AAC%20-%2044_16%20-%2001%20-%20Mutineer.m4a)/&amp;player=" target="browser">
                                                             <!-- More Icon SVG -->
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024">
                                                                 <path fill="#EFF8FC" d="M176 416a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224"/>
                                                             </svg>
                                                         </a>
+
+
                                                     </span>
                                                     <a href="index.html?index=0f4a5065.0&amp;player=&amp;sess=">
                                                         AAC - 44_16 - 01 - Mutineer.m4a
@@ -622,6 +633,25 @@ SqueezeJS.UI.FilesystemBrowser = {
                                         <div style="margin: 3rem;">
                                             You have: [% artist_count %] total.
 
+                                [% " " _ stringBY _ " " %]
+                                    [%- FILTER null %]
+                                    [% IF item.artists; contributorsText = item.artists; ELSE %]
+                                    [% contributorsText = [ item.artist ] %]
+
+                                    [% contributors = item.artistsWithAttributes || itemobj.artistsWithAttributes %]
+
+                                    [% FOREACH contributorTuple IN contributors %]
+
+                                        [% contributorsText.push(contributorTuple.name) %]
+
+                                    [% END %]
+                                    [% END; END -%]
+                                    [% contributorsText.join(', ') %]
+
+
+
+                                    [% " " _ stringBY _ " " %]
+
                                         </div>
                                     </div>
 
@@ -661,6 +691,91 @@ SqueezeJS.UI.FilesystemBrowser = {
                         <button class="accordionButton">Radio</button>
                         <div class="accordionPanel">
                             <div class="radioContainer">
+
+[% pagetitle = 'RADIO_TUNEIN' | string %]
+[% pageicon = icons.TUNEINURL %]
+[% pageHeaderMenu = BLOCK %]
+	/ [% 'RADIO_TUNEIN' | string %]
+[% END %]
+[% extJsScripts = BLOCK %]
+	<script type="text/javascript">
+		Ext.onReady(function(){
+			tuneIn = new Ext.form.TextField({
+				applyTo: 'url'
+			});
+		
+			Ext.get('tuneInSubmit').hide();
+			Ext.get('tuneInAdd').hide();
+
+			new Ext.Button({
+				renderTo: 'tuneIn',
+				text: '[% 'RADIO_TUNEIN_CHOOSE' | string %]',
+				handler: function(){
+					var url = Ext.get('url').getValue();
+					if (url) {
+						SqueezeJS.UI.setProgressCursor();
+						SqueezeJS.Controller.playerControl(['playlist', 'play', url]);
+					}
+				}
+			});
+
+			new Ext.Button({
+				renderTo: 'add',
+				text: '[% 'ADD' | string %]',
+				handler: function(){
+					var url = Ext.get('url').getValue();
+					if (url) {
+						SqueezeJS.UI.setProgressCursor();
+						SqueezeJS.Controller.playerControl(['playlist', 'add', url]);
+					}
+				}
+			});
+		});
+	</script>
+[% END %]
+[% PROCESS pageheader.html %]
+
+<br>
+
+[% IF url %]
+	<p><b>
+	[% 'RADIO_TUNED_IN' | string %] [% url %]
+	</b></p>
+	<br/>
+	
+	<script type="text/javascript" language="JavaScript">
+	// Reload the status frame in 5 seconds to display the newly added playlist item
+	setTimeout( "refreshStatus()", 5000 );
+	</script>
+[% END %]
+
+<form name="tune" method="post" id="tune" action="[% webroot %]tunein.html">
+	<input type="hidden" name="player" value="[% player %]">
+	[% 'RADIO_TUNEIN_RADIOURL' | string %]
+
+	<table>
+		<tr>
+			<td style="vertical-align:bottom;"><input type="text" class="stdedit" name="url" id="url" size="50%"></td>
+			<td>
+				<input type="submit" id="tuneInSubmit" class="stdclick" value="[% 'RADIO_TUNEIN_CHOOSE' | string %]">
+				<span id="tuneIn" style="vertical-align:bottom;"></span>
+			</td>
+			<td>
+				<input type="submit" id="tuneInAdd" name="tuneInAdd" class="stdclick" value="[% 'ADD' | string %]">
+				<span id="add" style="vertical-align:bottom;"></span>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<br/>
+
+<p>[% 'RADIO_TUNEIN_DESC' | string %]</p>
+
+<br/>
+
+[% PROCESS pagefooter.html %]
+
                                 <div class="radioExample"></div>
                                 <div class="radioExample"></div>
                                 <div class="radioExample"></div>
