@@ -82,6 +82,94 @@
                 el: 'bitrate',
                 noLink: true
             });
+
+// File browswer
+
+
+
+SqueezeJS.UI.FilesystemBrowser = {
+    init: function(){
+        var inputEl, btnEl, filter, classes, start;
+
+        var tpl = new Ext.Template('&nbsp;<input type="button" value="' + SqueezeJS.string('browse') + '" onclick="SqueezeJS.UI.FilesystemBrowser.show(\'{inputField}\', \'{filter}\')">');
+        tpl.compile();
+
+        // try to get the filter expression from the input fields CSS class
+        // selectFolder - only display folders
+        // selectFile   - display any filetype
+        // selectFile_X - only show files of the type X (eg. selectFile_xml -> .xml only)
+        var items = Ext.query('input.selectFolder, input[class*=selectFile]');
+        for(var i = 0; i < items.length; i++) {
+
+            if (inputEl = Ext.get(items[i])) {
+                filter = '';
+
+                if (inputEl.hasClass('selectFolder'))
+                    filter = 'foldersonly'
+
+                else {
+                    classes = items[i].className.split(' ');
+
+                    for (var x=0; x<classes.length; x++) {
+
+                        if (classes[x].search(/selectFile_/) > -1) {
+                            filter += (filter ? '|' : '') + classes[x].replace(/selectFile_/, '');
+                        }
+                    }
+                    if (filter)
+                        filter = "filetype:" + filter;
+                }
+
+                btnEl = tpl.insertAfter(inputEl, {
+                    inputField: inputEl.id,
+                    filter: filter
+                });
+            }
+        }
+    },
+
+    show: function(inputField, filter){
+        var filesystemDlg = new Ext.Window({
+            modal: true,
+            collapsible: false,
+            width: 350,
+            height: 400,
+            resizeHandles: 'se',
+            html: '<div id="filesystembrowser"></div>',
+            buttons: [{
+                text: SqueezeJS.string('close'),
+                handler: function(){
+                    filesystemDlg.close()
+                },
+                scope: filesystemDlg,
+                template: SqueezeJS.UI.buttonTemplate
+            }],
+            listeners: {
+                resize: this.onResize
+            }
+        });
+
+        filesystemDlg.setTitle(SqueezeJS.string(filter == 'foldersonly' ? 'choose_folder' : 'choose_file'));
+        filesystemDlg.show();
+
+        new SqueezeJS.UI.FileSelector({
+            renderTo: 'filesystembrowser',
+            input: inputField,
+            filter: filter
+        });
+    },
+
+    onResize: function() {
+        var el = Ext.get('filesystembrowser');
+        if (el && (el = el.parent())) {
+            el.setWidth(el.getWidth()-12);
+            el.setStyle({ overflow: 'auto' })
+        }
+    }
+};
+
+
+
         });
     </script>
 </head>
@@ -275,8 +363,16 @@
 
                                     <div class="songsList">
                                         <div style="margin: 3rem;">
+                                            <!-- Display song titles - Not working  -->
+                                            <!-- title_[% myItem.num %]|[% myItem.title %]
+                                            artist_[% myItem.num %]|[% PROCESS artistsAsHTML.html itemobj = myItem.itemobj %]
+                                            album_[% myItem.num %]|[% myItem.album.title %] -->
+
+                                
+
+
                                             You have: [% song_count %] total. <br>
-                                            <!-- Artist [% " " _ stringBY _ " " %] [%- FILTER null %] 
+                                            Artist [% " " _ stringBY _ " " %] [%- FILTER null %] 
                                             [% IF item.artists; contributorsText = item.artists; ELSE %] 
                                             [% contributorsText = [ item.artist ] %] 
                                             [% contributors = item.artistsWithAttributes || itemobj.artistsWithAttributes %] 
@@ -284,7 +380,7 @@
                                             [% contributorsText.push(contributorTuple.name) %] 
                                             [% END %] 
                                             [% END; END -%] 
-                                            [% contributorsText.join(', ') %]: -->
+                                            [% contributorsText.join(', ') %]:
                                             <div id="browsedbList" style="background-color: #1b2444;"></div>
                                     
                                             <!-- [% UNLESS leftControls; leftControls = 'browsecontrols'; END %] 
@@ -381,7 +477,7 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>
 
                                                 </a>
-                                                <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=2&amp;linktitle=Information%20(AIF%20-%2044_16%20-%2002%20-%20Mutineer.aif)/&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96" target="browser">
+                                                <a href="/capstone/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=2&amp;linktitle=Information%20(AIF%20-%2044_16%20-%2002%20-%20Mutineer.aif)/&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96" target="">
                                                     <!-- More Icon SVG -->
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"><path fill="#EFF8FC" d="M176 416a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224"/></svg>
                                                 
@@ -410,8 +506,9 @@
                                                       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>
                                                 </a>
 
-                                                <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=3&amp;linktitle=Information%20(ALAC%20-%2044_16%20-%2003%20-%20Mutineer.m4a)/&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96" target="browser">
-                                                     <!-- More Icon SVG -->
+                                                <!-- <a href="/EN/clixmlbrowser/clicmd=trackinfo+items&amp;track_id=3&amp;linktitle=Information%20(ALAC%20-%2044_16%20-%2003%20-%20Mutineer.m4a)/&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96" target="browser"> -->
+                                               <a href="./moreSongInfo.html">
+                                                    <!-- More Icon SVG -->
                                                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"><path fill="#EFF8FC" d="M176 416a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224m336 0a112 112 0 1 1 0 224a112 112 0 0 1 0-224"/></svg>
 
                                                 </a>
