@@ -1,3 +1,5 @@
+// From strings.txt
+
 var accordion = document.getElementsByClassName("accordion");
 var i;
 document.addEventListener('DOMContentLoaded', function () {
@@ -488,4 +490,44 @@ document.getElementById('settingsButton').addEventListener('click', function() {
     document.querySelector('.tabButton[data-tab="music"]').click();
 });
 
+// ----------------- Save settings, speciifically Language -----------------
 
+let languageStrings = {}; // To store the parsed strings from the file
+
+// Fetch the strings.txt file and parse as JSON
+function loadLanguageStrings() {
+    fetch('server/strings.txt') 
+        .then(response => response.json())
+        .then(data => {
+            languageStrings = data;
+            applyLanguage(document.getElementById('languageSelect').value); // Applyies default language on page load
+        })
+        .catch(error => console.error('Error loading language file:', error));
+}
+
+// Function to update all translatable elements on the page
+function applyLanguage(selectedLanguage) {
+    // Loop through all translatable elements based on languageStrings keys
+    for (let key in languageStrings) {
+        const elements = document.querySelectorAll(`[data-translate="${key}"]`);
+        const translation = languageStrings[key][selectedLanguage] || languageStrings[key]["EN"];
+        elements.forEach(el => {
+            if (el.tagName === "INPUT" && el.type === "submit") {
+                el.value = translation; // Update value for input buttons
+            } else {
+                el.textContent = translation; // Update text content for other elements
+            }
+        });
+    }
+}
+
+// Handle language change
+document.getElementById('languageSelect').addEventListener('change', function() {
+    const selectedLanguage = this.value;
+    applyLanguage(selectedLanguage);
+});
+
+// Set the initial language on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadLanguageStrings();
+});
