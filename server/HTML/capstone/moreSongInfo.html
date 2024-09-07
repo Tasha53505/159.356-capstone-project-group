@@ -7,9 +7,6 @@
 </head>
 <body>
     
-</body>
-</html>
-[% IF query %]
 	[%# Add the search query to each link if available %]
 	[% searchquery = 'query=' _ query _ '&amp;' %]
 [% END %]
@@ -310,3 +307,5 @@
 
 [% IF NOT ajaxUpdate %]</div>[% PROCESS pagefooter.html %][% END %]
 
+</body>
+</html>
