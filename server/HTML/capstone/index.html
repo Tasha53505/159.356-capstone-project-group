@@ -346,11 +346,11 @@ SqueezeJS.UI.FilesystemBrowser = {
                                   </div>
 
 
-                                    <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+                                    <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault(); saveLanguageSetting('FR');" class="stdclick" value="Save Settings">
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div>
                                     
-                                    <label data-translate="SETUP_LANGUAGE">Language</label>
+                                    <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
 
 
                                 </div>

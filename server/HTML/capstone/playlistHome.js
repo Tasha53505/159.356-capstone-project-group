@@ -3,6 +3,7 @@
 var accordion = document.getElementsByClassName("accordion");
 var i;
 document.addEventListener('DOMContentLoaded', function () {
+    
     var accordions = document.querySelectorAll('.accordionButton');
     accordions.forEach(function (accordion) {
         accordion.addEventListener('click', function () {
@@ -491,43 +492,39 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 });
 
 // ----------------- Save settings, speciifically Language -----------------
-
-let languageStrings = {}; // To store the parsed strings from the file
-
-// Fetch the strings.txt file and parse as JSON
-function loadLanguageStrings() {
-    fetch('server/strings.txt') 
-        .then(response => response.json())
-        .then(data => {
-            languageStrings = data;
-            applyLanguage(document.getElementById('languageSelect').value); // Applyies default language on page load
-        })
-        .catch(error => console.error('Error loading language file:', error));
+// Taken from basic.html
+function initSettingsForm() {
+    // Try to redirect all form submissions by return key to the default submit button
+    // Listen for keypress events on all form elements except submit
+    document.querySelectorAll('.settingsContainer input, .settingsContainer select').forEach(function(ele) {
+        if (ele.type != 'submit') {
+            ele.addEventListener('keypress', function(e) {
+                var cKeyCode = e.keyCode || e.which;
+                if (cKeyCode == 13) {  // Enter key
+                    e.preventDefault();  // Prevent default form submission
+                    document.getElementById('saveSettings').click();  // Trigger Save Settings button click
+                }
+            });
+        }
+    });
 }
 
-// Function to update all translatable elements on the page
-function applyLanguage(selectedLanguage) {
-    // Loop through all translatable elements based on languageStrings keys
-    for (let key in languageStrings) {
-        const elements = document.querySelectorAll(`[data-translate="${key}"]`);
-        const translation = languageStrings[key][selectedLanguage] || languageStrings[key]["EN"];
-        elements.forEach(el => {
-            if (el.tagName === "INPUT" && el.type === "submit") {
-                el.value = translation; // Update value for input buttons
-            } else {
-                el.textContent = translation; // Update text content for other elements
-            }
-        });
-    }
+function saveLanguageSetting() {
+    var selectedLanguage = document.getElementById('languageSelect').value;  // Get the selected language dynamically
+
+    const request = new XMLHttpRequest();
+    request.open('POST', '/save-language', true);
+    request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    
+    request.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            // Language saved successfully, refresh or update content
+            location.reload();  // Reload the page to apply the new language settings
+        }
+    };
+    
+    request.send(JSON.stringify({
+        language: selectedLanguage,
+        playerId: myClientState.id  // Assuming you need the player ID
+    }));
 }
-
-// Handle language change
-document.getElementById('languageSelect').addEventListener('change', function() {
-    const selectedLanguage = this.value;
-    applyLanguage(selectedLanguage);
-});
-
-// Set the initial language on page load
-document.addEventListener('DOMContentLoaded', function() {
-    loadLanguageStrings();
-});
