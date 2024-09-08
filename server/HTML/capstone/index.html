@@ -220,8 +220,6 @@ SqueezeJS.UI.FilesystemBrowser = {
                                     [% END %]
                                     [% END %]
                                     <!-- [% PROCESS settings/footer.html %] -->
-
-                                    
                                 </div>
 
                                 <div class="basicSettings">
@@ -246,7 +244,6 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                 </select>
                                 
                                                 <select class="stdedit" name="pref_language" id="languageSelect">
-
                                                     <option value="DA">Dansk</option>
                                                     <option value="DE">Deutsch</option>
                                                     <option selected="selected" value="EN">English</option>
@@ -331,6 +328,7 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                 [% END %] [% END %] 
                                             </div>
                                         </div>
+
                                         <div class="basicSettingsRescanMediaTab" id="rescanMedia">
                                             <div class="rescanMedia" >
                                                 [% WRAPPER setting title="SETUP_RESCAN" desc="SETUP_RESCAN_DESC" %] 
@@ -341,12 +339,10 @@ SqueezeJS.UI.FilesystemBrowser = {
         
                                         </div>
 
-                                        
-        
                                   </div>
 
 
-                                    <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault(); saveLanguageSetting('FR');" class="stdclick" value="Save Settings">
+                                    <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div>
                                     
@@ -387,6 +383,43 @@ SqueezeJS.UI.FilesystemBrowser = {
                                             [% END %] 
                                             [% END; END -%] 
                                             [% contributorsText.join(', ') %]:
+
+                                        <!-- From ajaxRequest  -->
+                                            <!-- songtitle|[% itemobj.title %]
+                                            [% IF itemobj.isRemoteURL %]streamtitle|[% songtitle %][% END %]
+                                            artist|[% itemobj.artist.name %]
+                                            album|[% itemobj.album.title %]
+                                            genre|[% itemobj.genre.name %]
+                                            songtitleid|[% itemobj.id %] -->
+
+                                            
+
+                                            <!-- Froom hreftemplate -->
+                                            [%# use this to add/play/insert/remove tracks and remote URLs %]
+                                            [% BLOCK cmdHRef -%]
+                                            href="[% webroot %][% statusroot %]?[%
+                                                IF numcmdFor.$cmdType; # better way to determine this?
+                                                    PROCESS cmdNumericQuery;
+                                                ELSIF (itemobj.isRemoteURL  || !attributes || itemobj.content_type() == 'dir');
+                                                    PROCESS cmdRemoteURLQuery;
+                                                ELSE;
+                                                    PROCESS cmdLocalQuery;
+                                                END; %]&amp;player=[% playerURI %]"
+                                            [%- END %]
+                                            
+                                            [%# ajaxCmdHRef supplies only the URL args necessary for an add/play/insert/remove
+                                            this should be identical to the URL args supplied in cmdHRef plus ajaxRequest=1 %]
+                                            [% BLOCK ajaxCmdHRef -%]
+                                            [%- IF numcmdFor.$cmdType; # better way to determine this?
+                                                    PROCESS cmdNumericQuery;
+                                                ELSIF (itemobj.isRemoteURL  || !attributes || itemobj.content_type() == 'dir');
+                                                    PROCESS cmdRemoteURLQuery;
+                                                ELSE;
+                                                    PROCESS cmdLocalQuery;
+                                                END; %]&amp;player=[% playerURI %]&amp;ajaxRequest=1
+                                            [%- END %]
+
+                        
                                             <div id="browsedbList" style="background-color: #1b2444;"></div>
                                     
                                             <!-- [% UNLESS leftControls; leftControls = 'browsecontrols'; END %] 
@@ -415,6 +448,7 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                     All Songs
                                                 </div>
                                             </div>
+                                            
                                     
                                             
                                             <span 
