@@ -171,18 +171,36 @@ SqueezeJS.UI.FilesystemBrowser = {
 };
 
 
-[%- FOREACH pref = validate; IF pref.value %]
-	new Event.observe('[% pref.key %]', 'blur', function(){ prefValidate($('[% pref.key %]'), '[% namespace %]'); } );
-	[%- END; END %]
+// Ext.onReady(function() {
+//         new Ext.Button({
+//             renderTo: 'prefsSubmit', // Render the button to the div containing the save button
+//             text: SqueezeJS.string('Save Settings'),
+//             handler: function() {
+//                 this.submitSettings(); // Calls the submitSettings function when the button is clicked
+//             },
+//             scope: this
+//         });
+//     });
 
-	// add an event handler to folder/file selector fields
-	$$('.selectFolder').each(function(ele) {
-		new Ajax.FileSelector(ele, true);
-	});
+//     // Function to submit the settings
+//     submitSettings: function(cb) {
+//         try {
+//             frames.settings.Settings.Page.submit(cb);
+//         } catch (e) {
+//             return false;
+//         }
+//         return true;
+//     }
 
-	$$('.selectFile').each(function(ele) {
-		new Ajax.FileSelector(ele, false);
-	});
+// new Ext.Button({
+// 			renderTo: 'save',
+// 			text: SqueezeJS.string('Save Settings'),
+// 			handler: function() {
+// 				this.submitSettings()
+// 			},
+// 			scope: this
+// 		});
+
 
         });
 
@@ -365,17 +383,7 @@ SqueezeJS.UI.FilesystemBrowser = {
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div>
                                     
-                                    <form name="settingsForm" id="settingsForm" method="post" action="[% webroot %][% path %][% IF playerid %]?playerid=[% playerid | uri %][% END %]">
-
-                                        <div id="settingsRegion">
-                            
-                                            <input type=hidden value="1" name="saveSettings">
-                                            <input type=hidden value="0" name="useAJAX">
-                                            <input type=hidden value="[% page %]" name="page">
-                                            [% IF noSettingsList %]<input type=hidden value="1" name="noSettingsList">[% END %]
-                                            [% IF playerid %]<input type=hidden value="[% playerid %]" name="playerid">[% END %]
-                                            [% IF player %]<input type=hidden value="[% player %]" name="player">[% END %]
-                                         </div>
+                                    
                                     <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
 
 
