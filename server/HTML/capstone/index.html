@@ -171,8 +171,22 @@ SqueezeJS.UI.FilesystemBrowser = {
 };
 
 
+[%- FOREACH pref = validate; IF pref.value %]
+	new Event.observe('[% pref.key %]', 'blur', function(){ prefValidate($('[% pref.key %]'), '[% namespace %]'); } );
+	[%- END; END %]
+
+	// add an event handler to folder/file selector fields
+	$$('.selectFolder').each(function(ele) {
+		new Ajax.FileSelector(ele, true);
+	});
+
+	$$('.selectFile').each(function(ele) {
+		new Ajax.FileSelector(ele, false);
+	});
 
         });
+
+
     </script>
 </head>
 
@@ -340,13 +354,28 @@ SqueezeJS.UI.FilesystemBrowser = {
                                         </div>
 
                                   </div>
+                                    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 
+                                    <!-- <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
+                                        <input type="hidden" name="saveSettings" value="1">
+                                    </div> -->
 
-                                    <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
+                                    <div id="prefsSubmit">
+                                        [%- IF NOT nosubmit %]<input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="[% "SAVE_SETTINGS" | string %]">[% END %]
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div>
                                     
-                                    
+                                    <form name="settingsForm" id="settingsForm" method="post" action="[% webroot %][% path %][% IF playerid %]?playerid=[% playerid | uri %][% END %]">
+
+                                        <div id="settingsRegion">
+                            
+                                            <input type=hidden value="1" name="saveSettings">
+                                            <input type=hidden value="0" name="useAJAX">
+                                            <input type=hidden value="[% page %]" name="page">
+                                            [% IF noSettingsList %]<input type=hidden value="1" name="noSettingsList">[% END %]
+                                            [% IF playerid %]<input type=hidden value="[% playerid %]" name="playerid">[% END %]
+                                            [% IF player %]<input type=hidden value="[% player %]" name="player">[% END %]
+                                         </div>
                                     <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
 
 
@@ -419,7 +448,9 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                     PROCESS cmdLocalQuery;
                                                 END; %]&amp;player=[% playerURI %]&amp;ajaxRequest=1
                                             [%- END %]
+                                            
 
+                                            
                         
                                             <div id="browsedbList" style="background-color: #1b2444;"></div>
                                     
@@ -439,6 +470,9 @@ SqueezeJS.UI.FilesystemBrowser = {
                                             %] 
                                             [% UNLESS itemInfoTemplate; itemInfoTemplate = 'iteminfo'; END; PROCESS $itemInfoTemplate %] 
                                             [% END -%] -->
+
+
+                                            
                                     
                                             <div class="">
                                                 <div class="browsedbListItem">
@@ -450,6 +484,7 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                 </div>
                                             </div>
                                             
+
                                     
                                             
                                             <span 
