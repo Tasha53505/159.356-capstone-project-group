@@ -228,7 +228,6 @@ SqueezeJS.UI.FilesystemBrowser = {
 
                                     <div class="basicSettingsTabs">
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
-                                        <button class="basicSettingsMediaLibraryTabButton" data-tab="mediaLibrary">Media Library</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
                                         <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
@@ -266,15 +265,14 @@ SqueezeJS.UI.FilesystemBrowser = {
                                             </div>
                                         </div>
 
-                                        <div class="basicSettingsMediaLibraryTab" id="mediaLibrary">
+
+                                        <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
                                             <div class="mediaLibrary" >
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
                                                 [% prefs.pref_libraryname | html %]
                                                 [% END %] [% END %] 
                                             </div>
-                                        </div>
 
-                                        <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
                                             <div class="mediaFolders">
                                                 [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
                                                 [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
@@ -282,6 +280,7 @@ SqueezeJS.UI.FilesystemBrowser = {
         
                                                 [% IF mediadir.path %][% END %]
                                                 [% END %]  
+                                                
 
                                                 <!-- Input to put in folder to find music -->
                                                 <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="mediadirs0" value="C:\Program Files\Songs" size="40">
@@ -293,6 +292,7 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                 <br />
                                                 <!-- Rescan Button -->
                                                 <input name="pref_rescan_mediadir0" type="submit" value="Rescan" class="stdclick rescanButton disableOnScan">
+                                                
 
                                                 <!-- [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %]
                                                 <table border="0" cellspacing="0">
@@ -345,6 +345,7 @@ SqueezeJS.UI.FilesystemBrowser = {
                                     <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div>
+                                    
                                     
                                     <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
 
