@@ -510,7 +510,6 @@ transform: translate3d(0, 0, 0);
 
 /* Button styles */
 .basicSettingsLanguageTabButton, 
-.basicSettingsMediaLibraryTabButton,
 .basicSettingsMediaFoldersTabButton,
 .basicSettingsPlaylistsTabButton,
 .basicSettingsRescanMediaTabButton {
@@ -524,7 +523,6 @@ transform: translate3d(0, 0, 0);
 
 
 .basicSettingsLanguageTabButton.active, 
-.basicSettingsMediaLibraryTabButton.active, 
 .basicSettingsMediaFoldersTabButton.active,
 .basicSettingsPlaylistsTabButton.active,
 .basicSettingsRescanMediaTabButton.active {
@@ -629,7 +627,6 @@ transform: translate3d(0, 0, 0);
 
         /* Button styles */
         .basicSettingsLanguageTabButton, 
-        .basicSettingsMediaLibraryTabButton,
         .basicSettingsMediaFoldersTabButton,
         .basicSettingsPlaylistsTabButton,
         .basicSettingsRescanMediaTabButton {
@@ -644,7 +641,6 @@ transform: translate3d(0, 0, 0);
 
         /* Active button styles */
         .basicSettingsLanguageTabButton.active, 
-        .basicSettingsMediaLibraryTabButton.active, 
         .basicSettingsMediaFoldersTabButton.active,
         .basicSettingsPlaylistsTabButton.active,
         .basicSettingsRescanMediaTabButton.active {
