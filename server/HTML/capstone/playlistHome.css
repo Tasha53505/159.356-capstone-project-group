@@ -781,58 +781,27 @@ transform: translate3d(0, 0, 0);
 
 
 /* Media Queries */
+/* 600 px or less */
 @media only screen and (max-width: 600px) {
-    h2 {
-        font-size: 15px;
-    }
-
-    ul li {
-        font-size: 13px;
-        }
-
-    .pluginExample, .radioExample {    
-      width: 1.5em;  
-      height: 1.5em;  
-    }
-    
-    .overallPlaylistContainer {
-        width: 100%;
-    }
-    .pluginsContainer, .allMusicContainer, .radioContainer {
-        width: 40%;
-    }
-    .accordionButton {
-        font-size: 14px;
-    }
-
-  }
-  @media only screen and (max-width: 800px) {
-    h2 {
-        font-size: 15px;
-    }
-
-    ul li {
-        font-size: 13px;
-        }
-
-    .pluginExample {    
-      width: 1.5em;  
-      height: 1.5em;  
-    }
-    
-    .overallPlaylistContainer {
-        width: 100%;
-    }
-    .pluginsContainer, .allMusicContainer {
-        width: 40%;
-    }
-    .accordionButton {
-        font-size: 14px;
-    }
-
     .animationBtn {
-        margin-left: 60%;
+        transform: translateX(30%);
+        margin-bottom: 100%;
+        border-radius: 50%;
     }
+
+    .animationBtn svg {
+        width: 2em;
+        height: 2em;
+    }
+
+
+
+}
+
+
+/* 800px or less */
+  @media only screen and (max-width: 890px) {
+ 
 
   }
 
