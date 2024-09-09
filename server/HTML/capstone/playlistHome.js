@@ -3,6 +3,7 @@
 var accordion = document.getElementsByClassName("accordion");
 var i;
 document.addEventListener('DOMContentLoaded', function () {
+
     
     var accordions = document.querySelectorAll('.accordionButton');
     accordions.forEach(function (accordion) {
@@ -20,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var plugins = document.querySelectorAll('.pluginExample');
     plugins.forEach(function (plugin) {
         plugin.addEventListener('click', function () {
-            console.log("please work");
             var newContainer = document.createElement('div');
             newContainer.classList.add('newPluginContainer');
             
@@ -115,6 +115,9 @@ document.getElementById('allSongs').addEventListener('click', function() {
     // Create a new container for the songs
     var newAllSongsContainer = document.createElement('div');
     newAllSongsContainer.classList.add('newAllSongsContainer');
+    var animationBtn = document.querySelector('.animationBtn');
+
+    animationBtn.style.display ='none';
 
     // Add back button and header
     newAllSongsContainer.innerHTML = 
@@ -146,6 +149,7 @@ document.getElementById('allSongs').addEventListener('click', function() {
         newAllSongsContainer.classList.remove('shownewAllSongsContainer');
         setTimeout(function () {
             newAllSongsContainer.remove();
+            animationBtn.style.display = 'block';
         }, 500); // Animation time + back functionality
     });
 });
@@ -172,6 +176,10 @@ document.getElementById('allAlbums').addEventListener('click', function() {
     // Create a new container for the songs
     var newAllAlbumsContainer = document.createElement('div');
     newAllAlbumsContainer.classList.add('newAllAlbumsContainer');
+    
+    var animationBtn = document.querySelector('.animationBtn');
+
+    animationBtn.style.display ='none';
 
     // Add back button and header
     newAllAlbumsContainer.innerHTML = 
@@ -203,6 +211,8 @@ document.getElementById('allAlbums').addEventListener('click', function() {
         newAllAlbumsContainer.classList.remove('shownewAllAlbumsContainer');
         setTimeout(function () {
             newAllAlbumsContainer.remove();
+            animationBtn.style.display = 'block';
+
         }, 500); // Animation time + back functionality
     });
 });
@@ -214,6 +224,9 @@ document.getElementById('allArtists').addEventListener('click', function() {
     // Create a new container for the songs
     var newAllArtistsContainer = document.createElement('div');
     newAllArtistsContainer.classList.add('newAllArtistsContainer');
+    var animationBtn = document.querySelector('.animationBtn');
+
+    animationBtn.style.display ='none';
 
     // Add back button and header
     newAllArtistsContainer.innerHTML = 
@@ -245,13 +258,11 @@ document.getElementById('allArtists').addEventListener('click', function() {
         newAllArtistsContainer.classList.remove('shownewAllArtistsContainer');
         setTimeout(function () {
             newAllArtistsContainer.remove();
+            animationBtn.style.display ='block';
+
         }, 500); // Animation time + back functionality
     });
 });
-
-
-
-
 
 
 
@@ -260,6 +271,12 @@ document.getElementById('allArtists').addEventListener('click', function() {
 document.getElementById('settingsButton').addEventListener('click', function() {
     var existingContainer = document.querySelector('.settingsContainerClicked');
     
+    // Hide "Home"  Music button when settings container is clicked
+    const animationBtn = document.querySelector('.animationBtn');
+    animationBtn.style.display = 'none'; // Hide the button
+
+
+
     if (existingContainer) {
         existingContainer.classList.add('showSettings');
         return;
@@ -311,6 +328,8 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         settingsContainer.classList.remove('showSettings');
         setTimeout(function() {
             settingsContainer.remove();
+            animationBtn.style.display = 'block'; // Show the button again when back button is clicked
+
         }, 500);
     });
 
