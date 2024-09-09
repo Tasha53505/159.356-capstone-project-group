@@ -171,8 +171,40 @@ SqueezeJS.UI.FilesystemBrowser = {
 };
 
 
+// Ext.onReady(function() {
+//         new Ext.Button({
+//             renderTo: 'prefsSubmit', // Render the button to the div containing the save button
+//             text: SqueezeJS.string('Save Settings'),
+//             handler: function() {
+//                 this.submitSettings(); // Calls the submitSettings function when the button is clicked
+//             },
+//             scope: this
+//         });
+//     });
+
+//     // Function to submit the settings
+//     submitSettings: function(cb) {
+//         try {
+//             frames.settings.Settings.Page.submit(cb);
+//         } catch (e) {
+//             return false;
+//         }
+//         return true;
+//     }
+
+// new Ext.Button({
+// 			renderTo: 'save',
+// 			text: SqueezeJS.string('Save Settings'),
+// 			handler: function() {
+// 				this.submitSettings()
+// 			},
+// 			scope: this
+// 		});
+
 
         });
+
+
     </script>
 </head>
 
@@ -340,9 +372,14 @@ SqueezeJS.UI.FilesystemBrowser = {
                                         </div>
 
                                   </div>
+                                    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 
+                                    <!-- <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
+                                        <input type="hidden" name="saveSettings" value="1">
+                                    </div> -->
 
-                                    <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
+                                    <div id="prefsSubmit">
+                                        [%- IF NOT nosubmit %]<input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="[% "SAVE_SETTINGS" | string %]">[% END %]
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div>
                                     
@@ -419,7 +456,9 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                     PROCESS cmdLocalQuery;
                                                 END; %]&amp;player=[% playerURI %]&amp;ajaxRequest=1
                                             [%- END %]
+                                            
 
+                                            
                         
                                             <div id="browsedbList" style="background-color: #1b2444;"></div>
                                     
@@ -439,6 +478,9 @@ SqueezeJS.UI.FilesystemBrowser = {
                                             %] 
                                             [% UNLESS itemInfoTemplate; itemInfoTemplate = 'iteminfo'; END; PROCESS $itemInfoTemplate %] 
                                             [% END -%] -->
+
+
+                                            
                                     
                                             <div class="">
                                                 <div class="browsedbListItem">
@@ -450,6 +492,7 @@ SqueezeJS.UI.FilesystemBrowser = {
                                                 </div>
                                             </div>
                                             
+
                                     
                                             
                                             <span 
