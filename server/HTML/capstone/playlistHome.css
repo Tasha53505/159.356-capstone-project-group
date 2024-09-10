@@ -787,6 +787,7 @@ transform: translate3d(0, 0, 0);
         transform: translateX(30%);
         margin-bottom: 100%;
         border-radius: 50%;
+        z-index: 100; 
     }
 
     .animationBtn svg {
@@ -794,7 +795,73 @@ transform: translate3d(0, 0, 0);
         height: 2em;
     }
 
+    /* The container that holds all the divs*/
+    .overallPlaylistContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vh;
+        height: 100%;
+        z-index: 90;
 
+    }
+    /* Container that hold 'Home' and 'Settings' Button */
+    .overallHeadersContainer {
+        font-size: 15px;
+        margin-left: 30px;
+        margin-top: 20px;
+
+    }
+
+    /* Container that holds 'My music' 'myApps' etc */
+    .accordionContainer {
+        
+    }
+
+    .accordionPanel {
+
+    }
+    /* Panels that pop up when clicked i.e Songs under My Music*/
+    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vh;
+        height: 100%;
+        z-index: 95;
+
+    }
+    /* Settings tabs */
+    .settingsHeader {
+        font-size: 14px;
+        justify-content: left;
+
+    }
+
+    .settingsHeader h2 {
+        margin-left: 10%;
+    }
+
+
+
+    .toggleSwitch {
+        margin-left: 10%;
+
+    }
+
+ 
+ 
+/* Common settings for all tabs */
+.basicSettingsLanguageTab, 
+.basicSettingsMediaLibraryTab, 
+.basicSettingsMediaFoldersTab, 
+.basicSettingsPlaylistsTab, 
+.basicSettingsRescanMediaTab, 
+.stdclick {
+    margin: 0 auto;
+    margin-right: 30%;
+
+}
 
 }
 
