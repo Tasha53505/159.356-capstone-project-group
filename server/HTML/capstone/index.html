@@ -228,29 +228,32 @@ SqueezeJS.UI.FilesystemBrowser = {
 
                                 <div class="advancedSettingsPlugin">
                                     <!-- [% PROCESS settings/header.html %]  -->
-                                    [% "SETUP_GROUP_PLUGINS" | string %]
-                                    [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
-                                    [% FOREACH plugin = sortedPlugins %]
-                                    [% name = plugins.$plugin.name %]
-                                    [% version = plugins.$plugin.version %]
-                                    [% enforce = plugins.$plugin.enforce || plugins.$plugin.errorDesc %]
-                                    [% settings = failsafe && !enforce ? '' : plugins.$plugin.optionsURL %]
-                                    [% enabled = pluginState.$plugin %]
-                                    [% title = BLOCK %]
-                                    [% name | getstring %]
-                                    [% IF version %](v[% version %])[% END %]
-                                    [% END %]
-                                    [% WRAPPER setting desc = plugins.$plugin.description %]
-                                    [% IF plugins.$plugin.errorDesc %]
-                                    [% plugins.$plugin.errorDesc %]
-                                    [% ELSE %]
-                                    [% PROCESS pluginLink %]
-                                    [% IF plugins.$plugin.opType %]
-                                    ([% "SETUP_GROUP_PLUGINS_NEEDS_RESTART" | string %])
-                                    [% END %]
-                                    [% END %]
-                                    [% END %]
-                                    [% END %]
+                                    <div class="advancedSettingsContent">
+                                        [% "SETUP_GROUP_PLUGINS" | string %]
+                                        [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
+                                        [% FOREACH plugin = sortedPlugins %]
+                                        [% name = plugins.$plugin.name %]
+                                        [% version = plugins.$plugin.version %]
+                                        [% enforce = plugins.$plugin.enforce || plugins.$plugin.errorDesc %]
+                                        [% settings = failsafe && !enforce ? '' : plugins.$plugin.optionsURL %]
+                                        [% enabled = pluginState.$plugin %]
+                                        [% title = BLOCK %]
+                                        [% name | getstring %]
+                                        [% IF version %](v[% version %])[% END %]
+                                        [% END %]
+                                        [% WRAPPER setting desc = plugins.$plugin.description %]
+                                        [% IF plugins.$plugin.errorDesc %]
+                                        [% plugins.$plugin.errorDesc %]
+                                        [% ELSE %]
+                                        [% PROCESS pluginLink %]
+                                        [% IF plugins.$plugin.opType %]
+                                        ([% "SETUP_GROUP_PLUGINS_NEEDS_RESTART" | string %])
+                                        [% END %]
+                                        [% END %]
+                                        [% END %]
+                                        [% END %]
+                                    </div>
+                              
                                     <!-- [% PROCESS settings/footer.html %] -->
                                 </div>
 

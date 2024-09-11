@@ -857,7 +857,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
-.stdclick {
+.stdclick,
+.advancedSettingsContent
+{
     margin: 0 auto;
     margin-right: 30%;
 
