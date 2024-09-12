@@ -45,6 +45,8 @@
     margin-left: 0; /* animation button will move WITH the overallBtn Container */
 }
 
+
+
 .player h2 {
     text-align: center;
     font-weight: 400;
@@ -85,11 +87,9 @@ hr {
 }
 
 
-
-
 .homeTitleContainer {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between; 
     text-align: center;
     padding: 1em;
@@ -98,6 +98,7 @@ hr {
 .homeTitleContainer h2 {
     text-align: center;
     margin-left: 2rem;
+
 }
 
 
@@ -109,7 +110,7 @@ hr {
     padding: 0 !important;
     cursor: pointer;
     font-size: 1em;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
 }
 
 .settingsButton svg {
@@ -831,7 +832,7 @@ transform: translate3d(0, 0, 0);
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vh;
+        width: 80vh;
         height: 100%;
         z-index: 95;
 
@@ -862,8 +863,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
-.stdclick,
-.advancedSettingsContent
+.stdclick
 {
     margin: 0 auto;
     margin-right: 30%;
