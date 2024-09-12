@@ -66,11 +66,13 @@ hr {
     margin-top: 0.5em;
     background-color: #151d3a;
     border-color: #151d3a;
+    margin-right: 20%;
 }
 
 /* Accordion for Plugins */
 .accordionContainer a {
     text-decoration: none;
+    margin-left: 10%;
 }
 
 .accordionContainer {
@@ -83,21 +85,21 @@ hr {
     padding: 0 !important;
     cursor: pointer;
     font-size: 1em;
-
 }
 
 
 .homeTitleContainer {
     display: flex;
-    align-items: end;
+    align-items: start;
+    
     padding: 1em;
     width: 100%;
 }
 
 
 .homeTitleContainer h2 {
-    text-align: center;
-    margin-left: 2rem;
+    margin-right: 20%;
+    /* margin-left: 2rem; */
 
 }
 
@@ -129,8 +131,6 @@ hr {
     width: 100%;
     height: 60%;
     flex-wrap: wrap;
-
-
 }
 
 
@@ -343,7 +343,13 @@ transform: translate3d(0, 0, 0);
 }
 
 .settingsHeader h2 {
-    margin: 0;
+    margin-left: 5%;
+    margin-top: 1%;
+}
+
+.settingsHeader svg {
+    margin-right: 20%;
+
 }
 
 .settingsTabs {
