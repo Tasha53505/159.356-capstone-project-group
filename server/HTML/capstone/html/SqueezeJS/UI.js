@@ -764,7 +764,6 @@ if (Ext.Window && SqueezeJS.UI.FileSelector) {
 }
 
 
-
 // menu highlighter helper classes
 SqueezeJS.UI.Highlight = function(config){
 	this.init(config);
@@ -1914,17 +1913,17 @@ SqueezeJS.UI.Playlist = Ext.extend(SqueezeJS.UI.Component, {
 	},
 
 	onResize : function(){
-		var el = this.container.parent().parent();
-		var plEl = this.getPlEl();
+		// var el = this.container.parent().parent();
+		// var plEl = this.getPlEl();
 
-		if (el == null || plEl == null)
-			return;
+		// if (el == null || plEl == null)
+		// 	return;
 
-		var height = el.getHeight() + el.getTop() - plEl.getTop();
-		if (el = Ext.get('playlistTab'))
-			height -= el.getHeight();
+		// var height = el.getHeight() + el.getTop() - plEl.getTop();
+		// if (el = Ext.get('playlistTab'))
+		// 	height -= el.getHeight();
 
-		plEl.setHeight(height);
+		// plEl.setHeight(height);
 	},
 
 	highlightCurrent : function(){
@@ -2318,3 +2317,164 @@ if (Ext.grid && Ext.grid.GridView && Ext.grid.GridPanel) {
 	Ext.extend(SqueezeJS.UI.SortableTable, Ext.grid.GridPanel);
 }
 
+SqueezeJS.UI.Playlist = Ext.extend(SqueezeJS.UI.Component, {
+	_resizeTask: null,
+
+	initComponent : function(){
+		
+		SqueezeJS.UI.Playlist.superclass.initComponent.call(this);
+
+		this.container = Ext.get(this.renderTo);
+		this.onResize();
+
+		this._resizeTask = new Ext.util.DelayedTask(function(){ this.onResize(); }, this);
+
+		Ext.EventManager.onWindowResize(function(){
+			this._resizeTask.delay(100);
+		}, this);
+
+		SqueezeJS.Controller.on({
+			playerselected: {
+				fn: this.onPlayerSelected,
+				scope: this
+			}
+		});
+	},
+
+	load : function(url, showIndicator){
+		// console.log(112233)
+		if (this.getPlEl() && SqueezeJS.UI.Sortable)
+			// unregister event handlers
+			Ext.dd.ScrollManager.unregister(this.playlistEl);
+
+		// try to reload previous page if no URL is defined
+		var um = this.container.getUpdateManager();
+
+		if (showIndicator)
+			this.container.getUpdateManager().showLoadIndicator = true;
+
+		this.container.load(
+			{ url: (url || this.url || webroot + 'playlist.html?ajaxRequest=1&player=' + SqueezeJS.getPlayer()) + '&uid=' + Date.parse(Date()) },
+			{},
+			this._onUpdated.createDelegate(this),
+			true
+		);
+
+		um.showLoadIndicator = false;
+	},
+
+	getPlEl : function(){
+		// console.log(Ext.get(this.playlistEl))
+		return Ext.get(this.playlistEl);
+	},
+
+	onUpdated : function(){},
+
+	_onUpdated : function(o){
+		this.onResize();
+
+		var el = this.getPlEl();
+		if (el && (el = el.child('div.noPlayerPanel')))
+			el.setDisplayed(true);
+
+		// shortcut if there's no player
+		if (!this.getPlEl())
+			return;
+
+		this.Highlighter.unHighlight();
+		this._initSortable();
+		this.highlightCurrent();
+
+		this.onUpdated(o);
+	},
+
+	_initSortable : function(){
+		if (!SqueezeJS.UI.Sortable)
+			return;
+
+		var offset = 0;
+		if (offset = Ext.get('offset'))
+			offset = parseInt(offset.dom.innerHTML);
+
+		new SqueezeJS.UI.Sortable({
+			el: this.playlistEl,
+			offset: offset,
+			selector: '#' + this.playlistEl + ' div.draggableSong',
+			highlighter: this.Highlighter,
+			onDropCmd: function(sourcePos, targetPos) {
+				SqueezeJS.Controller.playerControl(
+					[
+						'playlist',
+						'move',
+						sourcePos, targetPos
+					],
+				true);
+			}
+		});
+	},
+
+	onPlaylistChange : function() {
+		this.load();
+	},
+
+	onPlayerSelected : function() {
+		this.load();
+	},
+
+	onResize : function(){
+		// var el = this.container.parent().parent();
+		// var plEl = this.getPlEl();
+
+		// if (el == null || plEl == null)
+		// 	return;
+
+		// var height = el.getHeight() + el.getTop() - plEl.getTop();
+		// if (el = Ext.get('playlistTab'))
+		// 	height -= el.getHeight();
+
+		// plEl.setHeight(height);
+	},
+
+	highlightCurrent : function(){
+		var el;
+		if (el = this.getPlEl()) {
+			var plPos = el.getScroll();
+			var plView = el.getViewSize();
+			var el = Ext.DomQuery.selectNode(this.currentSelector);
+
+			if (el) {
+				el = Ext.get(el);
+				if (el.getTop() > plPos.top + plView.height
+					|| el.getBottom() < plPos.top)
+						this.scrollIntoView(el);
+			}
+		}
+	},
+
+	// overwriting Element.scrollIntoView
+	// to have the element centered, not at the top/bottom border
+	scrollIntoView : function(el) {
+		var c = Ext.getDom(this.playlistEl);
+		var elDom = el.dom;
+
+		var o = el.getOffsetsTo(c),
+		    t = o[1] + c.scrollTop,
+		    b = t + elDom.offsetHeight;
+
+		c.scrollTop = b - c.clientHeight + this.container.dom.scrollHeight / 2;;
+		c.scrollTop = c.scrollTop; // corrects IE, other browsers will ignore
+	},
+
+	request : function(cmd, el) {
+		// don't accept new commands while the playlist is updating
+		var um = this.getPlEl().getUpdateManager();
+
+		if (um && um.isUpdating())
+			return;
+
+		el = Ext.get(el);
+		// if (el.dd && el.dd.config && parseInt(el.dd.config.position) >= 0)
+		console.log(el.id.replace(/[^\d]/g, ""))
+		SqueezeJS.Controller.playerControl(['playlist', cmd, el.id.replace(/[^\d]/g, "")])
+	}
+});

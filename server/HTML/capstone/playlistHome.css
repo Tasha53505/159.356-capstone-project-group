@@ -69,7 +69,10 @@ hr {
 /* Accordion for Plugins */
 .accordionContainer a {
     text-decoration: none;
+}
 
+.accordionContainer {
+    width: 100%;
 }
 
 .accordionButton {
@@ -122,7 +125,7 @@ hr {
 .pluginsContainer, .allMusicContainer, .radioContainer {
     display: flex;
     padding: 1em;
-    width: 80%;
+    width: 100%;
     height: 60%;
     flex-wrap: wrap;
 
@@ -303,6 +306,7 @@ transform: translate3d(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align items to the top */
+    flex-flow: column;
 }
 
 .MusiclistContainer.show {
@@ -318,8 +322,7 @@ transform: translate3d(0, 0, 0);
     top: 0;
     left: 0;
     width: 35%;
-    /* height: 100%; */
-    height: 105%;
+    height: 100%;
     z-index: 10;
     display: none; /* Invisible until settings are clicked */
     animation: fadeIn 0.5s forwards;
@@ -628,6 +631,7 @@ transform: translate3d(0, 0, 0);
 
         /* Button styles */
         .basicSettingsLanguageTabButton, 
+        .basicSettingsMediaLibraryTabButton,
         .basicSettingsMediaFoldersTabButton,
         .basicSettingsPlaylistsTabButton,
         .basicSettingsRescanMediaTabButton {
@@ -642,6 +646,7 @@ transform: translate3d(0, 0, 0);
 
         /* Active button styles */
         .basicSettingsLanguageTabButton.active, 
+        .basicSettingsMediaLibraryTabButton.active, 
         .basicSettingsMediaFoldersTabButton.active,
         .basicSettingsPlaylistsTabButton.active,
         .basicSettingsRescanMediaTabButton.active {
