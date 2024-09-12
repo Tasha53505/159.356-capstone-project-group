@@ -26,185 +26,13 @@
     <script type="text/javascript" src="/html/ext/ext-all.js?r=[% revision %]"></script>
     <script type="text/javascript">[% PROCESS html/vars.js %]</script>
     <script type="text/javascript" src="/html/SqueezeJS/Base.js?r=[% revision %]"></script>
-    <script type="text/javascript">[% PROCESS html/SqueezeJS/Strings.js %]</script>
+    <!-- <script type="text/javascript">[% PROCESS html/SqueezeJS/Strings.js %]</script> -->
     <script type="text/javascript" src="/html/SqueezeJS/UI.js?r=[% revision %]"></script>
+    <script type="text/javascript">[% PROCESS html/Main.js %]</script>
     <script type ="text/javascript">
-
-        
         Ext.onReady(function(){
-            SqueezeJS.Controller.init({
-                player : playerid
-            });
-
-            // Cover
-            new SqueezeJS.UI.Coverart({
-                el: 'coverart',
-                noLink: true,
-            });
-
-            // Display name
-            new SqueezeJS.UI.RawTitle({
-                el: 'title',
-                noLink: true
-            });
-
-            // Display artist
-            new SqueezeJS.UI.Contributors({
-                el: 'artist',
-                noLink: true
-            });
-
-            // Back & Forward Buttons
-            new SqueezeJS.UI.Buttons.Rew({
-                renderTo: 'prevButton',
-                noText: true,
-            });
-            new SqueezeJS.UI.Buttons.Fwd({
-                renderTo: 'nextButton',
-                noText: true,
-            });
-
-            // Play Button
-            new SqueezeJS.UI.Buttons.Play({
-                renderTo: 'playPause',
-                noText: true
-            });
-
-            // Timers
-            new SqueezeJS.UI.Playtime({
-                el: 'playtime',
-                noLink: true
-            });
-            new SqueezeJS.UI.PlaytimeRemaining({
-                el: 'maxtime',
-                noLink: true
-            });
-
-            new SqueezeJS.UI.Bitrate({
-                el: 'bitrate',
-                noLink: true
-            });
-
-// File browswer
-
-
-
-SqueezeJS.UI.FilesystemBrowser = {
-    init: function(){
-        var inputEl, btnEl, filter, classes, start;
-
-        var tpl = new Ext.Template('&nbsp;<input type="button" value="' + SqueezeJS.string('browse') + '" onclick="SqueezeJS.UI.FilesystemBrowser.show(\'{inputField}\', \'{filter}\')">');
-        tpl.compile();
-
-        // try to get the filter expression from the input fields CSS class
-        // selectFolder - only display folders
-        // selectFile   - display any filetype
-        // selectFile_X - only show files of the type X (eg. selectFile_xml -> .xml only)
-        var items = Ext.query('input.selectFolder, input[class*=selectFile]');
-        for(var i = 0; i < items.length; i++) {
-
-            if (inputEl = Ext.get(items[i])) {
-                filter = '';
-
-                if (inputEl.hasClass('selectFolder'))
-                    filter = 'foldersonly'
-
-                else {
-                    classes = items[i].className.split(' ');
-
-                    for (var x=0; x<classes.length; x++) {
-
-                        if (classes[x].search(/selectFile_/) > -1) {
-                            filter += (filter ? '|' : '') + classes[x].replace(/selectFile_/, '');
-                        }
-                    }
-                    if (filter)
-                        filter = "filetype:" + filter;
-                }
-
-                btnEl = tpl.insertAfter(inputEl, {
-                    inputField: inputEl.id,
-                    filter: filter
-                });
-            }
-        }
-    },
-
-    show: function(inputField, filter){
-        var filesystemDlg = new Ext.Window({
-            modal: true,
-            collapsible: false,
-            width: 350,
-            height: 400,
-            resizeHandles: 'se',
-            html: '<div id="filesystembrowser"></div>',
-            buttons: [{
-                text: SqueezeJS.string('close'),
-                handler: function(){
-                    filesystemDlg.close()
-                },
-                scope: filesystemDlg,
-                template: SqueezeJS.UI.buttonTemplate
-            }],
-            listeners: {
-                resize: this.onResize
-            }
+            Main.init()
         });
-
-        filesystemDlg.setTitle(SqueezeJS.string(filter == 'foldersonly' ? 'choose_folder' : 'choose_file'));
-        filesystemDlg.show();
-
-        new SqueezeJS.UI.FileSelector({
-            renderTo: 'filesystembrowser',
-            input: inputField,
-            filter: filter
-        });
-    },
-
-    onResize: function() {
-        var el = Ext.get('filesystembrowser');
-        if (el && (el = el.parent())) {
-            el.setWidth(el.getWidth()-12);
-            el.setStyle({ overflow: 'auto' })
-        }
-    }
-};
-
-
-// Ext.onReady(function() {
-//         new Ext.Button({
-//             renderTo: 'prefsSubmit', // Render the button to the div containing the save button
-//             text: SqueezeJS.string('Save Settings'),
-//             handler: function() {
-//                 this.submitSettings(); // Calls the submitSettings function when the button is clicked
-//             },
-//             scope: this
-//         });
-//     });
-
-//     // Function to submit the settings
-//     submitSettings: function(cb) {
-//         try {
-//             frames.settings.Settings.Page.submit(cb);
-//         } catch (e) {
-//             return false;
-//         }
-//         return true;
-//     }
-
-// new Ext.Button({
-// 			renderTo: 'save',
-// 			text: SqueezeJS.string('Save Settings'),
-// 			handler: function() {
-// 				this.submitSettings()
-// 			},
-// 			scope: this
-// 		});
-
-
-        });
-
-
     </script>
 </head>
 
@@ -1022,10 +850,19 @@ SqueezeJS.UI.FilesystemBrowser = {
         </button>
     </div>
 
-
     <div class="playlistContainer">
         <div class="MusiclistContainer">
+            <div style="width: 100%; text-align: center;">
             <h2>Music Play List</h2>
+            </div>
+            
+            <div id="playlistPanel">
+                <div id="playList">
+                    <div class="noPlayerPanel" style="display:none">
+                        [% PROCESS status_noclients.html ajaxUpdate=1 %]
+                    </div>
+                </div>
+            </div>
         </div>
         <button class="animationMusiclistBtn">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6em" height="3em"
