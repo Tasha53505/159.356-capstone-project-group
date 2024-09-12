@@ -794,9 +794,9 @@ transform: translate3d(0, 0, 0);
 
 /* Media Queries */
 /* 600 px or less */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px){
     .animationBtn {
-        transform: translateX(30%);
+        transform: translateX(35%);
         margin-bottom: 100%;
         border-radius: 50%;
         z-index: 100; 
@@ -815,13 +815,14 @@ transform: translate3d(0, 0, 0);
         width: 100vh;
         height: 100%;
         z-index: 90;
+        background-color: rgb(97, 111, 189); /* Just for testing */
 
     }
     /* Container that hold 'Home' and 'Settings' Button */
     .overallHeadersContainer {
         font-size: 15px;
-        margin-left: 30px;
         margin-top: 20px;
+        margin-right: 20%;
 
     }
 
@@ -859,6 +860,10 @@ transform: translate3d(0, 0, 0);
     .toggleSwitch {
         margin-left: 10%;
 
+    }
+
+    .settingsContainerClicked {
+        width: 100%;
     }
 
  
