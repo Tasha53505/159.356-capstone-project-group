@@ -549,6 +549,8 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 // }
 
 
+
+// Save Settings Button - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs
 document.getElementById('saveSettings').addEventListener('click', function(e) {
     e.preventDefault(); // Prevent the default form submission
 
@@ -574,4 +576,33 @@ document.getElementById('saveSettings').addEventListener('click', function(e) {
         console.error('Error:', error);
     });
 });
+
+
+// - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs for where media is held.
+document.querySelector('.rescanButton').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const selectedFolder = document.getElementById('mediadirs0').value;
+
+    // Send the folder input to the backend via an AJAX request
+    fetch('/updateMediaDirs', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mediaDir: selectedFolder })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Media folder updated successfully.');
+        } else {
+            alert('Failed to update media folder.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
 
