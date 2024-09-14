@@ -512,38 +512,66 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 // ----------------- Save settings, speciifically Language -----------------
 // Taken from basic.html
-function initSettingsForm() {
-    // Try to redirect all form submissions by return key to the default submit button
-    // Listen for keypress events on all form elements except submit
-    document.querySelectorAll('.settingsContainer input, .settingsContainer select').forEach(function(ele) {
-        if (ele.type != 'submit') {
-            ele.addEventListener('keypress', function(e) {
-                var cKeyCode = e.keyCode || e.which;
-                if (cKeyCode == 13) {  // Enter key
-                    e.preventDefault();  // Prevent default form submission
-                    document.getElementById('saveSettings').click();  // Trigger Save Settings button click
-                }
-            });
+// function initSettingsForm() {
+//     // Try to redirect all form submissions by return key to the default submit button
+//     // Listen for keypress events on all form elements except submit
+//     document.querySelectorAll('.settingsContainer input, .settingsContainer select').forEach(function(ele) {
+//         if (ele.type != 'submit') {
+//             ele.addEventListener('keypress', function(e) {
+//                 var cKeyCode = e.keyCode || e.which;
+//                 if (cKeyCode == 13) {  // Enter key
+//                     e.preventDefault();  // Prevent default form submission
+//                     document.getElementById('saveSettings').click();  // Trigger Save Settings button click
+//                 }
+//             });
+//         }
+//     });
+// }
+
+// function saveLanguageSetting() {
+//     var selectedLanguage = document.getElementById('languageSelect').value;  // Get the selected language dynamically
+
+//     const request = new XMLHttpRequest();
+//     request.open('POST', '/save-language', true);
+//     request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    
+//     request.onreadystatechange = function () {
+//         if (this.readyState === 4 && this.status === 200) {
+//             // Language saved successfully, refresh or update content
+//             location.reload();  // Reload the page to apply the new language settings
+//         }
+//     };
+    
+//     request.send(JSON.stringify({
+//         language: selectedLanguage,
+//         playerId: myClientState.id  // Assuming you need the player ID
+//     }));
+// }
+
+
+document.getElementById('saveSettings').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    const selectedLanguage = document.getElementById('languageSelect').value;
+
+    // Send the selected language to the backend via an AJAX request
+    fetch('/saveLanguage', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ language: selectedLanguage })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Language settings saved successfully.');
+        } else {
+            alert('Failed to save language settings.');
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
-}
+});
 
-function saveLanguageSetting() {
-    var selectedLanguage = document.getElementById('languageSelect').value;  // Get the selected language dynamically
-
-    const request = new XMLHttpRequest();
-    request.open('POST', '/save-language', true);
-    request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    
-    request.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            // Language saved successfully, refresh or update content
-            location.reload();  // Reload the page to apply the new language settings
-        }
-    };
-    
-    request.send(JSON.stringify({
-        language: selectedLanguage,
-        playerId: myClientState.id  // Assuming you need the player ID
-    }));
-}
