@@ -41,7 +41,7 @@ app.post('/updateMediaDirs', (req, res) => {
         // Replace the mediaDirs section with the new folder path written from the textbox
         const updatedPrefs = data.replace(/mediadirs:.*\n/, `mediadirs:\n- ${newMediaDir}\n`);
 
-        // Write the updated prefs back to the file
+        // Write the updated preferences back to the file
         fs.writeFile(prefsFilePath, updatedPrefs, 'utf8', (err) => {
             if (err) {
                 return res.json({ success: false, message: 'Could not update prefs file.' });
