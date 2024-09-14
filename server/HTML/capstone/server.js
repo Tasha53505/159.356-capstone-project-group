@@ -1,5 +1,5 @@
 
-// Node JS script to rewrite prefs file
+// Node JS script to rewrite prefs file - this file is not showing up serverside
 const express = require('express');
 const fs = require('fs');
 const app = express();

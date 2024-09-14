@@ -35,6 +35,8 @@
     margin-bottom: 100%;
     border-radius: 0em 1em 1em 0em;
     transition: transform 0.5s ease-in-out; /* Slide animation */
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 }
 
 .overallPlaylistContainer.hidden {
@@ -165,6 +167,8 @@ hr {
     animation: fadeIn 0.5s forwards;
     display: none; /* Invisible until a plugin is clicked */
     z-index: 10; /* will always be on top of Player */
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 }
 
 .newAllSongsContainer.shownewAllSongsContainer, .newAllAlbumsContainer.shownewAllAlbumsContainer, .newAllArtistsContainer.shownewAllArtistsContainer {
