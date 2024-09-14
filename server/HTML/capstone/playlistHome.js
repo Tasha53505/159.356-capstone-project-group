@@ -556,14 +556,14 @@ document.getElementById('saveSettings').addEventListener('click', function(e) {
 
     const selectedLanguage = document.getElementById('languageSelect').value;
 
-    // Send the selected language to the backend via an AJAX request
-    fetch('/saveLanguage', {
+    fetch('http://localhost:3000/saveLanguage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ language: selectedLanguage })
     })
+    
     .then(response => response.json())
     .then(data => {
         if (data.success) {
@@ -585,13 +585,14 @@ document.querySelector('.rescanButton').addEventListener('click', function(e) {
     const selectedFolder = document.getElementById('mediadirs0').value;
 
     // Send the folder input to the backend via an AJAX request
-    fetch('/updateMediaDirs', {
+    fetch('http://localhost:3000/updateMediaDirs', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ mediaDir: selectedFolder })
     })
+    
     .then(response => response.json())
     .then(data => {
         if (data.success) {
