@@ -550,9 +550,9 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
 
-// Save Settings Button - should go to the server.pl and update the .prefs file in ProgramData/Squeezebox/Prefs
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('saveSettings').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent the default form submission
 
         const selectedLanguage = document.getElementById('languageSelect').value;
 
@@ -574,6 +574,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
 
 
 
