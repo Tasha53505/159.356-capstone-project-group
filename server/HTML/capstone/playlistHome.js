@@ -550,32 +550,33 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
 
-// Save Settings Button - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs
-document.getElementById('saveSettings').addEventListener('click', function(e) {
-    e.preventDefault(); // Prevent the default form submission
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('saveSettings').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent the default form submission
 
-    const selectedLanguage = document.getElementById('languageSelect').value;
+        const selectedLanguage = document.getElementById('languageSelect').value;
 
-    fetch('http://localhost:3000/saveLanguage', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ language: selectedLanguage })
-    })
-    
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Language settings saved successfully.');
-        } else {
-            alert('Failed to save language settings.');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
+        // Send a POST request to the Perl server with the selected language
+        fetch('http://127.0.0.1:3000/saveLanguage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ language: selectedLanguage })
+        })
+        .then(response => response.text())  // Expect text response from server
+        .then(data => {
+            console.log(data);  // Log server response
+            alert('Response: ' + data);  // Show response in an alert
+        })
+        .catch(error => {
+            console.error('Error:', error);  // Log any error
+        });
     });
 });
+
+
+
 
 
 // - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs for where media is held.
