@@ -79,6 +79,10 @@ Use this to get SqueezeJS functionality according to https://wiki.slimdevices.co
 </head>
 
 ```
+---
+## Save Preferences
+Preferences are being updated in C:\ProgramData\Squeezebox\prefs server.prefs
+
 
 
 
