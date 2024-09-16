@@ -598,6 +598,33 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 // }
 
 
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.getElementById('settingsForm').addEventListener('submit', function(e) {
+//         e.preventDefault(); // Prevent default form submission
+
+//         const selectedLanguage = document.getElementById('languageSelect').value;
+
+//         // Prepare the data to send
+//         const data = new URLSearchParams();
+//         data.append('language', selectedLanguage);
+//         data.append('saveSettings', 1); // Ensure 'saveSettings' is included
+
+//         fetch('/Plugins/server.pl', {
+//             method: 'POST',
+//             body: data
+//         })
+//         .then(response => response.text())
+//         .then(result => {
+//             console.log('Success:', result);
+//             alert('Settings saved and script executed!');
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//             alert('Failed to save settings or execute script.');
+//         });
+//     });
+// });
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('settingsForm').addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent default form submission
@@ -607,23 +634,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prepare the data to send
         const data = new URLSearchParams();
         data.append('language', selectedLanguage);
-        data.append('saveSettings', 1); // Ensure 'saveSettings' is included
 
-        fetch('/Plugins/server.pl', {
+        fetch('/Plugins/LanguageSettings/handleRequest', {
             method: 'POST',
             body: data
         })
         .then(response => response.text())
         .then(result => {
             console.log('Success:', result);
-            alert('Settings saved and script executed!');
+            alert('Settings saved and language updated!');
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Failed to save settings or execute script.');
+            alert('Failed to save settings or update language.');
         });
     });
 });
+
 
 
 
