@@ -264,6 +264,55 @@ document.getElementById('allArtists').addEventListener('click', function() {
     });
 });
 
+// // ------------------------ Radio Tune in ------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    
+document.getElementById('radioTuneInTitle').addEventListener('click', function() {
+    // Create a new container for the radioTuneIn
+    var newRadioTuneInContainer = document.createElement('div');
+    newRadioTuneInContainer.classList.add('newRadioTuneInContainer');
+    var animationBtn = document.querySelector('.animationBtn');
+
+    // Hide the animation button 
+    animationBtn.style.display = 'none';
+
+    // Add back button and header
+    newRadioTuneInContainer.innerHTML = 
+        `<h3>Radio Tune In</h3>
+
+        <button class="backButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+                <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
+                <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
+            </svg>
+        </button>
+        <div id="radioTuneInContent"></div>`; 
+
+    // Append the new container to the body
+    document.body.appendChild(newRadioTuneInContainer);
+
+    // Clone the radioTuneIn element to avoid issues with the original
+    var radioTuneIn = document.querySelector('.radioTuneIn').cloneNode(true);
+    radioTuneIn.style.display = 'block'; // Display it
+    newRadioTuneInContainer.querySelector('#radioTuneInContent').appendChild(radioTuneIn);
+
+    // Show the new container with animation
+    setTimeout(function () {
+        newRadioTuneInContainer.classList.add('shownewRadioTuneInContainer');
+    }, 10);
+
+    // Back Button functionality
+    newRadioTuneInContainer.querySelector('.backButton').addEventListener('click', function () {
+        newRadioTuneInContainer.classList.remove('shownewRadioTuneInContainer');
+        setTimeout(function () {
+            newRadioTuneInContainer.remove();
+            animationBtn.style.display = 'block';
+        }, 500); // Animation time + back functionality
+    });
+});
+
+
+});
 
 
 // --------------- Settings Button ------------------------
@@ -549,32 +598,58 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 // }
 
 
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.getElementById('settingsForm').addEventListener('submit', function(e) {
+//         e.preventDefault(); // Prevent default form submission
+
+//         const selectedLanguage = document.getElementById('languageSelect').value;
+
+//         // Prepare the data to send
+//         const data = new URLSearchParams();
+//         data.append('language', selectedLanguage);
+//         data.append('saveSettings', 1); // Ensure 'saveSettings' is included
+
+//         fetch('/Plugins/server.pl', {
+//             method: 'POST',
+//             body: data
+//         })
+//         .then(response => response.text())
+//         .then(result => {
+//             console.log('Success:', result);
+//             alert('Settings saved and script executed!');
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//             alert('Failed to save settings or execute script.');
+//         });
+//     });
+// });
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('saveSettings').addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent the default form submission
+    document.getElementById('settingsForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
 
         const selectedLanguage = document.getElementById('languageSelect').value;
 
-        // Send a POST request to the Perl server with the selected language
-        fetch('http://127.0.0.1:3000/saveLanguage', {
+        // Prepare the data to send
+        const data = new URLSearchParams();
+        data.append('language', selectedLanguage);
+
+        fetch('/Plugins/LanguageSettings/handleRequest', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ language: selectedLanguage })
+            body: data
         })
-        .then(response => response.text())  // Expect text response from server
-        .then(data => {
-            console.log(data);  // Log server response
-            alert('Response: ' + data);  // Show response in an alert
+        .then(response => response.text())
+        .then(result => {
+            console.log('Success:', result);
+            alert('Settings saved and language updated!');
         })
         .catch(error => {
-            console.error('Error:', error);  // Log any error
+            console.error('Error:', error);
+            alert('Failed to save settings or update language.');
         });
     });
 });
-
 
 
 

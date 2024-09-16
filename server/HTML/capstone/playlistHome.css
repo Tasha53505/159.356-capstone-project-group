@@ -127,7 +127,7 @@ hr {
 
 }
 
-.pluginsContainer, .allMusicContainer, .radioContainer {
+.pluginsContainer, .allMusicContainer, .allRadioContainer {
     display: flex;
     padding: 1em;
     width: 100%;
@@ -136,8 +136,8 @@ hr {
 }
 
 
-/* ------------ My Music CSS --------------- */
-.allMusicSelect {
+/* ------------ My Music CSS | Radio CSS--------------- */
+.allMusicSelect, .radioTuneInTitle {
     flex-direction: column;
     width: 100%;
     /* padding: 0.5em; */
@@ -146,16 +146,16 @@ hr {
     cursor: pointer;
 }
 
-.allMusicSelect:hover {
+.allMusicSelect:hover, .radioTuneInTitle:hover {
     color: #bbd3dd;
     transition: 0.2s ease;
 }
 
-.songsList, .albumsList, .artistsList {
+.songsList, .albumsList, .artistsList, .radioTuneIn {
     display: none; 
 }
 
-.newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer {
+.newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .newRadioTuneInContainer {
     background-color: #1b2444;
     height: 100%;
     /* width: 27%; */
@@ -171,7 +171,7 @@ hr {
     overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 }
 
-.newAllSongsContainer.shownewAllSongsContainer, .newAllAlbumsContainer.shownewAllAlbumsContainer, .newAllArtistsContainer.shownewAllArtistsContainer {
+.newAllSongsContainer.shownewAllSongsContainer, .newAllAlbumsContainer.shownewAllAlbumsContainer, .newAllArtistsContainer.shownewAllArtistsContainer, .newRadioTuneInContainer.shownewRadioTuneInContainer {
     opacity: 1;
 }
 
@@ -218,7 +218,7 @@ hr {
 
 /* PLUGIN AREA */
 /* When pluginExample is clicked, these become active.*/
-.newPluginContainer, .newAllSongsContainer {
+.newPluginContainer, .newAllSongsContainer, .newRadioTuneInContainer {
     background-color: #1b2444;
     height: 100%;
     /* width: 27%; */
@@ -239,7 +239,7 @@ hr {
     font-size: 1.5rem;
 }
 
-.shownewPluginContainer, .shownewAllSongsContainer, .newAllArtistsContainer, .newAllAlbumsContainer {
+.shownewPluginContainer, .shownewAllSongsContainer, .newAllArtistsContainer, .newAllAlbumsContainer, .newRadioTuneInContainer {
     display: block;
 }
 
@@ -1057,3 +1057,4 @@ transform: translate3d(0, 0, 0);
 .MusiclistContainer.show {
     bottom: 0; 
 } */
+
