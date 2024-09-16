@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         fetch('/Plugins/LanguageSettings/handleRequest', {
             method: 'POST',
-            body: data
+            body: data,
         })
         .then(response => response.text())
         .then(result => {
@@ -650,8 +650,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-
 
 
 // - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs for where media is held.

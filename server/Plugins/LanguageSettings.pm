@@ -28,6 +28,9 @@ sub strings {
 sub update_language {
     my ($new_language) = @_;
 
+     # Hardcode the language to French for testing
+    my $new_language = 'FR';
+
     # Read the current content of the prefs file
     my $file_data = read_file($prefs_file_path);
 
