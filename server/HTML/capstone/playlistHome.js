@@ -556,26 +556,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const selectedLanguage = document.getElementById('languageSelect').value;
 
-        // Send a POST request to the Perl server with the selected language
-        fetch('http://127.0.0.1:3000/saveLanguage', {
+        // Prepare the data to send
+        const data = new URLSearchParams();
+        data.append('language', selectedLanguage);
+
+        // Make the AJAX request
+        fetch('/run-script', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ language: selectedLanguage })
+            body: data
         })
-        .then(response => response.text())  // Expect text response from server
-        .then(data => {
-            console.log(data);  // Log server response
-            alert('Response: ' + data);  // Show response in an alert
+        .then(response => response.text())
+        .then(result => {
+            console.log('Success:', result);
+            // Optionally, you can provide feedback to the user
+            alert('Settings saved and script executed!');
         })
         .catch(error => {
-            console.error('Error:', error);  // Log any error
+            console.error('Error:', error);
+            alert('Failed to save settings or execute script.');
         });
     });
 });
-
-
 
 
 
