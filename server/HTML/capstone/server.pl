@@ -4,8 +4,6 @@ use strict;
 use warnings;
 use File::Slurp qw(read_file write_file);  # For reading/writing files
 
-print "Hello, World!\n";
-
 
 # Define the path to the prefs file
 my $prefs_file_path = 'C:/ProgramData/Squeezebox/prefs/server.prefs';
@@ -27,4 +25,4 @@ sub update_language {
 }
 
 # Example usage: update the language to 'FR' (French)
-update_language('FR');
+update_language('EN');
