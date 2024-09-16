@@ -82,6 +82,9 @@ Use this to get SqueezeJS functionality according to https://wiki.slimdevices.co
 ---
 ## Save Preferences
 Preferences are being updated in C:\ProgramData\Squeezebox\prefs server.prefs
+---
+## Plugin API Documentaion for squeezebox
+https://wiki.slimdevices.com/index.php/SqueezeCenter_7_Plugins.html
 
 
 
