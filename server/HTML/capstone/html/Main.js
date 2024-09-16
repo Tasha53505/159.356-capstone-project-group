@@ -122,6 +122,17 @@ Main = {
             noText: true
         });
 
+		// Shuffle & Repeat
+		new SqueezeJS.UI.Buttons.Shuffle({
+			renderTo: 'shuffleButton',
+			noText: true
+		});
+
+		new SqueezeJS.UI.Buttons.Repeat({
+			renderTo: 'repeatButton',
+			noText: true
+		});
+
         // Timers
         new SqueezeJS.UI.Playtime({
             el: 'playtime',
