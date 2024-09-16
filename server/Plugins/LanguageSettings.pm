@@ -1,57 +1,10 @@
-# #!/usr/bin/perl
-
-# use strict;
-# use warnings;
-# use CGI;
-# use CGI::Carp qw(fatalsToBrowser);
-# use File::Slurp qw(read_file write_file);
-
-# my $cgi = CGI->new;
-
-# # Get the language parameter from the request
-# my $language = $cgi->param('language');
-
-# # Define the path to the prefs file
-# my $prefs_file_path = 'C:/ProgramData/Squeezebox/prefs/server.prefs';
-
-# # Function to update the language setting
-# sub update_language {
-#     my ($new_language) = @_;
-    
-#     # Read the current content of the file
-#     my $file_data = read_file($prefs_file_path);
-
-#     # Modify the line that starts with 'language:'
-#     $file_data =~ s/^language: \w+/language: $new_language/m;
-
-#     # Write the updated content back to the file
-#     write_file($prefs_file_path, $file_data);
-
-#     print "Language updated to $new_language successfully.\n";
-# }
-
-
-# # update_language("EN"); # Added this to test locally --> This works
-
-
-
-# # Execute the update_language function if language is provided
-# if (defined $language) {
-#     update_language($language);
-#     print $cgi->header('text/plain');
-#     print "Script executed successfully.";
-# } else {
-#     print $cgi->header('text/plain');
-#     print "No language provided.";
-# }
-
-
 package Plugins::LanguageSettings;
 use strict;
 use File::Slurp qw(read_file write_file);
+use Slim::Utils::Prefs;
 
-# Define the functions that will be used
-my %functions = ();
+# Create a preferences object for the plugin
+my $prefs = preferences('plugin.languagesettings');
 
 # Define the path to the prefs file
 my $prefs_file_path = 'C:/ProgramData/Squeezebox/prefs/server.prefs';
@@ -63,7 +16,12 @@ sub getDisplayName {
 
 # Return strings for localization
 sub strings {
-    return ' PLUGIN_LANGUAGE_SETTINGS EN Language Settings DE Spracheinstellungen ';
+    return {
+        'PLUGIN_LANGUAGE_SETTINGS' => 'Language Settings',
+        'EN'                       => 'English',
+        'DE'                       => 'German',
+        'FR'                       => 'French',
+    };
 }
 
 # Subroutine to update the language setting in the prefs file
@@ -78,17 +36,25 @@ sub update_language {
 
     # Write the updated content back to the prefs file
     write_file($prefs_file_path, $file_data);
+
+    # Update the plugin preferences with the new language
+    $prefs->set('language', $new_language);
 }
 
 # Lines function: this can be used to display messages on the LMS UI
 sub lines {
-    my $client = shift;
-    return ("", "Language updated");
+    my ($client) = @_;
+    
+    # Return a hash as per the new display API
+    return {
+        'line1' => $client->symbols('PLUGIN_LANGUAGE_SETTINGS'),
+        'line2' => 'Language updated successfully',
+    };
 }
 
 # Set the mode and display the plugin output
 sub setMode {
-    my $client = shift;
+    my ($class, $client) = @_;
     $client->lines(\&lines);
     $client->update();
 }
@@ -100,11 +66,15 @@ sub addMenu {
 
 # Define the functions for handling remote button events
 sub initPlugin {
+    my ($class) = @_;
+    
     %functions = (
         'left'  => sub { my $client = shift; Slim::Buttons::Common::popModeRight($client); },
         'up'    => sub { my $client = shift; $client->bumpUp(); },
         'down'  => sub { my $client = shift; $client->bumpDown(); },
     );
+
+    Slim::Buttons::Common::addSaver($class);  # Register screensaver if applicable
 }
 
 sub getFunctions {
@@ -113,13 +83,13 @@ sub getFunctions {
 
 # Execute the update_language function based on input from the UI
 sub handleRequest {
-    my $request = shift;
-    my $client  = $request->client;
-    my $language = $request->getParam('language');
+    my ($request) = @_;
+    my $client    = $request->client;
+    my $language  = $request->getParam('language');
 
     if (defined $language) {
         update_language($language);
-        setMode($client);
+        setMode(__PACKAGE__, $client);
     }
 }
 
