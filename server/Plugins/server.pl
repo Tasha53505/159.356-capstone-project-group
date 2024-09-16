@@ -31,7 +31,10 @@ sub update_language {
 }
 
 
-# update_language("FR"); # Added this to test locally --> This works
+# update_language("EN"); # Added this to test locally --> This works
+
+
+
 # Execute the update_language function if language is provided
 if (defined $language) {
     update_language($language);
