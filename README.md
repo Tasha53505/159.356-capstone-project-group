@@ -85,6 +85,23 @@ Preferences are being updated in C:\ProgramData\Squeezebox\prefs server.prefs
 ---
 ## Plugin API Documentaion for squeezebox
 https://wiki.slimdevices.com/index.php/SqueezeCenter_7_Plugins.html
+I'm having a look at the Documentation for creating Plugins as mentioned there are certain rules that they need to have:
+
+https://wiki.slimdevices.com/index.php/HelloWorld.html
+ (However, it's not updated for the latest version of Squeezebox)
+
+and the link that IS dated for 7.0: https://wiki.slimdevices.com/index.php/SqueezeCenter_7_Plugins.html#A_Detailed_Example
+
+contains outdated / 404 links on how plugins work. 
+-A Detailed Example
+- Hello World Sample/Tutorial Plugin
+
+
+However, I did manage to change my code to adapt with the [new 7.0 changes ](https://wiki.slimdevices.com/index.php/SqueezeCenter_7_Plugins.html) of the preference API. See commit 1d73731 (
+Updated LanguageSettings.pm with 7.0 changes https://wiki.slimdevices…
+….com/index.php/SqueezeCenter_7_Plugins.html - Previously using outdated https://wiki.slimdevices.com/index.php/HelloWorld.html)
+
+
 
 
 
