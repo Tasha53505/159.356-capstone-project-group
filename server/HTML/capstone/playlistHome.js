@@ -551,24 +551,23 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('saveSettings').addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent the default form submission
+    document.getElementById('settingsForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
 
         const selectedLanguage = document.getElementById('languageSelect').value;
 
         // Prepare the data to send
         const data = new URLSearchParams();
         data.append('language', selectedLanguage);
+        data.append('saveSettings', 1); // Ensure 'saveSettings' is included
 
-        // Make the AJAX request
-        fetch('/run-script', {
+        fetch('/plugins/server.pl', {
             method: 'POST',
             body: data
         })
         .then(response => response.text())
         .then(result => {
             console.log('Success:', result);
-            // Optionally, you can provide feedback to the user
             alert('Settings saved and script executed!');
         })
         .catch(error => {
