@@ -1,7 +1,12 @@
 package Plugins::LanguageSettings;
 use strict;
 use File::Slurp qw(read_file write_file);
+
+use lib 'C:/Program Files/Squeezebox/server/CPAN';  # Hopefully stops the slim Utils Prefs not found error
+use lib 'C:/Program Files/Squeezebox/server/Slim/Utils/Prefs';  # Hopefully stops the slim Utils Prefs not found error
+
 use Slim::Utils::Prefs;
+
 
 # Create a preferences object for the plugin
 my $prefs = preferences('plugin.languagesettings');
@@ -93,6 +98,8 @@ sub handleRequest {
     if (defined $language) {
         update_language($language);
         setMode(__PACKAGE__, $client);
+    } else {
+        print STDERR "Error: Language parameter not provided.\n";
     }
 }
 

@@ -240,13 +240,27 @@
                                     <!-- <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div> -->
-                                    <form id="settingsForm"> 
+                                    <!-- <form id="settingsForm"> 
                                         <div id="prefsSubmit">
                                             <input name="saveSettings" id="saveSettings" type="submit" class="saveSettings" value="Save Settings">
                                             <input type="hidden" name="saveSettings" value="1">
                                         </div>
                                     </form>
                                     
+                                     -->
+
+                                     <form id="settingsForm"> 
+                                        <div id="prefsSubmit">
+                                            <label for="languageSelect">Choose Language:</label>
+                                            <select id="languageSelect" name="language">
+                                                <option value="EN">English</option>
+                                                <option value="DE">German</option>
+                                                <option value="FR">French</option>
+                                            </select>
+                                            <input name="saveSettings" id="saveSettings" type="submit" class="saveSettings" value="Save Settings">
+                                            <input type="hidden" name="saveSettings" value="1">
+                                        </div>
+                                    </form>
                                     
                                     
                                     <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
