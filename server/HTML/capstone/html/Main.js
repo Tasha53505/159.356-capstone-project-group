@@ -117,10 +117,10 @@ Main = {
         });
 
         // Play Button
-        new SqueezeJS.UI.Buttons.Play({
+        /*new SqueezeJS.UI.Buttons.Play({
             renderTo: 'playPause',
             noText: true
-        });
+        });*/
 
 		// Shuffle & Repeat
 		new SqueezeJS.UI.Buttons.Shuffle({

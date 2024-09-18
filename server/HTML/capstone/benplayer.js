@@ -1,11 +1,12 @@
-// Change from rounded square (album cover) to circle (artist) and vice versa
-
+// IMAGE CODE
 var infoPanelBtn = document.querySelector('.infoPanelBtn');
 var infoPanel = document.querySelector('.infoPanel');
 var artistPanel = document.querySelector('.infoArtistPanel');
 var coverDisplay = document.querySelector('.album');
 var artist = true;
 
+
+// Cover -> Artist -> Cover...
 document.querySelector('.album').addEventListener('click', function() {
     if(artist){
         artist = false;
@@ -27,7 +28,12 @@ document.querySelector('.album').addEventListener('click', function() {
     }
 });
 
+
+// ----------------------------------------- //
+
+
 // PLAYBACK BUTTONS
+var playPause = document.getElementById("playPause");
 
 function animateButton(button){
     button.classList.add('animatePlay');
@@ -37,8 +43,8 @@ function animateButton(button){
 }
 
 // Update play button
-var playPause = document.getElementById("playPause");
-function updatePlay(){
+function playClicked(){
+    SqueezeJS.Controller.togglePause();
     if(SqueezeJS.Controller.isPlaying()){
         console.log("pausing")
         playPause.classList.add('playButton');
@@ -49,54 +55,67 @@ function updatePlay(){
         playPause.classList.add('pauseButton');
     }
 }
-document.getElementById('playPause').addEventListener('click', function(){
-    animateButton(playPause);
-    updatePlay();
-});
 
-function initialPlay(){
+// Function to update the state of the button
+function updatePlay(){
     if(SqueezeJS.Controller.isPlaying()){
-        console.log("playing")
-        playPause.classList.add('pauseButton');
+        console.log("playing");
+        if(playPause.classList.contains('playButton')){
+            playPause.classList.remove('playButton');
+        }
+        if(!playPause.classList.contains('pauseButton')){
+            playPause.classList.add('pauseButton');
+        }
     } else {
-        console.log("paused")
-        playPause.classList.add('playButton');
+        console.log("paused");
+        if(playPause.classList.contains('pauseButton')){
+            playPause.classList.remove('pauseButton');
+        }
+        if(!playPause.classList.contains('playButton')){
+            playPause.classList.add('playButton');
+        }
     }
 }
-initialPlay();
+
+// Listeners to update the states
+document.addEventListener("DOMContentLoaded", function() {
+    updatePlay();
+});
+document.getElementById('playPause').addEventListener('click', function(){
+    animateButton(playPause);
+    playClicked();
+});
+
 
 
 // Update repeat button
 document.getElementById('repeatButton').addEventListener('click', function(){
     animateButton(this);
-})
+});
 
 // Previous and Next
 document.getElementById('prevButton').addEventListener('click', function(){
+    console.log("previous");
     animateButton(this);
-})
+    updatePlay();
+});
 document.getElementById('nextButton').addEventListener('click', function(){
+    console.log("next");
     animateButton(this);
-})
+    updatePlay();
+});
 
 // Update shuffle button
 document.getElementById('shuffleButton').addEventListener('click', function(){
     animateButton(this);
-    updatePlay();
-})
+    playClicked();
+});
 
-// changeButton.addEventListener('click', function () {
-//     if ((artistPanel.classList.contains('active')) || (infoPanel.classList.contains('active'))) {
-//         artistPanel.classList.toggle('active');
-//         infoPanel.classList.toggle('active');
-//         if (changeButton.innerHTML === 'B') {
-//             changeButton.innerHTML = 'A';
-//         } else {
-//             changeButton.innerHTML = 'B';
-//         }
-//     }
-// });
 
+// ----------------------------------------- //
+
+
+// STEVES CODE
 infoPanelBtn.addEventListener('click', function () {
     if (!infoPanelBtn.classList.contains('active')){
         // hide left bar
