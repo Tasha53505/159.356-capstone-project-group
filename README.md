@@ -101,6 +101,7 @@ However, I did manage to change my code to adapt with the [new 7.0 changes ](htt
 Updated LanguageSettings.pm with 7.0 changes https://wiki.slimdevices…
 ….com/index.php/SqueezeCenter_7_Plugins.html - Previously using outdated https://wiki.slimdevices.com/index.php/HelloWorld.html)
 
+For detiled information on this problem - Ive documented my findngs [SPECIIFCALLY for the Save function in Issue 35]([url](https://github.com/Tasha53505/159.356-capstone-project-group/issues/35))
 
 
 
