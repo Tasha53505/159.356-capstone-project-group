@@ -625,31 +625,31 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 //     });
 // });
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('settingsForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent default form submission
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.getElementById('settingsForm').addEventListener('submit', function(e) {
+//         e.preventDefault(); // Prevent default form submission
 
-        const selectedLanguage = document.getElementById('languageSelect').value;
+//         const selectedLanguage = document.getElementById('languageSelect').value;
 
-        // Prepare the data to send
-        const data = new URLSearchParams();
-        data.append('language', selectedLanguage);
+//         // Prepare the data to send
+//         const data = new URLSearchParams();
+//         data.append('language', selectedLanguage);
 
-        fetch('/Plugins/LanguageSettings/handleRequest', {
-            method: 'POST',
-            body: data,
-        })
-        .then(response => response.text())
-        .then(result => {
-            console.log('Success:', result);
-            alert('Settings saved and language updated!');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to save settings or update language.');
-        });
-    });
-});
+//         fetch('/Plugins/LanguageSettings/handleRequest', {
+//             method: 'POST',
+//             body: data,
+//         })
+//         .then(response => response.text())
+//         .then(result => {
+//             console.log('Success:', result);
+//             alert('Settings saved and language updated!');
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//             alert('Failed to save settings or update language.');
+//         });
+//     });
+// });
 
 
 // - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs for where media is held.

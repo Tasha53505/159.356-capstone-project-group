@@ -36,29 +36,53 @@ function animateButton(button){
     }, 150);
 }
 
-document.getElementById('playPause').addEventListener('click', function(){
-    let button = this;
-    animateButton(button);
-    if(this.classList.contains('pauseButton')){
-        button.classList.add('playButton');
-        button.classList.remove('pauseButton');
+// Update play button
+var playPause = document.getElementById("playPause");
+function updatePlay(){
+    if(SqueezeJS.Controller.isPlaying()){
+        console.log("pausing")
+        playPause.classList.add('playButton');
+        playPause.classList.remove('pauseButton');
     } else {
-        button.classList.remove('playButton');
-        button.classList.add('pauseButton');
+        console.log("playing")
+        playPause.classList.remove('playButton');
+        playPause.classList.add('pauseButton');
     }
-})
+}
+document.getElementById('playPause').addEventListener('click', function(){
+    animateButton(playPause);
+    updatePlay();
+});
 
+function initialPlay(){
+    if(SqueezeJS.Controller.isPlaying()){
+        console.log("playing")
+        playPause.classList.add('pauseButton');
+    } else {
+        console.log("paused")
+        playPause.classList.add('playButton');
+    }
+}
+initialPlay();
+
+
+// Update repeat button
 document.getElementById('repeatButton').addEventListener('click', function(){
     animateButton(this);
 })
+
+// Previous and Next
 document.getElementById('prevButton').addEventListener('click', function(){
     animateButton(this);
 })
 document.getElementById('nextButton').addEventListener('click', function(){
     animateButton(this);
 })
+
+// Update shuffle button
 document.getElementById('shuffleButton').addEventListener('click', function(){
     animateButton(this);
+    updatePlay();
 })
 
 // changeButton.addEventListener('click', function () {
