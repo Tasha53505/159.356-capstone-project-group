@@ -583,124 +583,51 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 });
 
 // ----------------- Save settings, speciifically Language -----------------
-// Taken from basic.html
-// function initSettingsForm() {
-//     // Try to redirect all form submissions by return key to the default submit button
-//     // Listen for keypress events on all form elements except submit
-//     document.querySelectorAll('.settingsContainer input, .settingsContainer select').forEach(function(ele) {
-//         if (ele.type != 'submit') {
-//             ele.addEventListener('keypress', function(e) {
-//                 var cKeyCode = e.keyCode || e.which;
-//                 if (cKeyCode == 13) {  // Enter key
-//                     e.preventDefault();  // Prevent default form submission
-//                     document.getElementById('saveSettings').click();  // Trigger Save Settings button click
-//                 }
-//             });
-//         }
-//     });
-// }
+// Looking into JSON RPC.js
 
-// function saveLanguageSetting() {
-//     var selectedLanguage = document.getElementById('languageSelect').value;  // Get the selected language dynamically
-
-//     const request = new XMLHttpRequest();
-//     request.open('POST', '/save-language', true);
-//     request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("saveSettings").addEventListener("click", function(e) {
+        e.preventDefault(); // Prevent the form from submitting the default way
+        const selectedLanguage = document.getElementById("languageSelect").value;
+        
+        console.log("Save Settings BUTTON CLICKED");
     
-//     request.onreadystatechange = function () {
-//         if (this.readyState === 4 && this.status === 200) {
-//             // Language saved successfully, refresh or update content
-//             location.reload();  // Reload the page to apply the new language settings
-//         }
-//     };
-    
-//     request.send(JSON.stringify({
-//         language: selectedLanguage,
-//         playerId: myClientState.id  // Assuming you need the player ID
-//     }));
-// }
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     document.getElementById('settingsForm').addEventListener('submit', function(e) {
-//         e.preventDefault(); // Prevent default form submission
-
-//         const selectedLanguage = document.getElementById('languageSelect').value;
-
-//         // Prepare the data to send
-//         const data = new URLSearchParams();
-//         data.append('language', selectedLanguage);
-//         data.append('saveSettings', 1); // Ensure 'saveSettings' is included
-
-//         fetch('/Plugins/server.pl', {
-//             method: 'POST',
-//             body: data
-//         })
-//         .then(response => response.text())
-//         .then(result => {
-//             console.log('Success:', result);
-//             alert('Settings saved and script executed!');
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             alert('Failed to save settings or execute script.');
-//         });
-//     });
-// });
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     document.getElementById('settingsForm').addEventListener('submit', function(e) {
-//         e.preventDefault(); // Prevent default form submission
-
-//         const selectedLanguage = document.getElementById('languageSelect').value;
-
-//         // Prepare the data to send
-//         const data = new URLSearchParams();
-//         data.append('language', selectedLanguage);
-
-//         fetch('/Plugins/LanguageSettings/handleRequest', {
-//             method: 'POST',
-//             body: data,
-//         })
-//         .then(response => response.text())
-//         .then(result => {
-//             console.log('Success:', result);
-//             alert('Settings saved and language updated!');
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             alert('Failed to save settings or update language.');
-//         });
-//     });
-// });
-
-
-// - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs for where media is held.
-document.querySelector('.rescanButton').addEventListener('click', function(e) {
-    e.preventDefault(); // Prevent default form submission
-
-    const selectedFolder = document.getElementById('mediadirs0').value;
-
-    // Send the folder input to the backend via an AJAX request
-    fetch('http://localhost:3000/updateMediaDirs', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ mediaDir: selectedFolder })
-    })
-    
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Media folder updated successfully.');
-        } else {
-            alert('Failed to update media folder.');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
+        // Send a JSON-RPC request to update the language in the server.prefs file
+        updateLanguageSetting(selectedLanguage);
     });
+    
 });
 
 
+function updateLanguageSetting(language) {
+    const language = 'FR'; // Hardcoding the language to French FOR TEST
+
+    const data = {
+        id: 1,
+        method: "slim.request",
+        params: [0, ["pref", "language", language]] //
+    };
+
+    fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Language updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating language:", error);
+    });
+}
+
+
+document.getElementById("testButton").addEventListener("click", function(e) {
+
+    
+    console.log("Test Button clicked");
+
+});

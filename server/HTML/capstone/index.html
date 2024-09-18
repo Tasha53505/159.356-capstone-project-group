@@ -78,6 +78,9 @@
                         <div class="homeTitle">
                             <h2>Home</h2>
                         </div>
+                        <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button>
+                        <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings" style="background-color: #23305f;">
+
                        
                         <div class="settingsContainer">
                             
@@ -132,8 +135,7 @@
 
                                         <div class="basicSettingsLanguageTab active" id="language">
                                             <div class="language">
-                                                <!-- testing -->
-                                                <td class="x-btn-mc"><em class="" unselectable="on"><button type="button" id="ext-gen53" class=" x-btn-text">Apply</button></em></td>
+                                                
                                                 
                                                 [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
                                                 [% languageoptions.$option %]
@@ -253,14 +255,7 @@
 
                                      <form id="settingsForm"> 
                                         <div id="prefsSubmit">
-                                            <label for="languageSelect">Choose Language:</label>
-                                            <select id="languageSelect" name="language">
-                                                <option value="EN">English</option>
-                                                <option value="DE">German</option>
-                                                <option value="FR">French</option>
-                                            </select>
-                                            <input name="saveSettings" id="saveSettings" type="submit" class="saveSettings" value="Save Settings">
-                                            <input type="hidden" name="saveSettings" value="1">
+                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
                                         </div>
                                     </form>
                                     

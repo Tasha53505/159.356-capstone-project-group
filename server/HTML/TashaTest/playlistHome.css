@@ -1,0 +1,1066 @@
+   /* Colours:
+ 20294B (dark blue) 
+ 470037 for headings (hope that makes sense).  
+ also uses Oladra colour 284771 for headings.
+ EFF8FC (white)
+ Highlights, links, buttons are 0456C6
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Poetsen+One&display=swap');
+
+* {
+    margin : 0px;
+    font-family: "Inter", sans-serif;
+    color: #EFF8FC;
+}
+
+/* body {
+    margin-top: 0.5em;
+} */
+
+.overallContainer {
+     width: auto; /* Sticks with the animation panel */
+    height: 100vh;
+    display: flex;
+    position: relative;
+    /* justify-content: center; */
+    display: none;
+}
+
+.overallPlaylistContainer {
+    background-color: #20294B;
+    height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
+    /* width: 45%; */
+    width: 100%;
+    margin-bottom: 100%;
+    border-radius: 0em 1em 1em 0em;
+    transition: transform 0.5s ease-in-out; /* Slide animation */
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+}
+
+.overallPlaylistContainer.hidden {
+    transform: translateX(-100%); /* Slide animation when Music button is clicked*/
+}
+
+.animationBtn.hidden {
+    margin-left: 0; /* animation button will move WITH the overallBtn Container */
+}
+
+
+
+.player h2 {
+    text-align: center;
+    font-weight: 400;
+    margin-top: 3%;
+}
+
+ul li {
+    text-decoration: none;
+    list-style-type: none;
+    margin-top: 5%;
+}
+
+hr {
+    width: 80%;
+    height: 0.2em;
+    border-radius: 50px;
+    margin-top: 0.5em;
+    background-color: #151d3a;
+    border-color: #151d3a;
+    margin-right: 20%;
+}
+
+/* Accordion for Plugins */
+.accordionContainer a {
+    text-decoration: none;
+    margin-left: 10%;
+}
+
+.accordionContainer {
+    width: 100%;
+}
+
+.accordionButton {
+    background: none!important;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+
+.homeTitleContainer {
+    display: flex;
+    align-items: start;
+    
+    padding: 1em;
+    width: 100%;
+}
+
+
+.homeTitleContainer h2 {
+    margin-right: 20%;
+    /* margin-left: 2rem; */
+
+}
+
+
+.settingsButton {
+    display: flex;
+    align-items: center; /* Aligns text and SVG vertically */
+    background: none!important;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 1rem;
+}
+
+.settingsButton svg {
+    vertical-align: middle; /* Aligns the SVG with the middle of the text */
+    margin-right: 0.5em; /* Adds spacing between the SVG and text */
+}
+
+.active, .accordionButton:hover {
+  background-color: #ccc; 
+
+}
+
+.pluginsContainer, .allMusicContainer, .allRadioContainer {
+    display: flex;
+    padding: 1em;
+    width: 100%;
+    height: 60%;
+    flex-wrap: wrap;
+}
+
+
+/* ------------ My Music CSS | Radio CSS--------------- */
+.allMusicSelect, .radioTuneInTitle {
+    flex-direction: column;
+    width: 100%;
+    /* padding: 0.5em; */
+    /* margin-top: 0.5%; */
+    color: #EFF8FC;
+    cursor: pointer;
+}
+
+.allMusicSelect:hover, .radioTuneInTitle:hover {
+    color: #bbd3dd;
+    transition: 0.2s ease;
+}
+
+.songsList, .albumsList, .artistsList, .radioTuneIn {
+    display: none; 
+}
+
+.newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .newRadioTuneInContainer {
+    background-color: #1b2444;
+    height: 100%;
+    /* width: 27%; */
+    width: 35%;
+    border-radius: 0em 1em 1em 0em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.5s forwards;
+    display: none; /* Invisible until a plugin is clicked */
+    z-index: 10; /* will always be on top of Player */
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+}
+
+.newAllSongsContainer.shownewAllSongsContainer, .newAllAlbumsContainer.shownewAllAlbumsContainer, .newAllArtistsContainer.shownewAllArtistsContainer, .newRadioTuneInContainer.shownewRadioTuneInContainer {
+    opacity: 1;
+}
+
+
+
+/* ------------ My Music CSS END --------------- */
+
+.pluginExample, .radioExample {
+    background: #EFF8FC;
+    width: 2em;
+    height: 2em;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+/* Animation  button - TASHA */
+.animationBtn {
+    background-color: #0456C6;
+    border: none;
+    padding: 1em;
+    border-radius: 0% 30% 30% 0%;
+    /* margin-top: 10%; */
+    /* margin-left: 27%; */
+    margin: 0;
+    /* margin-left: 0; Starts off hugging the left side of paghe */
+    transition: 0.6s ;
+    z-index: 10;
+}
+
+.accordionPanel {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #20294B;
+    padding: 0 18px;
+    border-radius: 0 0 10px 10px;
+    transition: max-height 0.7s ease-in-out, padding 0.4s ease-in-out;
+}
+
+.accordionPanel.show {
+    max-height: 50vh; 
+    padding: 18px;
+}
+
+
+/* PLUGIN AREA */
+/* When pluginExample is clicked, these become active.*/
+.newPluginContainer, .newAllSongsContainer, .newRadioTuneInContainer {
+    background-color: #1b2444;
+    height: 100%;
+    /* width: 27%; */
+    width: 35%;
+    border-radius: 0em 1em 1em 0em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fadeIn 0.5s forwards;
+    display: none; /* Invisible until a plugin is clicked */
+    z-index: 10; /* will always be on top of Player */
+}
+
+.newPluginContainer h3, .newAllSongsContainer h3, .newAllArtistsContainer h3, .newAllAlbumsContainer h3 {
+    text-align: center;
+    font-weight: 400;
+    margin-top: 5%;
+    font-size: 1.5rem;
+}
+
+.shownewPluginContainer, .shownewAllSongsContainer, .newAllArtistsContainer, .newAllAlbumsContainer, .newRadioTuneInContainer {
+    display: block;
+}
+
+/* Back button */
+.backButton {
+    background-color: #0456C6;
+    color: #EFF8FC;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+
+
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right{
+from{
+transform: translate3d(100%, 0, 0);
+visibility: visible;
+}
+to{
+transform: translate3d(0, 0, 0);
+}
+}
+
+
+
+/* animation Btn STEVE */
+
+.animationMusiclistBtn {
+    background-color: #0456C6;
+    border: none;
+    padding: 1em;
+    border-radius: 30% 30% 0% 0%;
+    transition: bottom 0.6s ease-in-out;
+    z-index: 5;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+
+}
+
+.MusiclistContainer {
+    width: 100%;
+    height: 50vh;
+    background-color: #20294B;
+    position: fixed;
+    bottom: -50vh; /* Initially hidden */
+    left: 0;
+    transition: bottom 0.6s ease-in-out;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    flex-flow: column;
+    overflow: auto;
+}
+
+.MusiclistContainer.show {
+    bottom: 0; /* Slide up into view */
+}
+
+
+/* ------------------------------ SETTINGS AREA ------------------------------ */
+.settingsContainerClicked {
+    background-color: #1b2444;
+    border-radius: 0em 1em 1em 0em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 100%;
+    z-index: 10;
+    display: none; /* Invisible until settings are clicked */
+    animation: fadeIn 0.5s forwards;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+}
+
+.showSettings {
+    display: block;
+}
+
+
+.settingsHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: #1b2444;
+    color: #EFF8FC;
+}
+
+.settingsHeader h2 {
+    margin-left: 5%;
+    margin-top: 1%;
+}
+
+.settingsHeader svg {
+    margin-right: 20%;
+
+}
+
+.settingsTabs {
+    display: flex;
+    background-color: #1b2444;
+    padding: 0.5em;
+}
+
+.tabButton {
+    background: none;
+    border: none;
+    color: #EFF8FC;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.tabButton.active {
+    background-color: #0456C6;
+    border-radius: 0.5em;
+}
+
+.settingsContent {
+    padding: 1em;
+}
+
+.tabContent {
+    display: none; /* Hidden by default */
+}
+
+.tabContent.active {
+    display: block;
+}
+
+.backButtonSettings {
+    background-color: #0456C6;
+    color: #EFF8FC;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.showSettings {
+    display: block;
+}
+/* Toggle switch */
+.toggleSwitch {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.toggleSwitch input[type="checkbox"] {
+    display: none;
+}
+
+.toggleLabel {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.toggleLabel .toggleSlider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 21px;
+    height: 21px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.toggleSwitch input[type="checkbox"]:checked + .toggleLabel {
+    background-color: #0456C6;
+}
+
+.toggleSwitch input[type="checkbox"]:checked + .toggleLabel .toggleSlider {
+    transform: translateX(25px);
+    transition:cubic-bezier(1, 0, 0, 1);
+}
+
+.toggleText {
+    color: #EFF8FC;
+    font-weight: bold;
+}
+
+
+
+.settingsTextContent {
+    background-color: #1b2444;
+
+}
+
+
+.advancedSettingsPlugin {
+    display: none;
+    background-color: #1b2444;
+}
+
+.advancedSettingsPlugin select {
+    background-color: #1b2444;
+
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+        /* ----------- Basic Settings Start ----------- */
+    .basicSettings {
+        display: none; 
+    }
+
+    
+
+    .basicSettingsTabs {
+        display: block;
+    }
+
+    .basicSettingsContent {
+        background-color: #1b2444;
+    }
+/* Common settings for all tabs */
+.basicSettingsLanguageTab, 
+.basicSettingsMediaLibraryTab, 
+.basicSettingsMediaFoldersTab, 
+.basicSettingsPlaylistsTab, 
+.basicSettingsRescanMediaTab {
+    display: none; /* Hide all tabs by default */
+    background-color: #3A456D; /* Darker background for inactive tabs */
+    padding: 1em;
+    border-radius: 10px;
+    color: #ecf0f1;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    max-width: 400px;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+}
+
+/* Active tab content should be displayed */
+.basicSettingsLanguageTab.active, 
+.basicSettingsMediaLibraryTab.active, 
+.basicSettingsMediaFoldersTab.active, 
+.basicSettingsPlaylistsTab.active, 
+.basicSettingsRescanMediaTab.active {
+    display: block; /* Show the active tab content */
+}
+
+
+.basicSettingsLanguageTab.active {
+    padding: 1em; 
+    background-color: #3A456D; 
+}
+
+.basicSettingsLanguageTab,
+.basicSettingsMediaLibraryTab,
+.basicSettingsMediaFoldersTab,
+.basicSettingsPlaylistsTab,
+.basicSettingsRescanMediaTab {
+    background-color: #3A456D; 
+}
+
+/* Button styles */
+.basicSettingsLanguageTabButton, 
+.basicSettingsMediaFoldersTabButton,
+.basicSettingsPlaylistsTabButton,
+.basicSettingsRescanMediaTabButton {
+    background-color: #1b2444; /* Darker background for inactive buttons */
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 0.7em;
+}
+
+
+.basicSettingsLanguageTabButton.active, 
+.basicSettingsMediaFoldersTabButton.active,
+.basicSettingsPlaylistsTabButton.active,
+.basicSettingsRescanMediaTabButton.active {
+    background-color: #0456C6;
+    border-radius: 0.5em;
+}
+
+
+/* ---- Basic Settings Language Tab Start ---- */
+
+        .basicSettingsLanguageTab {
+            display: block; /* Makes it so that Language tab is displayed first */ 
+            background-color: #3A456D; /* Darker background for contrast */
+            padding: 1em;
+            border-radius: 10px;
+            color: #ecf0f1;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            max-width: 400px;
+
+        }
+
+        /* Header styling */
+        .basicSettingsLanguageTab h2 {
+            margin-bottom: 0.5em;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        /* Styling for the language dropdown container */
+        .language {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+
+        /* Styling for the dropdown */
+        select.stdedit {
+            background-color: #20294B; /* Darker background for dropdown */
+            color: #ecf0f1;
+            border: 1px solid #3676cf; /* Border color */
+            border-radius: 5px;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .stdedit, .rescanButton, .browseFolders  {
+            background-color: #20294B; /* Darker background for dropdown */
+            color: #ecf0f1;
+            border: 1px solid #3676cf; /* Border color */
+            border-radius: 5px;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Dropdown hover and focus styling */
+        select.stdedit:hover,
+        select.stdedit:focus {
+            background-color: #20294B;
+            border-color: #0456C6; /* Lighter border color on hover/focus */
+            outline: none;
+        }
+
+        /* Option styling */
+        select.stdedit option {
+            background-color: #20294B;
+            color: #ecf0f1;
+        }
+
+        /* Wrapper and description text styling */
+        .setting {
+            margin-bottom: 1em;
+        }
+
+        .setting.title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        .setting.desc {
+            font-size: 0.9em;
+            color: #bdc3c7;
+        }
+
+
+        /* ---- Basic Settings Language Tab Start ---- */
+        .stdedit
+
+        /* ---- Basic Settings Language Tab End ---- */
+
+        /* ---- Basic Settings Buttons Start ---- */
+
+        /* Button styles */
+        .basicSettingsLanguageTabButton, 
+        .basicSettingsMediaLibraryTabButton,
+        .basicSettingsMediaFoldersTabButton,
+        .basicSettingsPlaylistsTabButton,
+        .basicSettingsRescanMediaTabButton {
+            display: inline;
+            background-color: #1b2444;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
+            cursor: pointer;
+            font-size: 0.7em;
+        }
+
+        /* Active button styles */
+        .basicSettingsLanguageTabButton.active, 
+        .basicSettingsMediaLibraryTabButton.active, 
+        .basicSettingsMediaFoldersTabButton.active,
+        .basicSettingsPlaylistsTabButton.active,
+        .basicSettingsRescanMediaTabButton.active {
+            background-color: #0456C6;
+            border: none;
+            border-radius: 0.5em;
+            cursor: pointer;
+            font-size: 0.7em;
+        }
+        /* ---- Basic Settings Buttons End ---- */
+
+        /* ----------- Basic Settings End ----------- */
+
+/* ---------------------- SAVE BUTTON ---------------------- */
+/* Styling for the 'Save Settings' button container */
+#prefsSubmit {
+    text-align: center;
+    margin-top: 1.5em;
+}
+
+/* Styling for the 'Save Settings' button */
+#prefsSubmit input#saveSettings {
+    background-color: #0456C6; 
+    color: #ecf0f1; /* Light text color to match the theme */
+    border: none;
+    border-radius: 5px;
+    padding: 0.8em 1.5em;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+/* Hover and focus effects */
+#prefsSubmit input#saveSettings:hover,
+#prefsSubmit input#saveSettings:focus {
+    background-color: #1266db; /* Slightly lighter blue on hover/focus */
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+    outline: none;
+}
+
+/* Disabled button styling */
+#prefsSubmit input#saveSettings:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* ---------------------- SAVE BUTTON END ---------------------- */
+
+
+/* ------------------------------ Settings End ------------------------------ */
+
+
+/* --------------------------- Songs CSS start --------------------------- */
+.browsedbListItem {
+    background-color: #3A456D;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    flex-wrap: wrap; /* Allows wrapping for responsiveness */
+}
+
+.browsedbListItem:hover {
+    background-color: #2d3a5d;
+}
+
+.browsedbLeftControls {
+    display: flex;
+    align-items: center;
+    margin-right: 15px; /* Space between controls and song name */
+}
+
+.browsedbLeftControls a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px; /* Space between icons */
+}
+
+.browsedbLeftControls a svg {
+    width: 2em;
+    height: 2em;
+}
+
+.browsedbLeftControls a svg:hover {
+    background-color: #0456C6;
+    border-radius: 10%;
+    transition: 1s ease;
+    padding: 0.5%;
+}
+
+.browsedbRightControls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.browsedbRightControls span a {
+    display: inline-block;
+    margin-left: 10px; /* Space between "Save" button and other elements */
+    border: 1px solid #0456C6;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.browsedbRightControls span a:hover {
+    background-color: #0456C6;
+    color: #ffffff;
+}
+
+.browsedbRightControls span {
+    display: none; /* Hidden by default */
+}
+
+/* Hide unnecessary elements in a single line layout */
+.browsedbListItem a {
+    flex-grow: 1; /* Ensures song name takes up remaining space */
+    text-decoration: none;
+    color: #ffffff;
+}
+
+
+
+
+
+/* --------------------------- Songs CSS END --------------------------- */
+
+/* Media Queries */
+
+/* 890px or less */
+  @media only screen and (max-width: 890px) {
+    .animationBtn {
+        transform: translateX(40%);
+        margin-bottom: 50%;
+        border-radius: 50%;
+        z-index: 100; 
+    }
+
+
+    .animationBtn svg {
+        width: 2em;
+        height: 2em;
+    }
+
+    /* The container that holds all the divs*/
+    .overallPlaylistContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 90;
+
+    }
+    /* Container that hold 'Home' and 'Settings' Button */
+    .overallHeadersContainer {
+        font-size: 20px;
+        /* margin-top: 20px; */
+        margin-right: 20%;
+
+    }
+
+    /* Container that holds 'My music' 'myApps' etc */
+    .accordionContainer {
+        
+    }
+
+    .accordionPanel {
+
+    }
+    /* Panels that pop up when clicked i.e Songs under My Music*/
+    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 95;
+        overflow-y: auto; /* Adds scroll bar */
+        overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+
+    }
+
+
+
+    /* Settings tabs */
+    .settingsHeader {
+        font-size: 13px;
+        justify-content: left;
+
+    }
+
+    .settingsHeader h2 {
+        margin-left: 10%;
+    }
+
+
+
+    .toggleSwitch {
+        margin-left: 10%;
+
+    }
+
+    .settingsContainerClicked {
+        width: 100%;
+    }
+
+ 
+ 
+/* Common settings for all tabs */
+.basicSettingsLanguageTab, 
+.basicSettingsMediaLibraryTab, 
+.basicSettingsMediaFoldersTab, 
+.basicSettingsPlaylistsTab, 
+.basicSettingsRescanMediaTab, 
+.saveSettings
+{
+    margin: 0 auto;
+    margin-right: 30%;
+    width: 100%;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+
+
+}
+
+/* Save Settings Button */
+.saveSettings {
+    padding: 0px;
+    font-size: 14px;
+    margin-bottom: 30%;
+}
+
+/* Play, more, add to playlist */
+.browsedbLeftControls {
+    text-align: left;
+    margin-right: 100%;
+}
+
+  }
+
+
+  /* 480 px or less */
+@media only screen and (max-width: 480px){
+    .animationBtn {
+        transform: translateX(60%);
+        margin-bottom: 120%;
+        border-radius: 50%;
+        z-index: 100; 
+    }
+
+    .animationBtn svg {
+        width: 2em;
+        height: 2em;
+    }
+
+    /* The container that holds all the divs*/
+    .overallPlaylistContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vh;
+        height: 100%;
+        z-index: 90;
+
+    }
+    /* Container that hold 'Home' and 'Settings' Button */
+    .overallHeadersContainer {
+        font-size: 15px;
+        margin-top: 20px;
+        margin-right: 20%;
+
+    }
+
+    /* Container that holds 'My music' 'myApps' etc */
+    .accordionContainer {
+        
+    }
+
+    .accordionPanel {
+
+    }
+    /* Panels that pop up when clicked i.e Songs under My Music*/
+    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 95;
+        overflow-y: auto; /* Adds scroll bar */
+        overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+
+    }
+
+
+
+    /* Settings tabs */
+    .settingsHeader {
+        font-size: 14px;
+        justify-content: left;
+
+    }
+
+    .settingsHeader h2 {
+        margin-left: 10%;
+    }
+
+
+
+    .toggleSwitch {
+        margin-left: 10%;
+
+    }
+
+    .settingsContainerClicked {
+        width: 100%;
+    }
+
+ 
+ 
+/* Common settings for all tabs */
+.basicSettingsLanguageTab, 
+.basicSettingsMediaLibraryTab, 
+.basicSettingsMediaFoldersTab, 
+.basicSettingsPlaylistsTab, 
+.basicSettingsRescanMediaTab, 
+<<<<<<< HEAD
+.stdclick,
+.advancedSettingsContent
+=======
+.saveSettings
+>>>>>>> main
+{
+    margin: 0 auto;
+    margin-right: 30%;
+    width: 100%;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+
+
+}
+
+/* Save Settings Button */
+.saveSettings {
+    padding: 0px;
+    font-size: 14px;
+    margin-bottom: 30%;
+}
+
+/* Play, more, add to playlist */
+.browsedbLeftControls {
+    text-align: left;
+    margin-right: 100%;
+}
+
+}
+
+
+
+  /* Steve's code
+  .animationMusiclistBtn {
+    background-color: #0456C6;
+    border: none;
+    padding: 1em;
+    border-radius: 30% 30% 0% 0%;
+    transition: bottom 0.6s ease-in-out;
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+
+}
+
+.MusiclistContainer {
+    width: 100%;
+    height: 50vh;
+    background-color: #20294B;
+    position: fixed;
+    bottom: -50vh;
+    left: 0;
+    transition: bottom 0.6s ease-in-out;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.MusiclistContainer.show {
+    bottom: 0; 
+} */
+
