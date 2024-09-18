@@ -104,9 +104,9 @@ Updated LanguageSettings.pm with 7.0 changes https://wiki.slimdevices…
 By using: https://lyrion.org/reference/cli/using-the-cli/#jsonrpcjs (JSON RPC) - I am looking into setting preferences from the FRONTEND instead of using Perl, as recommeneded by one of the delvopers at Lyrion Music Serever
 
 
-For detiled information on this problem -[ Ive documented my findngs SPECIIFCALLY for the Save function in Issue 35]([url] (https://github.com/Tasha53505/159.356-capstone-project-group/issues/35)) - it may contain helpful links, so please look through it.
+For detiled information on this problem  Ive documented my findngs SPECIIFCALLY for the Save function in https://github.com/Tasha53505/159.356-capstone-project-group/issues/35
+  - it may contain helpful links, so please look through it.
 
-https://github.com/Tasha53505/159.356-capstone-project-group/issues/35
 
 
 
