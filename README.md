@@ -101,6 +101,8 @@ However, I did manage to change my code to adapt with the [new 7.0 changes ](htt
 Updated LanguageSettings.pm with 7.0 changes https://wiki.slimdevices…
 ….com/index.php/SqueezeCenter_7_Plugins.html - Previously using outdated https://wiki.slimdevices.com/index.php/HelloWorld.html)
 
+By using: https://lyrion.org/reference/cli/using-the-cli/#jsonrpcjs (JSON RPC) - I am looking into setting preferences from the FRONTEND instead of using Perl, as recommeneded by one of the delvopers at Lyrion Music Serever
+
 
 
 
