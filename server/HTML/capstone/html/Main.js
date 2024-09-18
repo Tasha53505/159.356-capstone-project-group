@@ -106,33 +106,6 @@ Main = {
             noLink: true
         });
 
-        // Back & Forward Buttons
-        new SqueezeJS.UI.Buttons.Rew({
-            renderTo: 'prevButton',
-            noText: true,
-        });
-        new SqueezeJS.UI.Buttons.Fwd({
-            renderTo: 'nextButton',
-            noText: true,
-        });
-
-        // Play Button
-        /*new SqueezeJS.UI.Buttons.Play({
-            renderTo: 'playPause',
-            noText: true
-        });*/
-
-		// Shuffle & Repeat
-		new SqueezeJS.UI.Buttons.Shuffle({
-			renderTo: 'shuffleButton',
-			noText: true
-		});
-
-		new SqueezeJS.UI.Buttons.Repeat({
-			renderTo: 'repeatButton',
-			noText: true
-		});
-
         // Timers
         new SqueezeJS.UI.Playtime({
             el: 'playtime',

@@ -32,7 +32,27 @@ document.querySelector('.album').addEventListener('click', function() {
 // ----------------------------------------- //
 
 
-// PLAYBACK BUTTONS
+// -- PLAYBACK BUTTONS --
+
+// Actual buttons
+new SqueezeJS.UI.Buttons.Rew({ // Rewind
+    renderTo: 'prevButton',
+    noText: true,
+});
+new SqueezeJS.UI.Buttons.Fwd({ // Forward
+    renderTo: 'nextButton',
+    noText: true,
+});
+var shuffle = new SqueezeJS.UI.Buttons.Shuffle({ // Shuffle
+    renderTo: 'shuffleButton',
+    noText: true
+});
+
+var repeat = new SqueezeJS.UI.Buttons.Repeat({ // Repeat
+    renderTo: 'repeatButton',
+    noText: true
+});
+
 var playPause = document.getElementById("playPause");
 
 function animateButton(button){
@@ -77,38 +97,45 @@ function updatePlay(){
     }
 }
 
-// Listeners to update the states
+// Updates play button after reload
 document.addEventListener("DOMContentLoaded", function() {
-    updatePlay();
+    setTimeout(updatePlay, 200);
 });
+
+// Update play button when clicked
 document.getElementById('playPause').addEventListener('click', function(){
     animateButton(playPause);
     playClicked();
 });
 
-
+// -- REPEAT -- //
+function updateRepeatState(){
+    console.log(repeat.state);
+}
 
 // Update repeat button
 document.getElementById('repeatButton').addEventListener('click', function(){
     animateButton(this);
+    updateRepeatState();
 });
 
 // Previous and Next
 document.getElementById('prevButton').addEventListener('click', function(){
     console.log("previous");
     animateButton(this);
-    updatePlay();
+    setTimeout(updatePlay, 200);
 });
 document.getElementById('nextButton').addEventListener('click', function(){
     console.log("next");
     animateButton(this);
-    updatePlay();
+    setTimeout(updatePlay, 200);
 });
+
+// -- SHUFFLE
 
 // Update shuffle button
 document.getElementById('shuffleButton').addEventListener('click', function(){
     animateButton(this);
-    playClicked();
 });
 
 
