@@ -35,6 +35,8 @@
     margin-bottom: 100%;
     border-radius: 0em 1em 1em 0em;
     transition: transform 0.5s ease-in-out; /* Slide animation */
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 }
 
 .overallPlaylistContainer.hidden {
@@ -44,6 +46,8 @@
 .animationBtn.hidden {
     margin-left: 0; /* animation button will move WITH the overallBtn Container */
 }
+
+
 
 .player h2 {
     text-align: center;
@@ -64,11 +68,13 @@ hr {
     margin-top: 0.5em;
     background-color: #151d3a;
     border-color: #151d3a;
+    margin-right: 20%;
 }
 
 /* Accordion for Plugins */
 .accordionContainer a {
     text-decoration: none;
+    margin-left: 10%;
 }
 
 .accordionContainer {
@@ -81,23 +87,22 @@ hr {
     padding: 0 !important;
     cursor: pointer;
     font-size: 1em;
-
 }
-
-
 
 
 .homeTitleContainer {
     display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    text-align: center;
+    align-items: start;
+    
     padding: 1em;
+    width: 100%;
 }
 
+
 .homeTitleContainer h2 {
-    text-align: center;
-    margin-left: 2rem;
+    margin-right: 20%;
+    /* margin-left: 2rem; */
+
 }
 
 
@@ -122,19 +127,17 @@ hr {
 
 }
 
-.pluginsContainer, .allMusicContainer, .radioContainer {
+.pluginsContainer, .allMusicContainer, .allRadioContainer {
     display: flex;
     padding: 1em;
     width: 100%;
     height: 60%;
     flex-wrap: wrap;
-
-
 }
 
 
-/* ------------ My Music CSS --------------- */
-.allMusicSelect {
+/* ------------ My Music CSS | Radio CSS--------------- */
+.allMusicSelect, .radioTuneInTitle {
     flex-direction: column;
     width: 100%;
     /* padding: 0.5em; */
@@ -143,16 +146,16 @@ hr {
     cursor: pointer;
 }
 
-.allMusicSelect:hover {
+.allMusicSelect:hover, .radioTuneInTitle:hover {
     color: #bbd3dd;
     transition: 0.2s ease;
 }
 
-.songsList, .albumsList, .artistsList {
+.songsList, .albumsList, .artistsList, .radioTuneIn {
     display: none; 
 }
 
-.newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer {
+.newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .newRadioTuneInContainer {
     background-color: #1b2444;
     height: 100%;
     /* width: 27%; */
@@ -164,9 +167,11 @@ hr {
     animation: fadeIn 0.5s forwards;
     display: none; /* Invisible until a plugin is clicked */
     z-index: 10; /* will always be on top of Player */
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 }
 
-.newAllSongsContainer.shownewAllSongsContainer, .newAllAlbumsContainer.shownewAllAlbumsContainer, .newAllArtistsContainer.shownewAllArtistsContainer {
+.newAllSongsContainer.shownewAllSongsContainer, .newAllAlbumsContainer.shownewAllAlbumsContainer, .newAllArtistsContainer.shownewAllArtistsContainer, .newRadioTuneInContainer.shownewRadioTuneInContainer {
     opacity: 1;
 }
 
@@ -213,7 +218,7 @@ hr {
 
 /* PLUGIN AREA */
 /* When pluginExample is clicked, these become active.*/
-.newPluginContainer, .newAllSongsContainer {
+.newPluginContainer, .newAllSongsContainer, .newRadioTuneInContainer {
     background-color: #1b2444;
     height: 100%;
     /* width: 27%; */
@@ -234,7 +239,7 @@ hr {
     font-size: 1.5rem;
 }
 
-.shownewPluginContainer, .shownewAllSongsContainer, .newAllArtistsContainer, .newAllAlbumsContainer {
+.shownewPluginContainer, .shownewAllSongsContainer, .newAllArtistsContainer, .newAllAlbumsContainer, .newRadioTuneInContainer {
     display: block;
 }
 
@@ -327,6 +332,8 @@ transform: translate3d(0, 0, 0);
     z-index: 10;
     display: none; /* Invisible until settings are clicked */
     animation: fadeIn 0.5s forwards;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 }
 
 .showSettings {
@@ -343,7 +350,13 @@ transform: translate3d(0, 0, 0);
 }
 
 .settingsHeader h2 {
-    margin: 0;
+    margin-left: 5%;
+    margin-top: 1%;
+}
+
+.settingsHeader svg {
+    margin-right: 20%;
+
 }
 
 .settingsTabs {
@@ -488,6 +501,8 @@ transform: translate3d(0, 0, 0);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin: 0 auto;
     max-width: 400px;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 }
 
 /* Active tab content should be displayed */
@@ -782,16 +797,126 @@ transform: translate3d(0, 0, 0);
 
 /* --------------------------- Songs CSS END --------------------------- */
 
-
-
-
-
 /* Media Queries */
-/* 600 px or less */
-@media only screen and (max-width: 600px) {
+
+/* 890px or less */
+  @media only screen and (max-width: 890px) {
     .animationBtn {
-        transform: translateX(30%);
-        margin-bottom: 100%;
+        transform: translateX(40%);
+        margin-bottom: 50%;
+        border-radius: 50%;
+        z-index: 100; 
+    }
+
+
+    .animationBtn svg {
+        width: 2em;
+        height: 2em;
+    }
+
+    /* The container that holds all the divs*/
+    .overallPlaylistContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 90;
+
+    }
+    /* Container that hold 'Home' and 'Settings' Button */
+    .overallHeadersContainer {
+        font-size: 20px;
+        /* margin-top: 20px; */
+        margin-right: 20%;
+
+    }
+
+    /* Container that holds 'My music' 'myApps' etc */
+    .accordionContainer {
+        
+    }
+
+    .accordionPanel {
+
+    }
+    /* Panels that pop up when clicked i.e Songs under My Music*/
+    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 95;
+        overflow-y: auto; /* Adds scroll bar */
+        overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+
+    }
+
+
+
+    /* Settings tabs */
+    .settingsHeader {
+        font-size: 13px;
+        justify-content: left;
+
+    }
+
+    .settingsHeader h2 {
+        margin-left: 10%;
+    }
+
+
+
+    .toggleSwitch {
+        margin-left: 10%;
+
+    }
+
+    .settingsContainerClicked {
+        width: 100%;
+    }
+
+ 
+ 
+/* Common settings for all tabs */
+.basicSettingsLanguageTab, 
+.basicSettingsMediaLibraryTab, 
+.basicSettingsMediaFoldersTab, 
+.basicSettingsPlaylistsTab, 
+.basicSettingsRescanMediaTab, 
+.saveSettings
+{
+    margin: 0 auto;
+    margin-right: 30%;
+    width: 100%;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+
+
+}
+
+/* Save Settings Button */
+.saveSettings {
+    padding: 0px;
+    font-size: 14px;
+    margin-bottom: 30%;
+}
+
+/* Play, more, add to playlist */
+.browsedbLeftControls {
+    text-align: left;
+    margin-right: 100%;
+}
+
+  }
+
+
+  /* 480 px or less */
+@media only screen and (max-width: 480px){
+    .animationBtn {
+        transform: translateX(60%);
+        margin-bottom: 120%;
         border-radius: 50%;
         z-index: 100; 
     }
@@ -814,8 +939,8 @@ transform: translate3d(0, 0, 0);
     /* Container that hold 'Home' and 'Settings' Button */
     .overallHeadersContainer {
         font-size: 15px;
-        margin-left: 30px;
         margin-top: 20px;
+        margin-right: 20%;
 
     }
 
@@ -832,11 +957,16 @@ transform: translate3d(0, 0, 0);
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vh;
+        width: 100%;
         height: 100%;
         z-index: 95;
+        overflow-y: auto; /* Adds scroll bar */
+        overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 
     }
+
+
+
     /* Settings tabs */
     .settingsHeader {
         font-size: 14px;
@@ -855,6 +985,10 @@ transform: translate3d(0, 0, 0);
 
     }
 
+    .settingsContainerClicked {
+        width: 100%;
+    }
+
  
  
 /* Common settings for all tabs */
@@ -863,22 +997,37 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
+<<<<<<< HEAD
 .stdclick,
 .advancedSettingsContent
+=======
+.saveSettings
+>>>>>>> main
 {
     margin: 0 auto;
     margin-right: 30%;
+    width: 100%;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
 
+
+}
+
+/* Save Settings Button */
+.saveSettings {
+    padding: 0px;
+    font-size: 14px;
+    margin-bottom: 30%;
+}
+
+/* Play, more, add to playlist */
+.browsedbLeftControls {
+    text-align: left;
+    margin-right: 100%;
 }
 
 }
 
-
-/* 800px or less */
-  @media only screen and (max-width: 890px) {
- 
-
-  }
 
 
   /* Steve's code
@@ -914,3 +1063,4 @@ transform: translate3d(0, 0, 0);
 .MusiclistContainer.show {
     bottom: 0; 
 } */
+

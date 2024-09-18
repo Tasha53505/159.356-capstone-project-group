@@ -33,6 +33,39 @@
         Ext.onReady(function(){
             Main.init()
         });
+        Ext.onReady(function(){
+                    tuneIn = new Ext.form.TextField({
+                        applyTo: 'url'
+                    });
+                
+                    Ext.get('tuneInSubmit').hide();
+                    Ext.get('tuneInAdd').hide();
+
+                    new Ext.Button({
+                        renderTo: 'tuneIn',
+                        text: '[% 'RADIO_TUNEIN_CHOOSE' | string %]',
+                        handler: function(){
+                            var url = Ext.get('url').getValue();
+                            if (url) {
+                                SqueezeJS.UI.setProgressCursor();
+                                SqueezeJS.Controller.playerControl(['playlist', 'play', url]);
+                            }
+                        }
+                    });
+
+                    new Ext.Button({
+                        renderTo: 'add',
+                        text: '[% 'ADD' | string %]',
+                        handler: function(){
+                            var url = Ext.get('url').getValue();
+                            if (url) {
+                                SqueezeJS.UI.setProgressCursor();
+                                SqueezeJS.Controller.playerControl(['playlist', 'add', url]);
+                            }
+                        }
+                    });
+             });
+
     </script>
 </head>
 
@@ -112,7 +145,7 @@
                                                     <option value="EN_GB">English (British) *</option>
                                                     <option value="ES">Español</option>
                                                     <option value="FR">Français</option>
-                                                    <option value="IT">Italiano</option>
+                                                    <option value="IT">Italiano</option> 
                                                     <option value="NL">Nederlands</option>
                                                     <option value="NO">Norsk</option>
                                                     <option value="PL">Polski</option>
@@ -127,7 +160,6 @@
                                                 </select>
                                             </div>
                                         </div>
-
 
                                         <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
                                             <div class="mediaLibrary" >
@@ -149,7 +181,7 @@
                                                 <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="mediadirs0" value="C:\Program Files\Songs" size="40">
                                                 <br />
                                                 <br />
-                                                <!-- Button to browse folders -->
+                                                <!-- Button to browse folders-->
                                                 <input type="button" value="Browse" class="browseFolders" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
                                                 <br />
                                                 <br />
@@ -161,7 +193,7 @@
                                                 <table border="0" cellspacing="0">
                                                     <tr>
                                                         <th>[% 'FOLDER' | string %]</th>
-                                                        <th>[% 'MUSIC' | string %]&nbsp;&nbsp;</th>
+                                                        <th>[% 'MUSIC' | string %]&nbsp;&n9bsp;</th>
                                                         <th>&nbsp;</th>
                                                     </tr>
 
@@ -208,11 +240,12 @@
                                     <!-- <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div> -->
-
+                                <form id="settingsForm"> 
                                     <div id="prefsSubmit">
-                                        [%- IF NOT nosubmit %]<input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="[% "SAVE_SETTINGS" | string %]">[% END %]
+                                        [%- IF NOT nosubmit %]<input name="saveSettings" id="saveSettings" type="submit" class="saveSettings" value="[% "SAVE_SETTINGS" | string %]">[% END %]
                                         <input type="hidden" name="saveSettings" value="1">
                                     </div>
+                                </form>
                                     
                                     
                                     <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
@@ -473,10 +506,12 @@
 
                                                                                     
 
+<!--                                                     <a href="#" onclick="playSong('http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=play&index=c4ec732d.14&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">  -->
 
 
+                    
+                                              
 
-                                            <!-- Not working at this point in time -->
                                             <div class="browsedbListItem">
                                                 <span class="browsedbLeftControls">
                                                     <a href="#" onclick="playSong('http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=play&index=c4ec732d.14&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">
@@ -496,17 +531,18 @@
                                                     </a>
                                                 </span>
                                             
-                                                <a href="index.html?index=c4ec732d.14&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=">
+                                            
+                                                <a href="index.html?index=996763a4.14&amp;player=&amp;sess=" style="font-size: 11px;">
                                                     PGGB - 705 - 15 - Running Out of Time - 186M.wav
                                                 </a>
                                             
                                                 <span class="browsedbRightControls">
-                                                    <span id="controlsc4ec732d.14" style="display: none;">
-                                                        <a href="javascript:void(0);" onclick="ajaxUpdate('index.html', 'action=favadd&amp;index=c4ec732d.14&amp;start=0&amp;sess=')">Save</a>
+                                                    <span id="controls996763a4.14" style="display: none;">
+                                                        <a href="javascript:void(0);" onclick="ajaxUpdate('index.html', 'action=favadd&amp;index=996763a4.14&amp;start=0&amp;sess=')">Save</a>
                                                     </span>
                                                 </span>
-                                            </div>                                           
-                                              
+                                            </div>
+                                            
 
 
                                             
@@ -599,108 +635,64 @@
                     <ul class="accordionContainer">
                         <button class="accordionButton">Radio</button>
                         <div class="accordionPanel">
-                            <div class="radioContainer">
+                            <div class="allRadioContainer">
+                                <div class="radioTuneInTitle" id="radioTuneInTitle">Radio Tune In</div>
+                                <div class="radioTuneIn" id="radioTuneIn">
+                                                                                
+                                            [% pagetitle = 'RADIO_TUNEIN' | string %]
+                                            [% pageicon = icons.TUNEINURL %]
+                                            [% pageHeaderMenu = BLOCK %]
+                                                / [% 'RADIO_TUNEIN' | string %]
+                                            [% END %]
+                                            [% extJsScripts = BLOCK %]
+                                           
+                                            [% END %]
+                                            [% PROCESS pageheader.html %]
 
-[% pagetitle = 'RADIO_TUNEIN' | string %]
-[% pageicon = icons.TUNEINURL %]
-[% pageHeaderMenu = BLOCK %]
-	/ [% 'RADIO_TUNEIN' | string %]
-[% END %]
-[% extJsScripts = BLOCK %]
-	<script type="text/javascript">
-		Ext.onReady(function(){
-			tuneIn = new Ext.form.TextField({
-				applyTo: 'url'
-			});
-		
-			Ext.get('tuneInSubmit').hide();
-			Ext.get('tuneInAdd').hide();
+                                            <br>
 
-			new Ext.Button({
-				renderTo: 'tuneIn',
-				text: '[% 'RADIO_TUNEIN_CHOOSE' | string %]',
-				handler: function(){
-					var url = Ext.get('url').getValue();
-					if (url) {
-						SqueezeJS.UI.setProgressCursor();
-						SqueezeJS.Controller.playerControl(['playlist', 'play', url]);
-					}
-				}
-			});
+                                            [% IF url %]
+                                                <p><b>
+                                                [% 'RADIO_TUNED_IN' | string %] [% url %]
+                                                </b></p>
+                                                <br/>
+                                                
+                                                <script type="text/javascript" language="JavaScript">
+                                                // Reload the status frame in 5 seconds to display the newly added playlist item
+                                                setTimeout( "refreshStatus()", 5000 );
+                                                </script>
+                                            [% END %]
 
-			new Ext.Button({
-				renderTo: 'add',
-				text: '[% 'ADD' | string %]',
-				handler: function(){
-					var url = Ext.get('url').getValue();
-					if (url) {
-						SqueezeJS.UI.setProgressCursor();
-						SqueezeJS.Controller.playerControl(['playlist', 'add', url]);
-					}
-				}
-			});
-		});
-	</script>
-[% END %]
-[% PROCESS pageheader.html %]
+                                            <form name="tune" method="post" id="tune" action="[% webroot %]tunein.html">
+                                                <input type="hidden" name="player" value="[% player %]">
+                                                [% 'RADIO_TUNEIN_RADIOURL' | string %]
 
-<br>
+                                                <table>
+                                                    <tr>
+                                                        <td style="vertical-align:bottom;"><input type="text" class="stdedit" name="url" id="url" size="50%"></td>
+                                                        <td>
+                                                            <input type="submit" id="tuneInSubmit" class="stdclick" value="[% 'RADIO_TUNEIN_CHOOSE' | string %]">
+                                                            <span id="tuneIn" style="vertical-align:bottom;"></span>
+                                                        </td>
+                                                        <td>
+                                                            <input type="submit" id="tuneInAdd" name="tuneInAdd" class="stdclick" value="[% 'ADD' | string %]">
+                                                            <span id="add" style="vertical-align:bottom;"></span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </form>
 
-[% IF url %]
-	<p><b>
-	[% 'RADIO_TUNED_IN' | string %] [% url %]
-	</b></p>
-	<br/>
-	
-	<script type="text/javascript" language="JavaScript">
-	// Reload the status frame in 5 seconds to display the newly added playlist item
-	setTimeout( "refreshStatus()", 5000 );
-	</script>
-[% END %]
+                                            <br/>
 
-<form name="tune" method="post" id="tune" action="[% webroot %]tunein.html">
-	<input type="hidden" name="player" value="[% player %]">
-	[% 'RADIO_TUNEIN_RADIOURL' | string %]
+                                            <p>[% 'RADIO_TUNEIN_DESC' | string %]</p>
 
-	<table>
-		<tr>
-			<td style="vertical-align:bottom;"><input type="text" class="stdedit" name="url" id="url" size="50%"></td>
-			<td>
-				<input type="submit" id="tuneInSubmit" class="stdclick" value="[% 'RADIO_TUNEIN_CHOOSE' | string %]">
-				<span id="tuneIn" style="vertical-align:bottom;"></span>
-			</td>
-			<td>
-				<input type="submit" id="tuneInAdd" name="tuneInAdd" class="stdclick" value="[% 'ADD' | string %]">
-				<span id="add" style="vertical-align:bottom;"></span>
-			</td>
-		</tr>
-	</table>
-</form>
+                                            <br/>
 
-<br/>
+                                            [% PROCESS pagefooter.html %]
 
-<p>[% 'RADIO_TUNEIN_DESC' | string %]</p>
+                                </div>
 
-<br/>
-
-[% PROCESS pagefooter.html %]
-
-                                <div class="radioExample"></div>
-                                <div class="radioExample"></div>
-                                <div class="radioExample"></div>
-
-                                <div class="radioExample"></div>
-                                <div class="radioExample"></div>
-                                <div class="radioExample"></div>  
-
-                                <div class="radioExample"></div>
-                                <div class="radioExample"></div>
-                                <div class="radioExample"></div>  
-
-                                <div class="radioExample"></div>
-                                <div class="radioExample"></div>
-                                <div class="radioExample"></div>  
-                                                              
+                    
                                                               
                             
                             </div>
@@ -778,7 +770,7 @@
                         </div>
                     </div>
                     <div class="control">
-                        <div id="playPause" class="playButton">   
+                        <div id="playPause" class="">   
                         </div>
                     </div>
                     <div class="control">

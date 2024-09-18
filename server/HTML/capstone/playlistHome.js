@@ -264,6 +264,55 @@ document.getElementById('allArtists').addEventListener('click', function() {
     });
 });
 
+// // ------------------------ Radio Tune in ------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    
+document.getElementById('radioTuneInTitle').addEventListener('click', function() {
+    // Create a new container for the radioTuneIn
+    var newRadioTuneInContainer = document.createElement('div');
+    newRadioTuneInContainer.classList.add('newRadioTuneInContainer');
+    var animationBtn = document.querySelector('.animationBtn');
+
+    // Hide the animation button 
+    animationBtn.style.display = 'none';
+
+    // Add back button and header
+    newRadioTuneInContainer.innerHTML = 
+        `<h3>Radio Tune In</h3>
+
+        <button class="backButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+                <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
+                <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
+            </svg>
+        </button>
+        <div id="radioTuneInContent"></div>`; 
+
+    // Append the new container to the body
+    document.body.appendChild(newRadioTuneInContainer);
+
+    // Clone the radioTuneIn element to avoid issues with the original
+    var radioTuneIn = document.querySelector('.radioTuneIn').cloneNode(true);
+    radioTuneIn.style.display = 'block'; // Display it
+    newRadioTuneInContainer.querySelector('#radioTuneInContent').appendChild(radioTuneIn);
+
+    // Show the new container with animation
+    setTimeout(function () {
+        newRadioTuneInContainer.classList.add('shownewRadioTuneInContainer');
+    }, 10);
+
+    // Back Button functionality
+    newRadioTuneInContainer.querySelector('.backButton').addEventListener('click', function () {
+        newRadioTuneInContainer.classList.remove('shownewRadioTuneInContainer');
+        setTimeout(function () {
+            newRadioTuneInContainer.remove();
+            animationBtn.style.display = 'block';
+        }, 500); // Animation time + back functionality
+    });
+});
+
+
+});
 
 
 // --------------- Settings Button ------------------------
@@ -512,38 +561,125 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 // ----------------- Save settings, speciifically Language -----------------
 // Taken from basic.html
-function initSettingsForm() {
-    // Try to redirect all form submissions by return key to the default submit button
-    // Listen for keypress events on all form elements except submit
-    document.querySelectorAll('.settingsContainer input, .settingsContainer select').forEach(function(ele) {
-        if (ele.type != 'submit') {
-            ele.addEventListener('keypress', function(e) {
-                var cKeyCode = e.keyCode || e.which;
-                if (cKeyCode == 13) {  // Enter key
-                    e.preventDefault();  // Prevent default form submission
-                    document.getElementById('saveSettings').click();  // Trigger Save Settings button click
-                }
-            });
-        }
+// function initSettingsForm() {
+//     // Try to redirect all form submissions by return key to the default submit button
+//     // Listen for keypress events on all form elements except submit
+//     document.querySelectorAll('.settingsContainer input, .settingsContainer select').forEach(function(ele) {
+//         if (ele.type != 'submit') {
+//             ele.addEventListener('keypress', function(e) {
+//                 var cKeyCode = e.keyCode || e.which;
+//                 if (cKeyCode == 13) {  // Enter key
+//                     e.preventDefault();  // Prevent default form submission
+//                     document.getElementById('saveSettings').click();  // Trigger Save Settings button click
+//                 }
+//             });
+//         }
+//     });
+// }
+
+// function saveLanguageSetting() {
+//     var selectedLanguage = document.getElementById('languageSelect').value;  // Get the selected language dynamically
+
+//     const request = new XMLHttpRequest();
+//     request.open('POST', '/save-language', true);
+//     request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    
+//     request.onreadystatechange = function () {
+//         if (this.readyState === 4 && this.status === 200) {
+//             // Language saved successfully, refresh or update content
+//             location.reload();  // Reload the page to apply the new language settings
+//         }
+//     };
+    
+//     request.send(JSON.stringify({
+//         language: selectedLanguage,
+//         playerId: myClientState.id  // Assuming you need the player ID
+//     }));
+// }
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.getElementById('settingsForm').addEventListener('submit', function(e) {
+//         e.preventDefault(); // Prevent default form submission
+
+//         const selectedLanguage = document.getElementById('languageSelect').value;
+
+//         // Prepare the data to send
+//         const data = new URLSearchParams();
+//         data.append('language', selectedLanguage);
+//         data.append('saveSettings', 1); // Ensure 'saveSettings' is included
+
+//         fetch('/Plugins/server.pl', {
+//             method: 'POST',
+//             body: data
+//         })
+//         .then(response => response.text())
+//         .then(result => {
+//             console.log('Success:', result);
+//             alert('Settings saved and script executed!');
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//             alert('Failed to save settings or execute script.');
+//         });
+//     });
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('settingsForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const selectedLanguage = document.getElementById('languageSelect').value;
+
+        // Prepare the data to send
+        const data = new URLSearchParams();
+        data.append('language', selectedLanguage);
+
+        fetch('/Plugins/LanguageSettings/handleRequest', {
+            method: 'POST',
+            body: data
+        })
+        .then(response => response.text())
+        .then(result => {
+            console.log('Success:', result);
+            alert('Settings saved and language updated!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to save settings or update language.');
+        });
     });
-}
+});
 
-function saveLanguageSetting() {
-    var selectedLanguage = document.getElementById('languageSelect').value;  // Get the selected language dynamically
 
-    const request = new XMLHttpRequest();
-    request.open('POST', '/save-language', true);
-    request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+
+// - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs for where media is held.
+document.querySelector('.rescanButton').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const selectedFolder = document.getElementById('mediadirs0').value;
+
+    // Send the folder input to the backend via an AJAX request
+    fetch('http://localhost:3000/updateMediaDirs', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ mediaDir: selectedFolder })
+    })
     
-    request.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            // Language saved successfully, refresh or update content
-            location.reload();  // Reload the page to apply the new language settings
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Media folder updated successfully.');
+        } else {
+            alert('Failed to update media folder.');
         }
-    };
-    
-    request.send(JSON.stringify({
-        language: selectedLanguage,
-        playerId: myClientState.id  // Assuming you need the player ID
-    }));
-}
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+
