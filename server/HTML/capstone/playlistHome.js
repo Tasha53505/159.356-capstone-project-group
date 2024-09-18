@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
+    var overallContainer = document.querySelector('.overallContainer');
+    var animationBtn = document.querySelector('.animationBtn');
     var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
     var MusiclistContainer = document.querySelector('.MusiclistContainer');
 
@@ -58,6 +61,17 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             MusiclistContainer.classList.add('show');
             animationMusiclistBtn.style.bottom = '50vh';
+
+            // hide left bar
+            overallPlaylistContainer.classList.add('hidden');
+            animationBtn.classList.add('hidden');
+            setTimeout(function() {
+                overallContainer.style.display = 'none';
+            }, 500); // Wait for the animation to finish before hiding
+
+            // hide right bar
+            // infoPanelBtn.classList.add('hidden')
+            infoPanel.classList.remove('active')
         }
     });
 
@@ -67,6 +81,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
     var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
+    var MusiclistContainer = document.querySelector('.MusiclistContainer');
+    var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
     
     // Set initial state (only the button should be visible)
     overallContainer.style.display = 'none';  // overallContainer is hidden initially
@@ -82,6 +98,13 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function() {
                 overallPlaylistContainer.classList.remove('hidden');
             }, 10);  // Delay to ensure flex is applied before animation
+
+            // hide bottom bar
+            MusiclistContainer.classList.remove('show');
+            animationMusiclistBtn.style.bottom = '0';
+
+            // hide right bar
+            infoPanel.classList.remove('active')
         } else {
             overallPlaylistContainer.classList.add('hidden');
             setTimeout(function() {
