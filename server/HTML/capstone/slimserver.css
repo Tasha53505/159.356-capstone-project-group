@@ -112,6 +112,11 @@ div#browsedbList {
 	text-align:right;
 }
 
+.playlistControls button {
+	background-color: transparent;
+	border: transparent;
+}
+
 .browsedbControls {
 	text-align:right;
 }

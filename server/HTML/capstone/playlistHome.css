@@ -307,6 +307,7 @@ transform: translate3d(0, 0, 0);
     justify-content: center;
     align-items: flex-start; /* Align items to the top */
     flex-flow: column;
+    overflow: auto;
 }
 
 .MusiclistContainer.show {
@@ -862,7 +863,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
-.stdclick {
+.stdclick,
+.advancedSettingsContent
+{
     margin: 0 auto;
     margin-right: 30%;
 
