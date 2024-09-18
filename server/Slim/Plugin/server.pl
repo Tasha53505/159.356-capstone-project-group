@@ -2,10 +2,14 @@
 
 use strict;
 use warnings;
-use File::Slurp qw(read_file write_file);  # For reading/writing files
+use CGI;
+use CGI::Carp qw(fatalsToBrowser);
+use File::Slurp qw(read_file write_file);
 
-print "Hello, World!\n";
+my $cgi = CGI->new;
 
+# Get the language parameter from the request
+my $language = $cgi->param('language');
 
 # Define the path to the prefs file
 my $prefs_file_path = 'C:/ProgramData/Squeezebox/prefs/server.prefs';
@@ -26,5 +30,17 @@ sub update_language {
     print "Language updated to $new_language successfully.\n";
 }
 
-# Example usage: update the language to 'FR' (French)
-update_language('FR');
+
+# update_language("EN"); # Added this to test locally --> This works
+
+
+
+# Execute the update_language function if language is provided
+if (defined $language) {
+    update_language($language);
+    print $cgi->header('text/plain');
+    print "Script executed successfully.";
+} else {
+    print $cgi->header('text/plain');
+    print "No language provided.";
+}
