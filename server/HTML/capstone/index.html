@@ -132,6 +132,11 @@
 
                                         <div class="basicSettingsLanguageTab active" id="language">
                                             <div class="language">
+                                                <!-- testing -->
+                                                <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+                                                    <input type="hidden" name="saveSettings" value="1">
+                                                </div>
+                                                
                                                 [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
                                                 [% languageoptions.$option %]
                                                 [% END %] 
