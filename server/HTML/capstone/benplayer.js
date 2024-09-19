@@ -54,6 +54,7 @@ var repeat = new SqueezeJS.UI.Buttons.Repeat({ // Repeat
 });
 
 var playPause = document.getElementById("playPause");
+var repeatDisplay = document.getElementById("repeatButton");
 
 function animateButton(button){
     button.classList.add('animatePlay');
@@ -100,6 +101,7 @@ function updatePlay(){
 // Updates play button after reload
 document.addEventListener("DOMContentLoaded", function() {
     setTimeout(updatePlay, 200);
+    setTimeout(updateRepeatState, 200);
 });
 
 // Update play button when clicked
@@ -111,12 +113,28 @@ document.getElementById('playPause').addEventListener('click', function(){
 // -- REPEAT -- //
 function updateRepeatState(){
     console.log(repeat.state);
+    if(repeat.state == 0){
+        // No repeat
+        repeatDisplay.classList.add('repeatButtonInactive');
+        repeatDisplay.classList.remove('repeatButtonActiveSong');
+        repeatDisplay.classList.remove('repeatButtonActivePlaylist');
+    } else if(repeat.state == 1){
+        // Repeat song
+        repeatDisplay.classList.remove('repeatButtonInactive');
+        repeatDisplay.classList.add('repeatButtonActiveSong');
+        repeatDisplay.classList.remove('repeatButtonActivePlaylist');
+    } else if (repeat.state == 2){
+        // Repeat playlist
+        repeatDisplay.classList.remove('repeatButtonInactive');
+        repeatDisplay.classList.remove('repeatButtonActiveSong');
+        repeatDisplay.classList.add('repeatButtonActivePlaylist');
+    }
 }
 
 // Update repeat button
 document.getElementById('repeatButton').addEventListener('click', function(){
     animateButton(this);
-    updateRepeatState();
+    setTimeout(updateRepeatState, 200);
 });
 
 // Previous and Next
