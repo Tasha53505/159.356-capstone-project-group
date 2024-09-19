@@ -107,7 +107,10 @@ By using: https://lyrion.org/reference/cli/using-the-cli/#jsonrpcjs (JSON RPC) -
 For detiled information on this problem  Ive documented my findngs SPECIIFCALLY for the Save function in https://github.com/Tasha53505/159.356-capstone-project-group/issues/35
   - it may contain helpful links, so please look through it.
 
-
+## issues with save settings button
+If you're having issues with buttons in general - the fix is described in Detail in https://github.com/Tasha53505/159.356-capstone-project-group/issues/35 
+ - it's all due to some of the components being loaded AFTER the DOM
+ - but ALSO in tangent with needing to use the highest element to listen for clicks (Event delgation with the body element) - so that even listeners attached AFTER the DOM has rendered, it'll still be recognised)
 
 
 
