@@ -650,6 +650,8 @@ document.addEventListener("DOMContentLoaded", function() {
             
             const selectedLanguage = document.getElementById("languageSelect").value;
             console.log("Save Settings BUTTON CLICKED");
+            console.log("Selected language:", selectedLanguage); // Log the selected language
+
 
             // Send a JSON-RPC request to update the language in the server.prefs file
             updateLanguageSetting(selectedLanguage);    
@@ -659,13 +661,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-function updateLanguageSetting() { // Removed language param to hardcode test. WIll add back latwer
-    let language = 'FR'; // Hardcoding the language to French FOR TEST
-
+function updateLanguageSetting(language) { // Removed language param to hardcode test. WIll add back latwer
     const data = {
         id: 1,
         method: "slim.request",
-        params: [0, ["pref", "language", language]] //
+        params: [0, ["pref", "language", language]] 
     };
 
     fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
