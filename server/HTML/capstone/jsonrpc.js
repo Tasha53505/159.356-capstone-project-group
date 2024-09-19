@@ -46,7 +46,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post('/jsonrpc.js', (req, res) => {
-    const newLanguage = 'EN'; // AS A TEST
+    const newLanguage = 'FR'; // AS A TEST
     const filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
 
     ffs.readFile(filePath, 'utf8', (err, data) => {

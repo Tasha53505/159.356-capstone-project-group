@@ -600,7 +600,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 function updateLanguageSetting() { // Removed language param to hardcode test. WIll add back latwer
-    let language = 'EN'; // Hardcoding the language to French FOR TEST
+    let language = 'FR'; // Hardcoding the language to French FOR TEST
 
     const data = {
         id: 1,
