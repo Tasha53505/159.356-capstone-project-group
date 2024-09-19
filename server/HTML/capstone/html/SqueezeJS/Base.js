@@ -308,7 +308,6 @@ function _init() {
 				this.request(config);
 			}
 		},
-
 		togglePause : function(dontUpdate) {
 			if (this.isPaused()) {
 				this.playerControl(['play'], dontUpdate);
