@@ -46,20 +46,20 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post('/jsonrpc.js', (req, res) => {
-    const newLanguage = 'FR'; // AS A TEST
+    const newLanguage = 'EN'; // AS A TEST
     const filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    ffs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading prefs file:', err);
             return res.status(500).send('Error reading prefs file');
         }
-
+    
         console.log('Original Data:', data); // Log original data
-
+    
         const updatedData = data.replace(/language:\s*\S+/g, `language: ${newLanguage}`);
         console.log('Updated Data:', updatedData); // Log updated data
-
+    
         fs.writeFile(filePath, updatedData, (err) => {
             if (err) {
                 console.error('Error updating prefs file:', err);
@@ -68,5 +68,4 @@ app.post('/jsonrpc.js', (req, res) => {
             res.json({ result: 'Language updated to FR successfully' });
         });
     });
-});
-
+    
