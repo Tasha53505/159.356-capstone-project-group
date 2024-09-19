@@ -996,13 +996,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
-.basicSettingsRescanMediaTab, 
-<<<<<<< HEAD
-.stdclick,
-.advancedSettingsContent
-=======
-.saveSettings
->>>>>>> main
+.basicSettingsRescanMediaTab
 {
     margin: 0 auto;
     margin-right: 30%;

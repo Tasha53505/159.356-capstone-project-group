@@ -68,4 +68,5 @@ app.post('/jsonrpc.js', (req, res) => {
             res.json({ result: 'Language updated to FR successfully' });
         });
     });
+});
     

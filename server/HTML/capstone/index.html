@@ -33,38 +33,7 @@
         Ext.onReady(function(){
             Main.init()
         });
-        Ext.onReady(function(){
-                    tuneIn = new Ext.form.TextField({
-                        applyTo: 'url'
-                    });
-                
-                    Ext.get('tuneInSubmit').hide();
-                    Ext.get('tuneInAdd').hide();
 
-                    new Ext.Button({
-                        renderTo: 'tuneIn',
-                        text: '[% 'RADIO_TUNEIN_CHOOSE' | string %]',
-                        handler: function(){
-                            var url = Ext.get('url').getValue();
-                            if (url) {
-                                SqueezeJS.UI.setProgressCursor();
-                                SqueezeJS.Controller.playerControl(['playlist', 'play', url]);
-                            }
-                        }
-                    });
-
-                    new Ext.Button({
-                        renderTo: 'add',
-                        text: '[% 'ADD' | string %]',
-                        handler: function(){
-                            var url = Ext.get('url').getValue();
-                            if (url) {
-                                SqueezeJS.UI.setProgressCursor();
-                                SqueezeJS.Controller.playerControl(['playlist', 'add', url]);
-                            }
-                        }
-                    });
-             });
 
     </script>
 </head>
@@ -72,14 +41,16 @@
 <body>
     <div class="overallContainer">
         <div class="overallPlaylistContainer">
+
             <div class="overallHeadersContainer">
                 <div class="player">
                     <div class="homeTitleContainer">
                         <div class="homeTitle">
                             <h2>Home</h2>
+
                         </div>
-                        <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button>
-                        <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings" style="background-color: #23305f;">
+                        <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button> -->
+                        <!-- <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings" style="background-color: #23305f;"> -->
 
                        
                         <div class="settingsContainer">
@@ -90,42 +61,50 @@
                                 </svg>                    
                                 Settings </button>
 
-                                <div class="advancedSettingsPlugin">
-                                    <!-- [% PROCESS settings/header.html %]  -->
-                                    <div class="advancedSettingsContent">
-                                        [% "SETUP_GROUP_PLUGINS" | string %]
-                                        [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
-                                        [% FOREACH plugin = sortedPlugins %]
-                                        [% name = plugins.$plugin.name %]
-                                        [% version = plugins.$plugin.version %]
-                                        [% enforce = plugins.$plugin.enforce || plugins.$plugin.errorDesc %]
-                                        [% settings = failsafe && !enforce ? '' : plugins.$plugin.optionsURL %]
-                                        [% enabled = pluginState.$plugin %]
-                                        [% title = BLOCK %]
-                                        [% name | getstring %]
-                                        [% IF version %](v[% version %])[% END %]
-                                        [% END %]
-                                        [% WRAPPER setting desc = plugins.$plugin.description %]
-                                        [% IF plugins.$plugin.errorDesc %]
-                                        [% plugins.$plugin.errorDesc %]
-                                        [% ELSE %]
-                                        [% PROCESS pluginLink %]
-                                        [% IF plugins.$plugin.opType %]
-                                        ([% "SETUP_GROUP_PLUGINS_NEEDS_RESTART" | string %])
-                                        [% END %]
-                                        [% END %]
-                                        [% END %]
-                                        [% END %]
-                                    </div>
-                              
-                                    <!-- [% PROCESS settings/footer.html %] -->
-                                </div>
 
-                                <div class="basicSettings">
+                                 <!-- <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings" style="background-color: #23305f;"> -->
+
+
+                                    <div class="advancedSettingsPlugin">
+                                        <!-- [% PROCESS settings/header.html %]  -->
+                                        <div class="advancedSettingsContent">
+                                            [% "SETUP_GROUP_PLUGINS" | string %]
+                                            [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
+                                            [% FOREACH plugin = sortedPlugins %]
+                                            [% name = plugins.$plugin.name %]
+                                            [% version = plugins.$plugin.version %]
+                                            [% enforce = plugins.$plugin.enforce || plugins.$plugin.errorDesc %]
+                                            [% settings = failsafe && !enforce ? '' : plugins.$plugin.optionsURL %]
+                                            [% enabled = pluginState.$plugin %]
+                                            [% title = BLOCK %]
+                                            [% name | getstring %]
+                                            [% IF version %](v[% version %])[% END %]
+                                            [% END %]
+                                            [% WRAPPER setting desc = plugins.$plugin.description %]
+                                            [% IF plugins.$plugin.errorDesc %]
+                                            [% plugins.$plugin.errorDesc %]
+                                            [% ELSE %]
+                                            [% PROCESS pluginLink %]
+                                            [% IF plugins.$plugin.opType %]
+                                            ([% "SETUP_GROUP_PLUGINS_NEEDS_RESTART" | string %])
+                                            [% END %]
+                                            [% END %]
+                                            [% END %]
+                                            [% END %]
+                                        </div>
+                                
+                                        <!-- [% PROCESS settings/footer.html %] -->
+                                    </div>
+                                <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button> Works here -->
+
+                                <div class="basicSettings" id="basicSettings">
+
                                     <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
-                             <!------------- Basic Settings Language Tab Content ------------->
+                                         <!------------- Basic Settings Language Tab Content ------------->
 
                                     <div class="basicSettingsTabs">
+                                        
+
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
@@ -135,7 +114,7 @@
 
                                         <div class="basicSettingsLanguageTab active" id="language">
                                             <div class="language">
-                                                
+
                                                 
                                                 [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
                                                 [% languageoptions.$option %]
@@ -162,8 +141,13 @@
                                                     <option value="JA">日本語 *</option>
                                                     <option value="ZH_CN">简体中文 *</option>
                                                 </select>
+
                                             </div>
+
+                                            
                                         </div>
+
+                                        
 
                                         <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
                                             <div class="mediaLibrary" >
@@ -253,14 +237,18 @@
                                     
                                      -->
 
-                                     <form id="settingsForm"> 
+                                     <!-- <form id="settingsForm"> 
                                         <div id="prefsSubmit">
                                             <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
                                         </div>
-                                    </form>
-                                    
+                                    </form> -->
+                                    <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button> 
+
+                                 <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings" style="background-color: #23305f;">
+
                                     
                                     <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
+
 
 
                                 </div>
@@ -272,8 +260,12 @@
                         <!-- <li id="myMusic">My Musicc</li> -->
                         <ul class="accordionContainer">
                             <button class="accordionButton">My Music</button>
+
+
+
                             <div class="accordionPanel">
-                                <div class="allMusicContainer">                               
+                                <div class="allMusicContainer">    
+                           
     
                                     <div class="allMusicSelect" id="allSongs">Songs</div>
 
@@ -284,7 +276,8 @@
                                             artist_[% myItem.num %]|[% PROCESS artistsAsHTML.html itemobj = myItem.itemobj %]
                                             album_[% myItem.num %]|[% myItem.album.title %] -->
 
-                                
+                                            <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button>  -->
+
 
 
                                             You have: [% song_count %] total. <br>
