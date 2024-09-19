@@ -55,6 +55,7 @@ var repeat = new SqueezeJS.UI.Buttons.Repeat({ // Repeat
 
 var playPause = document.getElementById("playPause");
 var repeatDisplay = document.getElementById("repeatButton");
+var shuffleDisplay = document.getElementById("shuffleButton");
 
 function animateButton(button){
     button.classList.add('animatePlay');
@@ -112,7 +113,7 @@ document.getElementById('playPause').addEventListener('click', function(){
 
 // -- REPEAT -- //
 function updateRepeatState(){
-    console.log(repeat.state);
+    console.log("Repeat: " + repeat.state);
     if(repeat.state == 0){
         // No repeat
         repeatDisplay.classList.add('repeatButtonInactive');
@@ -149,11 +150,31 @@ document.getElementById('nextButton').addEventListener('click', function(){
     setTimeout(updatePlay, 200);
 });
 
-// -- SHUFFLE
+// -- SHUFFLE -- //
+function updateShuffleState(){
+    console.log("Shuffle: " + shuffle.state);
+    if(shuffle.state == 0){
+        // No shuffle
+        shuffleDisplay.classList.add('shuffleButtonInactive');
+        shuffleDisplay.classList.remove('shuffleButtonSong');
+        shuffleDisplay.classList.remove('shuffleButtonPlaylist');
+    } else if(shuffle.state == 1){
+        // Shuffle song
+        shuffleDisplay.classList.remove('shuffleButtonInactive');
+        shuffleDisplay.classList.add('shuffleButtonSong');
+        shuffleDisplay.classList.remove('shuffleButtonPlaylist');
+    } else if (shuffle.state == 2){
+        // Shuffle playlist
+        shuffleDisplay.classList.remove('shuffleButtonInactive');
+        shuffleDisplay.classList.remove('shuffleButtonSong');
+        shuffleDisplay.classList.add('shuffleButtonPlaylist');
+    }
+}
 
 // Update shuffle button
 document.getElementById('shuffleButton').addEventListener('click', function(){
     animateButton(this);
+    setTimeout(updateShuffleState, 200);
 });
 
 
