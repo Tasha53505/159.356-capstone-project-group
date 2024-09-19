@@ -1,0 +1,23 @@
+[% IF customViewSelect %]
+	[% customViewSelect %]
+[% ELSE %]
+
+<div id="viewSelect">
+
+	[% IF orderByList %]
+
+		[% IF NOT noLabel %]<label for="orderBy" class="stdlabel">[% "SORT_BY" | string %]</label>[% END %]
+
+		<select class="stdedit" name="orderBy" id="orderBy" onChange="chooseAlbumOrderBy(selectedIndex,options[selectedIndex].value)">
+
+		[% FOREACH orderType = orderByList.keys.sort %]
+			<option [% IF orderByList.$orderType == orderBy %]selected[% END %] value="[% orderByList.$orderType %]">[% orderType | string %]</option>
+		[% END %]
+
+		</select>
+
+	[% END %]
+
+</div>
+
+[% END %]

@@ -138,8 +138,8 @@ document.getElementById('allSongs').addEventListener('click', function() {
     // Create a new container for the songs
     var newAllSongsContainer = document.createElement('div');
     newAllSongsContainer.classList.add('newAllSongsContainer');
-    var animationBtn = document.querySelector('.animationBtn');
 
+    var animationBtn = document.querySelector('.animationBtn');
     animationBtn.style.display ='none';
 
     // Add back button and header
@@ -175,6 +175,13 @@ document.getElementById('allSongs').addEventListener('click', function() {
             animationBtn.style.display = 'block';
         }, 500); // Animation time + back functionality
     });
+
+//     // Use event delegation to handle dynamic content // THIS IS the code that made testButton trigger its event inside a popup code
+// document.body.addEventListener('click', function(event) {
+//     if (event.target && event.target.id === 'testButton') {
+//         console.log('testButton clicked');
+//     }
+// });
 });
 
 
@@ -408,29 +415,35 @@ document.getElementById('settingsButton').addEventListener('click', function() {
     function updateTabListeners() {
         const tabButtons = settingsContainer.querySelectorAll('.tabButton');
         const tabContents = settingsContainer.querySelectorAll('.tabContent');
-        
+    
         tabButtons.forEach(function(button) {
             button.addEventListener('click', function() {
                 // Remove the active class from all buttons and contents
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
-        
+    
                 // Add the active class to the clicked button
                 this.classList.add('active');
-        
+    
                 // Show the corresponding tab content
                 const activeTab = document.getElementById(this.getAttribute('data-tab'));
                 if (activeTab) {
                     activeTab.classList.add('active');
+                } else {
+                    console.error("No content found for tab ID:", this.getAttribute('data-tab'));
                 }
             });
         });
-
+    
         // Add the content of `.basicSettings` to `.basicSettingsContent`
         const basicSettingsContent = settingsContainer.querySelector('.basicSettingsContent');
-        const basicSettings = document.querySelector('.basicSettings').innerHTML;
-        basicSettingsContent.innerHTML = basicSettings;
-        
+        if (basicSettingsContent) {
+            const basicSettings = document.querySelector('.basicSettings')?.innerHTML || '';
+            basicSettingsContent.innerHTML = basicSettings;
+        } else {
+            console.error('.basicSettingsContent element not found.');
+        }
+    
         // Initialize Basic Settings Tab Switching
         const buttonClasses = [
             '.basicSettingsLanguageTabButton',
@@ -440,7 +453,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsRescanMediaTabButton'
         ];
         const basicSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClasses.join(', '));
-
+    
         const contentClasses = [
             '.basicSettingsLanguageTab',
             '.basicSettingsMediaLibraryTab',
@@ -449,7 +462,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsRescanMediaTab'
         ];
         const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
-
+    
         // Function to hide all tab contents
         function hideAllTabsContent() {
             basicSettingsTabsContent.forEach(tab => {
@@ -457,7 +470,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 tab.classList.remove('active'); // Remove active class
             });
         }
-
+    
         // Function to show the .basicSettings container
         function showBasicSettings() {
             const basicSettingsContainer = settingsContainer.querySelector('.basicSettings');
@@ -467,7 +480,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 console.error('Basic settings container not found.');
             }
         }
-
+    
         // Function to hide the .basicSettings container
         function hideBasicSettings() {
             const basicSettingsContainer = settingsContainer.querySelector('.basicSettings');
@@ -477,18 +490,19 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 console.error('Basic settings container not found.');
             }
         }
+    
         // Add click event listeners to each tab button
         basicSettingsTabsButtons.forEach(button => {
             button.addEventListener('click', function() {
                 // Show .basicSettings container
                 showBasicSettings();
-
+    
                 // Hide all tab contents
                 hideAllTabsContent();
-
+    
                 // Remove active class from all buttons
                 basicSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
-
+    
                 // Show the selected tab content and add the active class to the clicked button
                 const selectedTabId = this.getAttribute('data-tab');
                 const selectedTabContent = settingsContainer.querySelector(`#${selectedTabId}`);
@@ -502,15 +516,17 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 this.classList.add('active'); // Add active class to the clicked button
             });
         });
+    
         hideBasicSettings();
-
+    
         // Trigger click on the Language tab button to display its content by default
         const languageTabButton = settingsContainer.querySelector('.basicSettingsLanguageTabButton');
         if (languageTabButton) {
             languageTabButton.click();
         }
     }
-
+    
+    
     // Initialize the tab listeners after the container is added
     updateTabListeners();
 
@@ -580,129 +596,95 @@ document.getElementById('settingsButton').addEventListener('click', function() {
     }
 
     document.querySelector('.tabButton[data-tab="music"]').click();
+
+
 });
+
 
 // ----------------- Save settings, speciifically Language -----------------
-// Taken from basic.html
-// function initSettingsForm() {
-//     // Try to redirect all form submissions by return key to the default submit button
-//     // Listen for keypress events on all form elements except submit
-//     document.querySelectorAll('.settingsContainer input, .settingsContainer select').forEach(function(ele) {
-//         if (ele.type != 'submit') {
-//             ele.addEventListener('keypress', function(e) {
-//                 var cKeyCode = e.keyCode || e.which;
-//                 if (cKeyCode == 13) {  // Enter key
-//                     e.preventDefault();  // Prevent default form submission
-//                     document.getElementById('saveSettings').click();  // Trigger Save Settings button click
-//                 }
-//             });
-//         }
-//     });
-// }
-
-// function saveLanguageSetting() {
-//     var selectedLanguage = document.getElementById('languageSelect').value;  // Get the selected language dynamically
-
-//     const request = new XMLHttpRequest();
-//     request.open('POST', '/save-language', true);
-//     request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+// Looking into JSON RPC.js
+// document.addEventListener("DOMContentLoaded", function() {
+//     const basicSettings = document.getElementById('basicSettings');
     
-//     request.onreadystatechange = function () {
-//         if (this.readyState === 4 && this.status === 200) {
-//             // Language saved successfully, refresh or update content
-//             location.reload();  // Reload the page to apply the new language settings
-//         }
-//     };
-    
-//     request.send(JSON.stringify({
-//         language: selectedLanguage,
-//         playerId: myClientState.id  // Assuming you need the player ID
-//     }));
-// }
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     document.getElementById('settingsForm').addEventListener('submit', function(e) {
-//         e.preventDefault(); // Prevent default form submission
-
-//         const selectedLanguage = document.getElementById('languageSelect').value;
-
-//         // Prepare the data to send
-//         const data = new URLSearchParams();
-//         data.append('language', selectedLanguage);
-//         data.append('saveSettings', 1); // Ensure 'saveSettings' is included
-
-//         fetch('/Plugins/server.pl', {
-//             method: 'POST',
-//             body: data
-//         })
-//         .then(response => response.text())
-//         .then(result => {
-//             console.log('Success:', result);
-//             alert('Settings saved and script executed!');
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             alert('Failed to save settings or execute script.');
+//     if (basicSettings) {
+//         basicSettings.addEventListener('click', function(e) {
+//             if (e.target && e.target.id === 'saveSettings') {
+//                 e.preventDefault(); // Prevent default behavior
+//                 const selectedLanguage = document.getElementById("languageSelect").value;
+                
+//                 console.log("Save Settings BUTTON CLICKED");
+            
+//                 // Send a JSON-RPC request to update the language in the server.prefs file
+//                 updateLanguageSetting(selectedLanguage);    
+//             }
 //         });
-//     });
+//     } else {
+//         console.error('Element with ID "basicSettings" not found.');
+//     }
 // });
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('settingsForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent default form submission
+// document.addEventListener("DOMContentLoaded", function() {
+//     document.getElementById("saveSettings").addEventListener("click", function(e) {
+//         e.preventDefault(); // Prevent the form from submitting the default way
+//         const selectedLanguage = document.getElementById("languageSelect").value;
+        
+//         console.log("Save Settings BUTTON CLICKED");
+    
+//         // Send a JSON-RPC request to update the language in the server.prefs file
+//         updateLanguageSetting(selectedLanguage);
+//     });
+    
+// });
 
-        const selectedLanguage = document.getElementById('languageSelect').value;
 
-        // Prepare the data to send
-        const data = new URLSearchParams();
-        data.append('language', selectedLanguage);
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // Event delegation to handle dynamic content
+    document.body.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'testButton') {
+            console.log('testButton clicked');
+        } 
+        
+        if (e.target && e.target.id === 'saveSettings') {
+            e.preventDefault(); // Prevent default behavior
+            
+            const selectedLanguage = document.getElementById("languageSelect").value;
+            console.log("Save Settings BUTTON CLICKED");
+            console.log("Selected language:", selectedLanguage); // Log the selected language
 
-        fetch('/Plugins/LanguageSettings/handleRequest', {
-            method: 'POST',
-            body: data
-        })
-        .then(response => response.text())
-        .then(result => {
-            console.log('Success:', result);
-            alert('Settings saved and language updated!');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to save settings or update language.');
-        });
+
+            // Send a JSON-RPC request to update the language in the server.prefs file
+            updateLanguageSetting(selectedLanguage);    
+        }
     });
 });
 
 
 
+function updateLanguageSetting(language) { // Removed language param to hardcode test. WIll add back latwer
+    const data = {
+        id: 1,
+        method: "slim.request",
+        params: [0, ["pref", "language", language]] 
+    };
 
-// - should go to the server.js and update the .prefs files in ProgramData/Squeezebox/Prefs for where media is held.
-document.querySelector('.rescanButton').addEventListener('click', function(e) {
-    e.preventDefault(); // Prevent default form submission
-
-    const selectedFolder = document.getElementById('mediadirs0').value;
-
-    // Send the folder input to the backend via an AJAX request
-    fetch('http://localhost:3000/updateMediaDirs', {
-        method: 'POST',
+    fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json"
         },
-        body: JSON.stringify({ mediaDir: selectedFolder })
+        body: JSON.stringify(data)
     })
-    
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            alert('Media folder updated successfully.');
-        } else {
-            alert('Failed to update media folder.');
-        }
+        console.log("Language updated:", data);
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error("Error updating language:", error);
     });
-});
+}
+
+
+
 
 

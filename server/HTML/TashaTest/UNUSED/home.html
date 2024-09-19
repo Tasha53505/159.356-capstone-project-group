@@ -1,0 +1,220 @@
+
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//CAPSTONE"
+"http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+	[% PROCESS standardheader.html %]
+</head>
+	<frameset cols="50%,50%">
+		<frame src="index.html?player=[% playerURI %]" name="browser">
+		<frame src="status.html?player=[% playerURI %]" name="status">
+	</frameset>
+
+	</html>
+
+
+[%- IF ajaxRequest -%]
+	[%- IF ajaxRequest -%]
+	<pre>
+	[% PROCESS ajaxHome.txt %]
+	</pre>
+[%- ELSE -%]
+[% FILTER null %]
+[% pagetitle = stringHOME; noSpacer = 1; noHomeLink = 1 %]
+
+[% IF warn %]
+	[% bodyscript = 'onload="doLoad(1);"' %]
+[% END %]
+
+[% pageHeaderMenu = BLOCK %]
+
+<link rel="stylesheet" href="playlistHome.css">
+
+
+	<div class="statusarea">
+		<div id="scanWarning" [% IF NOT warn %]style="display:none"[% END %]><b>[% "NOTE" | string %]</b> [% "HOME_SCAN_WARNING" | string %]</div>
+
+		<div id="libraryInfo" [% IF warn OR NOT (album_count OR artistcount OR song_count) %]style="display:none"[% END %]>
+			[%- "LIBRARY_CONTAINS" | string %]&nbsp;<span id="albumcount">[% album_count %]</span>&nbsp;[% "WITH" | string -%]
+			<span id="songcount">[%- song_count %]</span>&nbsp;[% stringBY %]&nbsp;<span id="artistcount">[% artist_count %]</span>.
+		</div>
+
+		<div id="newVersion">
+			[% IF newVersion %]<br><br>[% newVersion %][% END %]
+		</div>
+
+	</div>
+
+[% END %]
+
+[% pageHeaderScripts = BLOCK %]
+	<script TYPE="text/javascript">[% PROCESS html/vars.js %]</script>
+	<script type="text/javascript" src="[% webroot %]html/prototype.js?r=[% revision %]" ></script>
+	<script TYPE="text/javascript" src="[% webroot %]html/global.js?r=[% revision %]"></script>
+	<script TYPE="text/javascript" src="[% webroot %]html/common.js?r=[% revision %]"></script>
+	<script TYPE="text/javascript" src="[% webroot %]html/home.js?r=[% revision %]" ></script>
+[% END %]
+
+[% END -%]
+[% PROCESS pageheader.html %]
+
+			<div id="progressName" style="display:inline">[% IF progress.name %][% progress.name _ "_PROGRESS" | string %][% END %]</div><br>
+			<a href="[% webroot %]progress.html?type=importer"><span id="progressBar" >[% progress.bar %]</span></a>
+
+<div class="homeMenuSection">
+	<div>[% "BROWSE_MUSIC" | string | upper %]</div>
+	<ul>
+	[%- FOREACH item = additionalLinkOrder.browse %]
+		[%- IF additionalLinks.browse.exists(item) %]
+		<li><a href="[% additionalLinks.browse.$item | html %]player=[% playerURI %]">[% item | getstring | html %]</a></li>
+		[% IF item == 'SEARCH' && additionalLinks.search.ADVANCEDSEARCH %]
+		<li><a href="[% additionalLinks.search.ADVANCEDSEARCH | html %]player=[% playerURI %]">[% "ADVANCEDSEARCH" | getstring | html %]</a></li>
+		[% END %]
+		[%- END %]
+	[%- END %]
+	[%- FOREACH link = additionalLinks.browse; IF !additionalLinkOrder.browse.grep(link.key).size %]
+		<li><a href="[% link.value | html %]player=[% playerURI %]">[% link.key | getstring | html %]</a></li>
+	[%- END; END %]
+	</ul>
+</div>
+
+<div class="homeMenuSection">
+	<div>[% "RADIO" | string | upper %]</div>
+	<ul>
+	[%- FOREACH item = additionalLinkOrder.radios %]
+		<li><a href="[% additionalLinks.radios.$item | html %]player=[% playerURI %]">[% item | getstring | html %]</a></li>
+	[%- END %]
+	[%- FOREACH link = additionalLinks.radios; IF !additionalLinkOrder.radios.grep(link.key).size %]
+		<li><a href="[% link.value | html %]player=[% playerURI %]">[% link.key | getstring | html %]</a></li>
+	[%- END; END %]
+		<li><a href="tunein.html?player=[% playerURI %]">[% "RADIO_TUNEIN" | string | html %]</a></li>
+	</ul>
+</div>
+
+[% IF additionalLinks.my_apps %]
+<div class="homeMenuSection">
+	<div>[% "PLUGIN_MY_APPS_MODULE_NAME" | string | upper %]</div>
+	<ul>
+	[%- FOREACH item = additionalLinkOrder.my_apps %]
+		<li><a href="[% additionalLinks.my_apps.$item | html %]player=[% playerURI %]" [% IF additionalLinks.my_apps.$item.match('^https?:') %]target="_blank"[% END %]>[% item | getstring | html %]</a></li>
+	[%- END %]
+	[%- FOREACH link = additionalLinks.apps; IF !additionalLinkOrder.my_apps.grep(link.key).size %]
+		<li><a href="[% link.value | html %]player=[% playerURI %]">[% link.key | getstring | html %]</a></li>
+	[%- END; END %]
+	</ul>
+</div>
+[%- END %]
+
+[% IF not nosetup %]
+<div class="homeMenuSection">
+	<div>[% "SETTINGS" | string | upper %]</div>
+	<ul>
+	[%- IF not noserver %]
+		<li><a href="[% webroot %]settings/server/basic.html?player=[% playerURI %]">[% "SERVER_SETTINGS" | string %]</a></li>
+	[%- END %]
+
+	[%- USE Clients; players = Clients.get("name"); FOREACH client = players.reverse; %]
+		<li><a href="[% webroot %]settings/player/basic.html?player=[% playerURI %]&amp;playerid=[% client.id | uri %]">[% "PLAYER_SETTINGS" | string %][% IF client.name %] [% "FOR" | string %] [% client.name %][% END %]</a></li>
+	[%- END %]
+
+	[%- FOREACH key = additionalLinks.settings.keys %]
+		<li><a href="[% additionalLinks.settings.$key | html %]player=[% playerURI %]">[% key | getstring | html %]</a></li>
+	[%- END %]
+	</ul>
+</div>
+[% END %]
+
+[% IF additionalLinks.plugins %]
+<div class="homeMenuSection">
+	<div>[% "PLUGINS" | string | upper %]</div>
+	<ul>
+		[%- FOREACH link = additionalLinks.plugins %]
+			[% NEXT IF link.key == 'ALARM' && (!player || nosetup) %]
+			<li><a href="[% link.value | html %]player=[% playerURI %][% IF link.key == 'ALARM'%]&playerid=[% playerURI %][% END %]">[% link.key | getstring | html %]</a></li>
+		[%- END %]
+	</ul>
+</div>
+[% END %]
+
+<div class="homeMenuSection">
+	<div>[% "HELP" | string | upper %]</div>
+	<ul>
+	[%- FOREACH link = additionalLinks.help %]
+		<li><a href="[% link.value | html %][% IF NOT link.value.match('^http') %]player=[% playerURI %][% END %]" [% IF link.value.match('^http') %]target="_new"[% END %]>[% link.key | string | html %]</a></li>
+	[%- END %]
+	</ul>
+</div>
+
+
+    <div class="overallContainer">
+        <div class="overallPlaylistContainer">
+            <div class="overallHeadersContainer">
+                <div class="player">
+                    <h2>Home</h2>
+                    <ul>
+                        <li>My Music</li>
+                        <hr />
+                    </ul>
+                    <ul class="pluginsAccordion">
+                        <button class="accordionButton">Plugins</button>
+                        <div class="accordionPanel">
+                            <div class="pluginsContainer">
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+
+                                <div class="pluginExample"></div>                                
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                                <div class="pluginExample"></div>
+                            </div>
+                        
+                        </div>
+                        <hr />
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="animationBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M9 17V4h10v13M9 8h10"/></g></svg>
+    </button>
+
+	<button class="animationBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M9 17V4h10v13M9 8h10"/></g></svg>
+    </button>
+
+	<div class="MusiclistContainer">
+		<h2>Music Play List</h2>
+	</div>
+	<button class="animationMusiclistBtn">
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6em" height="3em" viewBox="0 0 34 34" fill="none">
+			<g  clip-path="url(#clip-path-0_106)">
+			<g opacity="0">
+			<path d="M34 34L0 34L0 0L34 0L34 34Z"   fill="#FFFFFF" >
+			</path>
+			</g>
+			<path d="M7.40921 15.0716C7.52816 15.2151 7.67425 15.3336 7.83911 15.4205C8.00397 15.5074 8.18437 15.561 8.36996 15.5781C8.55555 15.5952 8.74269 15.5755 8.92067 15.5202C9.09864 15.4649 9.26396 15.375 9.40714 15.2558L15.5851 10.1142L15.5851 26.9128C15.5851 27.2885 15.7344 27.6487 16.0002 27.9143C16.2659 28.18 16.6263 28.3292 17.0021 28.3292C17.3779 28.3292 17.7383 28.18 18.0041 27.9143C18.2698 27.6487 18.4191 27.2885 18.4191 26.9128L18.4191 10.1142L24.5971 15.2558C24.7404 15.3748 24.9057 15.4645 25.0836 15.5197C25.2616 15.5748 25.4487 15.5944 25.6342 15.5773C25.8197 15.5602 26 15.5068 26.1649 15.42C26.3298 15.3332 26.4759 15.2149 26.595 15.0716C26.7141 14.9284 26.8038 14.7632 26.859 14.5853C26.9142 14.4074 26.9338 14.2204 26.9167 14.0349C26.8996 13.8495 26.8461 13.6692 26.7593 13.5044C26.6725 13.3396 26.5541 13.1936 26.4108 13.0745L17.909 5.99249L17.6964 5.86501L17.5122 5.76587C17.1839 5.63924 16.8203 5.63924 16.492 5.76587L16.3078 5.86501L16.0952 5.99249L7.59342 13.0745C7.44993 13.1934 7.33133 13.3395 7.2444 13.5042C7.15746 13.669 7.10391 13.8494 7.08679 14.0349C7.06968 14.2204 7.08935 14.4075 7.14468 14.5854C7.2 14.7633 7.2899 14.9285 7.40921 15.0716L7.40921 15.0716Z"   fill="#FFFFFF" >
+			</path>
+			</g>
+			<defs>
+			<clipPath id="clip-path-0_106">
+			<path d="M0 34L34 34L34 0L0 0L0 34Z" fill="white"/>
+			</clipPath>
+			</defs>
+			</svg>			
+	</button>
+
+    <!-- <script src="script.js"></script> -->
+	<script src="playlistHome.js"></script>
+
+
+[% PROCESS pagefooter.html %]
+
+[% END %]
+
+

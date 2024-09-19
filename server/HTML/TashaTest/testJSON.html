@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print JSON Data</title>
+</head>
+<body>
+    <h1>Song Information</h1>
+    <pre id="jsonOutput"></pre>
+    <script>
+        console.log('Script started'); // Log to verify the script is running
+
+        fetch('okcomputer.json')
+            .then(response => {
+                console.log('Fetch response:', response); // Log the fetch response
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('JSON Data:', data); // Log the JSON data
+                const jsonOutput = document.getElementById('jsonOutput');
+                jsonOutput.textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Error loading or parsing JSON:', error));
+    </script>
+</body>
+</html>

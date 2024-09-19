@@ -684,7 +684,7 @@ transform: translate3d(0, 0, 0);
 }
 
 /* Styling for the 'Save Settings' button */
-#prefsSubmit input#saveSettings {
+#prefsSubmit input#saveSettings, .saveSettings {
     background-color: #0456C6; 
     color: #ecf0f1; /* Light text color to match the theme */
     border: none;
@@ -699,7 +699,7 @@ transform: translate3d(0, 0, 0);
 
 /* Hover and focus effects */
 #prefsSubmit input#saveSettings:hover,
-#prefsSubmit input#saveSettings:focus {
+#prefsSubmit input#saveSettings:focus, .saveSettings:hover {
     background-color: #1266db; /* Slightly lighter blue on hover/focus */
     transform: translateY(-2px); /* Subtle lift effect on hover */
     outline: none;
@@ -996,13 +996,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
-.basicSettingsRescanMediaTab, 
-<<<<<<< HEAD
-.stdclick,
-.advancedSettingsContent
-=======
-.saveSettings
->>>>>>> main
+.basicSettingsRescanMediaTab
 {
     margin: 0 auto;
     margin-right: 30%;
