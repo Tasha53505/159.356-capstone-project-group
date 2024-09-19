@@ -638,9 +638,20 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    
-    // Event delegation to handle dynamic content
+
+    // Event delegation for click events
     document.body.addEventListener('click', function(e) {
+        // console.log(document.getElementById('languageSelect').value)
+
+
+            if (e.target && e.target.id === "languageSelect") {
+                const selectedLanguage = e.target.value;
+                console.log("Language select changed to:", selectedLanguage);
+            }
+
+    
+
+
         if (e.target && e.target.id === 'testButton') {
             console.log('testButton clicked');
         } 
@@ -652,7 +663,6 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("Save Settings BUTTON CLICKED");
             console.log("Selected language:", selectedLanguage); // Log the selected language
 
-
             // Send a JSON-RPC request to update the language in the server.prefs file
             updateLanguageSetting(selectedLanguage);    
         }
@@ -660,8 +670,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-function updateLanguageSetting(language) { // Removed language param to hardcode test. WIll add back latwer
+function updateLanguageSetting(language) { 
     const data = {
         id: 1,
         method: "slim.request",

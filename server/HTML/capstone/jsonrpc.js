@@ -15,6 +15,8 @@ app.post('/jsonrpc.js', (req, res) => {
         
         // Update the server.prefs file
         const filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+        //  For fedora distro - the   path is /var/lib/squeezeboxserver/prefs/server.prefs
+
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) return res.status(500).send('Error reading prefs file');
             
