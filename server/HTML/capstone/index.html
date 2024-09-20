@@ -264,7 +264,7 @@
     
                                     <div class="allMusicSelect" id="allSongs">Songs</div>
 
-                                    <div class="songsList" onclick="loadMusicFolder();">
+                                    <div class="songsList" >
                                         <div style="margin: 3rem;">
                                             <!-- Display song titles - Not working  -->
                                             <!-- title_[% myItem.num %]|[% myItem.title %]
@@ -273,7 +273,36 @@
 
                                             <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button>  -->
 
-                                            <a href="http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96">LIST</a>
+                                            <a href="http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" target="">MUSIC FOLDER</a>
+
+        	                    <!-- From Cmdwrappers -->
+<!--                                             
+                                            [%# this formats the track item %]
+                                            [% BLOCK trackinfo %]
+                                                [% IF item.currentsong %][% item.noHref=1 %]<b>[% END %]
+                                                
+                                                [% IF item.infohref %]
+                                                        <a [% item.infohref %] target="browser" class="browseItemLink">[% ( item.text || item.title ) | html %]</a>
+                                                [% ELSIF item.num || item.num == 0 %]
+                                                        [% UNLESS item.noHref %]<a [% PROCESS songinfoItemHRef %] target="browser">[% END %]
+                                                        [% item.title | html %][% UNLESS item.noHref %]</a>[% END %]
+                                                [%# browse list items %]
+                                                [%# no level info means its a music folder item, and check for itemobj to make sure it isn't just a text item %]
+                                                [% ELSIF item.item || !item.defined('level') && item.itemobj %]
+                                                    <a [% PROCESS songinfoItemHRef %] target="browser" class="browseItemLink">[% item.text | html %]</a>
+                                                [% ELSIF item.songtitle %]
+                                                    <a [% PROCESS songinfoItemHRef %] target="browser" class="browseItemLink">[% item.songtitle | html %]</a>
+                                                [% ELSE %]
+                                                    [% item.text | html %]
+                                                [% END %]
+                                                
+                                                [% IF item.includeArtist && (artist = item.artistsWithAttributes ? item.artistsWithAttributes.0 : item.itemobj.artist) && artist.name != item.noArtist; PROCESS artistsAsHTML.html itemobj = item.itemobj; END %]
+                                                
+                                                [% IF item.includeAlbum && (albumTitle = item.albumTitle || (item.itemobj.album && item.itemobj.album.title)) && albumTitle != item.noAlbum && albumTitle != "" %][% stringFROM %]
+                                                <a [% PROCESS albumItemHRef %] target="browser" class="browseItemLink">[% albumTitle | html %]</a>[% END %]
+                                                [% IF item.currentsong %]</b>[% END %]
+                                            [% END %]
+ -->
 
                                             You have: [% song_count %] total. <br>
                                             Artist [% " " _ stringBY _ " " %] [%- FILTER null %] 
@@ -344,7 +373,7 @@
                                             [% END -%] -->
 
 
-                                            
+
                                     
                                             <div class="">
                                                 <div class="browsedbListItem">
@@ -356,8 +385,8 @@
                                                 </div>
                                             </div>
                                           
-                                                
-                                            <div class="homeMenuSection">
+                                                <!-- This LINKS ALL THE FOLDERS -->
+                                            <!-- <div class="homeMenuSection">
                                                 <div>[% "BROWSE_MUSIC" | string | upper %]</div>
                                                 <ul>
                                                 [%- FOREACH item = additionalLinkOrder.browse %]
@@ -373,7 +402,7 @@
                                                 [%- END; END %]
                                                 </ul>
                                             </div>
-                                            
+                                             -->
                                             
                                             <span 
                                                 style="margin: 0px; padding: 0px; border: 0px;" 

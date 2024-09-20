@@ -184,16 +184,22 @@ document.getElementById('allSongs').addEventListener('click', function() {
 // });
 });
 
-function loadMusicFolder() {
-    const url = "http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96";
+// function loadMusicFolder() {
+//     const url = "http:localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96";
     
-    fetch(url)
-        .then(response => response.text()) 
-        .then(data => {
-            document.getElementById('songsList').innerHTML = data;
-        })
-        .catch(error => console.error('Error fetching the music folder:', error));
-}
+//     fetch(url)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             return response.text(); // Or use .json() if the data is JSON
+//         })
+//         .then(data => {
+//             // Display the fetched data inside the songsList div
+//             document.querySelector('.songsList').innerHTML = data;
+//         })
+//         .catch(error => console.error('Error fetching the music folder:', error));
+// }
 
 
 
