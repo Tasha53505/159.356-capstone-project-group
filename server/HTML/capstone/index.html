@@ -96,7 +96,7 @@
                                         <!-- [% PROCESS settings/footer.html %] -->
                                     </div>
                                 <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button> Works here -->
-
+                           
                                 <div class="basicSettings" id="basicSettings">
 
                                     <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
@@ -110,16 +110,14 @@
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
                                         <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
                                     </div>
+                          
                                     <div class="settingsContent">
 
                                         <div class="basicSettingsLanguageTab active" id="language">
-                                            <div class="language">
-
-                                                
+                                            <div class="language">                                              
                                                 [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
                                                 [% languageoptions.$option %]
                                                 [% END %] 
-
                                 
                                                 <select class="stdedit" name="pref_language" id="languageSelect">
                                                     <option value="DA">Dansk</option>
@@ -141,14 +139,11 @@
                                                     <option value="JA">日本語 *</option>
                                                     <option value="ZH_CN">简体中文 *</option>
                                                 </select>
-
-                                            </div>
-
-                                            
+                                     
+                                            </div>                                            
                                         </div>
 
-                                        
-
+                                       
                                         <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
                                             <div class="mediaLibrary" >
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 

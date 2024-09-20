@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
+const os = require('os');
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -9,12 +11,24 @@ app.use(bodyParser.json());
 app.post('/jsonrpc.js', (req, res) => {
     const { params } = req.body;
 
+// ******************************************************************************
+//                    ****  Language selection ****
+//*******************************************************************************
     // Check if the command is 'pref' and the preference being updated is 'language'
     if (params && params[1][0] === "pref" && params[1][1] === "language") {
         const newLanguage = params[1][2];
         
-        // Update the server.prefs file
-        const filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+        // Update the server.prefs file with file paths for Windows and Linux
+        let filePath;
+        if (os.platform() === 'win32' || os.platform() === 'win64') {
+             filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+        } else if (os.platform() === 'linux') {
+            filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+        } else {
+            return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+        }
+
+
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) return res.status(500).send('Error reading prefs file');
             
@@ -32,7 +46,22 @@ app.post('/jsonrpc.js', (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Server listening on port 3000');
-});
+// ******************************************************************************
+//                    ****  Language selection END  ****
+// *******************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+// app.listen(3000, () => {
+//     console.log('Server listening on port 3000');
+// });
 

@@ -638,20 +638,27 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    
-    // Event delegation to handle dynamic content
+    let selectedLanguage = document.getElementById("languageSelect").value; // Initialize variable
+
+    // Event delegation for click events
     document.body.addEventListener('click', function(e) {
+        // Handle language selection change
+        if (e.target && e.target.id === "languageSelect") {
+            selectedLanguage = e.target.value; // Update variable on change
+            console.log("Language select changed to (languageSelect statement):", selectedLanguage);
+        }
+
+        // Check if the test button was clicked
         if (e.target && e.target.id === 'testButton') {
             console.log('testButton clicked');
         } 
         
+        // Check if the save settings button was clicked
         if (e.target && e.target.id === 'saveSettings') {
             e.preventDefault(); // Prevent default behavior
-            
-            const selectedLanguage = document.getElementById("languageSelect").value;
-            console.log("Save Settings BUTTON CLICKED");
-            console.log("Selected language:", selectedLanguage); // Log the selected language
 
+            console.log("Save Settings BUTTON CLICKED");
+            console.log("Selected language inside saveSettings:", selectedLanguage); // Log the selected language
 
             // Send a JSON-RPC request to update the language in the server.prefs file
             updateLanguageSetting(selectedLanguage);    
@@ -659,9 +666,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-
-function updateLanguageSetting(language) { // Removed language param to hardcode test. WIll add back latwer
+function updateLanguageSetting(language) { 
     const data = {
         id: 1,
         method: "slim.request",
@@ -683,8 +688,6 @@ function updateLanguageSetting(language) { // Removed language param to hardcode
         console.error("Error updating language:", error);
     });
 }
-
-
 
 
 
