@@ -674,6 +674,36 @@ transform: translate3d(0, 0, 0);
         }
         /* ---- Basic Settings Buttons End ---- */
 
+
+/* ------------ Browse Folders CSS (Rescan) ------------ */
+
+        .x-window {
+            background-color: #151d3a;
+            border-radius: 30px;
+        }
+
+        .x-window .x-window-body {
+            background-color: #273047;
+            border-radius: 30px;
+
+
+        }
+
+        #filesystembrowser {
+            background-color: #2d3a5d;
+            border-radius: 30px;
+
+        }
+
+        
+        .x-btn-text {
+            background-color: #1266db;
+            padding: 10%;
+        }
+        
+      
+
+    
         /* ----------- Basic Settings End ----------- */
 
 /* ---------------------- SAVE BUTTON ---------------------- */
