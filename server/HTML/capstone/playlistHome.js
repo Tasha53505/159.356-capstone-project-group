@@ -604,6 +604,13 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 // ----------------- Save settings, speciifically Language -----------------
 // Looking into JSON RPC.js
 document.addEventListener("DOMContentLoaded", function() {
+
+    // Retrieve and set the saved folder path on page load
+    const savedFolderPath = localStorage.getItem('musicFolderPath');
+    if (savedFolderPath) {
+        document.getElementById('musicInputPath').value = savedFolderPath;
+    }
+    
     let selectedLanguage = document.getElementById("languageSelect").value; // Initialize variable
 
     // Event delegation for click events
@@ -630,15 +637,20 @@ document.addEventListener("DOMContentLoaded", function() {
             updateLanguageSetting(selectedLanguage);    
         }
     // -------------------------------- Rescan Settings folder --------------------------------
-          if (e.target && e.target.classList.contains('rescanButton')) {
+          if (e.target && e.target.id === 'rescanButton') {
             e.preventDefault(); // Prevent default behavior
             console.log("Rescan button clicked");
 
             // Get the folder path from the input field (new id: 'musicInputPath')
             const folderPath = document.getElementById('musicInputPath').value;
+           
             if (folderPath) {
-                updateMediaDirSetting(folderPath);
-            }
+                console.log("Rescan put in for folder path:", folderPath);
+                localStorage.setItem('musicFolderPath', folderPath); // this is so that the value is updated
+                updateMediaDirSetting(folderPath); // Update media dir setting with the correct value
+            } else {
+                console.error("Folder path is empty. Please input a valid path.");
+            }            
         }
 
 
@@ -686,7 +698,7 @@ function updateMediaDirSetting(folderPath) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Media directory updated:", data);
+        console.log("Media directory updated to:", data);
     })
     .catch(error => {
         console.error("Error updating media directory:", error);
