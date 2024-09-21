@@ -41,14 +41,40 @@ app.post('/jsonrpc.js', (req, res) => {
                 res.json({ result: 'Language updated successfully' });
             });
         });
+    }    
+    
+// ******************************************************************************
+//                    ****  Rescan Folder Path Setting  ****
+// *******************************************************************************
+     if (params && params[1][0] === "pref" && params[1][1] === "mediadirs") {
+        const newMediaDir = params[1][2];
+
+        let filePath;
+        if (os.platform() === 'win32' || os.platform() === 'win64') {
+            filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+        } else if (os.platform() === 'linux') {
+            filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+        } else {
+            return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+        }
+
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) return res.status(500).send('Error reading prefs file');
+
+            // Replace the mediadirs line with the new directory
+            const updatedData = data.replace(/mediadirs:\s*\S+/g, `mediadirs: ${newMediaDir}`);
+
+            fs.writeFile(filePath, updatedData, (err) => {
+                if (err) return res.status(500).send('Error updating prefs file');
+                res.json({ result: 'Media directory updated successfully' });
+            });
+        });
     } else {
         res.status(400).send('Invalid request');
     }
 });
 
-// ******************************************************************************
-//                    ****  Language selection END  ****
-// *******************************************************************************
+
 
 
 

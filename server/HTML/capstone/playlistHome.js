@@ -603,40 +603,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 // ----------------- Save settings, speciifically Language -----------------
 // Looking into JSON RPC.js
-// document.addEventListener("DOMContentLoaded", function() {
-//     const basicSettings = document.getElementById('basicSettings');
-    
-//     if (basicSettings) {
-//         basicSettings.addEventListener('click', function(e) {
-//             if (e.target && e.target.id === 'saveSettings') {
-//                 e.preventDefault(); // Prevent default behavior
-//                 const selectedLanguage = document.getElementById("languageSelect").value;
-                
-//                 console.log("Save Settings BUTTON CLICKED");
-            
-//                 // Send a JSON-RPC request to update the language in the server.prefs file
-//                 updateLanguageSetting(selectedLanguage);    
-//             }
-//         });
-//     } else {
-//         console.error('Element with ID "basicSettings" not found.');
-//     }
-// });
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     document.getElementById("saveSettings").addEventListener("click", function(e) {
-//         e.preventDefault(); // Prevent the form from submitting the default way
-//         const selectedLanguage = document.getElementById("languageSelect").value;
-        
-//         console.log("Save Settings BUTTON CLICKED");
-    
-//         // Send a JSON-RPC request to update the language in the server.prefs file
-//         updateLanguageSetting(selectedLanguage);
-//     });
-    
-// });
-
-
 document.addEventListener("DOMContentLoaded", function() {
     let selectedLanguage = document.getElementById("languageSelect").value; // Initialize variable
 
@@ -663,9 +629,23 @@ document.addEventListener("DOMContentLoaded", function() {
             // Send a JSON-RPC request to update the language in the server.prefs file
             updateLanguageSetting(selectedLanguage);    
         }
+    // -------------------------------- Rescan Settings folder --------------------------------
+          if (e.target && e.target.classList.contains('rescanButton')) {
+            e.preventDefault(); // Prevent default behavior
+            console.log("Rescan button clicked");
+
+            // Get the folder path from the input field (new id: 'musicInputPath')
+            const folderPath = document.getElementById('musicInputPath').value;
+            if (folderPath) {
+                updateMediaDirSetting(folderPath);
+            }
+        }
+
+
     });
 });
 
+// ------------- Language selection  -------------
 function updateLanguageSetting(language) { 
     const data = {
         id: 1,
@@ -689,5 +669,28 @@ function updateLanguageSetting(language) {
     });
 }
 
+// -------------  Rescan folder path -------------
+function updateMediaDirSetting(folderPath) {
+    const data = {
+        id: 1,
+        method: "slim.request",
+        params: [0, ["pref", "mediadirs", folderPath]] 
+    };
+
+    fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Media directory updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating media directory:", error);
+    });
+}
 
 
