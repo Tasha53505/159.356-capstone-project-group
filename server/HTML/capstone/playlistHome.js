@@ -610,7 +610,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (savedFolderPath) {
         document.getElementById('musicInputPath').value = savedFolderPath;
     }
-    
+
     let selectedLanguage = document.getElementById("languageSelect").value; // Initialize variable
 
     // Event delegation for click events
@@ -650,7 +650,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 updateMediaDirSetting(folderPath); // Update media dir setting with the correct value
             } else {
                 console.error("Folder path is empty. Please input a valid path.");
-            }            
+            }    
+            
+//              const inputField = document.getElementById('musicInputPath');
+
+//   inputField.addEventListener('input', function (evt) {
+//       something(this.value); // Call your function with the current value
+//   });
+
+//   function something(value) {
+//       console.log("Current input value:", value);
+//       // You can call your update function here if needed
+//       // updateMediaDirSetting(value);
+//   }
+
         }
 
 
@@ -704,5 +717,6 @@ function updateMediaDirSetting(folderPath) {
         console.error("Error updating media directory:", error);
     });
 }
+
 
 
