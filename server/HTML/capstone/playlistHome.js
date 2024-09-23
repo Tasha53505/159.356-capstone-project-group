@@ -184,6 +184,24 @@ document.getElementById('allSongs').addEventListener('click', function() {
 // });
 });
 
+// function loadMusicFolder() {
+//     const url = "http:localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96";
+    
+//     fetch(url)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             return response.text(); // Or use .json() if the data is JSON
+//         })
+//         .then(data => {
+//             // Display the fetched data inside the songsList div
+//             document.querySelector('.songsList').innerHTML = data;
+//         })
+//         .catch(error => console.error('Error fetching the music folder:', error));
+// }
+
+
 
 // Play Songs
 function playSong(url) {
@@ -196,6 +214,16 @@ function playSong(url) {
       })
       .catch(error => console.error("Error playing song:", error));
   }
+
+  // Add song to queue
+  function addToQueue(url) {
+    fetch(url)
+      .then(response => response.text())
+      .then(data => {
+        console.log("Song added to queue");
+      })
+      .catch(error => console.error("Error adding song to queue:", error));
+}
 
 
 
@@ -602,41 +630,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
 // ----------------- Save settings, speciifically Language -----------------
-// Looking into JSON RPC.js
-// document.addEventListener("DOMContentLoaded", function() {
-//     const basicSettings = document.getElementById('basicSettings');
-    
-//     if (basicSettings) {
-//         basicSettings.addEventListener('click', function(e) {
-//             if (e.target && e.target.id === 'saveSettings') {
-//                 e.preventDefault(); // Prevent default behavior
-//                 const selectedLanguage = document.getElementById("languageSelect").value;
-                
-//                 console.log("Save Settings BUTTON CLICKED");
-            
-//                 // Send a JSON-RPC request to update the language in the server.prefs file
-//                 updateLanguageSetting(selectedLanguage);    
-//             }
-//         });
-//     } else {
-//         console.error('Element with ID "basicSettings" not found.');
-//     }
-// });
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     document.getElementById("saveSettings").addEventListener("click", function(e) {
-//         e.preventDefault(); // Prevent the form from submitting the default way
-//         const selectedLanguage = document.getElementById("languageSelect").value;
-        
-//         console.log("Save Settings BUTTON CLICKED");
-    
-//         // Send a JSON-RPC request to update the language in the server.prefs file
-//         updateLanguageSetting(selectedLanguage);
-//     });
-    
-// });
-
-
 document.addEventListener("DOMContentLoaded", function() {
     let selectedLanguage = document.getElementById("languageSelect").value; // Initialize variable
 
@@ -673,7 +666,7 @@ function updateLanguageSetting(language) {
         params: [0, ["pref", "language", language]] 
     };
 
-    fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
+    fetch("<http:localhost:9000>/capstone/jsonrpc.js", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
