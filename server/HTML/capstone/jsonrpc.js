@@ -41,14 +41,87 @@ app.post('/jsonrpc.js', (req, res) => {
                 res.json({ result: 'Language updated successfully' });
             });
         });
-    } else {
-        res.status(400).send('Invalid request');
-    }
-});
-
+    }    
+    
 // ******************************************************************************
-//                    ****  Language selection END  ****
+//                    ****  Rescan Folder Path Setting  ****
 // *******************************************************************************
+     if (params && params[1][0] === "pref" && params[1][1] === "mediadirs") {
+        const newMediaDir = params[1][2];
+
+        let filePath;
+        if (os.platform() === 'win32' || os.platform() === 'win64') {
+            filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+        } else if (os.platform() === 'linux') {
+            filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+        } else {
+            return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+        }
+
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) return res.status(500).send('Error reading prefs file');
+            console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+            // Replace the mediadirs line with the new directory
+            // const updatedData = data.replace(/mediadirs:\s*\S+/g, `mediadirs: ${newMediaDir}`);
+            // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ${newMediaDir}`);
+
+            // const updatedData = data.replace(/mediadirs:\s*\S+/g, `mediadirs: ${newMediaDir}`);
+                // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: [${newMediaDir}]`);
+
+            // const updatedData = data.replace(/mediadirs:\s*\S+/g, `mediadirs: HARDCODE JSON TEST`);
+            // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: [HARDCODE JSON TEST]`);
+
+            // const updatedData = data.replace(/mediadirs:.*(\r?\n- .*)*/g, `mediadirs:\n- ${newMediaDir}`);
+            const updatedData = data.replace(/mediadirs:\s*\S+/g, `test`);
+
+
+
+            // Write the updated data back to the file
+            fs.writeFile(filePath, updatedData, (err) => {
+                console.log("Updated prefs file content:", updatedData); // DEBUG
+                if (err) return res.status(500).send('Error updating prefs file');
+                res.json({ result: 'Media directory updated successfully' });
+                });
+            });
+        } else {
+             res.status(400).send('Invalid request');
+        }
+// ******************************************************************************
+//                    ****  Fetch Songs   ****
+// *******************************************************************************
+// if (params && params[0] === "get" && params[1] === "mediadirs") {
+    if (params && params[1][0] === "pref" && params[1][1] === "mediadirs") {
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    console.log("MAYBE failed to read FIle path to read:", filePath);
+
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file: ', err);
+    
+        // Find any mediadirs line
+        const mediadirsLine = data.split('\n').find(line => line.includes('mediadirs:'));
+        if (mediadirsLine) {
+            console.log("Found mediadirs line:", mediadirsLine);
+            res.json({ result: mediadirsLine });
+        } else {
+            res.status(404).send('mediadirs not found');
+        }
+    });
+} else {
+    res.status(400).send('Invalid request');
+}
+    
+});
 
 
 

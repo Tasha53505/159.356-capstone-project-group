@@ -161,15 +161,17 @@
                                                 
 
                                                 <!-- Input to put in folder to find music -->
-                                                <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="mediadirs0" value="C:\Program Files\Songs" size="40">
+                                                <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="test" size="40" >
+
+                                                
                                                 <br />
                                                 <br />
                                                 <!-- Button to browse folders-->
-                                                <input type="button" value="Browse" class="browseFolders" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
+                                                <input type="button" value="Browse" class="browseFolders filesystembrowser" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
                                                 <br />
                                                 <br />
                                                 <!-- Rescan Button -->
-                                                <input name="pref_rescan_mediadir0" type="submit" value="Rescan" class="stdclick rescanButton disableOnScan">
+                                                <input name="pref_rescan_mediadir0" type="submit" value="Rescan" class="stdclick rescanButton disableOnScan" id="rescanButton">
                                                 
 
                                                 <!-- [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %]
@@ -261,7 +263,7 @@
                             <div class="accordionPanel">
                                 <div class="allMusicContainer">    
                            
-    
+                                    <!-- For now changing from div to button to try and read server.prefs file. -->
                                     <div class="allMusicSelect" id="allSongs">Songs</div>
 
                                     <div class="songsList" >

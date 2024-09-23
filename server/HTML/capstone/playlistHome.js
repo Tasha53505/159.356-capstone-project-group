@@ -203,6 +203,8 @@ document.getElementById('allSongs').addEventListener('click', function() {
 
 
 
+
+
 // Play Songs
 function playSong(url) {
 
@@ -630,8 +632,13 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
 // ----------------- Save settings, speciifically Language -----------------
+// Looking into JSON RPC.js
 document.addEventListener("DOMContentLoaded", function() {
-    let selectedLanguage = document.getElementById("languageSelect").value; // Initialize variable
+
+    let selectedLanguage = document.getElementById("languageSelect").value; 
+    let folderPath = document.getElementById('musicInputPath').value;
+
+
 
     // Event delegation for click events
     document.body.addEventListener('click', function(e) {
@@ -655,13 +662,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Send a JSON-RPC request to update the language in the server.prefs file
             updateLanguageSetting(selectedLanguage);    
+            updateMediaDirSetting(folderPath);
         }
+    // -------------------------------- Rescan Settings folder --------------------------------
+          if (e.target && e.target.id === 'rescanButton') {
+            e.preventDefault(); // Prevent default behavior
+            console.log("Rescan button clicked");
+
+            // Get the folder path from the input field (new id: 'musicInputPath')
+            let folderPath = document.getElementById('musicInputPath').value;
+           
+            if (folderPath) {
+                console.log("Rescan put in for folder path:", folderPath);
+
+                updateMediaDirSetting(folderPath); // Update media dir setting with the correct value
+            } else {
+                console.error("Folder path is empty. Please input a valid path.");
+            }    
+            
+
+
+        }
+
+
     });
 });
 
+// ------------- Language selection  -------------
 function updateLanguageSetting(language) { 
     const data = {
-        id: 1,
+        id: 2,
         method: "slim.request",
         params: [0, ["pref", "language", language]] 
     };
@@ -682,5 +712,59 @@ function updateLanguageSetting(language) {
     });
 }
 
+// -------------  Rescan folder path -------------
+function updateMediaDirSetting(folderPath) {
+    const data = {
+        id: 1,
+        method: "slim.request",
+        params: [0, ["pref", "mediadirs", folderPath]] 
+    };
 
+    fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Media directory updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating media directory:", error);
+    });
+}
+
+
+
+
+// document.getElementById('allSongs').addEventListener('click', function() {
+//     // Create the JSON-RPC request to get the media directories
+//     const data = {
+//         id: 1,
+//         method: "slim.request",
+//         params: [0, ["pref", "mediadirs"]] 
+//     };
+
+//     fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.result) {
+//             const folderPath = data.result; // Get the directory path
+//             console.log("Media directory path:", folderPath);
+//         } else {
+//             console.error("No result found:", data);
+//         }
+//     })
+//     .catch(error => {
+//         console.error("Error fetching media directories:", error);
+//     });
+// });
 

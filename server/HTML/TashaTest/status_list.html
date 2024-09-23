@@ -1,14 +1,14 @@
 [% IF item.currentsong %]<a name="currentsong"></a>[% END %]
-<!-- <div [% IF item.odd %]class="odd"[% END %] [% IF not item.odd %]class="even"[% END %] [% IF item.currentsong %]id="currentListItem"[% END %]> -->
-<div [% IF item.odd %]class="odd [% IF item.currentsong %]currentSong[% END %]"[% END %] [% IF not item.odd %]class="even [% IF item.currentsong %]currentSong[% END %]"[% END %] id="playlistSong[% item.num %]">
+<div [% IF item.odd %]class="odd"[% END %] [% IF not item.odd %]class="even"[% END %] [% IF item.currentsong %]id="currentListItem"[% END %]>
 	<div class="browsedbListItem">
 		[% IF item.currentsong %]
-		<a class="exboldlisting" href="[% webroot %][% statusroot %]?p0=playlist&amp;p1=jump&amp;p2=[% item.num %]&amp;start=[% start %]&amp;player=[% playerURI %]">
+		<span class="exboldlisting">
 		[% ELSE %]
-		<a class="exlisting" href="[% webroot %][% statusroot %]?p0=playlist&amp;p1=jump&amp;p2=[% item.num %]&amp;start=[% start %]&amp;player=[% playerURI %]">
+		<span class="exlisting">
 		[% END %]
 		<a href="[% webroot %]songinfo.html?item=[% item.id %]&amp;player=[% playerURI %]" target="browser">[% item.title | html %]</a>
 		[% IF item.includeAlbum && item.album.defined && item.album != noAlbum %]
+			[% stringFROM %]
 			[% IF item.album_id %]
 				<a href="[% webroot %]clixmlbrowser/clicmd=browselibrary+items&amp;mode=albums&amp;linktitle=[% stringALBUM %]%20([% item.album | uri %])&amp;album_id=[% item.album_id %]&amp;player=[% playerURI %]/index.html?index=0" target="browser">[% item.album | html %]</a>
 			[% ELSE; item.album; END %]
@@ -17,29 +17,22 @@
 			IF item.artistsWithAttributes && item.artistsWithAttributes.0.name != noArtist; 
 				PROCESS artistsAsHTML.html;
 			ELSIF item.artist && item.artist != noArtist;
+				stringBY;
 				" ";
 				item.artist;
 			END;
 		END %]
-		</a>
+		</span>
 		[%# remote_title is for radio streams %]
 		[% IF item.remote_title %]
 			<br />
 			[% item.remote_title | html %]
 		[% END %]
 		<div class="playlistControls">
-			<button onclick="SqueezeJS.UI.setProgressCursor();Main.playlist.request('index', 'playlistSong[% item.num %]')" target="status">
-				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
-					<path fill="#EFF8FC" fill-opacity="1" stroke="#EFF8FC" stroke-dasharray="40" stroke-dashoffset="40" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l10 6l-10 6Z">
-					</path>
-				</svg>
-			</button>
-
-			<button onclick="SqueezeJS.UI.setProgressCursor();Main.playlist.request('delete', 'playlistSong[% item.num %]')" target="status">
-				<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
-					<path fill="none" stroke="#EFF8FC" stroke-width="2" d="M4 4l12 12M4 16l12-12" />
-				</svg>
-			</button>
+			<a href="[% webroot %][% statusroot %]?p0=playlist&amp;p1=jump&amp;p2=[% item.num %]&amp;start=[% start %]&amp;player=[% playerURI %]" target="status">[% stringPLAY %]</a>
+			<a href="[% webroot %][% statusroot %]?p0=playlist&amp;p1=move&amp;p2=[% item.num %]&amp;p3=%2B1&amp;start=[% start %]&amp;player=[% playerURI %]" target="status">[% stringDOWN %]</a>
+			<a href="[% webroot %][% statusroot %]?p0=playlist&amp;p1=move&amp;p2=[% item.num %]&amp;p3=%2D1&amp;start=[% start %]&amp;player=[% playerURI %]" target="status">[% stringUP %]</a>
+			<a href="[% webroot %][% statusroot %]?p0=playlist&amp;p1=delete&amp;p2=[% item.num %]&amp;start=[% start %]&amp;player=[% playerURI %]" target="status">[% stringREMOVE_FROM_PLAYLIST %]</a>
 		</div>
 	</div>
 </div>
