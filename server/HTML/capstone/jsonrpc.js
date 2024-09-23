@@ -60,18 +60,33 @@ app.post('/jsonrpc.js', (req, res) => {
 
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) return res.status(500).send('Error reading prefs file');
+            console.log("Current prefs file data DEBUG:", data); //  DEBUG
 
             // Replace the mediadirs line with the new directory
-            const updatedData = data.replace(/mediadirs:\s*\S+/g, `mediadirs: ${newMediaDir}`);
+            // const updatedData = data.replace(/mediadirs:\s*\S+/g, `mediadirs: ${newMediaDir}`);
+            // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ${newMediaDir}`);
 
+            // const updatedData = data.replace(/mediadirs:\s*\S+/g, `mediadirs: ${newMediaDir}`);
+                // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: [${newMediaDir}]`);
+
+            // const updatedData = data.replace(/mediadirs:\s*\S+/g, `mediadirs: HARDCODE JSON TEST`);
+            // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: [HARDCODE JSON TEST]`);
+
+            // const updatedData = data.replace(/mediadirs:.*(\r?\n- .*)*/g, `mediadirs:\n- ${newMediaDir}`);
+            const updatedData = data.replace(/mediadirs:\s*\S+/g, `test`);
+
+
+
+            // Write the updated data back to the file
             fs.writeFile(filePath, updatedData, (err) => {
+                console.log("Updated prefs file content:", updatedData); // DEBUG
                 if (err) return res.status(500).send('Error updating prefs file');
                 res.json({ result: 'Media directory updated successfully' });
+                });
             });
-        });
-    } else {
-        res.status(400).send('Invalid request');
-    }
+        } else {
+             res.status(400).send('Invalid request');
+        }
 // ******************************************************************************
 //                    ****  Fetch Songs   ****
 // *******************************************************************************
@@ -107,8 +122,6 @@ app.post('/jsonrpc.js', (req, res) => {
 }
     
 });
-
-
 
 
 
