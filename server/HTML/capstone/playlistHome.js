@@ -134,55 +134,59 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ------------------------ Code to fetch all Songs ------------------------
-document.getElementById('allSongs').addEventListener('click', function() {
-    // Create a new container for the songs
-    var newAllSongsContainer = document.createElement('div');
-    newAllSongsContainer.classList.add('newAllSongsContainer');
+// document.getElementById('allSongs').addEventListener('click', function() {
+//     // Create a new container for the songs
+//     var newAllSongsContainer = document.createElement('div');
+//     newAllSongsContainer.classList.add('newAllSongsContainer');
 
-    var animationBtn = document.querySelector('.animationBtn');
-    animationBtn.style.display ='none';
+//     var animationBtn = document.querySelector('.animationBtn');
+//     animationBtn.style.display ='none';
 
-    // Add back button and header
-    newAllSongsContainer.innerHTML = 
-        `<h3>Songs</h3>
+//     // Add back button and header
+//     newAllSongsContainer.innerHTML = 
+//         `<h3>Songs</h3>
 
-        <button class="backButton">
-            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
-                <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
-                <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
-            </svg>
-        </button>
-        <div id="musicList"></div>`; 
+//         <button class="backButton">
+//             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+//                 <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
+//                 <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
+//             </svg>
+//         </button>
+//         <div id="musicList"></div>`; 
 
-    // Append the new container to the body
-    document.body.appendChild(newAllSongsContainer);
+//     // Append the new container to the body
+//     document.body.appendChild(newAllSongsContainer);
 
-    // Clone the songsList element to avoid issues with the original
-    var songsList = document.querySelector('.songsList').cloneNode(true);
-    songsList.style.display = 'block'; // Display it
-    newAllSongsContainer.querySelector('#musicList').appendChild(songsList);
+//     // Clone the songsList element to avoid issues with the original
+//     var songsList = document.querySelector('.songsList').cloneNode(true);
+//     songsList.style.display = 'block'; // Display it
+//     newAllSongsContainer.querySelector('#musicList').appendChild(songsList);
 
-    // Show the new container
-    setTimeout(function () {
-        newAllSongsContainer.classList.add('shownewAllSongsContainer');
-    }, 10);
+//     // Show the new container
+//     setTimeout(function () {
+//         newAllSongsContainer.classList.add('shownewAllSongsContainer');
+//     }, 10);
 
-    // Back Button functionality
-    newAllSongsContainer.querySelector('.backButton').addEventListener('click', function () {
-        newAllSongsContainer.classList.remove('shownewAllSongsContainer');
-        setTimeout(function () {
-            newAllSongsContainer.remove();
-            animationBtn.style.display = 'block';
-        }, 500); // Animation time + back functionality
-    });
+//     // Back Button functionality
+//     newAllSongsContainer.querySelector('.backButton').addEventListener('click', function () {
+//         newAllSongsContainer.classList.remove('shownewAllSongsContainer');
+//         setTimeout(function () {
+//             newAllSongsContainer.remove();
+//             animationBtn.style.display = 'block';
+//         }, 500); // Animation time + back functionality
+//     });
 
-//     // Use event delegation to handle dynamic content // THIS IS the code that made testButton trigger its event inside a popup code
-// document.body.addEventListener('click', function(event) {
-//     if (event.target && event.target.id === 'testButton') {
-//         console.log('testButton clicked');
-//     }
+// //     // Use event delegation to handle dynamic content // THIS IS the code that made testButton trigger its event inside a popup code
+// // document.body.addEventListener('click', function(event) {
+// //     if (event.target && event.target.id === 'testButton') {
+// //         console.log('testButton clicked');
+// //     }
+// // });
 // });
-});
+
+// ------------- Fetch all songs and log to cosnole  -------------
+
+
 
 
 // Play Songs
@@ -719,4 +723,34 @@ function updateMediaDirSetting(folderPath) {
 }
 
 
+
+
+document.getElementById('allSongs').addEventListener('click', function() {
+    // Create the JSON-RPC request to get the media directories
+    const data = {
+        id: 1,
+        method: "slim.request",
+        params: [0, ["pref", "mediadirs"]] 
+    };
+
+    fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.result) {
+            const folderPath = data.result; // Get the directory path
+            console.log("Media directory path:", folderPath);
+        } else {
+            console.error("No result found:", data);
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching media directories:", error);
+    });
+});
 
