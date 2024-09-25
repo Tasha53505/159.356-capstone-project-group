@@ -53,6 +53,9 @@ var repeat = new SqueezeJS.UI.Buttons.Repeat({ // Repeat
     noText: true
 });
 
+new SqueezeJS.UI.PlaytimeProgress('ctrlProgress');
+
+
 var playPause = document.getElementById("playPause");
 var repeatDisplay = document.getElementById("repeatButton");
 var shuffleDisplay = document.getElementById("shuffleButton");
