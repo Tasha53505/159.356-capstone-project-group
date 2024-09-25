@@ -679,11 +679,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 console.error("Folder path is empty. Please input a valid path.");
             }    
-            
-
-
         }
-
 
     });
 });
@@ -713,14 +709,14 @@ function updateLanguageSetting(language) {
 }
 
 // -------------  Rescan folder path -------------
-function updateMediaDirSetting(folderPath) {
+function updateMediaDirSetting(folderPath) {9
     const data = {
         id: 1,
         method: "slim.request",
         params: [0, ["pref", "mediadirs", folderPath]] 
     };
 
-    fetch("http://161.29.197.94.localhost:9000/capstone/jsonrpc.js", {
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
