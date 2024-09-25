@@ -300,9 +300,35 @@ body {
     padding-right: 10%;
 }
 
+
+/* PROGRESS BAR */
+
+#playtimePanel{
+    width: 75%;
+    height: 30px;
+    overflow: hidden;
+    padding-left: 45px;
+    position: relative;
+    margin-top: 20px;
+    overflow: hidden;
+    align-self:end;
+    justify-self:center;
+}
+
+#ctrlPlaytime{
+    position: absolute;
+    top: 0px;
+}
+
+#ctrlRemainingTime{
+    right: 50px;
+    position: absolute;
+    top: 0px;
+}
+
 #ctrlProgress{
-    height: 12px;
-    margin: 2px 100px 0 40px;
+    height: 15px;
+    margin: 0px 100px 0 40px;
     overflow: hidden;
     cursor: pointer;
 }

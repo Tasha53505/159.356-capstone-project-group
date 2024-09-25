@@ -31,6 +31,12 @@ document.querySelector('.album').addEventListener('click', function() {
 
 // ----------------------------------------- //
 
+// -- PROGRESS BAR -- 
+
+new SqueezeJS.UI.PlaytimeProgress('ctrlProgress');
+new SqueezeJS.UI.Playtime('ctrlPlaytime');
+new SqueezeJS.UI.PlaytimeRemaining('ctrlRemainingTime');
+
 
 // -- PLAYBACK BUTTONS --
 
@@ -52,9 +58,6 @@ var repeat = new SqueezeJS.UI.Buttons.Repeat({ // Repeat
     renderTo: 'repeatButton',
     noText: true
 });
-
-new SqueezeJS.UI.PlaytimeProgress('ctrlProgress');
-
 
 var playPause = document.getElementById("playPause");
 var repeatDisplay = document.getElementById("repeatButton");
