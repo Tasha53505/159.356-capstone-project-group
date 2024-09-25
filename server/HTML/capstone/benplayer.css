@@ -120,20 +120,6 @@ body {
     position: relative;
 }
 
-.bar {
-    width: 75%;
-    height: 6px;
-    background-color: #EFF8FC;
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-    align-self:end;
-    justify-self:center;
-    margin-left:5%;
-    margin-right: 5%;
-    margin-top: 3%;
-}
-
 .buttons {
     display: flex;
     align-items: center;
