@@ -49,6 +49,7 @@ app.post('/jsonrpc.js', (req, res) => {
      if (params && params[1][0] === "pref" && params[1][1] === "mediadirs") {
         // const newMediaDir = params[1][2];
         const newMediaDir = decodeURIComponent(decodeURIComponent(params[1][2])); // Double unescape
+        //    const newMediaDir = params[1][2][0];
 
 
         let filePath;
@@ -65,10 +66,6 @@ app.post('/jsonrpc.js', (req, res) => {
             console.log("Current prefs file data DEBUG:", data); //  DEBUG
 
             // Replace the mediadirs line with the new directory
-            // const updatedData = data.replace(/mediadirs:\s*\S+/g, `test`);
-            // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);
-                    // const updatedData = data.replace('mediadirs: []', 'mediadirs: test');
-                // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ${newMediaDir}`);
             const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);
 
 

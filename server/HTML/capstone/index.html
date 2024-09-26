@@ -63,7 +63,6 @@
                                 Settings </button>
 
 
-                                 <!-- <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings" style="background-color: #23305f;"> -->
 
 
                                     <div class="advancedSettingsPlugin">
@@ -96,7 +95,6 @@
                                 
                                         <!-- [% PROCESS settings/footer.html %] -->
                                     </div>
-                                <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button> Works here -->
                            
                                 <div class="basicSettings" id="basicSettings">
 
@@ -107,7 +105,6 @@
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
-                                        <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
                                     </div>
                           
                                     <div class="settingsContent">
@@ -121,7 +118,7 @@
                                                 <select class="stdedit" name="pref_language" id="languageSelect">
                                                     <option value="DA">Dansk</option>
                                                     <option value="DE">Deutsch</option>
-                                                    <option value="EN">English</option>
+                                                    <option value="EN" selected>English</option>
                                                     <option value="EN_GB">English (British) *</option>
                                                     <option value="ES">Español</option>
                                                     <option value="FR">Français</option>
@@ -161,22 +158,27 @@
                                                 
 
                                                 <!-- Input to put in folder to find music -->
-                                                <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="/Program Files/Songs" size="40" >
-                                                
-                                                <div class="prefs">
-			
-                                                    <select class="stdedit disableOnScan" name="pref_rescantype" id="rescantype">
-                                            
+                                                 <form id="rescanMediaForm" class="">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="" size="40" >
                                                     
-                                                        <option value="1rescan">Look for new and changed media files</option>
-                                                        <option value="2wipedb">Clear library and rescan everything</option>
-                                                        <option value="3playlist">Only rescan playlists</option>
-                                                        <option value="4onlinelibrary">Only rescan online music library</option>
-                                                    </select>
-                                                    <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan" id="rescanButton"   value="Rescan"><br><br>
+                                                    <div class="prefs">
+                
+                                                        <select class="stdedit disableOnScan" name="pref_rescantype" id="rescantype">
+                                                
+                                                        
+                                                            <option value="1rescan">Look for new and changed media files</option>
+                                                            <option value="2wipedb">Clear library and rescan everything</option>
+                                                            <option value="3playlist">Only rescan playlists</option>
+                                                            <option value="4onlinelibrary">Only rescan online music library</option>
+                                                        </select>
+
+
+                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan" id="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
                                                     <a id="progressLink" href="/capstone/settings/server/status.html?player=">View Previous Scan Details</a>
                                                 
                                                     &nbsp;</div>
+                                                </form>
+                                    
                                                 
                                                 <br />
                                                 <br />
@@ -186,33 +188,6 @@
                                                 <input type="button" value="Browse" class="browseFolders filesystembrowser" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
                                                 <br />
                                                 <br />
-                                                <!-- Rescan Button -->
-                                                <!-- <input name="pref_rescan_mediadir0" type="submit" value="Rescan" class="stdclick rescanButton disableOnScan" id="rescanButton"> -->
-                                                
-
-                                                <!-- [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %]
-                                                <table border="0" cellspacing="0">
-                                                    <tr>
-                                                        <th>[% 'FOLDER' | string %]</th>
-                                                        <th>[% 'MUSIC' | string %]&nbsp;&n9bsp;</th>
-                                                        <th>&nbsp;</th>
-                                                    </tr>
-
-                                                    [% FOREACH mediadir = mediadirs %]
-                                                    <tr>
-                                                        <td class="[% odd ? "odd" : "even" %]">
-                                                            <input type="text" class="stdedit selectFolder" name="pref_mediadirs[% loop.index %]" id="mediadirs[% loop.index %]" value="[% mediadir.path %]" size="40"><br/>&nbsp;
-                                                        </td>
-                                                        <td class="[% odd ? "odd" : "even" %]" align="center">
-                                                            <input type=checkbox [% IF !mediadir.audio %]checked="1" [% END %] class="stdedit" name="pref_ignoreInAudioScan[% loop.index %]" id="ignoreInAudioScan[% loop.index %]" value="1" />
-                                                        </td>
-                                                        <td class="[% odd ? "odd" : "even" %]" align="center" style="padding: 0 5px">
-                                                            [% IF mediadir.path %]<input name="pref_rescan_mediadir[% loop.index %]" type=submit value="[% "SETUP_RESCAN_BUTTON" | string %]" class="stdclick disableOnScan" [% IF scanning %]disabled[% END %] />[% END %]
-                                                        </td>
-                                                    </tr>
-                                                    [% END %]
-                                                </table>
-                                            [% END %] -->
 
 
                                             </div>
@@ -225,42 +200,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="basicSettingsRescanMediaTab" id="rescanMedia">
-                                            <div class="rescanMedia" >
-                                                [% WRAPPER setting title="SETUP_RESCAN" desc="SETUP_RESCAN_DESC" %] 
-                                                [% option.value | string %]
-                                                
-                                                [% IF scanning %][% "SETUP_VIEW_SCANNING" | string %][% ELSE %][% "SETUP_VIEW_NOT_SCANNING" | string %][% END %] [% END %]
-                                            </div>
-        
-                                        </div>
+                                
 
                                   </div>
-                                    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+                                  <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
 
-                                    <!-- <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
-                                        <input type="hidden" name="saveSettings" value="1">
-                                    </div> -->
-                                    <!-- <form id="settingsForm"> 
-                                        <div id="prefsSubmit">
-                                            <input name="saveSettings" id="saveSettings" type="submit" class="saveSettings" value="Save Settings">
-                                            <input type="hidden" name="saveSettings" value="1">
-                                        </div>
-                                    </form>
-                                    
-                                     -->
-
-                                     <!-- <form id="settingsForm"> 
-                                        <div id="prefsSubmit">
-                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
-                                        </div>
-                                    </form> -->
-                                    <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button>  -->
-
-                                 <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
-
-                                    
-                                    <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
 
 
 
@@ -284,43 +228,11 @@
 
                                     <div class="songsList" >
                                         <div style="margin: 3rem;">
-                                            <!-- Display song titles - Not working  -->
-                                            <!-- title_[% myItem.num %]|[% myItem.title %]
-                                            artist_[% myItem.num %]|[% PROCESS artistsAsHTML.html itemobj = myItem.itemobj %]
-                                            album_[% myItem.num %]|[% myItem.album.title %] -->
-
-                                            <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button>  -->
+                            
 
                                             <a href="http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" target="">MUSIC FOLDER</a>
 
-        	                    <!-- From Cmdwrappers -->
-<!--                                             
-                                            [%# this formats the track item %]
-                                            [% BLOCK trackinfo %]
-                                                [% IF item.currentsong %][% item.noHref=1 %]<b>[% END %]
-                                                
-                                                [% IF item.infohref %]
-                                                        <a [% item.infohref %] target="browser" class="browseItemLink">[% ( item.text || item.title ) | html %]</a>
-                                                [% ELSIF item.num || item.num == 0 %]
-                                                        [% UNLESS item.noHref %]<a [% PROCESS songinfoItemHRef %] target="browser">[% END %]
-                                                        [% item.title | html %][% UNLESS item.noHref %]</a>[% END %]
-                                                [%# browse list items %]
-                                                [%# no level info means its a music folder item, and check for itemobj to make sure it isn't just a text item %]
-                                                [% ELSIF item.item || !item.defined('level') && item.itemobj %]
-                                                    <a [% PROCESS songinfoItemHRef %] target="browser" class="browseItemLink">[% item.text | html %]</a>
-                                                [% ELSIF item.songtitle %]
-                                                    <a [% PROCESS songinfoItemHRef %] target="browser" class="browseItemLink">[% item.songtitle | html %]</a>
-                                                [% ELSE %]
-                                                    [% item.text | html %]
-                                                [% END %]
-                                                
-                                                [% IF item.includeArtist && (artist = item.artistsWithAttributes ? item.artistsWithAttributes.0 : item.itemobj.artist) && artist.name != item.noArtist; PROCESS artistsAsHTML.html itemobj = item.itemobj; END %]
-                                                
-                                                [% IF item.includeAlbum && (albumTitle = item.albumTitle || (item.itemobj.album && item.itemobj.album.title)) && albumTitle != item.noAlbum && albumTitle != "" %][% stringFROM %]
-                                                <a [% PROCESS albumItemHRef %] target="browser" class="browseItemLink">[% albumTitle | html %]</a>[% END %]
-                                                [% IF item.currentsong %]</b>[% END %]
-                                            [% END %]
- -->
+        	               
 
                                             You have: [% song_count %] total. <br>
                                             Artist [% " " _ stringBY _ " " %] [%- FILTER null %] 
@@ -373,24 +285,7 @@
                         
                                             <div id="browsedbList" style="background-color: #1b2444;"></div>
                                     
-                                            <!-- [% UNLESS leftControls; leftControls = 'browsecontrols'; END %] 
-                                            [% WRAPPER contentitem 
-                                                leftcontrols=leftControls 
-                                                itemobj=item.itemobj 
-                                                attributes=item.attributes 
-                                                odd=item.odd 
-                                                anchor=item.anchor 
-                                                showdescend=item.showdescend 
-                                                showplay=item.showplay 
-                                                showplayall=item.showplayall 
-                                                playallhref=item.playallhref 
-                                                addallhref=item.addallhref 
-                                                href=item.href 
-                                            %] 
-                                            [% UNLESS itemInfoTemplate; itemInfoTemplate = 'iteminfo'; END; PROCESS $itemInfoTemplate %] 
-                                            [% END -%] -->
-
-
+                    
 
                                     
                                             <div class="">

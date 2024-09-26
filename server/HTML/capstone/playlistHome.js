@@ -507,7 +507,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             if (basicSettingsContainer) {
                 basicSettingsContainer.style.display = 'block';
             } else {
-                console.error('Basic settings container not found.');
+                // console.log('Basic settings container not found.');
             }
         }
     
@@ -517,7 +517,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             if (basicSettingsContainer) {
                 basicSettingsContainer.style.display = 'none';
             } else {
-                console.error('Basic settings container not found.');
+                // console.log('Basic settings container not found.');
             }
         }
     
@@ -662,31 +662,75 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Send a JSON-RPC request to update the language in the server.prefs file
             updateLanguageSetting(selectedLanguage);    
-            updateMediaDirSetting(folderPath);
         }
     // -------------------------------- Rescan Settings folder --------------------------------
-          if (e.target && e.target.id === 'rescanButton') {
-            e.preventDefault(); // Prevent default behavior
-            console.log("Rescan button clicked");
 
-            // Get the folder path from the input field (new id: 'musicInputPath')
-            let folderPath = document.getElementById('musicInputPath').value;
+  
+
+        //   if (e.target && e.target.id === 'rescanButton') {
+        //     e.preventDefault(); // Prevent default behavior
+        //     console.log("Rescan button clicked");
+
+        //     const form = document.getElementById('rescanMediaForm');
+
+        //     // Use dynamic field name or ID if needed
+        //     // const dynamicFieldName = "pref_mediadirs0";  // Dynamically constructed
+        //     // let folderPath = form[dynamicFieldName].value.trim();  // Access form input dynamically
+        //     // let folderPath = document.getElementById('musicInputPath').value.trim();
+        //     let folderPath = form["pref_mediadirs0"].value;
+
+
+
+
+        //     // Get the folder path from the input field ( id: 'musicInputPath')
+        //     // let folderPath = document.getElementById('musicInputPath').value;
+        //     console.log("Captured folder path:", folderPath);
+
            
-            if (folderPath) {
-                console.log("Rescan put in for folder path:", folderPath);
+        //     if (folderPath) {
+        //         console.log("Rescan put in for folder path:", folderPath);
 
-                // updateMediaDirSetting(folderPath); // Update media dir setting with the correct value
-                // updateMediaDirSetting(["/C:/Program Files/Songs"]); 
-                updateMediaDirSetting(folderPath);
+        //         updateMediaDirSetting(folderPath);
 
 
-            } else {
-                console.error("Folder path is empty. Please input a valid path.");
-            }    
-        }
+        //     } else {
+        //         console.error("Folder path is empty. Please input a valid path.");
+        //     }    
+        // }
 
     });
 });
+
+
+  //  Testing dynmaic code with random form TO DELETE
+  function rescanMediaForm(form) {
+    console.log("Rescan button clicked");
+
+    // const form = document.getElementById('rescanMediaForm');
+
+
+    let folderPath = form["pref_mediadirs0"].value;
+
+
+
+
+    // Get the folder path from the input field ( id: 'musicInputPath')
+    // let folderPath = document.getElementById('musicInputPath').value;
+    console.log("Captured folder path:", folderPath);
+
+   
+    if (folderPath) {
+        console.log("Rescan put in for folder path:", folderPath);
+
+        updateMediaDirSetting(folderPath);
+
+
+    } else {
+        console.error("Folder path is empty. Please input a valid path.");
+    }    
+}
+
+
 
 // ------------- Language selection  -------------
 function updateLanguageSetting(language) { 
@@ -722,6 +766,9 @@ function updateMediaDirSetting(folderPath) {
         params: [ "", ["pref", "mediadirs", formattedPath]]
     };
 
+
+    console.log("Sending this data to server:", data); // DEBUG
+
     fetch("http:localhost:9000/capstone/jsonrpc.js", {
         method: "POST",
         headers: {
@@ -737,7 +784,6 @@ function updateMediaDirSetting(folderPath) {
         console.error("Error updating media directory:", error);
     });
 }
-
 
 
 
