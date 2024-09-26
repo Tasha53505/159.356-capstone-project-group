@@ -118,7 +118,7 @@
                                                 <select class="stdedit" name="pref_language" id="languageSelect">
                                                     <option value="DA">Dansk</option>
                                                     <option value="DE">Deutsch</option>
-                                                    <option value="EN">English</option>
+                                                    <option value="EN" selected>English</option>
                                                     <option value="EN_GB">English (British) *</option>
                                                     <option value="ES">Español</option>
                                                     <option value="FR">Français</option>
@@ -158,22 +158,36 @@
                                                 
 
                                                 <!-- Input to put in folder to find music -->
-                                                <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="/Program Files/Songs" size="40" >
-                                                
-                                                <div class="prefs">
-			
-                                                    <select class="stdedit disableOnScan" name="pref_rescantype" id="rescantype">
-                                            
+                                                <!-- <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="/Program Files/Songs" size="40" > -->
+                                                 <form id="rescanMediaForm" class="">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="" size="40" >
+                                                    <!-- <input type="text" class="stdedit selectFolder" name="qty1" id="musicInputPath" value="" size="40" > -->
                                                     
-                                                        <option value="1rescan">Look for new and changed media files</option>
-                                                        <option value="2wipedb">Clear library and rescan everything</option>
-                                                        <option value="3playlist">Only rescan playlists</option>
-                                                        <option value="4onlinelibrary">Only rescan online music library</option>
-                                                    </select>
-                                                    <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan" id="rescanButton"   value="Rescan"><br><br>
+                                                    <div class="prefs">
+                
+                                                        <select class="stdedit disableOnScan" name="pref_rescantype" id="rescantype">
+                                                
+                                                        
+                                                            <option value="1rescan">Look for new and changed media files</option>
+                                                            <option value="2wipedb">Clear library and rescan everything</option>
+                                                            <option value="3playlist">Only rescan playlists</option>
+                                                            <option value="4onlinelibrary">Only rescan online music library</option>
+                                                        </select>
+
+
+                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan" id="rescanButton" onclick="checkVal(this.form); return false;"   value="Rescan"><br><br>
                                                     <a id="progressLink" href="/capstone/settings/server/status.html?player=">View Previous Scan Details</a>
                                                 
                                                     &nbsp;</div>
+                                                </form>
+                                                <!-- TO DELETE -->
+                                                    <form style="background-color: #1b2444;">
+                                                        <input type="text" name="qty1" value="input1" />
+                                                         <input type="text" name="qty2" value="input2" />
+                                                         <input type="text" name="qty3" value="input3" />
+                                                        
+                                                        <input type="submit" value="Submit" onClick="checkVal(this.form); return false;" />
+                                                    </form>
                                                 
                                                 <br />
                                                 <br />
