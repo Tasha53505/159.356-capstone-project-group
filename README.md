@@ -113,7 +113,11 @@ For detiled information on this problem  Ive documented my findngs SPECIIFCALLY 
 If you're having issues with buttons in general - the fix is described in Detail in https://github.com/Tasha53505/159.356-capstone-project-group/issues/35 
  - it's all due to some of the components being loaded AFTER the DOM
  - but ALSO in tangent with needing to use the highest element to listen for clicks (Event delgation with the body element) - so that even listeners attached AFTER the DOM has rendered, it'll still be recognised)
-
+---
+#Issues with File paths
+Documented issue here: https://github.com/Tasha53505/159.356-capstone-project-group/issues/73
+(Specifically for the rescan button) - but this will help in general, is that `C:` is NOT a valid path, it needed to be `C/` --> Also, I needed to format it so that it was a 2D Array
+   ` const formattedPath = [folderPath];`  and `const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);`
 
 
 
