@@ -677,7 +677,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // updateMediaDirSetting(folderPath); // Update media dir setting with the correct value
                 // updateMediaDirSetting(["/C:/Program Files/Songs"]); 
-                updateMediaDirSetting("/C:/Program Files/Songs");
+                updateMediaDirSetting(folderPath);
 
 
             } else {
