@@ -192,14 +192,32 @@
 
                                             </div>
                                         </div>
+
+
                                         <div class="basicSettingsPlaylistsTab" id="playlistsFolder">
                                             <div class="playListsFolder">
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
                                                 [% prefs.pref_playlistdir | html %]
+                                                <p>Format it like this (NOTE - the ":" is NEEDED. It will not update if you do not have the ':') <br>  C:\Program Files\SongsCopy</p> <br><br>
+
                                                 [% END %] [% END %] 
+                                             
+
+                                                <form id="playlistsDirectoryForm" class="">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_playlistdir0" id="playlistDirPath" value="" size="40">
+                                                    
+                                                    
+                                                    <div class="prefs">
+                                                     <input name="pref_update_playlistdir0" type="button" class="stdclick rescanButton disableOnScan" id="playlistDirUpdateButton" onclick="playlistsDirectoryForm(this.form); return false;"  value="Scan for Playlist"><br><br>
+                                                    </div>
+
+                                            
+
                                             </div>
+                                        </form>
                                         </div>
 
+                                
                                 
 
                                   </div>

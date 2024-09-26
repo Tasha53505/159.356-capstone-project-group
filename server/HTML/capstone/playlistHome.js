@@ -636,7 +636,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 document.addEventListener("DOMContentLoaded", function() {
 
     let selectedLanguage = document.getElementById("languageSelect").value; 
-    let folderPath = document.getElementById('musicInputPath').value;
 
 
 
@@ -661,78 +660,20 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("Selected language inside saveSettings:", selectedLanguage); // Log the selected language
 
             // Send a JSON-RPC request to update the language in the server.prefs file
-            updateLanguageSetting(selectedLanguage);    
+            updateLanguageSetting(selectedLanguage);  
+            
+        
         }
-    // -------------------------------- Rescan Settings folder --------------------------------
 
-  
-
-        //   if (e.target && e.target.id === 'rescanButton') {
-        //     e.preventDefault(); // Prevent default behavior
-        //     console.log("Rescan button clicked");
-
-        //     const form = document.getElementById('rescanMediaForm');
-
-        //     // Use dynamic field name or ID if needed
-        //     // const dynamicFieldName = "pref_mediadirs0";  // Dynamically constructed
-        //     // let folderPath = form[dynamicFieldName].value.trim();  // Access form input dynamically
-        //     // let folderPath = document.getElementById('musicInputPath').value.trim();
-        //     let folderPath = form["pref_mediadirs0"].value;
-
-
-
-
-        //     // Get the folder path from the input field ( id: 'musicInputPath')
-        //     // let folderPath = document.getElementById('musicInputPath').value;
-        //     console.log("Captured folder path:", folderPath);
-
-           
-        //     if (folderPath) {
-        //         console.log("Rescan put in for folder path:", folderPath);
-
-        //         updateMediaDirSetting(folderPath);
-
-
-        //     } else {
-        //         console.error("Folder path is empty. Please input a valid path.");
-        //     }    
-        // }
 
     });
 });
 
 
-  //  Testing dynmaic code with random form TO DELETE
-  function rescanMediaForm(form) {
-    console.log("Rescan button clicked");
-
-    // const form = document.getElementById('rescanMediaForm');
-
-
-    let folderPath = form["pref_mediadirs0"].value;
 
 
 
-
-    // Get the folder path from the input field ( id: 'musicInputPath')
-    // let folderPath = document.getElementById('musicInputPath').value;
-    console.log("Captured folder path:", folderPath);
-
-   
-    if (folderPath) {
-        console.log("Rescan put in for folder path:", folderPath);
-
-        updateMediaDirSetting(folderPath);
-
-
-    } else {
-        console.error("Folder path is empty. Please input a valid path.");
-    }    
-}
-
-
-
-// ------------- Language selection  -------------
+// -------------------------------- Language Selection --------------------------------
 function updateLanguageSetting(language) { 
     const data = {
         id: 2,
@@ -756,7 +697,25 @@ function updateLanguageSetting(language) {
     });
 }
 
-// -------------  Rescan folder path -------------
+// -------------------------------- Rescan Settings folder --------------------------------
+
+function rescanMediaForm(form) {
+    console.log("Rescan button clicked");
+
+    let folderPath = form["pref_mediadirs0"].value;
+    console.log("Captured folder path:", folderPath);
+
+   
+    if (folderPath) {
+        console.log("Rescan put in for folder path:", folderPath);
+        updateMediaDirSetting(folderPath);
+    } else {
+        console.error("Folder path is empty. Please input a valid path.");
+    }    
+}
+
+
+
 function updateMediaDirSetting(folderPath) {
     const formattedPath = [folderPath];
 
@@ -784,6 +743,58 @@ function updateMediaDirSetting(folderPath) {
         console.error("Error updating media directory:", error);
     });
 }
+
+// --------------------------------  Playlists Directory folder --------------------------------
+
+function playlistsDirectoryForm(form) {
+    console.log("playList Direrctor button clicked");
+
+
+    let folderPath = form["pref_playlistdir0"].value;
+    console.log("Captured folder path for playlists:", folderPath);
+
+   
+    if (folderPath) {
+        console.log("Playlist directory put in for folder path:", folderPath);
+        updatePlaylistPath(folderPath);
+    } else {
+        console.log("Updated to blank, meaning you don't want to save playlists");
+        updatePlaylistPath('');
+
+    }    
+}
+
+
+
+function updatePlaylistPath(folderPath) {
+
+    // const formattedPath = [folderPath];
+
+    const data = {
+        id: 3,
+        method: "slim.request",
+        params: [ "", ["pref", "playlistdir", folderPath]]
+    };
+
+
+    console.log("Sending this data to server:", data); // DEBUG
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Playlist directory updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating playlist directory:", error);
+    });
+}
+
 
 
 
