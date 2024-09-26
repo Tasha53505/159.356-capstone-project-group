@@ -107,7 +107,6 @@
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
-                                        <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
                                     </div>
                           
                                     <div class="settingsContent">
@@ -225,42 +224,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="basicSettingsRescanMediaTab" id="rescanMedia">
-                                            <div class="rescanMedia" >
-                                                [% WRAPPER setting title="SETUP_RESCAN" desc="SETUP_RESCAN_DESC" %] 
-                                                [% option.value | string %]
-                                                
-                                                [% IF scanning %][% "SETUP_VIEW_SCANNING" | string %][% ELSE %][% "SETUP_VIEW_NOT_SCANNING" | string %][% END %] [% END %]
-                                            </div>
-        
-                                        </div>
+                                
 
                                   </div>
-                                    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+                                  <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
 
-                                    <!-- <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
-                                        <input type="hidden" name="saveSettings" value="1">
-                                    </div> -->
-                                    <!-- <form id="settingsForm"> 
-                                        <div id="prefsSubmit">
-                                            <input name="saveSettings" id="saveSettings" type="submit" class="saveSettings" value="Save Settings">
-                                            <input type="hidden" name="saveSettings" value="1">
-                                        </div>
-                                    </form>
-                                    
-                                     -->
-
-                                     <!-- <form id="settingsForm"> 
-                                        <div id="prefsSubmit">
-                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
-                                        </div>
-                                    </form> -->
-                                    <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button>  -->
-
-                                 <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
-
-                                    
-                                    <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
 
 
 
