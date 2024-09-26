@@ -69,7 +69,7 @@ app.post('/jsonrpc.js', (req, res) => {
             // const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);
             //    const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);
                     // const updatedData = data.replace('mediadirs: []', 'mediadirs: test');
-                const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);
+                const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ${newMediaDir}`);
 
 
             

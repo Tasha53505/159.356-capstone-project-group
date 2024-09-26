@@ -675,7 +675,11 @@ document.addEventListener("DOMContentLoaded", function() {
             if (folderPath) {
                 console.log("Rescan put in for folder path:", folderPath);
 
-                updateMediaDirSetting(folderPath); // Update media dir setting with the correct value
+                // updateMediaDirSetting(folderPath); // Update media dir setting with the correct value
+                // updateMediaDirSetting(["/C:/Program Files/Songs"]); 
+                updateMediaDirSetting("/C:/Program Files/Songs");
+
+
             } else {
                 console.error("Folder path is empty. Please input a valid path.");
             }    
@@ -709,11 +713,13 @@ function updateLanguageSetting(language) {
 }
 
 // -------------  Rescan folder path -------------
-function updateMediaDirSetting(folderPath) {9
+function updateMediaDirSetting(folderPath) {
+    const formattedPath = [folderPath];
+
     const data = {
         id: 1,
         method: "slim.request",
-        params: [0, ["pref", "mediadirs", folderPath]] 
+        params: [ "", ["pref", "mediadirs", formattedPath]]
     };
 
     fetch("http:localhost:9000/capstone/jsonrpc.js", {
