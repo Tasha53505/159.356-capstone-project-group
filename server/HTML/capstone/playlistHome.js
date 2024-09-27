@@ -795,6 +795,52 @@ function updatePlaylistPath(folderPath) {
     });
 }
 
+// --------------------------------  Media Library Name  --------------------------------
+
+function libraryNameForm(form) {
+    console.log("playList Direrctor button clicked");
+
+
+    let libraryName = form["pref_libraryname0"].value;
+    console.log("library Name :", libraryName);
+
+   
+    if (libraryName) {
+        console.log("Playlist directory put in for folder path:", libraryName);
+        updatelibraryName(libraryName);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updatelibraryName('');
+
+    }    
+}
+
+
+
+function updatelibraryName(libraryName) {
+
+    const data = {
+        id: 3,
+        method: "slim.request",
+        params: [ "", ["pref", "libraryname", libraryName]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Library name updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating  Library name:", error);
+    });
+}
 
 
 

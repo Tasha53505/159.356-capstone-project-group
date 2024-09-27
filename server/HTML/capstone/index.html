@@ -136,8 +136,11 @@
                                                     <option value="ZH_CN">简体中文 *</option>
                                                 </select>
                                                 
-                                     
-                                            </div>                                            
+
+                                            </div>                 
+                                            <br>
+                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language" style="width: 50%; text-align: center;">
+                           
                                         </div>
 
                                        
@@ -146,8 +149,24 @@
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
                                                 [% prefs.pref_libraryname | html %]
                                                 [% END %] [% END %] 
-                                            </div>
 
+                                                
+                                                <form id="libraryNameForm" class="">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_libraryname0" id="libraryName" value="" size="40">
+                                                    
+                                                    
+                                                    <div class="prefs">
+                                                     <input name="pref_update_libraryname" type="button" class="stdclick rescanButton disableOnScan" id="libraryNameUpdateButton" onclick="libraryNameForm(this.form); return false;"  value="Save Library Name"><br><br>
+                                                    </div>
+
+                                            
+
+                                            </div>
+                                        </form>
+
+
+                                        <hr />
+                                        
                                             <div class="mediaFolders">
                                                 [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
                                                 [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
@@ -198,10 +217,11 @@
                                             <div class="playListsFolder">
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
                                                 [% prefs.pref_playlistdir | html %]
-                                                <p>Format it like this (NOTE - the ":" is NEEDED. It will not update if you do not have the ':') <br>  C:\Program Files\SongsCopy</p> <br><br>
+                                                <p>Format it like this (NOTE - the ":" is NEEDED. It will not update if you do not have the ':') <br>  C:\Program Files\SongsCopy</p> 
 
                                                 [% END %] [% END %] 
-                                             
+                                                <br>
+
 
                                                 <form id="playlistsDirectoryForm" class="">
                                                     <input type="text" class="stdedit selectFolder" name="pref_playlistdir0" id="playlistDirPath" value="" size="40">
@@ -221,7 +241,6 @@
                                 
 
                                   </div>
-                                  <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
 
 
 
