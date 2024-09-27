@@ -414,7 +414,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         <div class="settingsTabs">
             <button class="tabButton active" data-tab="music">Music</button>
             <button class="tabButton" data-tab="plugins">Plugins</button>
-            <button class="tabButton" data-tab="basic-info">Basic Settings | Information</button>
+            <button class="tabButton" data-tab="basic-info">Basic Settings | Organisation </button>
         </div>
         <div class="settingsContent">
             <div class="tabContent active" id="music">
@@ -480,7 +480,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsMediaLibraryTabButton',
             '.basicSettingsMediaFoldersTabButton',
             '.basicSettingsPlaylistsTabButton',
-            '.basicSettingsRescanMediaTabButton'
+            '.basicSettingsMediaLibraryManagementTabButton',
         ];
         const basicSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClasses.join(', '));
     
@@ -489,7 +489,8 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsMediaLibraryTab',
             '.basicSettingsMediaFoldersTab',
             '.basicSettingsPlaylistsTab',
-            '.basicSettingsRescanMediaTab'
+            '.basicSettingsMediaLibraryManagementTab',
+
         ];
         const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
     

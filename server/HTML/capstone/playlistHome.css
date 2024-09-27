@@ -491,7 +491,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
-.basicSettingsRescanMediaTab {
+.basicSettingsMediaLibraryManagementTab {
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
     padding: 1em;
@@ -510,7 +510,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab.active, 
 .basicSettingsMediaFoldersTab.active, 
 .basicSettingsPlaylistsTab.active, 
-.basicSettingsRescanMediaTab.active {
+.basicSettingsMediaLibraryManagementTab.active {
     display: block; /* Show the active tab content */
 }
 
@@ -524,7 +524,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab,
 .basicSettingsMediaFoldersTab,
 .basicSettingsPlaylistsTab,
-.basicSettingsRescanMediaTab {
+.basicSettingsMediaLibraryManagementTab {
     background-color: #3A456D; 
 }
 
@@ -532,7 +532,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsLanguageTabButton, 
 .basicSettingsMediaFoldersTabButton,
 .basicSettingsPlaylistsTabButton,
-.basicSettingsRescanMediaTabButton {
+.basicSettingsMediaLibraryManagementTabButton {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -545,7 +545,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsLanguageTabButton.active, 
 .basicSettingsMediaFoldersTabButton.active,
 .basicSettingsPlaylistsTabButton.active,
-.basicSettingsRescanMediaTabButton.active {
+.basicSettingsMediaLibraryManagementTabButton.active {
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -650,7 +650,7 @@ transform: translate3d(0, 0, 0);
         .basicSettingsMediaLibraryTabButton,
         .basicSettingsMediaFoldersTabButton,
         .basicSettingsPlaylistsTabButton,
-        .basicSettingsRescanMediaTabButton {
+        .basicSettingsMediaLibraryManagementTabButton {
             display: inline;
             background-color: #1b2444;
             border: none;
@@ -665,7 +665,7 @@ transform: translate3d(0, 0, 0);
         .basicSettingsMediaLibraryTabButton.active, 
         .basicSettingsMediaFoldersTabButton.active,
         .basicSettingsPlaylistsTabButton.active,
-        .basicSettingsRescanMediaTabButton.active {
+        .basicSettingsMediaLibraryManagementTabButton.active {
             background-color: #0456C6;
             border: none;
             border-radius: 0.5em;

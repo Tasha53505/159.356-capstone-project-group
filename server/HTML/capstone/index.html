@@ -105,6 +105,8 @@
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
+                                        <button class="basicSettingsMediaLibraryManagementTabButton" data-tab="mediaLibraryManagement">Media Library Management</button>
+
                                     </div>
                           
                                     <div class="settingsContent">
@@ -166,7 +168,7 @@
 
 
                                         <hr />
-                                        
+
                                             <div class="mediaFolders">
                                                 [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
                                                 [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
@@ -235,6 +237,11 @@
 
                                             </div>
                                         </form>
+                                        </div>
+
+                                        <div class="basicSettingsMediaLibraryManagementTab" id="mediaLibraryManagement">
+                                            <h4>hello</h4>
+
                                         </div>
 
                                 
