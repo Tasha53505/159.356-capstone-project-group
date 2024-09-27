@@ -473,25 +473,29 @@ transform: translate3d(0, 0, 0);
     to { opacity: 1; }
 }
         /* ----------- Basic Settings Start ----------- */
-    .basicSettings {
+    .basicSettings, .mediaLibraryManagementSettings {
         display: none; 
     }
 
     
 
-    .basicSettingsTabs {
+    .basicSettingsTabs, .mediaLibraryManagementSettingsTabs {
         display: block;
     }
 
-    .basicSettingsContent {
+    .basicSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs {
         background-color: #1b2444;
     }
+
+
 /* Common settings for all tabs */
 .basicSettingsLanguageTab, 
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
-.basicSettingsPlaylistsTab, 
-.basicSettingsMediaLibraryManagementTab {
+.basicSettingsPlaylistsTab,
+.mediaLibraryManagementBrowseTab, 
+.mediaLibraryManagementReleaseTypesTab, 
+.mediaLibraryManagementFiltersTab  {
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
     padding: 1em;
@@ -509,13 +513,16 @@ transform: translate3d(0, 0, 0);
 .basicSettingsLanguageTab.active, 
 .basicSettingsMediaLibraryTab.active, 
 .basicSettingsMediaFoldersTab.active, 
-.basicSettingsPlaylistsTab.active, 
-.basicSettingsMediaLibraryManagementTab.active {
+.basicSettingsPlaylistsTab.active,
+.mediaLibraryManagementFiltersTab.active, 
+.mediaLibraryManagementBrowseTab.active, 
+.mediaLibraryManagementReleaseTypesTab.active
+ {
     display: block; /* Show the active tab content */
 }
 
 
-.basicSettingsLanguageTab.active {
+.basicSettingsLanguageTab.active, .mediaLibraryManagementBrowseTabButton.active  {
     padding: 1em; 
     background-color: #3A456D; 
 }
@@ -524,7 +531,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab,
 .basicSettingsMediaFoldersTab,
 .basicSettingsPlaylistsTab,
-.basicSettingsMediaLibraryManagementTab {
+.mediaLibraryReleaseTypesTab,
+.mediaLibraryManagementBrowseTab,
+.mediaLibraryFiltersTab
+{
     background-color: #3A456D; 
 }
 
@@ -532,7 +542,12 @@ transform: translate3d(0, 0, 0);
 .basicSettingsLanguageTabButton, 
 .basicSettingsMediaFoldersTabButton,
 .basicSettingsPlaylistsTabButton,
-.basicSettingsMediaLibraryManagementTabButton {
+.basicSettingsMediaLibraryManagementTabButton,
+.mediaLibraryManagementBrowseTabButton,
+.mediaLibraryManagementReleaseTypesTabButton,
+.mediaLibraryManagementFiltersTabButton
+
+ {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -545,7 +560,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsLanguageTabButton.active, 
 .basicSettingsMediaFoldersTabButton.active,
 .basicSettingsPlaylistsTabButton.active,
-.basicSettingsMediaLibraryManagementTabButton.active {
+.basicSettingsMediaLibraryManagementTabButton.active,
+.mediaLibraryManagementReleaseTypesTabButton.active,
+.mediaLibraryManagementBrowseTabButton.active,
+.mediaLibraryManagementFiltersTabButton.active {
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -553,7 +571,7 @@ transform: translate3d(0, 0, 0);
 
 /* ---- Basic Settings Language Tab Start ---- */
 
-        .basicSettingsLanguageTab {
+        .basicSettingsLanguageTab, .mediaLibraryManagementBrowseTabButton {
             display: block; /* Makes it so that Language tab is displayed first */ 
             background-color: #3A456D; /* Darker background for contrast */
             padding: 1em;
@@ -639,7 +657,7 @@ transform: translate3d(0, 0, 0);
 
 
         /* ---- Basic Settings Language Tab Start ---- */
-        .stdedit
+    
 
         /* ---- Basic Settings Language Tab End ---- */
 
@@ -650,7 +668,10 @@ transform: translate3d(0, 0, 0);
         .basicSettingsMediaLibraryTabButton,
         .basicSettingsMediaFoldersTabButton,
         .basicSettingsPlaylistsTabButton,
-        .basicSettingsMediaLibraryManagementTabButton {
+        .mediaLibraryManagementBrowseTabButton,
+        .mediaLibraryManagementReleaseTypesTabButton,
+        .mediaLibraryManagementFiltersTabButton
+         {
             display: inline;
             background-color: #1b2444;
             border: none;
@@ -665,7 +686,10 @@ transform: translate3d(0, 0, 0);
         .basicSettingsMediaLibraryTabButton.active, 
         .basicSettingsMediaFoldersTabButton.active,
         .basicSettingsPlaylistsTabButton.active,
-        .basicSettingsMediaLibraryManagementTabButton.active {
+        .mediaLibraryManagementBrowseTabButton.active,
+        .mediaLibraryManagementReleaseTypesTabButton.active,
+        .mediaLibraryManagementFiltersTabButton.active
+        {
             background-color: #0456C6;
             border: none;
             border-radius: 0.5em;

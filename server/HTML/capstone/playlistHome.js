@@ -414,7 +414,8 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         <div class="settingsTabs">
             <button class="tabButton active" data-tab="music">Music</button>
             <button class="tabButton" data-tab="plugins">Plugins</button>
-            <button class="tabButton" data-tab="basic-info">Basic Settings | Organisation </button>
+            <button class="tabButton" data-tab="basic-info">Basic Settings</button>
+            <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
         <div class="settingsContent">
             <div class="tabContent active" id="music">
@@ -427,6 +428,11 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             </div>
             <div class="tabContent" id="basic-info">
                 <div class="basicSettingsContent"></div>
+            </div>
+
+          <div class="tabContent" id="media-library-management">
+                <div class="mediaLibraryManagementContent"></div>
+
             </div>
         </div>
     `;
@@ -473,14 +479,25 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         } else {
             console.error('.basicSettingsContent element not found.');
         }
-    
+
+
+        // Add the content of `.mediaLibraryManagement` to `.mediaLibraryManagementContent`
+        const mediaLibraryManagementContent = settingsContainer.querySelector('.mediaLibraryManagementContent');
+            if (mediaLibraryManagementContent) {
+                const mediaLibraryManagementSettings = document.querySelector('.mediaLibraryManagementSettings')?.innerHTML || '';
+                mediaLibraryManagementContent.innerHTML = mediaLibraryManagementSettings;
+            } else {
+                console.error('.mediaLibraryManagementSettings element not found.');
+            }
+
+
         // Initialize Basic Settings Tab Switching
         const buttonClasses = [
             '.basicSettingsLanguageTabButton',
             '.basicSettingsMediaLibraryTabButton',
             '.basicSettingsMediaFoldersTabButton',
             '.basicSettingsPlaylistsTabButton',
-            '.basicSettingsMediaLibraryManagementTabButton',
+        
         ];
         const basicSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClasses.join(', '));
     
@@ -489,10 +506,33 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsMediaLibraryTab',
             '.basicSettingsMediaFoldersTab',
             '.basicSettingsPlaylistsTab',
-            '.basicSettingsMediaLibraryManagementTab',
 
         ];
         const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
+
+
+        
+        // Initialize Basic Settings Tab Switching  for Media Library management
+        const buttonClassesMediaLibraryManagement = [
+            '.mediaLibraryManagementBrowseTabButton',
+            '.mediaLibraryManagementReleaseTypesTabButton',
+            '.mediaLibraryManagementFiltersTabButton',
+        
+        ];
+        const mediaLibraryManagementTabsButtons = settingsContainer.querySelectorAll(buttonClassesMediaLibraryManagement.join(', '));
+    
+        const MediaLibraryManagementcontentClasses = [
+            '.mediaLibraryManagementBrowseTab',
+            '.mediaLibraryManagementReleaseTypesTab',
+            '.mediaLibraryManagementFiltersTab',
+
+
+        ];
+        const mediaLibraryManagementTabContent = settingsContainer.querySelectorAll(MediaLibraryManagementcontentClasses.join(', '));
+
+
+
+
     
         // Function to hide all tab contents
         function hideAllTabsContent() {
@@ -501,6 +541,15 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 tab.classList.remove('active'); // Remove active class
             });
         }
+
+        
+        // Function to hide all Library Management Media
+    function hideAllLibraryManagementTabsContent() {
+        mediaLibraryManagementTabContent.forEach(tab => {
+            tab.style.display = 'none';  // Hide the tab
+            tab.classList.remove('active');  // Remove active class
+        });
+    }
     
         // Function to show the .basicSettings container
         function showBasicSettings() {
@@ -512,11 +561,32 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             }
         }
     
-        // Function to hide the .basicSettings container
+
+        // Function to show the Media Library Management container
+        function showMediaLibraryManagement() {
+            const mediaLibraryManagementContainer = settingsContainer.querySelector('.mediaLibraryManagementSettings');
+            if (mediaLibraryManagementContainer) {
+                mediaLibraryManagementContainer.style.display = 'block';  // Ensure the container is displayed
+            } else {
+                // console.error('Media Library Management container not found.');
+            }
+        }
+
+                // Function to hide the .basicSettings container
         function hideBasicSettings() {
             const basicSettingsContainer = settingsContainer.querySelector('.basicSettings');
             if (basicSettingsContainer) {
                 basicSettingsContainer.style.display = 'none';
+            } else {
+                // console.log('Basic settings container not found.');
+            }
+        }
+
+        // Hide Media Library Management
+        function hideMediaLibraryManagementSettings() {
+            const mediaLibraryManagementContainer = settingsContainer.querySelector('.mediaLibraryManagementSettings');
+            if (mediaLibraryManagementContainer) {
+                mediaLibraryManagementContainer.style.display = 'none';
             } else {
                 // console.log('Basic settings container not found.');
             }
@@ -548,13 +618,43 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             });
         });
     
+        // Add click event listeners to each media library tab button
+        mediaLibraryManagementTabsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Show Media Library Management container
+                showMediaLibraryManagement();
+        
+                // Hide all tab contents
+                hideAllLibraryManagementTabsContent();
+        
+                // Remove active class from all buttons
+                mediaLibraryManagementTabsButtons.forEach(btn => btn.classList.remove('active'));
+        
+                // Show the selected tab content and add the active class to the clicked button
+                const selectedTabId = this.getAttribute('data-tab');
+                const selectedTabContent = settingsContainer.querySelector(`#mediaLibraryManagement${selectedTabId.charAt(0).toUpperCase() + selectedTabId.slice(1)}`);
+                if (selectedTabContent) {
+                    selectedTabContent.style.display = 'block'; // Show the selected tab content
+                    selectedTabContent.classList.add('active'); // Add active class to the selected tab content
+                } else {
+                    console.error("No content found for tab ID:", selectedTabId); // Error
+                }
+        
+                this.classList.add('active'); // Add active class to the clicked button
+            });
+        });
+        
+
         hideBasicSettings();
+        hideMediaLibraryManagementSettings();
     
         // Trigger click on the Language tab button to display its content by default
         const languageTabButton = settingsContainer.querySelector('.basicSettingsLanguageTabButton');
         if (languageTabButton) {
             languageTabButton.click();
         }
+
+
     }
     
     
