@@ -473,17 +473,17 @@ transform: translate3d(0, 0, 0);
     to { opacity: 1; }
 }
         /* ----------- Basic Settings Start ----------- */
-    .basicSettings, .mediaLibraryManagementSettings {
+    .basicSettings, .mediaLibraryManagementSettings, .advancedSettings {
         display: none; 
     }
 
     
 
-    .basicSettingsTabs, .mediaLibraryManagementSettingsTabs {
+    .basicSettingsTabs, .mediaLibraryManagementSettingsTabs, .advancedSettingsTabs {
         display: block;
     }
 
-    .basicSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs {
+    .basicSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs, .advancedSettingsContent {
         background-color: #1b2444;
     }
 
@@ -580,7 +580,7 @@ transform: translate3d(0, 0, 0);
 
 /* ---- Basic Settings Language Tab Start ---- */
 
-        .basicSettingsLanguageTab, .mediaLibraryManagementBrowseTabButton, .advancedSettingsMediaLibraryManagementTabButton {
+        .basicSettingsLanguageTab, .advancedSettingsMediaLibraryManagementTab {
             display: block; /* Makes it so that Language tab is displayed first */ 
             background-color: #3A456D; /* Darker background for contrast */
             padding: 1em;
@@ -680,7 +680,7 @@ transform: translate3d(0, 0, 0);
         .mediaLibraryManagementBrowseTabButton,
         .mediaLibraryManagementReleaseTypesTabButton,
         .mediaLibraryManagementFiltersTabButton,
-        .advancedSettingsMediaLibraryManagementTab,
+        .advancedSettingsMediaLibraryManagementTabButton,
         .advancedSettingsFileTypesTabButton
          {
             display: inline;
