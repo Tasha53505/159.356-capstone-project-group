@@ -490,6 +490,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 console.error('.mediaLibraryManagementSettings element not found.');
             }
 
+        // ------------ Basic Settings -------------
 
         // Initialize Basic Settings Tab Switching
         const buttonClasses = [
@@ -511,7 +512,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
 
 
-        
+        // ------------ Media Library management -------------
         // Initialize Basic Settings Tab Switching  for Media Library management
         const buttonClassesMediaLibraryManagement = [
             '.mediaLibraryManagementBrowseTabButton',
@@ -531,6 +532,18 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const mediaLibraryManagementTabContent = settingsContainer.querySelectorAll(MediaLibraryManagementcontentClasses.join(', '));
 
 
+        // ------------ Advanced File Type Settings and Advanced Media Library Management settings -------------
+        const advancedSettingsButtonClasses  = [
+            '.advancedSettingsMediaLibraryManagementTabButton',
+            '.advancedSettingsFileTypesTabButton',
+        ];
+        const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
+
+        const advancedSettingsContentClasses = [
+            '#advancedSettingsMediaLibraryManagement', // 
+            '#advancedFileTypes', //
+        ];
+        const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
 
 
     
@@ -546,6 +559,14 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         // Function to hide all Library Management Media
     function hideAllLibraryManagementTabsContent() {
         mediaLibraryManagementTabContent.forEach(tab => {
+            tab.style.display = 'none';  // Hide the tab
+            tab.classList.remove('active');  // Remove active class
+        });
+    }
+
+      // Function to hide all Advanced Settings tab contents
+      function hideAllAdvancedSettingsTabsContent() {
+        advancedSettingsTabContent.forEach(tab => {
             tab.style.display = 'none';  // Hide the tab
             tab.classList.remove('active');  // Remove active class
         });
@@ -591,6 +612,14 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 // console.log('Basic settings container not found.');
             }
         }
+
+          // Function to hide all advanced settings tab contents
+    function hideAllAdvancedSettingsTabsContent() {
+        advancedSettingsTabContent.forEach(tab => {
+            tab.style.display = 'none';  // Hide the tab
+            tab.classList.remove('active');  // Remove active class
+        });
+    }
     
         // Add click event listeners to each tab button
         basicSettingsTabsButtons.forEach(button => {
@@ -644,7 +673,31 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             });
         });
         
+// Add click event listeners to each advanced settings tab button
+advancedSettingsTabsButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        // Hide all advanced settings tab contents
+        hideAllAdvancedSettingsTabsContent();
 
+        // Remove active class from all buttons
+        advancedSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Show the selected tab content and add the active class to the clicked button
+        const selectedTabId = this.getAttribute('data-tab');
+        const selectedTabContent = settingsContainer.querySelector(`#${selectedTabId}`);
+        if (selectedTabContent) {
+            selectedTabContent.style.display = 'block'; // Show the selected tab content
+            selectedTabContent.classList.add('active'); // Add active class to the selected tab content
+        } else {
+            console.error("No content found for tab ID:", selectedTabId); // Error
+        }
+
+        this.classList.add('active'); // Add active class to the clicked button
+    });
+});
+
+    // Initially hide all advanced settings content
+        hideAllAdvancedSettingsTabsContent();
         hideBasicSettings();
         hideMediaLibraryManagementSettings();
     
@@ -652,6 +705,12 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const languageTabButton = settingsContainer.querySelector('.basicSettingsLanguageTabButton');
         if (languageTabButton) {
             languageTabButton.click();
+        }
+
+        // Trigger click on the first tab button to display its content by default 
+        const firstAdvancedTabButton = advancedSettingsTabsButtons[0];
+        if (firstAdvancedTabButton) {
+            firstAdvancedTabButton.click(); // Simulate a click on the first tab button to show its content
         }
 
 

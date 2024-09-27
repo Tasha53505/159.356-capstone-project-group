@@ -495,7 +495,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab,
 .mediaLibraryManagementBrowseTab, 
 .mediaLibraryManagementReleaseTypesTab, 
-.mediaLibraryManagementFiltersTab  {
+.mediaLibraryManagementFiltersTab,
+.advancedSettingsMediaLibraryManagementTab,
+.advancedSettingsFileTypesTab  {
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
     padding: 1em;
@@ -516,7 +518,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab.active,
 .mediaLibraryManagementFiltersTab.active, 
 .mediaLibraryManagementBrowseTab.active, 
-.mediaLibraryManagementReleaseTypesTab.active
+.mediaLibraryManagementReleaseTypesTab.active,
+.advancedSettingsMediaLibraryManagementTab.active,
+.advancedSettingsFileTypesTab.active
  {
     display: block; /* Show the active tab content */
 }
@@ -533,7 +537,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab,
 .mediaLibraryReleaseTypesTab,
 .mediaLibraryManagementBrowseTab,
-.mediaLibraryFiltersTab
+.mediaLibraryFiltersTab,
+.advancedSettingsMediaLibraryManagementTab,
+.advancedSettingsFileTypesTab
 {
     background-color: #3A456D; 
 }
@@ -545,9 +551,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryManagementTabButton,
 .mediaLibraryManagementBrowseTabButton,
 .mediaLibraryManagementReleaseTypesTabButton,
-.mediaLibraryManagementFiltersTabButton
-
- {
+.mediaLibraryManagementFiltersTabButton,
+.advancedSettingsMediaLibraryManagementTabButton,
+.advancedSettingsFileTypesTabButton {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -563,7 +569,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryManagementTabButton.active,
 .mediaLibraryManagementReleaseTypesTabButton.active,
 .mediaLibraryManagementBrowseTabButton.active,
-.mediaLibraryManagementFiltersTabButton.active {
+.mediaLibraryManagementFiltersTabButton.active,
+.advancedSettingsMediaLibraryManagementTabButton.active,
+.advancedSettingsFileTypesTabButton.active
+{
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -571,7 +580,7 @@ transform: translate3d(0, 0, 0);
 
 /* ---- Basic Settings Language Tab Start ---- */
 
-        .basicSettingsLanguageTab, .mediaLibraryManagementBrowseTabButton {
+        .basicSettingsLanguageTab, .mediaLibraryManagementBrowseTabButton, .advancedSettingsMediaLibraryManagementTabButton {
             display: block; /* Makes it so that Language tab is displayed first */ 
             background-color: #3A456D; /* Darker background for contrast */
             padding: 1em;
@@ -581,7 +590,7 @@ transform: translate3d(0, 0, 0);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 0 auto;
             max-width: 400px;
-
+            
         }
 
         /* Header styling */
@@ -670,7 +679,9 @@ transform: translate3d(0, 0, 0);
         .basicSettingsPlaylistsTabButton,
         .mediaLibraryManagementBrowseTabButton,
         .mediaLibraryManagementReleaseTypesTabButton,
-        .mediaLibraryManagementFiltersTabButton
+        .mediaLibraryManagementFiltersTabButton,
+        .advancedSettingsMediaLibraryManagementTab,
+        .advancedSettingsFileTypesTabButton
          {
             display: inline;
             background-color: #1b2444;
@@ -688,7 +699,9 @@ transform: translate3d(0, 0, 0);
         .basicSettingsPlaylistsTabButton.active,
         .mediaLibraryManagementBrowseTabButton.active,
         .mediaLibraryManagementReleaseTypesTabButton.active,
-        .mediaLibraryManagementFiltersTabButton.active
+        .mediaLibraryManagementFiltersTabButton.active,
+        .advancedSettingsMediaLibraryManagementTabButton.active,
+        .advancedSettingsFileTypesTabButton.active       
         {
             background-color: #0456C6;
             border: none;
@@ -696,6 +709,9 @@ transform: translate3d(0, 0, 0);
             cursor: pointer;
             font-size: 0.7em;
         }
+
+
+        
         /* ---- Basic Settings Buttons End ---- */
 
 
