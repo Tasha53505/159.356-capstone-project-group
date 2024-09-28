@@ -113,7 +113,16 @@ For detiled information on this problem  Ive documented my findngs SPECIIFCALLY 
 If you're having issues with buttons in general - the fix is described in Detail in https://github.com/Tasha53505/159.356-capstone-project-group/issues/35 
  - it's all due to some of the components being loaded AFTER the DOM
  - but ALSO in tangent with needing to use the highest element to listen for clicks (Event delgation with the body element) - so that even listeners attached AFTER the DOM has rendered, it'll still be recognised)
+---
+#Issues with File paths
+Documented issue here: https://github.com/Tasha53505/159.356-capstone-project-group/issues/73
+(Specifically for the rescan button) - but this will help in general, is that `C:` is NOT a valid path, it needed to be `C/` --> Also, I needed to format it so that it was a 2D Array
+   ` const formattedPath = [folderPath];`  and `const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);`
 
-
-
+----------------------------------------
+## Notes about JSON RPC
+https://lyrion.org/reference/cli/using-the-cli/#jsonrpcjs --> Documentation is incredibly helpful
+- From what I've found and doing research, the drawback from JSON RPC is not being able to send multiple requests at one time, results in an error. Perl would have been able to do this
+- Make sure if you're dealing with file paths that they're correct.
+- 0 can be used as a placeholder for playerID --> if the command your sending supports it.
 

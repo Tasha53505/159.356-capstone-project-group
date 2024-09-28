@@ -141,6 +141,8 @@
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
+                                        <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
+                                        <button class="basicSettingsSecurityTabButton" data-tab="security">Security</button>
                                     </div>
                           
                                     <div class="settingsContent">
@@ -274,6 +276,13 @@
                                         </div>
                                                              
                                 
+
+                                        <div class="basicSettingsSecurityTab" id="security">
+                                            <div class="security" >
+                                                [% PROCESS settings/server/security.html %]
+                                            </div>
+        
+                                        </div>
 
                                   </div>
 
@@ -928,12 +937,18 @@
         </div>
         <div class="playerContainer">
             <div class="player">
-                <div class="bar"></div>
-                <div class="progress"></div>
+                <div id="playtimePanel">
+                    <div id="ctrlPlaytime"></div>
+                    <div id="playbar">
+                        <div id="ctrlProgress"></div>
+                    </div>
+                    <div id="ctrlRemainingTime"></div>
+                </div>
+                <!--<div id="ctrlProgress"></div>
                 <div class="timeInfo">
                     <p class="playtime" id="playtime"></p>
                     <p class="maxtime" id="maxtime"></p>
-                </div>
+                </div>-->
                 <div class="buttons">
                     <div class="control">
                         <div id="repeatButton" class="repeatButtonInactive">   
