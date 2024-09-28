@@ -1047,30 +1047,33 @@ function updateUnifiedArtists(unifiedArtists) {
 // --------------------------------  All Release Types Settings (Albums, types, recognising)  --------------------------------
 
 function allReleaseTypesForm(form) {
-    // Get values from the form
-    let ignoreReleaseTypes = form["pref_ignoreReleaseTypes"].value;
-    let groupArtistsAlbumsByReleaseType = form["pref_groupArtistAlbumsByReleaseType"].value;
-    let cleanupReleaseTypes = form["pref_cleanupReleaseTypes"] ? form["pref_cleanupReleaseTypes"].checked ? "1" : "0" : "0";
+    const cleanupReleaseTypes = form["pref_cleanupReleaseTypes"].checked ? "1" : "0";
+    const groupArtistAlbumsByReleaseType = form["pref_groupArtistAlbumsByReleaseType"].value;
+    const ignoreReleaseTypes = form["ignoreReleaseTypes"].value; 
 
-    // Log values to debug
-    console.log("Ignore Release Types:", ignoreReleaseTypes);
-    console.log("Group Artists Albums by Release Type:", groupArtistsAlbumsByReleaseType);
+    
     console.log("Cleanup Release Types:", cleanupReleaseTypes);
+    console.log("Group Artist Albums By Release Type:", groupArtistAlbumsByReleaseType);
+    console.log("Ignore Release Types:", ignoreReleaseTypes); // Debug log
 
-    // Submit the preferences to update
-    updateReleaseTypes(ignoreReleaseTypes, groupArtistsAlbumsByReleaseType, cleanupReleaseTypes);
+
+    if (groupArtistAlbumsByReleaseType !== undefined && (groupArtistAlbumsByReleaseType === "0" || groupArtistAlbumsByReleaseType === "1" || groupArtistAlbumsByReleaseType === "2")) {
+        console.log("Submitting all release types preference:", cleanupReleaseTypes, groupArtistAlbumsByReleaseType, ignoreReleaseTypes);
+        updateAllReleaseTypes(cleanupReleaseTypes, groupArtistAlbumsByReleaseType, ignoreReleaseTypes);
+    } else {
+        console.error("Invalid value for release types selection");
+    }
 }
 
-function updateReleaseTypes(ignoreReleaseTypes, groupArtistsAlbumsByReleaseType, cleanupReleaseTypes) {
+function updateAllReleaseTypes(cleanupReleaseTypes, groupArtistAlbumsByReleaseType, ignoreReleaseTypes) {
     const data = {
         id: 4,
         method: "slim.request",
-        params: [
-            "",
-            ["pref", "ignoreReleaseTypes", ignoreReleaseTypes],
-            ["pref", "groupArtistsAlbumsByReleaseType", groupArtistsAlbumsByReleaseType],
-            ["pref", "cleanupReleaseTypes", cleanupReleaseTypes]
-        ]
+        params: ["", [
+            ["pref", "cleanupReleaseTypes", cleanupReleaseTypes],
+            ["pref", "groupArtistAlbumsByReleaseType", groupArtistAlbumsByReleaseType],
+            ["pref", "ignoreReleaseTypes", ignoreReleaseTypes] 
+        ]]
     };
 
     fetch("http://localhost:9000/capstone/jsonrpc.js", {
@@ -1082,12 +1085,57 @@ function updateReleaseTypes(ignoreReleaseTypes, groupArtistsAlbumsByReleaseType,
     })
     .then(response => response.json())
     .then(data => {
-        console.log("All Release Types updated to:", data);
+        console.log("Release Types settings updated to:", data);
     })
     .catch(error => {
-        console.error("Error updating Release Types:", error);
+        console.error("Error updating Release Types settings:", error);
     });
 }
+
+
+// --------------------------------  Library Filters  --------------------------------
+
+// --------  Genres for Albumms and Tracks  --------
+function noGenreFilterForm(form) {
+    let noGenreFilter = form["pref_noGenreFilter"].value;
+
+    console.log("No Genre Filter:", noGenreFilter);
+
+    if ((noGenreFilter === "0" || noGenreFilter === "1")) {
+        console.log("Submitting preferences:", { noGenreFilter });
+        updateGenreLibraryFilter(noGenreFilter); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateGenreLibraryFilter(noGenreFilter) {
+    const data = {
+        id: 5,
+        method: "slim.request",
+        params: [ "", ["pref", "noGenreFilter", noGenreFilter]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("No genre Filter updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+// --------  Contributor Roles  --------
 
 
 
