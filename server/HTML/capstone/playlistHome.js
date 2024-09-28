@@ -437,7 +437,8 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsMediaLibraryTabButton',
             '.basicSettingsMediaFoldersTabButton',
             '.basicSettingsPlaylistsTabButton',
-            '.basicSettingsRescanMediaTabButton'
+            '.basicSettingsRescanMediaTabButton',
+            '.basicSettingsSecurityTabButton'
         ];
         const basicSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClasses.join(', '));
 
@@ -446,7 +447,8 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsMediaLibraryTab',
             '.basicSettingsMediaFoldersTab',
             '.basicSettingsPlaylistsTab',
-            '.basicSettingsRescanMediaTab'
+            '.basicSettingsRescanMediaTab',
+            '.basicSettingsSecurityTab'
         ];
         const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
 

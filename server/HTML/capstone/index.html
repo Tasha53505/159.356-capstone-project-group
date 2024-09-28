@@ -127,6 +127,7 @@
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
                                         <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
+                                        <button class="basicSettingsSecurityTabButton" data-tab="security">Security</button>
                                     </div>
                                     <div class="settingsContent">
 
@@ -230,6 +231,13 @@
                                                 [% option.value | string %]
                                                 
                                                 [% IF scanning %][% "SETUP_VIEW_SCANNING" | string %][% ELSE %][% "SETUP_VIEW_NOT_SCANNING" | string %][% END %] [% END %]
+                                            </div>
+        
+                                        </div>
+
+                                        <div class="basicSettingsSecurityTab" id="security">
+                                            <div class="security" >
+                                                [% PROCESS settings/server/security.html %]
                                             </div>
         
                                         </div>
