@@ -105,6 +105,8 @@
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
+                                        <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
+                                        <button class="basicSettingsSecurityTabButton" data-tab="security">Security</button>
                                     </div>
                           
                                     <div class="settingsContent">
@@ -201,6 +203,13 @@
                                         </div>
 
                                 
+
+                                        <div class="basicSettingsSecurityTab" id="security">
+                                            <div class="security" >
+                                                [% PROCESS settings/server/security.html %]
+                                            </div>
+        
+                                        </div>
 
                                   </div>
                                   <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
