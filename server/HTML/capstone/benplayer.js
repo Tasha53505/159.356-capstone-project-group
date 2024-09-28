@@ -31,6 +31,12 @@ document.querySelector('.album').addEventListener('click', function() {
 
 // ----------------------------------------- //
 
+// -- PROGRESS BAR -- 
+
+new SqueezeJS.UI.PlaytimeProgress('ctrlProgress');
+new SqueezeJS.UI.Playtime('ctrlPlaytime');
+new SqueezeJS.UI.PlaytimeRemaining('ctrlRemainingTime');
+
 
 // -- PLAYBACK BUTTONS --
 

@@ -498,6 +498,7 @@ transform: translate3d(0, 0, 0);
 .mediaLibraryManagementFiltersTab,
 .advancedSettingsMediaLibraryManagementTab,
 .advancedSettingsFileTypesTab  {
+
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
     padding: 1em;
@@ -539,8 +540,9 @@ transform: translate3d(0, 0, 0);
 .mediaLibraryManagementBrowseTab,
 .mediaLibraryFiltersTab,
 .advancedSettingsMediaLibraryManagementTab,
-.advancedSettingsFileTypesTab
-{
+.advancedSettingsFileTypesTab,
+.basicSettingsRescanMediaTab,
+.basicSettingsSecurityTab {
     background-color: #3A456D; 
 }
 
@@ -553,7 +555,9 @@ transform: translate3d(0, 0, 0);
 .mediaLibraryManagementReleaseTypesTabButton,
 .mediaLibraryManagementFiltersTabButton,
 .advancedSettingsMediaLibraryManagementTabButton,
-.advancedSettingsFileTypesTabButton {
+.advancedSettingsFileTypesTabButton,
+.basicSettingsRescanMediaTabButton,
+.basicSettingsSecurityTabButton {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -571,8 +575,9 @@ transform: translate3d(0, 0, 0);
 .mediaLibraryManagementBrowseTabButton.active,
 .mediaLibraryManagementFiltersTabButton.active,
 .advancedSettingsMediaLibraryManagementTabButton.active,
-.advancedSettingsFileTypesTabButton.active
-{
+.advancedSettingsFileTypesTabButton.active,
+.basicSettingsRescanMediaTabButton.active,
+.basicSettingsSecurityTabButton.active {
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -680,8 +685,9 @@ transform: translate3d(0, 0, 0);
         .mediaLibraryManagementReleaseTypesTabButton,
         .mediaLibraryManagementFiltersTabButton,
         .advancedSettingsMediaLibraryManagementTabButton,
-        .advancedSettingsFileTypesTabButton
-         {
+        .advancedSettingsFileTypesTabButton,
+        .basicSettingsRescanMediaTabButton,
+        .basicSettingsSecurityTabButton {
             display: inline;
             background-color: #1b2444;
             border: none;
@@ -700,8 +706,10 @@ transform: translate3d(0, 0, 0);
         .mediaLibraryManagementReleaseTypesTabButton.active,
         .mediaLibraryManagementFiltersTabButton.active,
         .advancedSettingsMediaLibraryManagementTabButton.active,
-        .advancedSettingsFileTypesTabButton.active       
-        {
+        .advancedSettingsFileTypesTabButton.active,
+        .basicSettingsRescanMediaTabButton.active,
+        .basicSettingsSecurityTabButton.active {
+
             background-color: #0456C6;
             border: none;
             border-radius: 0.5em;
@@ -962,6 +970,7 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
+.basicSettingsSecurityTab,
 .saveSettings
 {
     margin: 0 auto;
@@ -1074,7 +1083,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
-.basicSettingsRescanMediaTab
+.basicSettingsRescanMediaTab, 
+.basicSettingsSecurityTab,
+.saveSettings
 {
     margin: 0 auto;
     margin-right: 30%;
