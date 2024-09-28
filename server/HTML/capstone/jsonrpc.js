@@ -451,6 +451,84 @@ if (params && params[1][0] === "pref" && params[1][1] === "noRoleFilter") {
 
 
 
+
+    // *******************************************************************************
+//                    ****  Tag Format (TPE2  MP3) ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "useTPE2AsAlbumArtist") {
+    const newUseTPE2AsAlbumArtist = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace Line
+        const updatedData = data.replace(/useTPE2AsAlbumArtist:\s*\S+/g, `useTPE2AsAlbumArtist: ["${newUseTPE2AsAlbumArtist}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'useTPE2AsAlbumArtist (Advanced) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+
+    
+// ******************************************************************************
+//                    ****  Compilation Name Setting (Various Artists) ****
+// *******************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "variousArtistsString") {
+    const newVariousArtistsString = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace the mediadirs line with the new directory
+        const updatedData = data.replace(/variousArtistsString:\s*\S+/g, `variousArtistsString: ["${newVariousArtistsString}"]`);
+       
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'Playlist Library Name updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
 // // *******************************************************************************
 // //                    ****  update Album release types  ****
 // // *******************************************************************************

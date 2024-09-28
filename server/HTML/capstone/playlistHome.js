@@ -1166,38 +1166,28 @@ function updateGroupArtistAlbumsByReleaseType(groupReleaseTypes) {
     });
 }
 
+// --------------------------------  Tag Format setttings --------------------------------
+function tagFormatForm(form) {
+    let tagFormat = form["pref_useTPE2AsAlbumArtist"].value;
 
+    console.log("pref_useTPE2AsAlbumArtist:", tagFormat);
 
-
-
-function allReleaseTypesForm(form) {
-    const cleanupReleaseTypes = form["pref_cleanupReleaseTypes"].checked ? "1" : "0";
-    const groupArtistAlbumsByReleaseType = form["pref_groupArtistAlbumsByReleaseType"].value;
-    const ignoreReleaseTypes = form["ignoreReleaseTypes"].value; 
-
-    
-    console.log("Cleanup Release Types:", cleanupReleaseTypes);
-    console.log("Group Artist Albums By Release Type:", groupArtistAlbumsByReleaseType);
-    console.log("Ignore Release Types:", ignoreReleaseTypes); // Debug log
-
-
-    if (groupArtistAlbumsByReleaseType !== undefined && (groupArtistAlbumsByReleaseType === "0" || groupArtistAlbumsByReleaseType === "1" || groupArtistAlbumsByReleaseType === "2")) {
-        console.log("Submitting all release types preference:", cleanupReleaseTypes, groupArtistAlbumsByReleaseType, ignoreReleaseTypes);
-        updateAllReleaseTypes(cleanupReleaseTypes, groupArtistAlbumsByReleaseType, ignoreReleaseTypes);
+    if ((tagFormat === "0" || tagFormat === "1")) {
+        console.log("Submitting preferences:", { tagFormat });
+        updateTagFormat(tagFormat); 
     } else {
-        console.error("Invalid value for release types selection");
+        console.error("Invalid value for genre or role filter selection");
+
     }
 }
 
-function updateAllReleaseTypes(cleanupReleaseTypes, groupArtistAlbumsByReleaseType, ignoreReleaseTypes) {
+
+function updateTagFormat(tagFormat) {
     const data = {
-        id: 4,
+        id: 11,
         method: "slim.request",
-        params: ["", [
-            ["pref", "cleanupReleaseTypes", cleanupReleaseTypes],
-            ["pref", "groupArtistAlbumsByReleaseType", groupArtistAlbumsByReleaseType],
-            ["pref", "ignoreReleaseTypes", ignoreReleaseTypes] 
-        ]]
+        params: [ "", ["pref", "useTPE2AsAlbumArtist", tagFormat]]
+
     };
 
     fetch("http://localhost:9000/capstone/jsonrpc.js", {
@@ -1209,13 +1199,54 @@ function updateAllReleaseTypes(cleanupReleaseTypes, groupArtistAlbumsByReleaseTy
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Release Types settings updated to:", data);
+        console.log("useTPE2AsAlbumArtist updated:", data);
     })
     .catch(error => {
-        console.error("Error updating Release Types settings:", error);
+        console.error("Error updating filters:", error);
     });
 }
+// --------------------------------  Change Compilation Name  --------------------------------
 
+function changeCompilationNameForm(form) {
+    let compilationName = form["variousArtistsString"].value;
+    console.log("Compialtion  :", compilationName);
+
+   
+    if (compilationName) {
+        console.log("Compilation Name", compilationName);
+        udpateChangeCompilationName(compilationName)
+        } else {
+        console.log("Updated to blank, meaning iot will be default. Various Artists");
+        udpateChangeCompilationName('')
+    }    
+}
+
+
+
+function udpateChangeCompilationName(compilationName) {
+
+    const data = {
+        id: 3,
+        method: "slim.request",
+        params: [ "", ["pref", "variousArtistsString", compilationName]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Compilation name updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating  Library name:", error);
+    });
+}
 
 // --------------------------------  Library Filters  --------------------------------
 

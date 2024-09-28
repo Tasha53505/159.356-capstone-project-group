@@ -74,28 +74,35 @@
                                             
                                         <div class="advancedSettingsMediaLibraryManagementTab active" id="advancedSettingsMediaLibraryManagement"> 
                                                 <h2>MP3 Tag Format</h2>
-                                                <form id="tagFormatForm">
-                                                    [% IF prefs.pref_useUnifiedArtistsList; WRAPPER settingSection %]
-                                                    [% WRAPPER settingGroup title="SETUP_COMPOSERINARTISTS" desc="SETUP_COMPOSERINARTISTS_DESC" %]
-                                                        <input type="checkbox" [% IF prefs.pref_composerInArtists %]checked="1" [% END %] class="stdedit" name="pref_composerInArtists" id="composerInArtists" value="1" />
-                                                        <label for="composerInArtists" class="stdlabel">[% "COMPOSER" | string %]</label><br>
+
+
+                                                <form id="tagFormatForm" action="">
+                                                   
+                                                    <div class="prefDesc hiddenDesc">The MP3 tag format does not provide a standard way of defining an Album Artist.  Some MP3 tagging tools use the TPE2 field for Album Artist (iTunes, Winamp, Windows Media Player) while others may use it for the intended meaning of "Band/orchestra".  Select the meaning you would like Logitech Media Server to use.  Changing this setting will start a rescan of your music library.</div>
+                                                    <input type="radio" name="pref_useTPE2AsAlbumArtist" id="pref_useTPE2AsAlbumArtist0" value="0">
+                                                    <label for="pref_useTPE2AsAlbumArtist0" class="stdlabel">Treat TPE2 MP3 tag as Band</label><br>
+                                                    <input type="radio" name="pref_useTPE2AsAlbumArtist" id="pref_useTPE2AsAlbumArtist1" value="1" checked="checked">
+                                                    <label for="pref_useTPE2AsAlbumArtist1" class="stdlabel">Treat TPE2 MP3 tag as Album Artist</label><br>
+                                                    <input name="pref_useTPE2AsAlbumArtist" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="tagFormatFormId" onclick="tagFormatForm(this.form); return false;" value="Change Tag format">
+                                             </form>
+
+
+                                                    <!-- useTPE2AsAlbumArtist 0 or 1 -->
+
+
+                                                <h2>Naming Compilation Change</h2>
+                                                <form action="" id="changeCompilationNameForm">
+                                                <!-- variousArtists -->
+                                                <div class="prefs">
+                                                    <div class="prefDesc">When compilation albums are grouped together, they appear under "Various Artists" by default.  You can change that name below.</div>
+                                                    <input type="text" class="stdedit" name="pref_variousArtistsString" id="variousArtistsString" value="Yes" size="40" placeholder="Various Artists">
+                                                &nbsp;</div>
+                                                <input name="pref_variousArtistsString" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="changeCompilationNameFormId" onclick="changeCompilationNameForm(this.form); return false;" value="Change Compilation Name">
+
+                                            </form>
                                             
-                                                        <input type="checkbox" [% IF prefs.pref_conductorInArtists %]checked="1" [% END %] class="stdedit" name="pref_conductorInArtists" id="conductorInArtists" value="1" />
-                                                        <label for="conductorInArtists" class="stdlabel">[% "CONDUCTOR" | string %]</label><br>
-                                            
-                                                        <input type="checkbox" [% IF prefs.pref_bandInArtists %]checked="1" [% END %] class="stdedit" name="pref_bandInArtists" id="bandInArtists" value="1" />
-                                                        <label for="bandInArtists" class="stdlabel">[% "BAND" | string %]</label>
-                                                    [% END %]
-                                                [% END; ELSE %]
-                                                    <input type="hidden" name="pref_composerInArtists" value="[% prefs.pref_composerInArtists | html %]" />
-                                                    <input type="hidden" name="pref_conductorInArtists" value="[% prefs.pref_conductorInArtists | html %]" />
-                                                    <input type="hidden" name="pref_bandInArtists" value="[% prefs.pref_bandInArtists | html %]" />
-                                                    <input type="hidden" name="pref_variousArtistAutoIdentification" value="[% prefs.pref_variousArtistAutoIdentification | html %]" />
-                                                [% END %]
                                                 
-                                                    <input name="pref_unifiedArtists0" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreReleaseTypes" onclick="ignoreReleaseTypesForm(this.form); return false;" value="Save Release Types for Albums">
-                                                </form>
-    
+                                      
 
 
                                              
