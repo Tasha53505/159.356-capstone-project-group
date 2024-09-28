@@ -1248,6 +1248,86 @@ function udpateChangeCompilationName(compilationName) {
     });
 }
 
+
+// --------------------------------  Search within words --------------------------------
+function searchWithinWordForm(form) {
+    let searchWithinWords = form["pref_searchSubString"].value;
+
+    console.log("searchWithinWords:", searchWithinWords);
+
+    if ((searchWithinWords === "0" || searchWithinWords === "1")) {
+        console.log("Submitting preferences:", { searchWithinWords });
+        updateSearchWithinWords(searchWithinWords); 
+    } else {
+        console.error("Invalid value search within words selection");
+
+    }
+}
+
+
+function updateSearchWithinWords(searchWithinWords) {
+    const data = {
+        id: 13,
+        method: "slim.request",
+        params: [ "", ["pref", "searchSubString", searchWithinWords]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Search substring updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+// --------------------------------  Ignored Articles --------------------------------
+function ignoreArticlesForm(form) {
+    let ignoredarticles = form["pref_ignoredarticles"].value;
+
+    console.log("ignoredarticles:", ignoredarticles);
+
+        console.log("Submitting preferences:", { ignoredarticles });
+        updateIgnoredArticles(ignoredarticles); 
+
+
+}
+
+//ignoredarticles
+function updateIgnoredArticles(ignoredarticles) {
+    const data = {
+        id: 13,
+        method: "slim.request",
+        params: [ "", ["pref", "ignoredarticles", ignoredarticles]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Search substring updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
 // --------------------------------  Library Filters  --------------------------------
 
 // --------  Genres for Albumms and Tracks  --------

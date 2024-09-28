@@ -101,15 +101,30 @@
 
                                             </form>
                                             
-                                                
-                                      
+                                                <form action="" id="searchWithinWordForm">
+                                                    [% WRAPPER setting title="SETUP_SEARCHSUBSTRING" desc="SETUP_SEARCHSUBSTRING_DESC"%]
+                                                    <select class="stdedit" name="pref_searchSubString" id="searchSubString">
 
+                                                        <option value="0">Search Beginning of Words</option>
+                                                        <option  selected value="1">Search Within Words</option>
+                                            
+                                                    </select>
+                                                    <input name="saveSearchSettings" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="searchWithinWordFormId" onclick="searchWithinWordForm(this.form); return false;" value="Save Search Settings">
+
+                                                [% END %]
+                                                 </form>
+                                                
+                                                 <form action="" id="ignoreArticlesForm">
+                                                    <div class="prefDesc hiddenDesc">A list of articles ("the", "les", "los", etc.) to ignore at the beginning of artist, song or album names when sorting. Separate multiple articles by spaces or leave this list blank to disable this behavior.  Changing this setting will start a rescan of your music library.</div>
+                                                    <input type="text" class="stdedit" name="pref_ignoredarticles" id="ignoredarticles" value="The El La Los Las Le Les" size="40">
+                                                    
+                                                <input name="saveIgnoredArticles" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreArticlesFormId" onclick="ignoreArticlesForm(this.form); return false;" value="Save Ignored Articles Settings">
+
+                                                 </form>
 
                                              
 
 
-
-                                                <h3>Search Witjon Words</h3>
                                                 <h3>Articles to Ignore when sorting</h3>                           
                                         </div>
 
