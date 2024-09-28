@@ -92,16 +92,14 @@ hr {
 
 .homeTitleContainer {
     display: flex;
-    align-items: start;
-    
+    align-items: space;  
     padding: 1em;
     width: 100%;
 }
 
 
-.homeTitleContainer h2 {
-    margin-right: 20%;
-    /* margin-left: 2rem; */
+.homeTitle h2 {
+margin-left: 1rem;
 
 }
 
@@ -114,7 +112,9 @@ hr {
     padding: 0 !important;
     cursor: pointer;
     font-size: 1em;
-    margin-right: 1rem;
+    width: 100%;
+    margin-left: 20rem;
+
 }
 
 .settingsButton svg {
@@ -681,6 +681,36 @@ transform: translate3d(0, 0, 0);
         }
         /* ---- Basic Settings Buttons End ---- */
 
+
+/* ------------ Browse Folders CSS (Rescan) ------------ */
+
+        .x-window {
+            background-color: #151d3a;
+            border-radius: 30px;
+        }
+
+        .x-window .x-window-body {
+            background-color: #273047;
+            border-radius: 30px;
+
+
+        }
+
+        #filesystembrowser {
+            background-color: #2d3a5d;
+            border-radius: 30px;
+
+        }
+
+        
+        .x-btn-text {
+            background-color: #1266db;
+            padding: 10%;
+        }
+        
+      
+
+    
         /* ----------- Basic Settings End ----------- */
 
 /* ---------------------- SAVE BUTTON ---------------------- */
@@ -691,7 +721,7 @@ transform: translate3d(0, 0, 0);
 }
 
 /* Styling for the 'Save Settings' button */
-#prefsSubmit input#saveSettings {
+#prefsSubmit input#saveSettings, .saveSettings {
     background-color: #0456C6; 
     color: #ecf0f1; /* Light text color to match the theme */
     border: none;
@@ -704,9 +734,13 @@ transform: translate3d(0, 0, 0);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }
 
+.saveSettings {
+    margin-left: 32%;
+}
+
 /* Hover and focus effects */
 #prefsSubmit input#saveSettings:hover,
-#prefsSubmit input#saveSettings:focus {
+#prefsSubmit input#saveSettings:focus, .saveSettings:hover {
     background-color: #1266db; /* Slightly lighter blue on hover/focus */
     transform: translateY(-2px); /* Subtle lift effect on hover */
     outline: none;
@@ -909,6 +943,7 @@ transform: translate3d(0, 0, 0);
     padding: 0px;
     font-size: 14px;
     margin-bottom: 30%;
+
 }
 
 /* Play, more, add to playlist */

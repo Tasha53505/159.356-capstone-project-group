@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Poetsen+One&display=swap');
+
+/* {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #EFF8EF
+} */
+
+.musicInfoPanel {
+    float: right;
+}
+
+.infoPanelImage {
+    object-fit: contain;
+    border-radius: 10%;
+    border: 3px solid #EFF8EF;
+    margin-top: 10%;
+    margin-bottom: 10%;
+
+    margin-left: 5%;
+    width: 90%
+}
+
+.infoPanel.active {
+    /* background-color: #ccccce; */
+    width: 75%;
+    height: 100vh;
+
+    float: right;
+
+    background-color: #20294B;
+    border-radius: 1em 0em 0em 1em;
+
+    display: block;
+
+    overflow-y: scroll;
+}
+
+.infoPanel {
+    overflow: hidden;
+    display: none;
+}
+
+.infoArtistPanel.active {
+    width: 75%;
+    height: 100vh;
+
+    float: right;
+
+    background-color: #20294B;
+    border-radius: 1em 0em 0em 1em;
+
+    display: block;
+
+    overflow-y: scroll;
+}
+
+.infoArtistPanel {
+    overflow: hidden;
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #0456C6;
+    border-radius: 1em;
+}
+
+.infoPanelContent h2 {
+    padding-bottom: 1em;
+}
+
+.infoPanelContent {
+    background-color: #20294B;
+}
+
+.infoPanelContainer {
+    padding: 10%;
+}
+
+.artistHeader2 {
+    text-align: center;
+}
+
+.infoPanelBtn {
+    float: right;
+    background-color: #0456C6;
+    border: none;
+    padding: 0.5em;
+    border-radius: 30% 0% 0% 30%;
+    z-index: 5;
+}

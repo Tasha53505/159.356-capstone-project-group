@@ -33,38 +33,7 @@
         Ext.onReady(function(){
             Main.init()
         });
-        Ext.onReady(function(){
-                    tuneIn = new Ext.form.TextField({
-                        applyTo: 'url'
-                    });
-                
-                    Ext.get('tuneInSubmit').hide();
-                    Ext.get('tuneInAdd').hide();
 
-                    new Ext.Button({
-                        renderTo: 'tuneIn',
-                        text: '[% 'RADIO_TUNEIN_CHOOSE' | string %]',
-                        handler: function(){
-                            var url = Ext.get('url').getValue();
-                            if (url) {
-                                SqueezeJS.UI.setProgressCursor();
-                                SqueezeJS.Controller.playerControl(['playlist', 'play', url]);
-                            }
-                        }
-                    });
-
-                    new Ext.Button({
-                        renderTo: 'add',
-                        text: '[% 'ADD' | string %]',
-                        handler: function(){
-                            var url = Ext.get('url').getValue();
-                            if (url) {
-                                SqueezeJS.UI.setProgressCursor();
-                                SqueezeJS.Controller.playerControl(['playlist', 'add', url]);
-                            }
-                        }
-                    });
-             });
 
     </script>
 </head>
@@ -72,12 +41,18 @@
 <body>
     <div class="overallContainer">
         <div class="overallPlaylistContainer">
+
             <div class="overallHeadersContainer">
                 <div class="player">
                     <div class="homeTitleContainer">
                         <div class="homeTitle">
                             <h2>Home</h2>
+
+
                         </div>
+                        <!-- <button  id="testButton" style="background-color: #23305f;">test Console log (TO DEL)</button> -->
+                        <!-- <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings" style="background-color: #23305f;"> -->
+
                        
                         <div class="settingsContainer">
                             
@@ -87,62 +62,65 @@
                                 </svg>                    
                                 Settings </button>
 
-                                <div class="advancedSettingsPlugin">
-                                    <!-- [% PROCESS settings/header.html %]  -->
-                                    <div class="advancedSettingsContent">
-                                        [% "SETUP_GROUP_PLUGINS" | string %]
-                                        [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
-                                        [% FOREACH plugin = sortedPlugins %]
-                                        [% name = plugins.$plugin.name %]
-                                        [% version = plugins.$plugin.version %]
-                                        [% enforce = plugins.$plugin.enforce || plugins.$plugin.errorDesc %]
-                                        [% settings = failsafe && !enforce ? '' : plugins.$plugin.optionsURL %]
-                                        [% enabled = pluginState.$plugin %]
-                                        [% title = BLOCK %]
-                                        [% name | getstring %]
-                                        [% IF version %](v[% version %])[% END %]
-                                        [% END %]
-                                        [% WRAPPER setting desc = plugins.$plugin.description %]
-                                        [% IF plugins.$plugin.errorDesc %]
-                                        [% plugins.$plugin.errorDesc %]
-                                        [% ELSE %]
-                                        [% PROCESS pluginLink %]
-                                        [% IF plugins.$plugin.opType %]
-                                        ([% "SETUP_GROUP_PLUGINS_NEEDS_RESTART" | string %])
-                                        [% END %]
-                                        [% END %]
-                                        [% END %]
-                                        [% END %]
+
+
+
+                                    <div class="advancedSettingsPlugin">
+                                        <!-- [% PROCESS settings/header.html %]  -->
+                                        <div class="advancedSettingsContent">
+                                            [% "SETUP_GROUP_PLUGINS" | string %]
+                                            [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
+                                            [% FOREACH plugin = sortedPlugins %]
+                                            [% name = plugins.$plugin.name %]
+                                            [% version = plugins.$plugin.version %]
+                                            [% enforce = plugins.$plugin.enforce || plugins.$plugin.errorDesc %]
+                                            [% settings = failsafe && !enforce ? '' : plugins.$plugin.optionsURL %]
+                                            [% enabled = pluginState.$plugin %]
+                                            [% title = BLOCK %]
+                                            [% name | getstring %]
+                                            [% IF version %](v[% version %])[% END %]
+                                            [% END %]
+                                            [% WRAPPER setting desc = plugins.$plugin.description %]
+                                            [% IF plugins.$plugin.errorDesc %]
+                                            [% plugins.$plugin.errorDesc %]
+                                            [% ELSE %]
+                                            [% PROCESS pluginLink %]
+                                            [% IF plugins.$plugin.opType %]
+                                            ([% "SETUP_GROUP_PLUGINS_NEEDS_RESTART" | string %])
+                                            [% END %]
+                                            [% END %]
+                                            [% END %]
+                                            [% END %]
+                                        </div>
+                                
+                                        <!-- [% PROCESS settings/footer.html %] -->
                                     </div>
-                              
-                                    <!-- [% PROCESS settings/footer.html %] -->
-                                </div>
+                           
+                                <div class="basicSettings" id="basicSettings">
 
-                                <div class="basicSettings">
                                     <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
-                             <!------------- Basic Settings Language Tab Content ------------->
+                                         <!------------- Basic Settings Language Tab Content ------------->
 
-                                    <div class="basicSettingsTabs">
+                                    <div class="basicSettingsTabs">                                        
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
                                         <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
                                         <button class="basicSettingsSecurityTabButton" data-tab="security">Security</button>
                                     </div>
+                          
                                     <div class="settingsContent">
 
                                         <div class="basicSettingsLanguageTab active" id="language">
-                                            <div class="language">
+                                            <div class="language">                                              
                                                 [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
                                                 [% languageoptions.$option %]
                                                 [% END %] 
-
-                                                </select>
                                 
                                                 <select class="stdedit" name="pref_language" id="languageSelect">
                                                     <option value="DA">Dansk</option>
                                                     <option value="DE">Deutsch</option>
-                                                    <option selected="selected" value="EN">English</option>
+                                                    <option value="EN" selected>English</option>
                                                     <option value="EN_GB">English (British) *</option>
                                                     <option value="ES">Español</option>
                                                     <option value="FR">Français</option>
@@ -159,9 +137,12 @@
                                                     <option value="JA">日本語 *</option>
                                                     <option value="ZH_CN">简体中文 *</option>
                                                 </select>
-                                            </div>
+                                                
+                                     
+                                            </div>                                            
                                         </div>
 
+                                       
                                         <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
                                             <div class="mediaLibrary" >
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
@@ -179,40 +160,36 @@
                                                 
 
                                                 <!-- Input to put in folder to find music -->
-                                                <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="mediadirs0" value="C:\Program Files\Songs" size="40">
-                                                <br />
-                                                <br />
-                                                <!-- Button to browse folders-->
-                                                <input type="button" value="Browse" class="browseFolders" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
-                                                <br />
-                                                <br />
-                                                <!-- Rescan Button -->
-                                                <input name="pref_rescan_mediadir0" type="submit" value="Rescan" class="stdclick rescanButton disableOnScan">
+                                                 <form id="rescanMediaForm" class="">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="" size="40" >
+                                                    
+                                                    <div class="prefs">
+                
+                                                        <select class="stdedit disableOnScan" name="pref_rescantype" id="rescantype">
                                                 
+                                                        
+                                                            <option value="1rescan">Look for new and changed media files</option>
+                                                            <option value="2wipedb">Clear library and rescan everything</option>
+                                                            <option value="3playlist">Only rescan playlists</option>
+                                                            <option value="4onlinelibrary">Only rescan online music library</option>
+                                                        </select>
 
-                                                <!-- [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %]
-                                                <table border="0" cellspacing="0">
-                                                    <tr>
-                                                        <th>[% 'FOLDER' | string %]</th>
-                                                        <th>[% 'MUSIC' | string %]&nbsp;&n9bsp;</th>
-                                                        <th>&nbsp;</th>
-                                                    </tr>
 
-                                                    [% FOREACH mediadir = mediadirs %]
-                                                    <tr>
-                                                        <td class="[% odd ? "odd" : "even" %]">
-                                                            <input type="text" class="stdedit selectFolder" name="pref_mediadirs[% loop.index %]" id="mediadirs[% loop.index %]" value="[% mediadir.path %]" size="40"><br/>&nbsp;
-                                                        </td>
-                                                        <td class="[% odd ? "odd" : "even" %]" align="center">
-                                                            <input type=checkbox [% IF !mediadir.audio %]checked="1" [% END %] class="stdedit" name="pref_ignoreInAudioScan[% loop.index %]" id="ignoreInAudioScan[% loop.index %]" value="1" />
-                                                        </td>
-                                                        <td class="[% odd ? "odd" : "even" %]" align="center" style="padding: 0 5px">
-                                                            [% IF mediadir.path %]<input name="pref_rescan_mediadir[% loop.index %]" type=submit value="[% "SETUP_RESCAN_BUTTON" | string %]" class="stdclick disableOnScan" [% IF scanning %]disabled[% END %] />[% END %]
-                                                        </td>
-                                                    </tr>
-                                                    [% END %]
-                                                </table>
-                                            [% END %] -->
+                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan" id="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
+                                                    <a id="progressLink" href="/capstone/settings/server/status.html?player=">View Previous Scan Details</a>
+                                                
+                                                    &nbsp;</div>
+                                                </form>
+                                    
+                                                
+                                                <br />
+                                                <br />
+
+
+                                                <!-- Button to browse folders-->
+                                                <input type="button" value="Browse" class="browseFolders filesystembrowser" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
+                                                <br />
+                                                <br />
 
 
                                             </div>
@@ -225,15 +202,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="basicSettingsRescanMediaTab" id="rescanMedia">
-                                            <div class="rescanMedia" >
-                                                [% WRAPPER setting title="SETUP_RESCAN" desc="SETUP_RESCAN_DESC" %] 
-                                                [% option.value | string %]
-                                                
-                                                [% IF scanning %][% "SETUP_VIEW_SCANNING" | string %][% ELSE %][% "SETUP_VIEW_NOT_SCANNING" | string %][% END %] [% END %]
-                                            </div>
-        
-                                        </div>
+                                
 
                                         <div class="basicSettingsSecurityTab" id="security">
                                             <div class="security" >
@@ -243,20 +212,9 @@
                                         </div>
 
                                   </div>
-                                    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+                                  <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
 
-                                    <!-- <div id="prefsSubmit"><input name="saveSettings" id="saveSettings" type="submit" onclick="event.preventDefault()" class="stdclick" value="Save Settings">
-                                        <input type="hidden" name="saveSettings" value="1">
-                                    </div> -->
-                                <form id="settingsForm"> 
-                                    <div id="prefsSubmit">
-                                        [%- IF NOT nosubmit %]<input name="saveSettings" id="saveSettings" type="submit" class="saveSettings" value="[% "SAVE_SETTINGS" | string %]">[% END %]
-                                        <input type="hidden" name="saveSettings" value="1">
-                                    </div>
-                                </form>
-                                    
-                                    
-                                    <!-- <label data-translate="SETUP_LANGUAGE">Language</label> -->
+
 
 
                                 </div>
@@ -268,20 +226,22 @@
                         <!-- <li id="myMusic">My Musicc</li> -->
                         <ul class="accordionContainer">
                             <button class="accordionButton">My Music</button>
+
+
+
                             <div class="accordionPanel">
-                                <div class="allMusicContainer">                               
-    
+                                <div class="allMusicContainer">    
+                           
+                                    <!-- For now changing from div to button to try and read server.prefs file. -->
                                     <div class="allMusicSelect" id="allSongs">Songs</div>
 
-                                    <div class="songsList">
+                                    <div class="songsList" >
                                         <div style="margin: 3rem;">
-                                            <!-- Display song titles - Not working  -->
-                                            <!-- title_[% myItem.num %]|[% myItem.title %]
-                                            artist_[% myItem.num %]|[% PROCESS artistsAsHTML.html itemobj = myItem.itemobj %]
-                                            album_[% myItem.num %]|[% myItem.album.title %] -->
+                            
 
-                                
+                                            <a href="http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" target="">MUSIC FOLDER</a>
 
+        	               
 
                                             You have: [% song_count %] total. <br>
                                             Artist [% " " _ stringBY _ " " %] [%- FILTER null %] 
@@ -334,38 +294,37 @@
                         
                                             <div id="browsedbList" style="background-color: #1b2444;"></div>
                                     
-                                            <!-- [% UNLESS leftControls; leftControls = 'browsecontrols'; END %] 
-                                            [% WRAPPER contentitem 
-                                                leftcontrols=leftControls 
-                                                itemobj=item.itemobj 
-                                                attributes=item.attributes 
-                                                odd=item.odd 
-                                                anchor=item.anchor 
-                                                showdescend=item.showdescend 
-                                                showplay=item.showplay 
-                                                showplayall=item.showplayall 
-                                                playallhref=item.playallhref 
-                                                addallhref=item.addallhref 
-                                                href=item.href 
-                                            %] 
-                                            [% UNLESS itemInfoTemplate; itemInfoTemplate = 'iteminfo'; END; PROCESS $itemInfoTemplate %] 
-                                            [% END -%] -->
+                    
 
-
-                                            
                                     
                                             <div class="">
                                                 <div class="browsedbListItem">
                                                     <span class="browsedbLeftControls">
                                                         <a href="">Play</a>
-                                                        <a href="index.html?action=addall&amp;index=0f4a5065&amp;player=&amp;sess=" target="status">Add to Current Playlist</a>
+                                                        <a onclick="Browse.XMLBrowser.addAllLink('mode=bmf&', 'b67fcba1', '');" target="status">Add to Current Playlist</a>
                                                     </span>    
                                                     All Songs
                                                 </div>
                                             </div>
-                                            
-
-                                    
+                                          
+                                                <!-- This LINKS ALL THE FOLDERS -->
+                                            <!-- <div class="homeMenuSection">
+                                                <div>[% "BROWSE_MUSIC" | string | upper %]</div>
+                                                <ul>
+                                                [%- FOREACH item = additionalLinkOrder.browse %]
+                                                    [%- IF additionalLinks.browse.exists(item) %]
+                                                    <li><a href="[% additionalLinks.browse.$item | html %]player=[% playerURI %]">[% item | getstring | html %]</a></li>
+                                                    [% IF item == 'SEARCH' && additionalLinks.search.ADVANCEDSEARCH %]
+                                                    <li><a href="[% additionalLinks.search.ADVANCEDSEARCH | html %]player=[% playerURI %]">[% "ADVANCEDSEARCH" | getstring | html %]</a></li>
+                                                    [% END %]
+                                                    [%- END %]
+                                                [%- END %]
+                                                [%- FOREACH link = additionalLinks.browse; IF !additionalLinkOrder.browse.grep(link.key).size %]
+                                                    <li><a href="[% link.value | html %]player=[% playerURI %]">[% link.key | getstring | html %]</a></li>
+                                                [%- END; END %]
+                                                </ul>
+                                            </div>
+                                             -->
                                             
                                             <span 
                                                 style="margin: 0px; padding: 0px; border: 0px;" 
@@ -386,8 +345,9 @@
                                                             </svg>
                                                         </a>
 
-                                                        <a href="index.html?action=add&amp;index=0f4a5065&amp;player=&amp;sess=" target="status">
                                                             <!-- Plus (Add to current playlist) Icon SVG -->
+                                                             <a href="#" onclick="addToQueue('http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=add&index=d92b6e27.0&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">
+
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                                                                 <g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                                                                     <path d="M5 12h14">
@@ -434,7 +394,7 @@
                                                                                    
                                                 </a>
 
-                                                <a href="index.html?action=add&amp;index=ddc8a52b.1&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=" target="status">
+                                                <a onclick="addToQueue(SqueezeJS.Controller.urlRequest('/capstone/anyurl?p0=playlist&p1=add&p2=file%3A%2F%2F%2FC%3A%2FProgram%2520Files%2FSongs%2FAIF%2520-%252044_16%2520-%252002%2520-%2520Mutineer.aif&player=10%3Af6%3A0a%3A92%3A1d%3A96', 1));" target="status">
                                                     <!-- Plus  (Add to current playlist) Icon SVG -->
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>
 
@@ -492,7 +452,7 @@
 
 
                                                 </a>
-                                                <a href="index.html?action=add&amp;index=ddc8a52b.3&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=" target="status">
+                                                <a  onclick="addToQueue(SqueezeJS.Controller.urlRequest('/capstone/anyurl?p0=playlist&p1=add&p2=file%3A%2F%2F%2FC%3A%2FProgram%2520Files%2FSongs%2FDFF%2520-%252064%2520-%252004%2520-%2520Taquito%2520Militar.dff&player=10%3Af6%3A0a%3A92%3A1d%3A96', 1));" target="status">
                                                     <!-- Plus  (Add to current playlist) Icon SVG -->
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>
                                                 </a>
@@ -514,7 +474,7 @@
 
                                                                                     
 
-<!--                                                     <a href="#" onclick="playSong('http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=play&index=c4ec732d.14&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">  -->
+    <!--                                                     <a href="#" onclick="playSong('http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=play&index=c4ec732d.14&player=10%3Af6%3A0a%3A92%3A1d%3A96&sess='); return false;">  -->
 
 
                     
@@ -528,7 +488,7 @@
 
 
                                                     </a>
-                                                    <a href="index.html?action=add&amp;index=c4ec732d.14&amp;player=10%3Af6%3A0a%3A92%3A1d%3A96&amp;sess=" target="status">
+                                                    <a onclick="addToQueue(SqueezeJS.Controller.urlRequest('/capstone/anyurl?p0=playlist&p1=add&p2=file%3A%2F%2F%2FC%3A%2FProgram%2520Files%2FSongs%2FPGGB%2520-%2520705%2520-%252015%2520-%2520Running%2520Out%2520of%2520Time%2520-%2520186M.wav&player=10%3Af6%3A0a%3A92%3A1d%3A96', 1));" target="status">
                                                         <!-- Plus  (Add to current playlist) Icon SVG -->
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><g fill="none" stroke="#EFF8FC" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M5 12h14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0"/></path><path d="M12 5v14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="16;0"/></path></g></svg>                                                          
                                                     </a>
@@ -762,15 +722,21 @@
         </div>
         <div class="playerContainer">
             <div class="player">
-                <div class="bar"></div>
-                <div class="progress"></div>
+                <div id="playtimePanel">
+                    <div id="ctrlPlaytime"></div>
+                    <div id="playbar">
+                        <div id="ctrlProgress"></div>
+                    </div>
+                    <div id="ctrlRemainingTime"></div>
+                </div>
+                <!--<div id="ctrlProgress"></div>
                 <div class="timeInfo">
                     <p class="playtime" id="playtime"></p>
                     <p class="maxtime" id="maxtime"></p>
-                </div>
+                </div>-->
                 <div class="buttons">
                     <div class="control">
-                        <div id="repeatButton" class="repeatButton">   
+                        <div id="repeatButton" class="repeatButtonInactive">   
                         </div>
                     </div>
                     <div class="control">
@@ -786,7 +752,7 @@
                         </div>
                     </div>
                     <div class="control">
-                        <div id="shuffleButton" class="shuffleButton">   
+                        <div id="shuffleButton" class="shuffleButtonInactive">   
                         </div>
                     </div>
                 </div>
@@ -853,6 +819,7 @@
         </button>
     </div>
 
+   
     <div class="playlistContainer">
         <div class="MusiclistContainer">
             <div style="width: 100%; text-align: center;">
@@ -890,6 +857,7 @@
 
     </div>
 
+   
 </body>
 <script src="benplayer.js"></script>
 <script src="playlistHome.js"></script>
