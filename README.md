@@ -119,5 +119,10 @@ Documented issue here: https://github.com/Tasha53505/159.356-capstone-project-gr
 (Specifically for the rescan button) - but this will help in general, is that `C:` is NOT a valid path, it needed to be `C/` --> Also, I needed to format it so that it was a 2D Array
    ` const formattedPath = [folderPath];`  and `const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);`
 
-
+----------------------------------------
+## Notes about JSON RPC
+https://lyrion.org/reference/cli/using-the-cli/#jsonrpcjs --> Documentation is incredibly helpful
+- From what I've found and doing research, the drawback from JSON RPC is not being able to send multiple requests at one time, results in an error. Perl would have been able to do this
+- Make sure if you're dealing with file paths that they're correct.
+- 0 can be used as a placeholder for playerID --> if the command your sending supports it.
 
