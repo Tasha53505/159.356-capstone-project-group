@@ -250,6 +250,46 @@ if (params && params[1][0] === "pref" && params[1][1] === "ignoreReleaseTypes") 
     }
 
 
+    // *******************************************************************************
+//                    ****  Grouping release types (Release types to include) ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "groupArtistAlbumsByReleaseType") {
+    const newGroupArtistAlbumsByReleaseType = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace Line
+        const updatedData = data.replace(/groupArtistAlbumsByReleaseType:\s*\S+/g, `groupArtistAlbumsByReleaseType: ["${newGroupArtistAlbumsByReleaseType}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'groupArtistAlbumsByReleaseType (Release Types in Media Library Management) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+
 
 // *******************************************************************************
 //                    ****  update Recognising EPs and Singles  ****

@@ -74,6 +74,34 @@
                                             
                                         <div class="advancedSettingsMediaLibraryManagementTab active" id="advancedSettingsMediaLibraryManagement"> 
                                                 <h2>MP3 Tag Format</h2>
+                                                <form id="tagFormatForm">
+                                                    [% IF prefs.pref_useUnifiedArtistsList; WRAPPER settingSection %]
+                                                    [% WRAPPER settingGroup title="SETUP_COMPOSERINARTISTS" desc="SETUP_COMPOSERINARTISTS_DESC" %]
+                                                        <input type="checkbox" [% IF prefs.pref_composerInArtists %]checked="1" [% END %] class="stdedit" name="pref_composerInArtists" id="composerInArtists" value="1" />
+                                                        <label for="composerInArtists" class="stdlabel">[% "COMPOSER" | string %]</label><br>
+                                            
+                                                        <input type="checkbox" [% IF prefs.pref_conductorInArtists %]checked="1" [% END %] class="stdedit" name="pref_conductorInArtists" id="conductorInArtists" value="1" />
+                                                        <label for="conductorInArtists" class="stdlabel">[% "CONDUCTOR" | string %]</label><br>
+                                            
+                                                        <input type="checkbox" [% IF prefs.pref_bandInArtists %]checked="1" [% END %] class="stdedit" name="pref_bandInArtists" id="bandInArtists" value="1" />
+                                                        <label for="bandInArtists" class="stdlabel">[% "BAND" | string %]</label>
+                                                    [% END %]
+                                                [% END; ELSE %]
+                                                    <input type="hidden" name="pref_composerInArtists" value="[% prefs.pref_composerInArtists | html %]" />
+                                                    <input type="hidden" name="pref_conductorInArtists" value="[% prefs.pref_conductorInArtists | html %]" />
+                                                    <input type="hidden" name="pref_bandInArtists" value="[% prefs.pref_bandInArtists | html %]" />
+                                                    <input type="hidden" name="pref_variousArtistAutoIdentification" value="[% prefs.pref_variousArtistAutoIdentification | html %]" />
+                                                [% END %]
+                                                
+                                                    <input name="pref_unifiedArtists0" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreReleaseTypes" onclick="ignoreReleaseTypesForm(this.form); return false;" value="Save Release Types for Albums">
+                                                </form>
+    
+
+
+                                             
+
+
+
                                                 <h3>Search Witjon Words</h3>
                                                 <h3>Articles to Ignore when sorting</h3>                           
                                         </div>
@@ -286,14 +314,14 @@
                                            <!-- Checkbox -->
                                            <form id="cleanupReleaseTypesForm">
                                          
-                                                [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
+                                            [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
                                                 <input type="checkbox" [% IF prefs.pref_cleanupReleaseTypes %]checked="1"[% END %] class="stdedit" name="pref_cleanupReleaseTypes" id="pref_cleanupReleaseTypes" value="1" />
                                                 <label for="pref_cleanupReleaseTypes" class="stdlabel">[% "SETUP_CLEANUP_RELEASE_TYPES" | string %]</label>
                                             [% END; ELSE %]
                                                 <input type="hidden" name="pref_cleanupReleaseTypes" value="[% IF prefs.pref_cleanupReleaseTypes %]1[% END %]">
                                             [% END %]
 
-                                                <input name="pref_cleanupReleaseTypes" type="button" style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreReleaseTypes" onclick="cleanupReleaseTypesForm(this.form); return false;" value="Save Release Types for Albums">
+                                                <input name="pref_cleanupReleaseTypes" type="button" style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreReleaseTypes" onclick="cleanupReleaseTypesForm(this.form); return false;" value="Save Recognising EPs and Singles">
                                         </form>
 
                                         <br style="margin-bottom: 10%;">

@@ -1088,7 +1088,7 @@ function updateIgnoreReleaseTypes(ignoreReleaseTypes) {
 
 // --------------------------------  Recognising EPs and singles  --------------------------------
 function cleanupReleaseTypesForm(form) {
-    const cleanupReleaseTypes = form["pref_cleanupReleaseTypes"].checked ? '1' : '0';
+    const cleanupReleaseTypes = form["pref_cleanupReleaseTypes"].value ? '1' : '0';
 
     console.log("Recognising Release types:", cleanupReleaseTypes);
 
@@ -1127,6 +1127,47 @@ function updateCleanupReleaseTypes(cleanupReleaseTypes) {
 }
 
 // --------------------------------  Release Types to Include (Grouping) --------------------------------
+function groupArtistAlbumsByReleaseTypeForm(form) {
+    let groupReleaseTypes = form["pref_groupArtistAlbumsByReleaseType"].value;
+
+    console.log("groupArtistAlbumsByReleaseType:", groupReleaseTypes);
+
+    if ((groupReleaseTypes === "0" || groupReleaseTypes === "1" || groupReleaseTypes === "2")) {
+        console.log("Submitting preferences:", { groupReleaseTypes });
+        updateGroupArtistAlbumsByReleaseType(groupReleaseTypes); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateGroupArtistAlbumsByReleaseType(groupReleaseTypes) {
+    const data = {
+        id: 11,
+        method: "slim.request",
+        params: [ "", ["pref", "groupArtistAlbumsByReleaseType", groupReleaseTypes]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("groupArtistAlbumsByReleaseType updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
 
 
 function allReleaseTypesForm(form) {
