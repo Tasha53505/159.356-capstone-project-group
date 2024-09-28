@@ -1044,7 +1044,90 @@ function updateUnifiedArtists(unifiedArtists) {
 }
 
 
-// --------------------------------  All Release Types Settings (Albums, types, recognising)  --------------------------------
+// --------------------------------  Enabling Release Types for Albums (Or ignorring)  --------------------------------
+
+function ignoreReleaseTypesForm(form) {
+    let ignoreReleaseTypes = form["pref_ignoreReleaseTypes"].value;
+
+    console.log("Ignore Release types:", ignoreReleaseTypes);
+
+    if ((ignoreReleaseTypes === "0" || ignoreReleaseTypes === "1")) {
+        console.log("Submitting preferences:", { ignoreReleaseTypes });
+        updateIgnoreReleaseTypes(ignoreReleaseTypes); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateIgnoreReleaseTypes(ignoreReleaseTypes) {
+    const data = {
+        id: 7,
+        method: "slim.request",
+        params: [ "", ["pref", "ignoreReleaseTypes", ignoreReleaseTypes]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("ignoreReleaseTypes updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+// --------------------------------  Recognising EPs and singles  --------------------------------
+function cleanupReleaseTypesForm(form) {
+    const cleanupReleaseTypes = form["pref_cleanupReleaseTypes"].checked ? '1' : '0';
+
+    console.log("Recognising Release types:", cleanupReleaseTypes);
+
+    if ((cleanupReleaseTypes === '0' || cleanupReleaseTypes === '1')) {
+        updateCleanupReleaseTypes(cleanupReleaseTypes); 
+        console.log("Submitting preferences:", { cleanupReleaseTypes });
+    } else {
+        console.error("Invalid value for Recognising EPs And singles");
+
+    }
+
+
+}
+
+function updateCleanupReleaseTypes(cleanupReleaseTypes) {
+    const data = {
+        id: 8,
+        method: "slim.request",
+        params: ["pref", "cleanupReleaseTypes", cleanupReleaseTypes]
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+             "Content-Type": "application/json" 
+            },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Cleanup Release Types updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Cleanup Release Types:", error);
+    });
+}
+
+// --------------------------------  Release Types to Include (Grouping) --------------------------------
+
 
 function allReleaseTypesForm(form) {
     const cleanupReleaseTypes = form["pref_cleanupReleaseTypes"].checked ? "1" : "0";
@@ -1136,6 +1219,48 @@ function updateGenreLibraryFilter(noGenreFilter) {
 }
 
 // --------  Contributor Roles  --------
+
+function noRoleFilterForm(form) {
+    console.log("Form received:", form);  // Debug form element
+
+
+    let noRoleFilter = form["pref_noRoleFilter"].value;
+    console.log("Role Filter:", noRoleFilter);
+
+    if ((noRoleFilter === "0" || noRoleFilter === "1")) {
+        console.log("Submitting preferences:", { noRoleFilter });
+        updateRoleLibraryFilter(noRoleFilter); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateRoleLibraryFilter(noRoleFilter) {
+    const data = {
+        id: 6,
+        method: "slim.request",
+        params: [ "", ["pref", "noRoleFilter", noRoleFilter]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("No Role Filter updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
 
 
 

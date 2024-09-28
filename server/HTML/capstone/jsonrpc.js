@@ -212,17 +212,12 @@ if (params && params[1][0] === "pref" && params[1][1] === "useUnifiedArtistsList
 
 
 // *******************************************************************************
-//                    ****  update ALL release types  ****
+//                    ****  update Ignore Album release types  ****
 // *******************************************************************************
-if (params && params[1]) {
-    let updatedPrefs = {};
-    params[1].forEach(([key, value]) => {
-        if (key === "pref") {
-            updatedPrefs[value[0]] = value[1];
-        }
-    });
 
-    const { cleanupReleaseTypes, groupArtistAlbumsByReleaseType, ignoreReleaseTypes } = updatedPrefs; // Destructure ignoreReleaseTypes
+if (params && params[1][0] === "pref" && params[1][1] === "ignoreReleaseTypes") {
+    const newIgnoreReleaseTypes = params[1][2];
+
 
     let filePath;
     if (os.platform() === 'win32' || os.platform() === 'win64') {
@@ -235,24 +230,103 @@ if (params && params[1]) {
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) return res.status(500).send('Error reading prefs file');
-        console.log("Current prefs file data DEBUG:", data); // DEBUG
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
 
-        // Replace cleanupReleaseTypes, groupArtistAlbumsByReleaseType, and ignoreReleaseTypes lines
-        const updatedData = data
-            .replace(/cleanupReleaseTypes:\s*\S+/g, `cleanupReleaseTypes: ["${cleanupReleaseTypes}"]`)
-            .replace(/groupArtistAlbumsByReleaseType:\s*\S+/g, `groupArtistAlbumsByReleaseType: ["${groupArtistAlbumsByReleaseType}"]`)
-            .replace(/ignoreReleaseTypes:\s*\S+/g, `ignoreReleaseTypes: ["${ignoreReleaseTypes}"]`); 
+        // Replace the mediadirs line with the new directory
+        const updatedData = data.replace(/ignoreReleaseTypes:\s*\S+/g, `ignoreReleaseTypes: ["${newIgnoreReleaseTypes}"]`);
 
+
+        
+        
         // Write the updated data back to the file
         fs.writeFile(filePath, updatedData, (err) => {
             if (err) return res.status(500).send('Error updating prefs file');
             console.log("Updated prefs file content:", updatedData); // DEBUG
-            res.json({ result: 'Release Types settings updated successfully' });
+            res.json({ result: 'ignoreReleaseTypes (Release Types in Media Library Management) updated successfully' });
+            });
         });
-    });
-} else {
-    res.status(400).send('Invalid request');
-}
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+
+// *******************************************************************************
+//                    ****  update Recognising EPs and Singles  ****
+// *******************************************************************************
+if (params && params[1].pref === "cleanupReleaseTypes") {
+  
+    const newCleanupReleaseTypes = params[1].value;
+    console.log("New cleanupReleaseTypes value:", newCleanupReleaseTypes);
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace the mediadirs line with the new directory
+        const updatedData = data.replace(/cleanupReleaseTypes:\s*\S+/g, `cleanupReleaseTypes: ["${newCleanupReleaseTypes}"]`);
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'Recognising singles and Eps (Release Types in Media Library Management) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+
+// *******************************************************************************
+//                    ****  update Grouping artists and albums  ****
+// *******************************************************************************
+if (params && params[1][0] === "pref" && params[1][1] === "groupArtistAlbumsByReleaseType") {
+    const newGroupArtistAlbumsByReleaseType = params[1][2];
+  
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace the mediadirs line with the new directory
+        const updatedData = data.replace(/groupArtistAlbumsByReleaseType:\s*\S+/g, `groupArtistAlbumsByReleaseType: ["${newGroupArtistAlbumsByReleaseType}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'Grouping  (Release Types in Media Library Management) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
 
 
 // *******************************************************************************
@@ -288,6 +362,47 @@ if (params && params[1][0] === "pref" && params[1][1] === "noGenreFilter") {
             if (err) return res.status(500).send('Error updating prefs file');
             console.log("Updated prefs file content:", updatedData); // DEBUG
             res.json({ result: 'Genre (Filters) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+
+    // *******************************************************************************
+//                    ****  update Role Filters  ****
+// *******************************************************************************
+if (params && params[1][0] === "pref" && params[1][1] === "noRoleFilter") {
+    const newNoRoleFilter= params[1][2];
+    // const libraryname = decodeURIComponent(decodeURIComponent(params[1][2])); // Double unescape
+    //    const newMediaDir = params[1][2][0];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace the mediadirs line with the new directory
+        const updatedData = data.replace(/noRoleFilter:\s*\S+/g, `noRoleFilter: ["${newNoRoleFilter}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'Role (Filters) updated successfully' });
             });
         });
     } else {

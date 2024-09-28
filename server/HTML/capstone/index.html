@@ -267,37 +267,54 @@
                                     </div>
 
                                     <div class="mediaLibraryManagementReleaseTypesTab" id="mediaLibraryManagementReleaseTypes">
-                                        <form id="allReleaseTypesForm">
-                                            [% WRAPPER settingGroup title="SETUP_RELEASE_TYPES" desc=""%]
-                                            <select class="stdedit" name="pref_ignoreReleaseTypes" id="ignoreReleaseTypes">
-                                                <option [% IF NOT prefs.pref_ignoreReleaseTypes %]selected [% END %]value="0">[% 'SETUP_IGNORE_RELEASE_TYPES_0' | string %]</option>
-                                                <option [% IF prefs.pref_ignoreReleaseTypes %]selected [% END %]value="1">[% 'SETUP_IGNORE_RELEASE_TYPES_1' | string %]</option>
-                                            </select>
-                                            [% END %]
+                                            
+                                            <!-- Release Types, ignore or not -->
+                                            <form id="ignoreReleaseTypesForm">
+                                                [% WRAPPER settingGroup title="SETUP_RELEASE_TYPES" desc=""%]
+                                                <select class="stdedit" name="pref_ignoreReleaseTypes" id="ignoreReleaseTypes">
+                                                    <option [% IF NOT prefs.pref_ignoreReleaseTypes %]selected [% END %]value="0">[% 'SETUP_IGNORE_RELEASE_TYPES_0' | string %]</option>
+                                                    <option [% IF prefs.pref_ignoreReleaseTypes %]selected [% END %]value="1">[% 'SETUP_IGNORE_RELEASE_TYPES_1' | string %]</option>
+                                                </select>
+                                                [% END %]
 
-                                            <h4>Release types Albums</h4>
+  
+                                                <input name="pref_unifiedArtists0" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreReleaseTypes" onclick="ignoreReleaseTypesForm(this.form); return false;" value="Save Release Types for Albums">
+                                            </form>
 
-                                            [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
-                                                <input type="checkbox" style="width: 20px; height: 20px;" [% IF prefs.pref_cleanupReleaseTypes %]checked="1"[% END %] class="stdedit" name="pref_cleanupReleaseTypes" id="pref_cleanupReleaseTypes" value="1" />
+                                            <br style="margin-bottom: 10%;">
+
+                                           <!-- Checkbox -->
+                                           <form id="cleanupReleaseTypesForm">
+                                         
+                                                [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
+                                                <input type="checkbox" [% IF prefs.pref_cleanupReleaseTypes %]checked="1"[% END %] class="stdedit" name="pref_cleanupReleaseTypes" id="pref_cleanupReleaseTypes" value="1" />
                                                 <label for="pref_cleanupReleaseTypes" class="stdlabel">[% "SETUP_CLEANUP_RELEASE_TYPES" | string %]</label>
                                             [% END; ELSE %]
-                                                <input type="hidden" name="pref_cleanupReleaseTypes" value="[% IF prefs.pref_cleanupReleaseTypes %]1[% END %]" style="margin-top: 5%;">
-                                            [% END %]
-                                    
-                                            <h4 style="margin-top: 2%;">Release types to include</h4>
-                                            [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
-                                                <select class="stdedit" name="pref_groupArtistAlbumsByReleaseType" id="groupArtistAlbumsByReleaseType">
-                                                    <option [% IF prefs.pref_groupArtistAlbumsByReleaseType == 1 %]selected [% END %]value="1">[% 'SETUP_GROUP_BY_RELEASE_TYPES_1' | string %]</option>
-                                                    <option [% IF prefs.pref_groupArtistAlbumsByReleaseType == 2 %]selected [% END %]value="2">[% 'SETUP_GROUP_BY_RELEASE_TYPES_2' | string %]</option>
-                                                    <option [% IF NOT prefs.pref_groupArtistAlbumsByReleaseType %]selected [% END %]value="0">[% 'SETUP_GROUP_BY_RELEASE_TYPES_0' | string %]</option>
-                                                </select>
-                                            [% END; ELSE %]
-                                                <input type="hidden" name="pref_groupArtistAlbumsByReleaseType" value="[% IF prefs.pref_groupArtistAlbumsByReleaseType %]1[% END %]">
                                                 <input type="hidden" name="pref_cleanupReleaseTypes" value="[% IF prefs.pref_cleanupReleaseTypes %]1[% END %]">
                                             [% END %]
-                                            
-                                            <input name="pref_allReleaseTypes0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="allReleaseTypes" onclick="allReleaseTypesForm(this.form); return false;" value="Save All Release Types Settings">
+
+                                                <input name="pref_cleanupReleaseTypes" type="button" style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreReleaseTypes" onclick="cleanupReleaseTypesForm(this.form); return false;" value="Save Release Types for Albums">
                                         </form>
+
+                                        <br style="margin-bottom: 10%;">
+
+                                            <!-- Release types to include -->
+                                            <form id="groupArtistAlbumsByReleaseTypeForm">
+
+                                                <h4 style="margin-top: 2%;">Release types to include</h4>
+                                                [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
+                                                    <select class="stdedit" name="pref_groupArtistAlbumsByReleaseType" id="groupArtistAlbumsByReleaseType">
+                                                        <option [% IF prefs.pref_groupArtistAlbumsByReleaseType == 1 %]selected [% END %]value="1">[% 'SETUP_GROUP_BY_RELEASE_TYPES_1' | string %]</option>
+                                                        <option [% IF prefs.pref_groupArtistAlbumsByReleaseType == 2 %]selected [% END %]value="2">[% 'SETUP_GROUP_BY_RELEASE_TYPES_2' | string %]</option>
+                                                        <option [% IF NOT prefs.pref_groupArtistAlbumsByReleaseType %]selected [% END %]value="0">[% 'SETUP_GROUP_BY_RELEASE_TYPES_0' | string %]</option>
+                                                    </select>
+                                                [% END; ELSE %]
+                                                    <input type="hidden" name="pref_groupArtistAlbumsByReleaseType" value="[% IF prefs.pref_groupArtistAlbumsByReleaseType %]1[% END %]">
+                                                    <input type="hidden" name="pref_cleanupReleaseTypes" value="[% IF prefs.pref_cleanupReleaseTypes %]1[% END %]">
+                                                [% END %]
+                                                <input type="button" class="stdclick rescanButton saveSettings" style="font-size: 15px;" onclick="groupArtistAlbumsByReleaseTypeForm(this.form); return false;" value="Save Group Artist Albums By Release Type">
+                                        </form>
+                                          
                                     </div>
                                     
                                     <div class="mediaLibraryManagementFiltersTab" id="mediaLibraryManagementFilters">
@@ -321,19 +338,25 @@
                                                     <option [% IF NOT prefs.pref_noGenreFilter %]selected [% END %]value="0">[% 'SETUP_NOGENREFILTER_0' | string %]</option>
                                                     <option [% IF prefs.pref_noGenreFilter %]selected [% END %]value="1">[% 'SETUP_NOGENREFILTER_1' | string %]</option>
                                                 </select>
-                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveGenreFiltersButton" onclick="noGenreFilterForm(this.form); return false;" value="Save  Genre Filters"><br><br>
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveGenreFiltersButton" onclick="noGenreFilterForm(this.form); return false;" value="Save  Genre Filters"><br>
 
                                             [% END %]
 
                                         </form>
                                     
                                         
+                                        <form action="" id="noRoleFilterForm">
+
                                             [% WRAPPER setting title="SETUP_NOROLEFILTER" desc="SETUP_NOROLEFILTER_DESC"%]
                                                 <select class="stdedit" name="pref_noRoleFilter" id="noRoleFilter">
-                                                    <option [% IF NOT prefs.pref_noRoleFilter %]selected [% END %]value="0">[% 'SETUP_NOROLEFILTER_0' | string %]</option>
-                                                    <option [% IF prefs.pref_noRoleFilter %]selected [% END %]value="1">[% 'SETUP_NOROLEFILTER_1' | string %]</option>
+                                                    <option [% IF NOT prefs.pref_noRoleFilter %]selected [% END %] value="0">[% 'SETUP_NOROLEFILTER_0' | string %]</option>
+                                                    <option [% IF prefs.pref_noRoleFilter %]selected [% END %] value="1">[% 'SETUP_NOROLEFILTER_1' | string %]</option>
                                                 </select>
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveRoleFiltersButton" onclick="noRoleFilterForm(this.form); return false;" value="Save Role Filters"><br>
+
                                             [% END %]
+
+                                        </form>
 
                                     </div>
                                     
