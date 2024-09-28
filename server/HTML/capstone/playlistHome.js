@@ -1002,6 +1002,93 @@ function updatelibraryName(libraryName) {
     });
 }
 
+// --------------------------------  Browse Artists (Unified Artists)  --------------------------------
+
+function unifiedArtistsForm(form) {
+
+    let unifiedArtists = form["pref_useUnifiedArtistsList"].value;
+    console.log("Unified Artists:", unifiedArtists);
+
+    if (unifiedArtists !== undefined && (unifiedArtists === "0" || unifiedArtists === "1")) {
+        console.log("Submitting unified artists preference: (0 or 1)", unifiedArtists);
+        updateUnifiedArtists(unifiedArtists);
+    } else {
+        console.error("Invalid value for unified artists selection");
+    }   
+}
+
+
+
+function updateUnifiedArtists(unifiedArtists) {
+    
+    const data = {
+        id: 4,
+        method: "slim.request",
+        params: [ "", ["pref", "useUnifiedArtistsList", unifiedArtists]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Browse Artists updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating UnifiedArtists name:", error);
+    });
+}
+
+
+// --------------------------------  All Release Types Settings (Albums, types, recognising)  --------------------------------
+
+function allReleaseTypesForm(form) {
+    // Get values from the form
+    let ignoreReleaseTypes = form["pref_ignoreReleaseTypes"].value;
+    let groupArtistsAlbumsByReleaseType = form["pref_groupArtistAlbumsByReleaseType"].value;
+    let cleanupReleaseTypes = form["pref_cleanupReleaseTypes"] ? form["pref_cleanupReleaseTypes"].checked ? "1" : "0" : "0";
+
+    // Log values to debug
+    console.log("Ignore Release Types:", ignoreReleaseTypes);
+    console.log("Group Artists Albums by Release Type:", groupArtistsAlbumsByReleaseType);
+    console.log("Cleanup Release Types:", cleanupReleaseTypes);
+
+    // Submit the preferences to update
+    updateReleaseTypes(ignoreReleaseTypes, groupArtistsAlbumsByReleaseType, cleanupReleaseTypes);
+}
+
+function updateReleaseTypes(ignoreReleaseTypes, groupArtistsAlbumsByReleaseType, cleanupReleaseTypes) {
+    const data = {
+        id: 4,
+        method: "slim.request",
+        params: [
+            "",
+            ["pref", "ignoreReleaseTypes", ignoreReleaseTypes],
+            ["pref", "groupArtistsAlbumsByReleaseType", groupArtistsAlbumsByReleaseType],
+            ["pref", "cleanupReleaseTypes", cleanupReleaseTypes]
+        ]
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("All Release Types updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Release Types:", error);
+    });
+}
+
 
 
 // document.getElementById('allSongs').addEventListener('click', function() {

@@ -164,6 +164,84 @@ if (params && params[1][0] === "pref" && params[1][1] === "libraryname") {
     }
 
 
+// ******************************************************************************
+//                    ****  Browse Artists (Unified Artists) ****
+// *******************************************************************************
+if (params && params[1][0] === "pref" && params[1][1] === "useUnifiedArtistsList") {
+    const newUnifiedArtistsList= params[1][2];
+    // const libraryname = decodeURIComponent(decodeURIComponent(params[1][2])); // Double unescape
+    //    const newMediaDir = params[1][2][0];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace the mediadirs line with the new directory
+        const updatedData = data.replace(/useUnifiedArtistsList:\s*\S+/g, `useUnifiedArtistsList: ["${newUnifiedArtistsList}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'useUnifiedArtistsList (Browse artists) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+// *******************************************************************************
+//                    ****  update ALL release types  ****
+// *******************************************************************************
+if (params && params[1][0] === "pref" && params[1][1] === "ignoreReleaseTypes") {
+    const ignoreReleaseTypes = params[1][2];
+    const groupArtistsAlbumsByReleaseType = params[2][2];
+    const cleanupReleaseTypes = params[3][2];
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); // DEBUG
+
+        // Update all relevant preferences in the prefs file
+        let updatedData = data.replace(/ignoreReleaseTypes:\s*\S+/g, `ignoreReleaseTypes: "${ignoreReleaseTypes}"`);
+        updatedData = updatedData.replace(/groupArtistsAlbumsByReleaseType:\s*\S+/g, `groupArtistsAlbumsByReleaseType: "${groupArtistsAlbumsByReleaseType}"`);
+        updatedData = updatedData.replace(/cleanupReleaseTypes:\s*\S+/g, `cleanupReleaseTypes: "${cleanupReleaseTypes}"`);
+
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'Release types updated successfully' });
+        });
+    });
+} else {
+    res.status(400).send('Invalid request');
+}
+
+
 
         
 // ******************************************************************************

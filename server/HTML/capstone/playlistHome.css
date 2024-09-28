@@ -668,7 +668,6 @@ transform: translate3d(0, 0, 0);
         /* ---- Basic Settings Language Tab Start ---- */
     
 
-        /* ---- Basic Settings Language Tab End ---- */
 
         /* ---- Basic Settings Buttons Start ---- */
 
@@ -714,6 +713,10 @@ transform: translate3d(0, 0, 0);
         
         /* ---- Basic Settings Buttons End ---- */
 
+    /* Library Management tabs */
+.mediaLibraryManagementSettingsContent {
+    margin-top: 5%;
+}
 
 /* ------------ Browse Folders CSS (Rescan) ------------ */
 
@@ -768,7 +771,7 @@ transform: translate3d(0, 0, 0);
 }
 
 .saveSettings {
-    margin-left: 32%;
+    margin-top: 5%;
 }
 
 /* Hover and focus effects */

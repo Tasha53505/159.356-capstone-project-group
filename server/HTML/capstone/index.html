@@ -127,7 +127,7 @@
 
                                             </div>                 
                                             <br>
-                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language" style="width: 50%; text-align: center;">
+                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language">
                            
                                         </div>
 
@@ -144,10 +144,10 @@
                                                     
                                                     
                                                     <div class="prefs">
-                                                     <input name="pref_update_libraryname" type="button" class="stdclick rescanButton disableOnScan" id="libraryNameUpdateButton" onclick="libraryNameForm(this.form); return false;"  value="Save Library Name"><br><br>
+                                                     <input name="pref_update_libraryname" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="libraryNameUpdateButton" onclick="libraryNameForm(this.form); return false;"  value="Save Library Name"><br><br>
                                                     </div>
 
-                                            
+
 
                                             </div>
                                         </form>
@@ -180,7 +180,7 @@
                                                         </select>
 
 
-                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan" id="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
+                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan saveSettings" id="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
                                                     <a id="progressLink" href="/capstone/settings/server/status.html?player=">View Previous Scan Details</a>
                                                 
                                                     &nbsp;</div>
@@ -216,7 +216,7 @@
                                                     
                                                     
                                                     <div class="prefs">
-                                                     <input name="pref_update_playlistdir0" type="button" class="stdclick rescanButton disableOnScan" id="playlistDirUpdateButton" onclick="playlistsDirectoryForm(this.form); return false;"  value="Scan for Playlist"><br><br>
+                                                     <input name="pref_update_playlistdir0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="playlistDirUpdateButton" onclick="playlistsDirectoryForm(this.form); return false;"  value="Scan for Playlist"><br><br>
                                                     </div>
 
                                             
@@ -235,11 +235,10 @@
                                 </div>
                             <!------------- Basic Settings Language Tab Content End ------------->
 
-                            <!------------- Management Library organisation Tab ------------->
+                            <!------------- Management Library organisation Tab  (Behaviour settings) ------------->
                             <div class="mediaLibraryManagementSettings" id="mediaLibraryManagementSettings">
 
                                 <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
-                                     <!------------- Basic Settings Language Tab Content ------------->
 
                                 <div class="mediaLibraryManagementSettingsTabs">                                        
                                     <button class="mediaLibraryManagementBrowseTabButton active" data-tab="browseArtists">Browse Artists</button>
@@ -250,11 +249,59 @@
                                 <div class="mediaLibraryManagementSettingsContent">
 
                                     <div class="mediaLibraryManagementBrowseTab active" id="mediaLibraryManagementBrowseArtists">
-                                        <h2>Management Browse</h4>
+                                        <form action="" class="unifiedArtistsForm">
+                                            [% WRAPPER settingSection %]
+                                            [% WRAPPER settingGroup title="SETUP_ARTISTS_BROWSE_MODES" desc="SETUP_ARTISTS_BROWSE_MODES_DESC" %]
+                                                <select class="stdedit" name="pref_useUnifiedArtistsList" id="useUnifiedArtistsList">[% prefs.pref_useUnifiedArtistsList %]
+                                    
+                                                    <option [% IF prefs.pref_useUnifiedArtistsList %]selected [% END %] value="1">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_ON' | string %]</option>
+                                                    <option [% IF NOT prefs.pref_useUnifiedArtistsList%]selected [% END %] value="0">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_OFF' | string %]</option>
+                                    
+                                                </select>
+                                            [% END %]
+                                        [% END %]
+                                            <input name="pref_unifiedArtists0" type="submit" class="stdclick rescanButton disableOnScan saveSettings" id="unifiedArtists" onclick="unifiedArtistsForm(this.form); return false;"   value="Save How you Browse Artists"><br><br>
+                                        <!-- Option 1 in prefs: useUnifiedArtistsList = 1  and if option 2 is clicked (Use 2 seperate lists), useUnifiedArtistsList = 0  -->
+                                     </form>
+
                                     </div>
 
                                     <div class="mediaLibraryManagementReleaseTypesTab " id="mediaLibraryManagementReleaseTypes">
-                                        <h4>Release types</h4>
+                                        <form  id="allReleaseTypesForm">
+                                        <h4>Release types Albums</h4>
+                                        [% WRAPPER settingSection %]
+                                        [% WRAPPER settingGroup title="SETUP_RELEASE_TYPES" desc=""%]
+                                            <select class="stdedit" name="pref_ignoreReleaseTypes" id="ignoreReleaseTypes">
+                                                <option [% IF NOT prefs.pref_ignoreReleaseTypes %]selected [% END %]value="0">[% 'SETUP_IGNORE_RELEASE_TYPES_0' | string %]</option>
+                                                <option [% IF prefs.pref_ignoreReleaseTypes %]selected [% END %]value="1">[% 'SETUP_IGNORE_RELEASE_TYPES_1' | string %]</option>
+                                            </select>
+                                        [% END %]
+
+
+                                        
+                                        [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
+                                        <input type="checkbox" style="width: 20px; height: 20px;" [% IF prefs.pref_cleanupReleaseTypes %]checked="1"[% END %] class="stdedit" name="pref_cleanupReleaseTypes" id="pref_cleanupReleaseTypes" value="1" />
+                                        <label for="pref_cleanupReleaseTypes" class="stdlabel">[% "SETUP_CLEANUP_RELEASE_TYPES" | string %]</label>
+                                    [% END; ELSE %]
+                                        <input type="hidden" name="pref_cleanupReleaseTypes" value="[% IF prefs.pref_cleanupReleaseTypes %]1[% END %]" style="margin-top: 5%;">
+                                    [% END %]
+                                          
+                                        <h4 style="margin-top: 2%;">Release types to include</h4>
+
+                                        
+                                            [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
+                                            <select class="stdedit" name="pref_groupArtistAlbumsByReleaseType" id="groupArtistAlbumsByReleaseType">
+                                                <option [% IF prefs.pref_groupArtistAlbumsByReleaseType == 1 %]selected [% END %]value="1">[% 'SETUP_GROUP_BY_RELEASE_TYPES_1' | string %]</option>
+                                                <option [% IF prefs.pref_groupArtistAlbumsByReleaseType == 2 %]selected [% END %]value="2">[% 'SETUP_GROUP_BY_RELEASE_TYPES_2' | string %]</option>
+                                                <option [% IF NOT prefs.pref_groupArtistAlbumsByReleaseType %]selected [% END %]value="0">[% 'SETUP_GROUP_BY_RELEASE_TYPES_0' | string %]</option>
+                                            </select>
+                                        [% END; ELSE %]
+                                            <input type="hidden" name="pref_groupArtistAlbumsByReleaseType" value="[% IF prefs.pref_groupArtistAlbumsByReleaseType %]1[% END %]">
+                                            <input type="hidden" name="pref_cleanupReleaseTypes" value="[% IF prefs.pref_cleanupReleaseTypes %]1[% END %]">
+                                        [% END %]
+                                    [% END %]
+                                    <input name="pref_allReleaseTypes0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="allReleaseTypes" onclick="allReleaseTypesForm(this.form); return false;"   value="Save All Release Types Settings"><br><br>
+                                </form>
                                     </div>
 
                                     <div class="mediaLibraryManagementFiltersTab" id="mediaLibraryManagementFilters">
