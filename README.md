@@ -126,3 +126,15 @@ https://lyrion.org/reference/cli/using-the-cli/#jsonrpcjs --> Documentation is i
 - Make sure if you're dealing with file paths that they're correct.
 - 0 can be used as a placeholder for playerID --> if the command your sending supports it.
 
+-------------------------------------
+## Generating Songs
+The folder menu is created by
+Slim::Menu::BrowseLibrary::_bmf
+which gets the folder data with a 'musicfolder' request
+which is dispatched by Slim::Control::Request
+which calls Slim::Control::Queries::mediafolderQuery
+
+(Note: bmf = browse media folder)
+
+
+
