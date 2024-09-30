@@ -375,6 +375,21 @@ document.getElementById('radioTuneInTitle').addEventListener('click', function()
 });
 
 
+// --------------------------- Iframe --------------------------------------
+const iframe = document.getElementById('songsIframe');
+
+// Send a message to the iframe once it loads
+iframe.onload = function() {
+    iframe.contentWindow.postMessage({ color: '#adffc3', font: 'Arial' }, '*');
+};
+
+window.addEventListener('message', function(event) {
+    document.body.style.backgroundColor = event.data.color; // Set text color
+    document.body.style.fontFamily = event.data.font; // Set font family
+});
+
+
+
 // --------------- Settings Button ------------------------
 // Event listener for the settings button
 document.getElementById('settingsButton').addEventListener('click', function() {
@@ -489,6 +504,19 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             } else {
                 console.error('.mediaLibraryManagementSettings element not found.');
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // ------------ Basic Settings -------------
 
