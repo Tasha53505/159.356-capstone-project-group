@@ -454,6 +454,7 @@
                             
 
                                             <a href="http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" target="">MUSIC FOLDER</a>
+                                            You have: [% song_count %] total. <br>
 
                                             <iframe src="http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" frameborder="0" class="songsIframe" id="songsIframe">
                                                     
@@ -461,7 +462,6 @@
 
                                             
 
-                                            You have: [% song_count %] total. <br>
                                             Artist [% " " _ stringBY _ " " %] [%- FILTER null %] 
                                             [% IF item.artists; contributorsText = item.artists; ELSE %] 
                                             [% contributorsText = [ item.artist ] %] 

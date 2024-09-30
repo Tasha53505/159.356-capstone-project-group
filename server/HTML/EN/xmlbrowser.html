@@ -53,7 +53,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #45a8ac; /* Color of the scrollbar thumb on hover */
+    background: #0c5ed1; /* Color of the scrollbar thumb on hover */
 }
 
 
@@ -367,3 +367,19 @@
 	[% IF NOT ajaxUpdate %]</div>[% PROCESS pagefooter.html %][% END %]
 
 </div>
+
+<script>
+            // Select all links on the page
+            const links = document.querySelectorAll("a");
+
+            // Loop through each link and add an event listener
+            links.forEach(function(link) {
+                link.addEventListener("click", function(event) {
+					
+
+                    console.log(`Link clicked: ${link.href}`);
+
+                });
+            });
+    
+</script>
