@@ -430,6 +430,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <button class="tabButton active" data-tab="music">Music</button>
             <button class="tabButton" data-tab="plugins">Plugins</button>
             <button class="tabButton" data-tab="basic-info">Basic Settings</button>
+            <button class="tabButton" data-tab="formatting">Format Settings</button>
             <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
         <div class="settingsContent">
@@ -443,6 +444,9 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             </div>
             <div class="tabContent" id="basic-info">
                 <div class="basicSettingsContent"></div>
+            </div>
+            <div class="tabContent" id="formatting">
+                <div class="formatSettingsContent"></div>
             </div>
 
           <div class="tabContent" id="media-library-management">
@@ -495,6 +499,15 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             console.error('.basicSettingsContent element not found.');
         }
 
+        // Add formatting content
+        const formatSettingsContent = settingsContainer.querySelector('.formatSettingsContent');
+        if(formatSettingsContent){
+            const formatSettings = document.querySelector('.formatSettings')?.innerHTML || '';
+            formatSettingsContent.innerHTML = formatSettings;
+        } else {
+            console.error('.formatSettingsContent element not found.');
+        }
+
 
         // Add the content of `.mediaLibraryManagement` to `.mediaLibraryManagementContent`
         const mediaLibraryManagementContent = settingsContainer.querySelector('.mediaLibraryManagementContent');
@@ -540,6 +553,19 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         ];
         const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
 
+        // ---------- FORMAT SETTINGS ----------
+        const buttonClassesFormatting =[
+            '.formatSettingsArtworkTabButton',
+            '.formatSettingsGuessTagsTabButton'
+        ];
+        const formatSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClassesFormatting.join(', '));
+
+        const formatContentClasses=[
+            '.formatSettingsArtworkTab',
+            '.formatSettingsGuessTagsTab'
+        ];
+        const formatSettingsTabContent = settingsContainer.querySelectorAll(formatContentClasses.join(', '));
+
 
         // ------------ Media Library management -------------
         // Initialize Basic Settings Tab Switching  for Media Library management
@@ -584,6 +610,13 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             });
         }
 
+        // Function to hide all format contents
+        function hideAllFormatContent() {
+            formatSettingsTabContent.forEach(tab => {
+                tab.style.display = 'none'; // Hide tab
+                tab.classList.remove('active'); // Remove active class
+            });
+        }
         
         // Function to hide all Library Management Media
     function hideAllLibraryManagementTabsContent() {
@@ -610,6 +643,15 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 // console.log('Basic settings container not found.');
             }
         }
+
+        function showFormatSettings(){
+            const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
+            if(formatSettingsContainer) {
+                formatSettingsContainer.style.display = 'block';
+            } else {
+
+            }
+        }
     
 
         // Function to show the Media Library Management container
@@ -629,6 +671,13 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 basicSettingsContainer.style.display = 'none';
             } else {
                 // console.log('Basic settings container not found.');
+            }
+        }
+
+        function hideFormatSettings() {
+            const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
+            if(formatSettingsContainer) {
+                formatSettingsContainer.style.display = 'none';
             }
         }
 
@@ -673,6 +722,24 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 }
                 
                 this.classList.add('active'); // Add active class to the clicked button
+            });
+        });
+
+        // Add click event listeners to each format tab button
+        formatSettingsTabsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                showFormatSettings();
+                hideAllFormatContent();
+                formatSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+                const selectedTabId = this.getAttribute('data-tab');
+                const selectedTabContent = settingsContainer.querySelector(`#formatSettings${selectedTabId}`);
+                if(selectedTabContent){
+                    selectedTabContent.style.display = 'block';
+                    selectedTabContent.classList.add('active');
+                } else {
+                    console.error("No content found for tab ID: ", selectedTabId);
+                }
+                this.classList.add('active');
             });
         });
     
@@ -729,6 +796,7 @@ advancedSettingsTabsButtons.forEach(button => {
         hideAllAdvancedSettingsTabsContent();
         hideBasicSettings();
         hideMediaLibraryManagementSettings();
+        hideFormatSettings();
     
         // Trigger click on the Language tab button to display its content by default
         const languageTabButton = settingsContainer.querySelector('.basicSettingsLanguageTabButton');
