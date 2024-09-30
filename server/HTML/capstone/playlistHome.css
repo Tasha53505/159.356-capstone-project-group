@@ -807,12 +807,11 @@ transform: translate3d(0, 0, 0);
 /* --------------------------- Songs CSS start --------------------------- */
 
 .songsIframe {
-    background-color: red;
+    width: 100%;
+    height: 120vh;
 
 }
-.songsIframe body {
-    background-color: pink;
-}
+
 
 .browsedbListItem {
     background-color: #3A456D;
