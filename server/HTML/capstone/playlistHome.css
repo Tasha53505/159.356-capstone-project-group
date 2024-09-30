@@ -14,10 +14,6 @@
     color: #EFF8FC;
 }
 
-/* body {
-    margin-top: 0.5em;
-} */
-
 .overallContainer {
      width: auto; /* Sticks with the animation panel */
     height: 100vh;
@@ -808,7 +804,7 @@ transform: translate3d(0, 0, 0);
 
 .songsIframe {
     width: 100%;
-    height: 120vh;
+    height: 250vh;
 
 }
 
