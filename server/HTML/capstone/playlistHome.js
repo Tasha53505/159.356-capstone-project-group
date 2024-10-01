@@ -1513,6 +1513,7 @@ function updateRoleLibraryFilter(noRoleFilter) {
 }
 
 // ------- BENS SETTINGS FUNCTIONS ------
+
 // ----- Update Coverart ---
 function coverArtForm(form) {
     let coverArt = form["pref_coverArt"].value;
@@ -1528,8 +1529,6 @@ function coverArtForm(form) {
 
     }    
 }
-
-
 
 function updateCoverArt(coverArt) {
 
@@ -1553,6 +1552,47 @@ function updateCoverArt(coverArt) {
     })
     .catch(error => {
         console.error("Error updating Cover Art:", error);
+    });
+}
+
+// ----- Update Artwork Folder -----
+function artFolderForm(form) {
+    let artFolder = form["pref_artfolder"].value;
+    console.log("Artwork Folder :", artFolder);
+
+   
+    if (artFolder) {
+        console.log("Artwork Folder location:", artFolder);
+        updateArtFolder(artFolder);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateArtFolder('');
+
+    }    
+}
+
+function updateArtFolder(artFolder) {
+
+    const data = {
+        id: 15,
+        method: "slim.request",
+        params: [ "", ["pref", "artfolder", artFolder]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Artwork Folder updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Artwork Folder:", error);
     });
 }
 

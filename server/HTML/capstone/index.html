@@ -314,7 +314,12 @@
 
                                         [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
                                         [% prefs.pref_artfolder | html %]
-                                        <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
+                                        <form id="artworkFolderForm" class="">
+                                            <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
+                                            <div class="prefs"></div>
+                                                <input name="pref_update_artfolder" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="artFolderUpdateButton" onclick="artFolderForm(this.form); return false;"  value="Save"><br><br>
+                                            </div>
+                                        </form>
 
                                         [% END %]
 
