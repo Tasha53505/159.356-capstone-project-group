@@ -301,10 +301,32 @@
 
                                 <div class="formatSettingsContent">
                                     <div class="formatSettingsArtworkTab active" id="formatSettingsArtwork">
-                                        1
+                                        [% WRAPPER setting title="SETUP_COVERART" desc="SETUP_COVERART_DESC" %]
+                                        [% prefs.pref_coverArt | html %]
+                                        <form id="coverArtForm" class="">
+                                            <input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="" size="40">
+                                            <div class="prefs">
+                                                <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save"><br><br>
+                                            </div>
+                                        </form>
+
+                                        [% END %]
+
+                                        [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
+                                        [% prefs.pref_artfolder | html %]
+                                        <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
+
+                                        [% END %]
+
                                     </div>
                                     <div class="formatSettingsGuessTagsTab" id="formatSettingsGuessTags">
-                                        2
+                                        [% WRAPPER setting title="SETUP_GUESSFILEFORMATS" desc="SETUP_GROUP_GUESSFILEFORMATS_DESC" %]
+                                        [% FOREACH format = prefs.pref_guessFileFormats %]
+                                        <h1>test</h1>
+                                        [% END %]
+                                        <button id="addFormatButton">Add Format</button>
+
+                                        [% END %]
                                     </div>
                                 </div>
 

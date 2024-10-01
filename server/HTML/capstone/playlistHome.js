@@ -430,7 +430,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <button class="tabButton active" data-tab="music">Music</button>
             <button class="tabButton" data-tab="plugins">Plugins</button>
             <button class="tabButton" data-tab="basic-info">Basic Settings</button>
-            <button class="tabButton" data-tab="formatting">Format Settings</button>
+            <button class="tabButton" data-tab="formatting">Formatting</button>
             <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
         <div class="settingsContent">
@@ -1509,6 +1509,50 @@ function updateRoleLibraryFilter(noRoleFilter) {
     })
     .catch(error => {
         console.error("Error updating filters:", error);
+    });
+}
+
+// ------- BENS SETTINGS FUNCTIONS ------
+// ----- Update Coverart ---
+function coverArtForm(form) {
+    let coverArt = form["pref_coverArt"].value;
+    console.log("Cover Art :", coverArt);
+
+   
+    if (coverArt) {
+        console.log("Cover Artwork default location:", coverArt);
+        updateCoverArt(coverArt);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateCoverArt('');
+
+    }    
+}
+
+
+
+function updateCoverArt(coverArt) {
+
+    const data = {
+        id: 14,
+        method: "slim.request",
+        params: [ "", ["pref", "coverArt", coverArt]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Cover Art default updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Cover Art:", error);
     });
 }
 
