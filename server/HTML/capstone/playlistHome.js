@@ -733,6 +733,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 formatSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
                 const selectedTabId = this.getAttribute('data-tab');
                 const selectedTabContent = settingsContainer.querySelector(`#formatSettings${selectedTabId}`);
+                console.log(selectedTabId);
                 if(selectedTabContent){
                     selectedTabContent.style.display = 'block';
                     selectedTabContent.classList.add('active');
@@ -758,6 +759,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 // Show the selected tab content and add the active class to the clicked button
                 const selectedTabId = this.getAttribute('data-tab');
                 const selectedTabContent = settingsContainer.querySelector(`#mediaLibraryManagement${selectedTabId.charAt(0).toUpperCase() + selectedTabId.slice(1)}`);
+                console.log(selectedTabId);
                 if (selectedTabContent) {
                     selectedTabContent.style.display = 'block'; // Show the selected tab content
                     selectedTabContent.classList.add('active'); // Add active class to the selected tab content
