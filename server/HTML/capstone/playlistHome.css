@@ -469,17 +469,17 @@ transform: translate3d(0, 0, 0);
     to { opacity: 1; }
 }
         /* ----------- Basic Settings Start ----------- */
-    .basicSettings, .mediaLibraryManagementSettings, .advancedSettings {
+    .basicSettings, .formatSettings, .mediaLibraryManagementSettings, .advancedSettings {
         display: none; 
     }
 
     
 
-    .basicSettingsTabs, .mediaLibraryManagementSettingsTabs, .advancedSettingsTabs {
+    .basicSettingsTabs, .formatSettingsTabs, .mediaLibraryManagementSettingsTabs, .advancedSettingsTabs {
         display: block;
     }
 
-    .basicSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs, .advancedSettingsContent {
+    .basicSettingsContent, .formatSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs, .advancedSettingsContent {
         background-color: #1b2444;
     }
 
@@ -493,7 +493,9 @@ transform: translate3d(0, 0, 0);
 .mediaLibraryManagementReleaseTypesTab, 
 .mediaLibraryManagementFiltersTab,
 .advancedSettingsMediaLibraryManagementTab,
-.advancedSettingsFileTypesTab  {
+.advancedSettingsFileTypesTab,
+.formatSettingsArtworkTab,
+.formatSettingsGuessTagsTab  {
 
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
@@ -517,13 +519,15 @@ transform: translate3d(0, 0, 0);
 .mediaLibraryManagementBrowseTab.active, 
 .mediaLibraryManagementReleaseTypesTab.active,
 .advancedSettingsMediaLibraryManagementTab.active,
-.advancedSettingsFileTypesTab.active
+.advancedSettingsFileTypesTab.active,
+.formatSettingsArtworkTab.active,
+.formatSettingsGuessTagsTab.active
  {
     display: block; /* Show the active tab content */
 }
 
 
-.basicSettingsLanguageTab.active, .mediaLibraryManagementBrowseTabButton.active  {
+.basicSettingsLanguageTab.active, .mediaLibraryManagementBrowseTabButton.active, .formatSettingsArtworkTab.active {
     padding: 1em; 
     background-color: #3A456D; 
 }
@@ -538,7 +542,9 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsMediaLibraryManagementTab,
 .advancedSettingsFileTypesTab,
 .basicSettingsRescanMediaTab,
-.basicSettingsSecurityTab {
+.basicSettingsSecurityTab,
+.formatSettingsArtworkTab,
+.formatSettingsGuessTagsTab {
     background-color: #3A456D; 
 }
 
@@ -553,7 +559,9 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsMediaLibraryManagementTabButton,
 .advancedSettingsFileTypesTabButton,
 .basicSettingsRescanMediaTabButton,
-.basicSettingsSecurityTabButton {
+.basicSettingsSecurityTabButton,
+.formatSettingsArtworkTabButton,
+.formatSettingsGuessTagsTabButton {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -573,7 +581,9 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsMediaLibraryManagementTabButton.active,
 .advancedSettingsFileTypesTabButton.active,
 .basicSettingsRescanMediaTabButton.active,
-.basicSettingsSecurityTabButton.active {
+.basicSettingsSecurityTabButton.active,
+.formatSettingsArtworkTabButton.active,
+.formatSettingsGuessTagsTabButton.active {
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -683,7 +693,9 @@ transform: translate3d(0, 0, 0);
         .advancedSettingsMediaLibraryManagementTabButton,
         .advancedSettingsFileTypesTabButton,
         .basicSettingsRescanMediaTabButton,
-        .basicSettingsSecurityTabButton {
+        .basicSettingsSecurityTabButton,
+        .formatSettingsArtworkTabButton,
+        .formatSettingsGuessTagsTabButton {
             display: inline;
             background-color: #1b2444;
             border: none;
@@ -704,7 +716,9 @@ transform: translate3d(0, 0, 0);
         .advancedSettingsMediaLibraryManagementTabButton.active,
         .advancedSettingsFileTypesTabButton.active,
         .basicSettingsRescanMediaTabButton.active,
-        .basicSettingsSecurityTabButton.active {
+        .basicSettingsSecurityTabButton.active,
+        .formatSettingsArtworkTabButton.active,
+        .formatSettingsGuessTagsTabButton.active {
 
             background-color: #0456C6;
             border: none;
@@ -975,6 +989,8 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
 .basicSettingsSecurityTab,
+.formatSettingsArtworkTab,
+.formatSettingsGuessTagsTab,
 .saveSettings
 {
     margin: 0 auto;
@@ -1089,6 +1105,8 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
 .basicSettingsSecurityTab,
+.formatSettingsArtworkTab,
+.formatSettingsGuessTagsTab,
 .saveSettings
 {
     margin: 0 auto;

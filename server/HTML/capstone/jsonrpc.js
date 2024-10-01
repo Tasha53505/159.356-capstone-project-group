@@ -652,13 +652,50 @@ if (params && params[1][0] === "pref" && params[1][1] === "ignoredarticles") {
 // }
 
 
+    
+
+
+
+    // *******************************************************************************
+//                    ****  Change Art Folder ****
+// ***********************************************************************************
+/*if (params && params[1][0] === "pref" && params[1][1] === "artfolder") {
+    const newArtFolder = params[1][2];
+    // const libraryname = decodeURIComponent(decodeURIComponent(params[1][2])); // Double unescape
+    //    const newMediaDir = params[1][2][0];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace the mediadirs line with the new directory
+        const updatedData = data.replace(/artfolder:\s*\S+/g, `artfolder: ["${newArtFolder}"]`);
+
+
         
-});
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'Artwork Folder updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
 
-
-
-
-
+});*/
 
 
 
@@ -669,4 +706,5 @@ if (params && params[1][0] === "pref" && params[1][1] === "ignoredarticles") {
 // app.listen(3000, () => {
 //     console.log('Server listening on port 3000');
 // });
+
 
