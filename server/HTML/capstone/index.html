@@ -524,10 +524,18 @@
                                         </form>
 
 
-                                        <form action="" id="reshuffleRepeatForm">
+                                        <form action="" id="reshuffleOnRepeatForm">
                                            
-                                         
-                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="reshuffleRepeatFormId" onclick="reshuffleRepeatForm(this.form); return false;" value="Save Shuffled Playlist"><br>
+                                            [% WRAPPER setting title="SETUP_RESHUFFLEONREPEAT" desc="SETUP_RESHUFFLEONREPEAT_DESC"%]
+                                            <select class="stdedit" name="pref_reshuffleOnRepeat" id="reshuffleOnRepeat">
+                                    
+                                                <option [% IF NOT prefs.pref_reshuffleOnRepeat %]selected [% END %]value="0">[% 'SETUP_RESHUFFLEONREPEAT_0' | string %]</option>
+                                                <option [% IF prefs.pref_reshuffleOnRepeat %]selected [% END %]value="1">[% 'SETUP_RESHUFFLEONREPEAT_1' | string %]</option>
+                                    
+                                            </select>
+                                            <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="reshuffleRepeatFormId" onclick="reshuffleOnRepeatForm(this.form); return false;" value="Save Reshuffling on repeat setting"><br>
+
+                                        [% END %]
 
                                         
                                        

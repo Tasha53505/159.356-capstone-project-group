@@ -1681,6 +1681,46 @@ function updateShuffledPlaylist(shuffledPlaylist) {
 }
 
 
+// --------  Reshuffle On Repeat --------
+
+function reshuffleOnRepeatForm(form) {
+
+    let reshuffleOnRepeat = form["pref_reshuffleOnRepeat"].value;
+    console.log("Save Shuffled:", reshuffleOnRepeat);
+
+    if (reshuffleOnRepeat !== undefined && (reshuffleOnRepeat === "0" || reshuffleOnRepeat === "1")) {
+        updateReshuffleOnRepeat(reshuffleOnRepeat);
+    } else {
+        console.error("Invalid value for pref_reshuffleOnRepeat");
+    }   
+}
+
+
+
+function updateReshuffleOnRepeat(reshuffleOnRepeat) {
+    
+    const data = {
+        id: 20,
+        method: "slim.request",
+        params: [ "", ["pref", "reshuffleOnRepeat", reshuffleOnRepeat]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("reshuffleOnRepeat updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating reshuffleOnRepeat:", error);
+    });
+}
+
 
 
 
