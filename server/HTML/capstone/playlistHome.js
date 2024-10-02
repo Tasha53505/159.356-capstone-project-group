@@ -431,6 +431,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <button class="tabButton" data-tab="plugins">Plugins</button>
             <button class="tabButton" data-tab="basic-info">Basic Settings</button>
             <button class="tabButton" data-tab="formatting">Formatting</button>
+            <button class="tabButton" data-tab="interface">Interface</button>
             <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
         <div class="settingsContent">
@@ -447,6 +448,9 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             </div>
             <div class="tabContent" id="formatting">
                 <div class="formatSettingsContent"></div>
+            </div>
+            <div class="tabContent" id="interface">
+                <div class="interfaceSettingsContent"></div>
             </div>
 
           <div class="tabContent" id="media-library-management">
@@ -487,6 +491,10 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 } else {
                     console.error("No content found for tab ID:", this.getAttribute('data-tab'));
                 }
+
+                // DISPLAY DATA FUNCTIONS
+                getPref('artfolder', 'art-folder');
+                getPref('coverArt', 'cover-art');
             });
         });
     
@@ -506,6 +514,15 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             formatSettingsContent.innerHTML = formatSettings;
         } else {
             console.error('.formatSettingsContent element not found.');
+        }
+
+        // Interface Content
+        const interfaceSettingsContent = settingsContainer.querySelector('.interfaceSettingsContent');
+        if(formatSettingsContent){
+            const interfaceSettings = document.querySelector('.interfaceSettings')?.innerHTML || '';
+            interfaceSettingsContent.innerHTML = interfaceSettings;
+        } else {
+            console.error('.interfaceSettingsContent element not found.');
         }
 
 
@@ -567,6 +584,22 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const formatSettingsTabContent = settingsContainer.querySelectorAll(formatContentClasses.join(', '));
 
 
+        // ---------- INTERFACE SETTINGS ----------
+        const buttonClassesInterface =[
+            '.interfaceSettingsDisplayTabButton',
+            '.interfaceSettingsFormatTabButton',
+            '.interfaceSettingsTimingTabButton'
+        ];
+        const interfaceSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClassesInterface.join(', '));
+
+        const interfaceContentClasses=[
+            '.interfaceSettingsDisplayTab',
+            '.interfaceSettingsFormatTab',
+            '.interfaceSettingsTimingTab'
+        ];
+        const interfaceSettingsTabContent = settingsContainer.querySelectorAll(interfaceContentClasses.join(', '));
+
+
         // ------------ Media Library management -------------
         // Initialize Basic Settings Tab Switching  for Media Library management
         const buttonClassesMediaLibraryManagement = [
@@ -619,6 +652,14 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 tab.classList.remove('active'); // Remove active class
             });
         }
+
+        // Function to hide all interface contents
+        function hideAllInterfaceContent() {
+            interfaceSettingsTabContent.forEach(tab => {
+                tab.style.display = 'none'; // Hide tab
+                tab.classList.remove('active'); // Remove active class
+            });
+        }
         
         // Function to hide all Library Management Media
     function hideAllLibraryManagementTabsContent() {
@@ -650,6 +691,18 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
             if(formatSettingsContainer) {
                 formatSettingsContainer.style.display = 'block';
+                // get functionTODO 
+            } else {
+
+            }
+        }
+
+        // Show interface container
+        function showInterfaceSettings(){
+            const interfaceSettingsContainer = settingsContainer.querySelector('.interfaceSettings');
+            if(interfaceSettingsContainer) {
+                interfaceSettingsContainer.style.display = 'block';
+                // get functionTODO 
             } else {
 
             }
@@ -680,6 +733,14 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
             if(formatSettingsContainer) {
                 formatSettingsContainer.style.display = 'none';
+            }
+        }
+
+        // Hide interface settings
+        function hideInterfaceSettings() {
+            const interfaceSettingsContainer = settingsContainer.querySelector('.interfaceSettings');
+            if(interfaceSettingsContainer) {
+                interfaceSettingsContainer.style.display = 'none';
             }
         }
 
@@ -745,6 +806,26 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 this.classList.add('active');
             });
         });
+
+        // Add click event listeners to each interface tab button
+        interfaceSettingsTabsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                showInterfaceSettings();
+                hideAllInterfaceContent();
+                interfaceSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+                const selectedTabId = this.getAttribute('data-tab');
+                const selectedTabContent = settingsContainer.querySelector(`#interfaceSettings${selectedTabId}`);
+                console.log(selectedTabId);
+                if(selectedTabContent){
+                    selectedTabContent.style.display = 'block';
+                    selectedTabContent.classList.add('active');
+                } else {
+                    console.error("No content found for tab ID: ", selectedTabId);
+                }
+                this.classList.add('active');
+            });
+        });
+    
     
         // Add click event listeners to each media library tab button
         mediaLibraryManagementTabsButtons.forEach(button => {
@@ -801,6 +882,7 @@ advancedSettingsTabsButtons.forEach(button => {
         hideBasicSettings();
         hideMediaLibraryManagementSettings();
         hideFormatSettings();
+        hideInterfaceSettings();
     
         // Trigger click on the Language tab button to display its content by default
         const languageTabButton = settingsContainer.querySelector('.basicSettingsLanguageTabButton');
@@ -1885,6 +1967,89 @@ function updateArtFolder(artFolder) {
     });
 }
 
+// --- UPDATE SHOW ARTIST ---
+function showArtistForm(form){
+    let showArtist = form["pref_showArtist"].value;
+    console.log("Show Artists: ", showArtist);
+    updateShowArtist(showArtist);
+}
+
+function updateShowArtist(showArtist){
+    const data = {
+        id: 16,
+        method: "slim.request",
+        params: [ "", ["pref", "showArtist", showArtist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Show Artist updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Show Artist:", error);
+    });
+}
+
+// --- UPDATE SHOW YEAR ---
+function showYearForm(form){
+    let showYear = form["pref_showYear"].value;
+    console.log("Show Year: ", showYear);
+    updateShowYear(showYear);
+}
+
+function updateShowYear(showYear){
+    const data = {
+        id: 16,
+        method: "slim.request",
+        params: [ "", ["pref", "showYear", showYear]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Show Year updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Show Year:", error);
+    });
+}
+
+// --- DISPLAY DATA --- //
+function getPref(display, listElementId){
+    fetch(`http://localhost:9000/capstone/jsonrpc.js?display=${display}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        //const listElement = document.getElementById(listElementId);
+        //listElement.innerHTML = '';
+        console.log(data.value);
+    })
+    .catch(error => {
+        console.error(`Error fetching ${display}:`, error);
+    });
+}
 
 
 

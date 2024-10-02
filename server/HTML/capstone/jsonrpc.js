@@ -612,7 +612,10 @@ if (params && params[1][0] === "pref" && params[1][1] === "ignoredarticles") {
     } else {
          res.status(400).send('Invalid request');
     }
+});
 
+app.get('/jsonrpc.js', (req, res) => {
+    const display = req.query.display;
 
     
 // ************************************************************************************
@@ -891,6 +894,32 @@ if (params && params[1][0] === "pref" && params[1][1] === "splitList") {
          res.status(400).send('Invalid request');
     }
 
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        let match;
+        if(display === 'artfolder'){
+            match = data.match(/artfolder:\s*(\[[^\]]+\]|\"[^\"]+\")/);
+        } else if (display === 'coverArt'){
+            match = data.match(/coverArt:\s*(\[[^\]]+\]|\"[^\"]+\")/);
+        }
+        if(match && match[1]){
+            const value = match[1];
+            res.json({ display, type: 'single', value: value.replace(/"/g, '')});
+        } else {
+            return res.status(500).send('test');
+        }
+    });
+});
+
 
 
 
@@ -971,16 +1000,4 @@ if (params && params[1][0] === "pref" && params[1][1] === "splitList") {
          res.status(400).send('Invalid request');
     }
 
-});*/
-
-
-
-
-
-
-
-// app.listen(3000, () => {
-//     console.log('Server listening on port 3000');
-// });
-
-
+});*
