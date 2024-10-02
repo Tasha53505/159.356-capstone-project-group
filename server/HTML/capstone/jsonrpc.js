@@ -732,6 +732,43 @@ if (params && params[1][0] === "pref" && params[1][1] === "persistPlaylists") {
          res.status(400).send('Invalid request');
     }
 
+  // ************************************************************************************
+//                              ****  Saved Shuffled Playlist ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "saveShuffled") {
+    const newSavedShuffled = params[1][2];
+  
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replaceline 
+        const updatedData = data.replace(/saveShuffled:\s*\S+/g, `saveShuffled: ["${newSavedShuffled}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'saveShuffled (Playlists) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
 
 
 

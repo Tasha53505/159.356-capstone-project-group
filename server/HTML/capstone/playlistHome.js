@@ -1636,9 +1636,50 @@ function updatePlaylistPersist(playlistPersist) {
         console.log("persistPlaylists updated to:", data);
     })
     .catch(error => {
-        console.error("Error updating groupDiscs:", error);
+        console.error("Error updating persistPlaylists:", error);
     });
 }
+
+// --------  Save Shuffled Playlists --------
+
+function saveShuffledPlaylistForm(form) {
+
+    let saveShuffledPlaylst = form["pref_saveShuffled"].value;
+    console.log("Save Shuffled:", saveShuffledPlaylst);
+
+    if (saveShuffledPlaylst !== undefined && (saveShuffledPlaylst === "0" || saveShuffledPlaylst === "1")) {
+        updateShuffledPlaylist(saveShuffledPlaylst);
+    } else {
+        console.error("Invalid value for Playlist Perrsist selection");
+    }   
+}
+
+
+
+function updateShuffledPlaylist(shuffledPlaylist) {
+    
+    const data = {
+        id: 19,
+        method: "slim.request",
+        params: [ "", ["pref", "saveShuffled", shuffledPlaylist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("persistPlaylists updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating persistPlaylists:", error);
+    });
+}
+
 
 
 

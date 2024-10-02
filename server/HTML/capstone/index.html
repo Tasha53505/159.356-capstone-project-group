@@ -506,7 +506,37 @@
                                         
                                         </form>
 
+
+                                        <form action="" id="saveShuffledPlaylistForm">
+                                           
+                                            [% WRAPPER setting title="SETUP_SAVESHUFFLED" desc="SETUP_SAVESHUFFLED_DESC"%]
+                                                <select class="stdedit" name="pref_saveShuffled" id="saveShuffled">
+                                        
+                                                    <option [% IF NOT prefs.pref_saveShuffled %]selected [% END %]value="0">[% 'SETUP_SAVESHUFFLED_0' | string %]</option>
+                                                    <option [% IF prefs.pref_saveShuffled %]selected [% END %]value="1">[% 'SETUP_SAVESHUFFLED_1' | string %]</option>
+                                        
+                                                </select>
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveShuffledPlaylistFormId" onclick="saveShuffledPlaylistForm(this.form); return false;" value="Save Shuffled Playlist"><br>
+
+                                            [% END %]
+                                        
+                                       
+                                        </form>
+
+
+                                        <form action="" id="reshuffleRepeatForm">
+                                           
+                                         
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="reshuffleRepeatFormId" onclick="reshuffleRepeatForm(this.form); return false;" value="Save Shuffled Playlist"><br>
+
+                                        
+                                       
+                                        </form>
+
+
                                     </div>
+
+
 
                                     
 
