@@ -487,6 +487,10 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 } else {
                     console.error("No content found for tab ID:", this.getAttribute('data-tab'));
                 }
+
+                // DISPLAY DATA FUNCTIONS
+                getPref('artfolder', 'art-folder');
+                getPref('coverArt', 'cover-art');
             });
         });
     
@@ -648,6 +652,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
             if(formatSettingsContainer) {
                 formatSettingsContainer.style.display = 'block';
+                // get functionTODO 
             } else {
 
             }
@@ -1596,6 +1601,29 @@ function updateArtFolder(artFolder) {
     });
 }
 
+// --- DISPLAY DATA --- //
+function getPref(display, listElementId){
+    fetch(`http://localhost:9000/capstone/jsonrpc.js`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        //const listElement = document.getElementById(listElementId);
+        //listElement.innerHTML = '';
+        console.log(data.value);
+    })
+    .catch(error => {
+        console.error(`Error fetching ${display}:`, error);
+    });
+}
 
 
 
