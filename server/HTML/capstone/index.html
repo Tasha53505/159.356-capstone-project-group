@@ -121,8 +121,29 @@
 
                                                  </form>
 
+
+                                                 <form action="" id="skipSentinelFileNameForm">
+                                                  
+                                                    [% WRAPPER setting title="SETUP_SKIPSENTINEL" desc="SETUP_SKIPSENTINEL_DESC" %]
+                                                    <input type="text" class="stdedit" name="pref_skipsentinel" id="skipsentinel" value="[% prefs.pref_skipsentinel | html %]" size="40">
+                                                    <input name="savveSentinelFileName" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="skipSentinelFileNameId" onclick="skipSentinelFileNameForm(this.form); return false;" value="Skip Sentinel File Name">
+
+                                                    [% END %]
+                                            
+                                                 </form>
                                              
 
+
+                                                <form action="" id="seperatorMultipleItemsTagsForm">
+                                                	[% WRAPPER setting title="SETUP_SPLITLIST" desc="SETUP_SPLITLIST_DESC"%]
+                                                        <input type="text"class="stdedit" name="pref_splitList" id="splitList" value="[% prefs.pref_splitList | html %]" size="40">
+                                                        <input name="seperatorMultipleItemsTags" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="skipSentinelFileNameId" onclick="seperatorMultipleItemsTagsForm(this.form); return false;" value="Save Seperator for Multiple Items in tags">
+
+                                                    [% END %]
+                                               
+
+                                                </form>
+                                             
                                         </div>
 
                                         <div class="advancedSettingsFileTypesTab active" id="advancedFileTypes"> 
