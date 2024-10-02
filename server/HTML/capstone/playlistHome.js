@@ -1724,6 +1724,83 @@ function updateReshuffleOnRepeat(reshuffleOnRepeat) {
 
 
 
+// --------------------------------  Skip Sentinel FileName --------------------------------
+function skipSentinelFileNameForm(form) {
+    let skipSentinel = form["pref_skipsentinel"].value;
+
+    console.log("skipSentinel:", skipSentinel);
+
+        console.log("Submitting preferences:", { skipSentinel });
+        updateSkipSentinel(skipSentinel); 
+
+
+}
+
+//skipSentinel
+function updateSkipSentinel(skipSentinel) {
+    const data = {
+        id: 13,
+        method: "slim.request",
+        params: [ "", ["pref", "skipsentinel", skipSentinel]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("skipsentinel updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+// --------------------------------  Seperrator for multiple items in tags --------------------------------
+function seperatorMultipleItemsTagsForm(form) {
+    let seperatorMultipleItemTags = form["pref_splitList"].value;
+
+    console.log("seperator:", seperatorMultipleItemTags);
+
+        console.log("Submitting preferences:", { seperatorMultipleItemTags });
+        updateSeperatorMultipleItemTags(seperatorMultipleItemTags); 
+
+
+}
+
+//seperatorMultipleItemTags
+function updateSeperatorMultipleItemTags(seperatorMultipleItemTags) {
+    const data = {
+        id: 22,
+        method: "slim.request",
+        params: [ "", ["pref", "splitList", seperatorMultipleItemTags]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("seperatorMultipleItemTags updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
 // ------- BENS SETTINGS FUNCTIONS ------
 
 // ----- Update Coverart ---
