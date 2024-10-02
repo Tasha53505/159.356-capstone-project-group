@@ -1603,7 +1603,7 @@ function updateArtFolder(artFolder) {
 
 // --- DISPLAY DATA --- //
 function getPref(display, listElementId){
-    fetch(`http://localhost:9000/capstone/jsonrpc.js`, {
+    fetch(`http://localhost:9000/capstone/jsonrpc.js?display=${display}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
