@@ -1686,7 +1686,6 @@ function showArtistForm(form){
 }
 
 function updateShowArtist(showArtist){
-    showArtist = +showArtist;
     const data = {
         id: 16,
         method: "slim.request",
@@ -1706,6 +1705,36 @@ function updateShowArtist(showArtist){
     })
     .catch(error => {
         console.error("Error updating Show Artist:", error);
+    });
+}
+
+// --- UPDATE SHOW YEAR ---
+function showYearForm(form){
+    let showYear = form["pref_showYear"].value;
+    console.log("Show Year: ", showYear);
+    updateShowYear(showYear);
+}
+
+function updateShowYear(showYear){
+    const data = {
+        id: 16,
+        method: "slim.request",
+        params: [ "", ["pref", "showYear", showYear]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Show Year updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Show Year:", error);
     });
 }
 
