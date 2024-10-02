@@ -1,3 +1,64 @@
+<style>
+	
+
+
+
+	body * {
+		background-color: #1B2444;
+	}
+
+	html {
+		background-color: #1B2444;
+	}
+
+	
+	.browsedbListItem {
+    background-color: #3A456D !important;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    flex-wrap: wrap;
+	}
+
+	.browsedbListItem a {
+    flex-grow: 1;
+    text-decoration: none;
+    color: #ffffff;
+	background-color: #3A456D;
+}
+
+/* Play add, more */
+.browsedbLeftControls {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+/* WebKit is for: (Chrome, Safari, Edge) */
+
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #1B2444; /* Background of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0456C6; /* Color of the scrollbar thumb */
+    border-radius: 12px; /* Rounded corners for the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0c5ed1; /* Color of the scrollbar thumb on hover */
+}
+
+
+</style>
+
 
 [% IF query %]
 	[%# Add the search query to each link if available %]
@@ -14,7 +75,6 @@
 		[% pwd_list.push(crumbItem) %]
 	[% END %]
 [% END # filter -%]
-<h1>TASHA IS TESTING IN XMLBROWSER.HTML</h1>
 
 [% IF useAJAX %][% pageHeaderScripts = BLOCK %]
 	<script TYPE="text/javascript">[% PROCESS html/vars.js %]</script>

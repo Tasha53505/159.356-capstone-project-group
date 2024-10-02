@@ -310,6 +310,7 @@
 								[% item.label | string %]
 								[%- stringCOLON %]
 							[% END %]
+							<!-- Link to click song and go to X -->
 							[% IF item.weblink %]
 								<a href="[% item.weblink %]" target="_blank">
 							[% ELSIF item.type == 'redirect' %]
@@ -322,6 +323,9 @@
 							[% ELSIF !item.type.match('^text') %]
 								<a href="[% path %]?[% searchquery %]index=[% item.index || index _ ((start || 0) + loop.index) %]&amp;player=[% player | uri %]&amp;sess=[% sess %]">
 							[% END %]
+						<!-- Link to click song and go to X End -->
+
+						<!-- Shows title of song  -->
 							[% title = item.web.value;
 								IF !title.defined || title == ''; title = item.name; END;
 								IF !title.defined || title == ''; title = item.title; END;
@@ -336,11 +340,14 @@
 							[% IF item.weblink || !item.type.match('^text') %]
 							</a>
 							[% END %]
+						<!-- Shows title of song  -->
+
+
 							[% IF item.showYear && item.year %]
 								[% IF item.remote %]
 									([% item.year %])
 								[% ELSE %]
-									<a [% PROCESS yearItemHRef %] target="browser">([% item.year %])</a>[% END %]
+									<a [% PROCESS yearItemHRef %] target="_parent">([% item.year %])</a>[% END %]
 								[% END %]
 							[% IF item.showArtist && item.artist %]
 								[% stringBY %]
