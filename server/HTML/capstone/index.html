@@ -346,6 +346,7 @@
                                     <button class="mediaLibraryManagementBrowseTabButton active" data-tab="browseArtists">Browse Artists</button>
                                     <button class="mediaLibraryManagementReleaseTypesTabButton" data-tab="releaseTypes">Release Types</button>
                                     <button class="mediaLibraryManagementFiltersTabButton" data-tab="filters">Filters</button>
+                                    <button class="mediaLibraryManagementPlaylistsTabButton" data-tab="playlists">Playlists</button>
                                 </div>
                       
                                 <div class="mediaLibraryManagementSettingsContent">
@@ -460,8 +461,93 @@
 
                                         </form>
 
-                                    </div>
+
+                                        <form action="" id="ageLimitForm">
+                                            [% WRAPPER setting title="SETUP_BROWSEAGELIMIT" desc="SETUP_BROWSEAGELIMIT_DESC"%]
+                                                <input type="text"class="stdedit" name="pref_browseagelimit" id="browseagelimit" value="[% prefs.pref_browseagelimit || 100 %]" size="15">
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveAgeLimitFilterButton" onclick="ageLimitForm(this.form); return false;" value="Save Number of albums displayed"><br>
+
+                                                [% END %]
+
+                                        </form>
+
+                                        <form action="" id="groupDiscsForm">
+
+                                            [% WRAPPER setting title="SETUP_GROUPDISCS" desc="SETUP_GROUPDISCS_DESC"%]
+                                            <select class="stdedit" name="pref_groupdiscs" id="groupdiscs">
                                     
+                                                <option [% IF NOT prefs.pref_groupdiscs %]selected [% END %]value="0">[% 'SETUP_GROUPDISCS_0' | string %]</option>
+                                                <option [% IF prefs.pref_groupdiscs %]selected [% END %]value="1">[% 'SETUP_GROUPDISCS_1' | string %]</option>
+                                    
+                                            </select>
+                                            <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveGroupFilterButton" onclick="groupDiscsForm(this.form); return false;" value="Save Group Discs"><br>
+
+                                            [% END %]
+
+                                        </form>
+
+                                    </div>
+
+
+                                    <div class="mediaLibraryManagementPlaylistsTab" id="mediaLibraryManagementPlaylists">
+                                        <form action="" id="playlistPersistForm">
+
+                                            [% WRAPPER setting title="SETUP_PERSISTPLAYLISTS" desc="SETUP_PERSISTPLAYLISTS_DESC"%]
+                                            <select class="stdedit" name="pref_persistPlaylists" id="persistPlaylists">
+                                    
+                                                <option [% IF NOT prefs.pref_persistPlaylists %]selected [% END %]value="0">[% 'SETUP_PERSISTPLAYLISTS_0' | string %]</option>
+                                                <option [% IF prefs.pref_persistPlaylists %]selected [% END %]value="1">[% 'SETUP_PERSISTPLAYLISTS_1' | string %]</option>
+                                    
+                                            </select>
+
+                                            <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="playlistPersistFormId" onclick="playlistPersistForm(this.form); return false;" value="Save Playlist Peristence"><br>
+
+                                        [% END %]
+                                        
+                                        </form>
+
+
+                                        <form action="" id="saveShuffledPlaylistForm">
+                                           
+                                            [% WRAPPER setting title="SETUP_SAVESHUFFLED" desc="SETUP_SAVESHUFFLED_DESC"%]
+                                                <select class="stdedit" name="pref_saveShuffled" id="saveShuffled">
+                                        
+                                                    <option [% IF NOT prefs.pref_saveShuffled %]selected [% END %]value="0">[% 'SETUP_SAVESHUFFLED_0' | string %]</option>
+                                                    <option [% IF prefs.pref_saveShuffled %]selected [% END %]value="1">[% 'SETUP_SAVESHUFFLED_1' | string %]</option>
+                                        
+                                                </select>
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveShuffledPlaylistFormId" onclick="saveShuffledPlaylistForm(this.form); return false;" value="Save Shuffled Playlist"><br>
+
+                                            [% END %]
+                                        
+                                       
+                                        </form>
+
+
+                                        <form action="" id="reshuffleOnRepeatForm">
+                                           
+                                            [% WRAPPER setting title="SETUP_RESHUFFLEONREPEAT" desc="SETUP_RESHUFFLEONREPEAT_DESC"%]
+                                            <select class="stdedit" name="pref_reshuffleOnRepeat" id="reshuffleOnRepeat">
+                                    
+                                                <option [% IF NOT prefs.pref_reshuffleOnRepeat %]selected [% END %]value="0">[% 'SETUP_RESHUFFLEONREPEAT_0' | string %]</option>
+                                                <option [% IF prefs.pref_reshuffleOnRepeat %]selected [% END %]value="1">[% 'SETUP_RESHUFFLEONREPEAT_1' | string %]</option>
+                                    
+                                            </select>
+                                            <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="reshuffleRepeatFormId" onclick="reshuffleOnRepeatForm(this.form); return false;" value="Save Reshuffling on repeat setting"><br>
+
+                                        [% END %]
+
+                                        
+                                       
+                                        </form>
+
+
+                                    </div>
+
+
+
+                                    
+
 
 
 
