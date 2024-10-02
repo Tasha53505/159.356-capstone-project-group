@@ -469,17 +469,17 @@ transform: translate3d(0, 0, 0);
     to { opacity: 1; }
 }
         /* ----------- Basic Settings Start ----------- */
-    .basicSettings, .formatSettings, .mediaLibraryManagementSettings, .advancedSettings {
+    .basicSettings, .formatSettings, .interfaceSettings, .mediaLibraryManagementSettings, .advancedSettings {
         display: none; 
     }
 
     
 
-    .basicSettingsTabs, .formatSettingsTabs, .mediaLibraryManagementSettingsTabs, .advancedSettingsTabs {
+    .basicSettingsTabs, .formatSettingsTabs, .interfaceSettingsTabs, .mediaLibraryManagementSettingsTabs, .advancedSettingsTabs {
         display: block;
     }
 
-    .basicSettingsContent, .formatSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs, .advancedSettingsContent {
+    .basicSettingsContent, .formatSettingsContent, .interfaceSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs, .advancedSettingsContent {
         background-color: #1b2444;
     }
 
@@ -495,7 +495,10 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsMediaLibraryManagementTab,
 .advancedSettingsFileTypesTab,
 .formatSettingsArtworkTab,
-.formatSettingsGuessTagsTab  {
+.formatSettingsGuessTagsTab,
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab  {
 
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
@@ -521,7 +524,10 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsMediaLibraryManagementTab.active,
 .advancedSettingsFileTypesTab.active,
 .formatSettingsArtworkTab.active,
-.formatSettingsGuessTagsTab.active
+.formatSettingsGuessTagsTab.active,
+.interfaceSettingsDisplayTab.active,
+.interfaceSettingsFormatTab.active,
+.interfaceSettingsTimingTab.active
  {
     display: block; /* Show the active tab content */
 }
@@ -544,7 +550,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsRescanMediaTab,
 .basicSettingsSecurityTab,
 .formatSettingsArtworkTab,
-.formatSettingsGuessTagsTab {
+.formatSettingsGuessTagsTab,
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab  {
     background-color: #3A456D; 
 }
 
@@ -561,7 +570,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsRescanMediaTabButton,
 .basicSettingsSecurityTabButton,
 .formatSettingsArtworkTabButton,
-.formatSettingsGuessTagsTabButton {
+.formatSettingsGuessTagsTabButton,
+.interfaceSettingsDisplayTabButton,
+.interfaceSettingsFormatTabButton,
+.interfaceSettingsTimingTabButton  {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -583,7 +595,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsRescanMediaTabButton.active,
 .basicSettingsSecurityTabButton.active,
 .formatSettingsArtworkTabButton.active,
-.formatSettingsGuessTagsTabButton.active {
+.formatSettingsGuessTagsTabButton.active,
+.interfaceSettingsDisplayTabButton.active,
+.interfaceSettingsFormatTabButton.active,
+.interfaceSettingsTimingTabButton.active  {
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -718,7 +733,10 @@ transform: translate3d(0, 0, 0);
         .basicSettingsRescanMediaTabButton.active,
         .basicSettingsSecurityTabButton.active,
         .formatSettingsArtworkTabButton.active,
-        .formatSettingsGuessTagsTabButton.active {
+        .formatSettingsGuessTagsTabButton.active,
+        .interfaceSettingsDisplayTabButton.active,
+        .interfaceSettingsFormatTabButton.active,
+        .interfaceSettingsTimingTabButton.active  {
 
             background-color: #0456C6;
             border: none;
@@ -991,6 +1009,9 @@ transform: translate3d(0, 0, 0);
 .basicSettingsSecurityTab,
 .formatSettingsArtworkTab,
 .formatSettingsGuessTagsTab,
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab 
 .saveSettings
 {
     margin: 0 auto;
@@ -1106,7 +1127,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsRescanMediaTab, 
 .basicSettingsSecurityTab,
 .formatSettingsArtworkTab,
-.formatSettingsGuessTagsTab,
+.formatSettingsGuessTagsTab
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab,
 .saveSettings
 {
     margin: 0 auto;

@@ -431,6 +431,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <button class="tabButton" data-tab="plugins">Plugins</button>
             <button class="tabButton" data-tab="basic-info">Basic Settings</button>
             <button class="tabButton" data-tab="formatting">Formatting</button>
+            <button class="tabButton" data-tab="interface">Interface</button>
             <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
         <div class="settingsContent">
@@ -447,6 +448,9 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             </div>
             <div class="tabContent" id="formatting">
                 <div class="formatSettingsContent"></div>
+            </div>
+            <div class="tabContent" id="interface">
+                <div class="interfaceSettingsContent"></div>
             </div>
 
           <div class="tabContent" id="media-library-management">
@@ -512,6 +516,15 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             console.error('.formatSettingsContent element not found.');
         }
 
+        // Interface Content
+        const interfaceSettingsContent = settingsContainer.querySelector('.interfaceSettingsContent');
+        if(formatSettingsContent){
+            const interfaceSettings = document.querySelector('.interfaceSettings')?.innerHTML || '';
+            interfaceSettingsContent.innerHTML = interfaceSettings;
+        } else {
+            console.error('.interfaceSettingsContent element not found.');
+        }
+
 
         // Add the content of `.mediaLibraryManagement` to `.mediaLibraryManagementContent`
         const mediaLibraryManagementContent = settingsContainer.querySelector('.mediaLibraryManagementContent');
@@ -571,6 +584,22 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const formatSettingsTabContent = settingsContainer.querySelectorAll(formatContentClasses.join(', '));
 
 
+        // ---------- INTERFACE SETTINGS ----------
+        const buttonClassesInterface =[
+            '.interfaceSettingsDisplayTabButton',
+            '.interfaceSettingsFormatTabButton',
+            '.interfaceSettingsTimingTabButton'
+        ];
+        const interfaceSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClassesInterface.join(', '));
+
+        const interfaceContentClasses=[
+            '.interfaceSettingsDisplayTab',
+            '.interfaceSettingsFormatTab',
+            '.interfaceSettingsTimingTab'
+        ];
+        const interfaceSettingsTabContent = settingsContainer.querySelectorAll(interfaceContentClasses.join(', '));
+
+
         // ------------ Media Library management -------------
         // Initialize Basic Settings Tab Switching  for Media Library management
         const buttonClassesMediaLibraryManagement = [
@@ -621,6 +650,14 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 tab.classList.remove('active'); // Remove active class
             });
         }
+
+        // Function to hide all interface contents
+        function hideAllInterfaceContent() {
+            interfaceSettingsTabContent.forEach(tab => {
+                tab.style.display = 'none'; // Hide tab
+                tab.classList.remove('active'); // Remove active class
+            });
+        }
         
         // Function to hide all Library Management Media
     function hideAllLibraryManagementTabsContent() {
@@ -657,6 +694,17 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
             }
         }
+
+        // Show interface container
+        function showInterfaceSettings(){
+            const interfaceSettingsContainer = settingsContainer.querySelector('.interfaceSettings');
+            if(interfaceSettingsContainer) {
+                interfaceSettingsContainer.style.display = 'block';
+                // get functionTODO 
+            } else {
+
+            }
+        }
     
 
         // Function to show the Media Library Management container
@@ -683,6 +731,14 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
             if(formatSettingsContainer) {
                 formatSettingsContainer.style.display = 'none';
+            }
+        }
+
+        // Hide interface settings
+        function hideInterfaceSettings() {
+            const interfaceSettingsContainer = settingsContainer.querySelector('.interfaceSettings');
+            if(interfaceSettingsContainer) {
+                interfaceSettingsContainer.style.display = 'none';
             }
         }
 
@@ -748,6 +804,26 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 this.classList.add('active');
             });
         });
+
+        // Add click event listeners to each interface tab button
+        interfaceSettingsTabsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                showInterfaceSettings();
+                hideAllInterfaceContent();
+                interfaceSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+                const selectedTabId = this.getAttribute('data-tab');
+                const selectedTabContent = settingsContainer.querySelector(`#interfaceSettings${selectedTabId}`);
+                console.log(selectedTabId);
+                if(selectedTabContent){
+                    selectedTabContent.style.display = 'block';
+                    selectedTabContent.classList.add('active');
+                } else {
+                    console.error("No content found for tab ID: ", selectedTabId);
+                }
+                this.classList.add('active');
+            });
+        });
+    
     
         // Add click event listeners to each media library tab button
         mediaLibraryManagementTabsButtons.forEach(button => {
@@ -804,6 +880,7 @@ advancedSettingsTabsButtons.forEach(button => {
         hideBasicSettings();
         hideMediaLibraryManagementSettings();
         hideFormatSettings();
+        hideInterfaceSettings();
     
         // Trigger click on the Language tab button to display its content by default
         const languageTabButton = settingsContainer.querySelector('.basicSettingsLanguageTabButton');
