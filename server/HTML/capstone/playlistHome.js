@@ -1678,6 +1678,37 @@ function updateArtFolder(artFolder) {
     });
 }
 
+// --- UPDATE SHOW ARTIST ---
+function showArtistForm(form){
+    let showArtist = form["pref_showArtist"].value;
+    console.log("Show Artists: ", showArtist);
+    updateShowArtist(showArtist);
+}
+
+function updateShowArtist(showArtist){
+    showArtist = +showArtist;
+    const data = {
+        id: 16,
+        method: "slim.request",
+        params: [ "", ["pref", "showArtist", showArtist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Show Artist updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Show Artist:", error);
+    });
+}
+
 // --- DISPLAY DATA --- //
 function getPref(display, listElementId){
     fetch(`http://localhost:9000/capstone/jsonrpc.js?display=${display}`, {

@@ -349,13 +349,29 @@
 
                                 <div class="interfaceSettingsContent">
                                     <div class="interfaceSettingsDisplayTab active" id="interfaceSettingsDisplay">
-
+                                        [% WRAPPER settingGroup title="SETUP_SHOWARTIST" desc="SETUP_SHOWARTIST_DESC" %]
+                                        <form id="showArtistForm" class="">
+                                            <div class="radio-buttons">
+                                                <label>
+                                                    <input type="radio" name="pref_showArtist" id="showArtistDisabled" value="0">
+                                                    [% 'DISABLED' | getstring %]
+                                                </label><br>
+                                                <label>
+                                                    <input type="radio" name="pref_showArtist" id="showArtistEnabled" value="1">
+                                                    [% 'ENABLED' | getstring %]
+                                                </label>
+                                            </div>
+                                            <div class="prefs">
+                                                <input name="pref_update_showArtist" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showArtistUpdateButton" onclick="showArtistForm(this.form); return false;"  value="Save"><br><br>
+                                            </div>
+                                            [% END %]
+                                        </form>
                                     </div>
                                     <div class="interfaceSettingsFormatTab" id="interfaceSettingsFormat">
 
                                     </div>
                                     <div class="interfaceSettingsTimingTab" id="interfaceSettingsTiming">
-                                        
+
                                     </div>
                                 </div>
                             </div>
