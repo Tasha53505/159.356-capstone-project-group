@@ -1512,6 +1512,91 @@ function updateRoleLibraryFilter(noRoleFilter) {
     });
 }
 
+
+
+
+// --------  Age Limit (Amount of albums that display) --------
+function ageLimitForm(form) {
+    let ageLimitFilter = form["pref_browseagelimit"].value;
+        console.log("Role Filter:", ageLimitFilter);
+
+   
+        updateAgeLimitFilter(ageLimitFilter); 
+   
+}
+
+
+function updateAgeLimitFilter(ageLimitFilter) {
+    const data = {
+        id: 15,
+        method: "slim.request",
+        params: [ "", ["pref", "browseagelimit", ageLimitFilter]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Age Limit (albums) updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+// --------  Group Discs --------
+
+
+function groupDiscsForm(form) {
+
+    let groupDiscs = form["pref_groupdiscs"].value;
+    console.log("Group Discs:", groupDiscs);
+
+    if (groupDiscs !== undefined && (groupDiscs === "0" || groupDiscs === "1")) {
+        console.log("Submitting unified artists preference: (0 or 1)", groupDiscs);
+        updategroupDiscs(groupDiscs);
+    } else {
+        console.error("Invalid value for unified artists selection");
+    }   
+}
+
+
+
+function updategroupDiscs(groupDiscs) {
+    
+    const data = {
+        id: 17,
+        method: "slim.request",
+        params: [ "", ["pref", "groupdiscs", groupDiscs]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Group Discs updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating groupDiscs:", error);
+    });
+}
+
+
+
+
 // ------- BENS SETTINGS FUNCTIONS ------
 
 // ----- Update Coverart ---
