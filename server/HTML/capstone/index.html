@@ -346,6 +346,7 @@
                                     <button class="mediaLibraryManagementBrowseTabButton active" data-tab="browseArtists">Browse Artists</button>
                                     <button class="mediaLibraryManagementReleaseTypesTabButton" data-tab="releaseTypes">Release Types</button>
                                     <button class="mediaLibraryManagementFiltersTabButton" data-tab="filters">Filters</button>
+                                    <button class="mediaLibraryManagementPlaylistsTabButton" data-tab="playlists">Playlists</button>
                                 </div>
                       
                                 <div class="mediaLibraryManagementSettingsContent">
@@ -486,6 +487,27 @@
                                         </form>
 
                                     </div>
+
+
+                                    <div class="mediaLibraryManagementPlaylistsTab" id="mediaLibraryManagementPlaylists">
+                                        <form action="" id="playlistPersistForm">
+
+                                            [% WRAPPER setting title="SETUP_PERSISTPLAYLISTS" desc="SETUP_PERSISTPLAYLISTS_DESC"%]
+                                            <select class="stdedit" name="pref_persistPlaylists" id="persistPlaylists">
+                                    
+                                                <option [% IF NOT prefs.pref_persistPlaylists %]selected [% END %]value="0">[% 'SETUP_PERSISTPLAYLISTS_0' | string %]</option>
+                                                <option [% IF prefs.pref_persistPlaylists %]selected [% END %]value="1">[% 'SETUP_PERSISTPLAYLISTS_1' | string %]</option>
+                                    
+                                            </select>
+
+                                            <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="playlistPersistFormId" onclick="playlistPersistForm(this.form); return false;" value="Save Playlist Peristence"><br>
+
+                                        [% END %]
+                                        
+                                        </form>
+
+                                    </div>
+
                                     
 
 

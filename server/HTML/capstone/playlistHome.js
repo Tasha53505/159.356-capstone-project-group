@@ -573,6 +573,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.mediaLibraryManagementBrowseTabButton',
             '.mediaLibraryManagementReleaseTypesTabButton',
             '.mediaLibraryManagementFiltersTabButton',
+            '.mediaLibraryManagementPlaylistsTabButton'
         
         ];
         const mediaLibraryManagementTabsButtons = settingsContainer.querySelectorAll(buttonClassesMediaLibraryManagement.join(', '));
@@ -581,6 +582,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.mediaLibraryManagementBrowseTab',
             '.mediaLibraryManagementReleaseTypesTab',
             '.mediaLibraryManagementFiltersTab',
+            '.mediaLibraryManagementPlaylistsTab'
 
 
         ];
@@ -1588,6 +1590,50 @@ function updategroupDiscs(groupDiscs) {
     .then(response => response.json())
     .then(data => {
         console.log("Group Discs updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating groupDiscs:", error);
+    });
+}
+
+
+
+
+// --------  Playlist Persistence --------
+
+
+function playlistPersistForm(form) {
+
+    let playlistPersist = form["pref_persistPlaylists"].value;
+    console.log("Group Discs:", playlistPersist);
+
+    if (playlistPersist !== undefined && (playlistPersist === "0" || playlistPersist === "1")) {
+        updatePlaylistPersist(playlistPersist);
+    } else {
+        console.error("Invalid value for Playlist Perrsist selection");
+    }   
+}
+
+
+
+function updatePlaylistPersist(playlistPersist) {
+    
+    const data = {
+        id: 18,
+        method: "slim.request",
+        params: [ "", ["pref", "persistPlaylists", playlistPersist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("persistPlaylists updated to:", data);
     })
     .catch(error => {
         console.error("Error updating groupDiscs:", error);
