@@ -575,7 +575,7 @@ if (params && params[1][0] === "pref" && params[1][1] === "searchSubString") {
 
 
     
-    // *******************************************************************************
+// *******************************************************************************
 //                    ****  Ignored Articles****
 // ***********************************************************************************
 
@@ -617,6 +617,282 @@ if (params && params[1][0] === "pref" && params[1][1] === "ignoredarticles") {
 app.get('/jsonrpc.js', (req, res) => {
     const display = req.query.display;
 
+    
+// ************************************************************************************
+//  ****  Age Limit (Number of recent albumbs to display when browsing new music ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "browseagelimit") {
+    const newAgeLimit = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace Line
+        const updatedData = data.replace(/browseagelimit:\s*\S+/g, `browseagelimit: ["${newAgeLimit}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'browseagelimit updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+    
+    
+// ************************************************************************************
+//                              ****  Group Discs ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "groupdiscs") {
+    const newGroupDiscs= params[1][2];
+  
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replaceline 
+        const updatedData = data.replace(/groupdiscs:\s*\S+/g, `groupdiscs: ["${newGroupDiscs}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'groupdiscs (Filters) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+    // ************************************************************************************
+//                              ****  Playlsit Persistence ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "persistPlaylists") {
+    const newPersistPlaylists= params[1][2];
+  
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replaceline 
+        const updatedData = data.replace(/persistPlaylists:\s*\S+/g, `persistPlaylists: ["${newPersistPlaylists}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'persistPlaylists (Playlists) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+  // ************************************************************************************
+//                              ****  Saved Shuffled Playlist ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "saveShuffled") {
+    const newSavedShuffled = params[1][2];
+  
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replaceline 
+        const updatedData = data.replace(/saveShuffled:\s*\S+/g, `saveShuffled: ["${newSavedShuffled}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'saveShuffled (Playlists) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+  // ************************************************************************************
+//                              ****  Reshuffle On repeat  ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "reshuffleOnRepeat") {
+    const newReshuffleOnRepeat= params[1][2];
+  
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replaceline 
+        const updatedData = data.replace(/reshuffleOnRepeat:\s*\S+/g, `reshuffleOnRepeat: ["${newReshuffleOnRepeat}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'pref_reshuffleOnRepeat (Playlists) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+});
+
+
+
+
+    
+// *******************************************************************************
+//                    ****  Skip sentinelm File Names****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "skipsentinel") {
+    const newSkipSentinel = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace Line
+        const updatedData = data.replace(/skipsentinel:\s*\S+/g, `skipsentinel: ["${newSkipSentinel}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'skipsentinel (advanced) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+    // *******************************************************************************
+//                    ****  Seperator for multiple Items in tags (Split list) ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "splitList") {
+    const newSplitList = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace Line
+        const updatedData = data.replace(/splitList:\s*\S+/g, `splitList: ["${newSplitList}"]`);
+
+
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'splitList (advanced) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
 
     let filePath;
     if (os.platform() === 'win32' || os.platform() === 'win64') {

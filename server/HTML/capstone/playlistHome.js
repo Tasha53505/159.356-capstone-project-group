@@ -606,6 +606,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.mediaLibraryManagementBrowseTabButton',
             '.mediaLibraryManagementReleaseTypesTabButton',
             '.mediaLibraryManagementFiltersTabButton',
+            '.mediaLibraryManagementPlaylistsTabButton'
         
         ];
         const mediaLibraryManagementTabsButtons = settingsContainer.querySelectorAll(buttonClassesMediaLibraryManagement.join(', '));
@@ -614,6 +615,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.mediaLibraryManagementBrowseTab',
             '.mediaLibraryManagementReleaseTypesTab',
             '.mediaLibraryManagementFiltersTab',
+            '.mediaLibraryManagementPlaylistsTab'
 
 
         ];
@@ -1593,6 +1595,293 @@ function updateRoleLibraryFilter(noRoleFilter) {
         console.error("Error updating filters:", error);
     });
 }
+
+
+
+
+// --------  Age Limit (Amount of albums that display) --------
+function ageLimitForm(form) {
+    let ageLimitFilter = form["pref_browseagelimit"].value;
+        console.log("Role Filter:", ageLimitFilter);
+
+   
+        updateAgeLimitFilter(ageLimitFilter); 
+   
+}
+
+
+function updateAgeLimitFilter(ageLimitFilter) {
+    const data = {
+        id: 15,
+        method: "slim.request",
+        params: [ "", ["pref", "browseagelimit", ageLimitFilter]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Age Limit (albums) updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+// --------  Group Discs --------
+
+
+function groupDiscsForm(form) {
+
+    let groupDiscs = form["pref_groupdiscs"].value;
+    console.log("Group Discs:", groupDiscs);
+
+    if (groupDiscs !== undefined && (groupDiscs === "0" || groupDiscs === "1")) {
+        console.log("Submitting unified artists preference: (0 or 1)", groupDiscs);
+        updategroupDiscs(groupDiscs);
+    } else {
+        console.error("Invalid value for unified artists selection");
+    }   
+}
+
+
+
+function updategroupDiscs(groupDiscs) {
+    
+    const data = {
+        id: 17,
+        method: "slim.request",
+        params: [ "", ["pref", "groupdiscs", groupDiscs]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Group Discs updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating groupDiscs:", error);
+    });
+}
+
+
+
+
+// --------  Playlist Persistence --------
+
+
+function playlistPersistForm(form) {
+
+    let playlistPersist = form["pref_persistPlaylists"].value;
+    console.log("Group Discs:", playlistPersist);
+
+    if (playlistPersist !== undefined && (playlistPersist === "0" || playlistPersist === "1")) {
+        updatePlaylistPersist(playlistPersist);
+    } else {
+        console.error("Invalid value for Playlist Perrsist selection");
+    }   
+}
+
+
+
+function updatePlaylistPersist(playlistPersist) {
+    
+    const data = {
+        id: 18,
+        method: "slim.request",
+        params: [ "", ["pref", "persistPlaylists", playlistPersist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("persistPlaylists updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating persistPlaylists:", error);
+    });
+}
+
+// --------  Save Shuffled Playlists --------
+
+function saveShuffledPlaylistForm(form) {
+
+    let saveShuffledPlaylst = form["pref_saveShuffled"].value;
+    console.log("Save Shuffled:", saveShuffledPlaylst);
+
+    if (saveShuffledPlaylst !== undefined && (saveShuffledPlaylst === "0" || saveShuffledPlaylst === "1")) {
+        updateShuffledPlaylist(saveShuffledPlaylst);
+    } else {
+        console.error("Invalid value for Playlist Perrsist selection");
+    }   
+}
+
+
+
+function updateShuffledPlaylist(shuffledPlaylist) {
+    
+    const data = {
+        id: 19,
+        method: "slim.request",
+        params: [ "", ["pref", "saveShuffled", shuffledPlaylist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("persistPlaylists updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating persistPlaylists:", error);
+    });
+}
+
+
+// --------  Reshuffle On Repeat --------
+
+function reshuffleOnRepeatForm(form) {
+
+    let reshuffleOnRepeat = form["pref_reshuffleOnRepeat"].value;
+    console.log("Save Shuffled:", reshuffleOnRepeat);
+
+    if (reshuffleOnRepeat !== undefined && (reshuffleOnRepeat === "0" || reshuffleOnRepeat === "1")) {
+        updateReshuffleOnRepeat(reshuffleOnRepeat);
+    } else {
+        console.error("Invalid value for pref_reshuffleOnRepeat");
+    }   
+}
+
+
+
+function updateReshuffleOnRepeat(reshuffleOnRepeat) {
+    
+    const data = {
+        id: 20,
+        method: "slim.request",
+        params: [ "", ["pref", "reshuffleOnRepeat", reshuffleOnRepeat]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("reshuffleOnRepeat updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating reshuffleOnRepeat:", error);
+    });
+}
+
+
+
+
+// --------------------------------  Skip Sentinel FileName --------------------------------
+function skipSentinelFileNameForm(form) {
+    let skipSentinel = form["pref_skipsentinel"].value;
+
+    console.log("skipSentinel:", skipSentinel);
+
+        console.log("Submitting preferences:", { skipSentinel });
+        updateSkipSentinel(skipSentinel); 
+
+
+}
+
+//skipSentinel
+function updateSkipSentinel(skipSentinel) {
+    const data = {
+        id: 13,
+        method: "slim.request",
+        params: [ "", ["pref", "skipsentinel", skipSentinel]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("skipsentinel updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+// --------------------------------  Seperrator for multiple items in tags --------------------------------
+function seperatorMultipleItemsTagsForm(form) {
+    let seperatorMultipleItemTags = form["pref_splitList"].value;
+
+    console.log("seperator:", seperatorMultipleItemTags);
+
+        console.log("Submitting preferences:", { seperatorMultipleItemTags });
+        updateSeperatorMultipleItemTags(seperatorMultipleItemTags); 
+
+
+}
+
+//seperatorMultipleItemTags
+function updateSeperatorMultipleItemTags(seperatorMultipleItemTags) {
+    const data = {
+        id: 22,
+        method: "slim.request",
+        params: [ "", ["pref", "splitList", seperatorMultipleItemTags]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("seperatorMultipleItemTags updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
 
 // ------- BENS SETTINGS FUNCTIONS ------
 
