@@ -149,7 +149,7 @@
                                         <div class="advancedSettingsFileTypesTab active" id="advancedFileTypes"> 
                                             <form action="" id="disableExtensionAudioForm">
                                                 [% WRAPPER settingGroup title="SETUP_DISABLEDEXTENSIONSAUDIO" desc="SETUP_DISABLEDEXTENSIONSAUDIO_DESC" %]
-                                                    <input type="text"class="stdedit" name="pref_disabledextensionsaudio" id="disabledextensionsaudio" value="[% disabledextensionsaudio | html %]" size="40">
+                                                    <input type="text"class="stdedit" name="disabledextensionsaudio" id="disabledextensionsaudio" value="[% disabledextensionsaudio | html %]" size="40">
                                                     <input name="advancedFilters" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="disabledextensionsaudioId" onclick="disableExtensionAudioForm(this.form); return false;" value="Disable Specific Audio File Extensions">
                                                   [% END %]
                                             </form>
@@ -161,6 +161,8 @@
                                                     <input name="advancedFilters" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="disabledextensionsplaylistId" onclick="disableExtensionPlaylistForm(this.form); return false;" value="Disable Specific Audio File Extensions">
                                                   [% END %]
                                             </form>
+
+                                            
 
                                         </div>
                                     </div>                            

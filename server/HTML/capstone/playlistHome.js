@@ -1887,25 +1887,33 @@ function updateSeperatorMultipleItemTags(seperatorMultipleItemTags) {
 
 // --------------------------------  Advanced File Types - Disable Extension Audio  --------------------------------
 
+
 function disableExtensionAudioForm(form) {
-    let disabledExtensions = form.querySelector("#disabledextensionsaudio").value;
+    let disabledExtensionsAudio = form["disabledextensionsaudio"].value;
+    console.log("disabledextensionsaudio  :", disabledExtensionsAudio);
 
-        console.log("disabledextensionsaudio:", disabledExtensions);
+   
+    if (disabledExtensionsAudio) {
+        console.log("disabledextensionsaudio", disabledExtensionsAudio);
+        updateDisableExtensionAudioForm(disabledExtensionsAudio)
+        } else {
+        console.log("Updated to blank, meaning it will be blank");
+        updateDisableExtensionAudioForm('')
+    }    
+}
 
-        console.log("Submitting preferences:", { disabledExtensions });
-        updateDisableExtensionAudioForm(disabledExtensions); 
 
-    }
 
-function updateDisableExtensionAudioForm(disabledExtensions) {
+function updateDisableExtensionAudioForm(disabledExtensionsAudio) {
+
     const data = {
-        id: 23,
+        id: 25,
         method: "slim.request",
-        params: [ "", ["pref", "disabledextensionsaudio", disabledExtensions]]
-
+        params: [ "", ["pref", "disabledextensionsaudio", disabledExtensionsAudio]]
     };
 
-    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -1914,30 +1922,31 @@ function updateDisableExtensionAudioForm(disabledExtensions) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("disabledextensionsaudio updated:", data);
+        console.log("disabledextensionsaudio  updated to:", data);
     })
     .catch(error => {
-        console.error("Error updating filters:", error);
+        console.error("Error updating disabledextensionsaudio:", error);
     });
 }
 
 
 
 
+
 // --------------------------------  Disabled Playlist File Extensions  --------------------------------
 
-function disableExtensionAudioForm(form) {
+function disableExtensionPlaylistForm(form) {
     let disabledExtensions = form["disabledextensionsplaylist"].value;
 
     console.log("disabledextensionsplaylist:", disabledExtensions);
 
         console.log("Submitting preferences:", { disabledExtensions });
-        disableExtensionPlaylistForm(disabledExtensions); 
+        updateDisableExtensionPlaylistForm(disabledExtensions); 
 
 
 }
 
-function disableExtensionPlaylistForm(disabledExtensions) {
+function updateDisableExtensionPlaylistForm(disabledExtensions) {
     const data = {
         id: 24,
         method: "slim.request",
