@@ -894,6 +894,123 @@ if (params && params[1][0] === "pref" && params[1][1] === "splitList") {
          res.status(400).send('Invalid request');
     }
 
+// *******************************************************************************
+//                    ****  Disablled audio File extensions ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "disabledextensionsaudio") {
+    const newDisabledextensionsaudio = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace Line
+        const updatedData = data.replace(/disabledextensionsaudio:\s*\S+/g, `disabledextensionsaudio: ["${newDisabledextensionsaudio}"]`);
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'disabledextensionsaudio (advanced) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+
+// *******************************************************************************
+//                    ****  Disablled audio File extensions ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "disabledextensionsaudio") {
+    const newDisabledextensionsaudio = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace Line
+        const updatedData = data.replace(/disabledextensionsaudio:\s*\S+/g, `disabledextensionsaudio: ["${newDisabledextensionsaudio}"]`);
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'disabledextensionsaudio (advanced) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+
+    
+// *******************************************************************************
+//                    ****  Disablled Playlist File extensions ****
+// ***********************************************************************************
+
+if (params && params[1][0] === "pref" && params[1][1] === "disabledextensionsplaylist") {
+    const newDisabledextensionsplaylist = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        // Replace Line
+        const updatedData = data.replace(/disabledextensionsplaylist:\s*\S+/g, `disabledextensionsplaylist: ["${newDisabledextensionsplaylist}"]`);
+        
+        
+        // Write the updated data back to the file
+        fs.writeFile(filePath, updatedData, (err) => {
+            if (err) return res.status(500).send('Error updating prefs file');
+            console.log("Updated prefs file content:", updatedData); // DEBUG
+            res.json({ result: 'disabledextensionsplaylist (advanced) updated successfully' });
+            });
+        });
+    } else {
+         res.status(400).send('Invalid request');
+    }
+
+
+// *******************************************************************************
+//                    ****  Art Folder ****
+// ***********************************************************************************
     let filePath;
     if (os.platform() === 'win32' || os.platform() === 'win64') {
         filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
@@ -918,86 +1035,14 @@ if (params && params[1][0] === "pref" && params[1][1] === "splitList") {
             return res.status(500).send('test');
         }
     });
-});
+ 
 
 
 
-
-// // *******************************************************************************
-// //                    ****  update Album release types  ****
-// // *******************************************************************************
-// if (params && params[1][0] === "pref" && params[1][1] === "ignoreReleaseTypes") {
-//     const ignoreReleaseTypes = params[1][2];
-
-//     let filePath;
-//     if (os.platform() === 'win32' || os.platform() === 'win64') {
-//         filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
-//     } else if (os.platform() === 'linux') {
-//         filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
-//     } else {
-//         return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
-//     }
-
-//     fs.readFile(filePath, 'utf8', (err, data) => {
-//         if (err) return res.status(500).send('Error reading prefs file');
-//         console.log("Current prefs file data:", data); 
-
-//         // Update ignoreReleaseTypes in the prefs file
-//         let updatedData = data.replace(/ignoreReleaseTypes:\s*\S+/g, `ignoreReleaseTypes: "${ignoreReleaseTypes}"`);
-
-//         // Write the updated data back to the file
-//         fs.writeFile(filePath, updatedData, (err) => {
-//             if (err) return res.status(500).send('Error updating prefs file');
-//             console.log("Updated prefs file content:", updatedData); 
-//             res.json({ result: 'Release types updated successfully' });
-//         });
-//     });
-// } else {
-//     res.status(400).send('Invalid request');
-// }
 
 
     
 
 
 
-    // *******************************************************************************
-//                    ****  Change Art Folder ****
-// ***********************************************************************************
-/*if (params && params[1][0] === "pref" && params[1][1] === "artfolder") {
-    const newArtFolder = params[1][2];
-    // const libraryname = decodeURIComponent(decodeURIComponent(params[1][2])); // Double unescape
-    //    const newMediaDir = params[1][2][0];
 
-
-    let filePath;
-    if (os.platform() === 'win32' || os.platform() === 'win64') {
-        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
-    } else if (os.platform() === 'linux') {
-        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
-    } else {
-        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
-    }
-
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) return res.status(500).send('Error reading prefs file');
-        console.log("Current prefs file data DEBUG:", data); //  DEBUG
-
-        // Replace the mediadirs line with the new directory
-        const updatedData = data.replace(/artfolder:\s*\S+/g, `artfolder: ["${newArtFolder}"]`);
-
-
-        
-        
-        // Write the updated data back to the file
-        fs.writeFile(filePath, updatedData, (err) => {
-            if (err) return res.status(500).send('Error updating prefs file');
-            console.log("Updated prefs file content:", updatedData); // DEBUG
-            res.json({ result: 'Artwork Folder updated successfully' });
-            });
-        });
-    } else {
-         res.status(400).send('Invalid request');
-    }
-
-});*

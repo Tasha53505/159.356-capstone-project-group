@@ -147,7 +147,21 @@
                                         </div>
 
                                         <div class="advancedSettingsFileTypesTab active" id="advancedFileTypes"> 
-                                            <h2>X</h2>                       
+                                            <form action="" id="disableExtensionAudioForm">
+                                                [% WRAPPER settingGroup title="SETUP_DISABLEDEXTENSIONSAUDIO" desc="SETUP_DISABLEDEXTENSIONSAUDIO_DESC" %]
+                                                    <input type="text"class="stdedit" name="pref_disabledextensionsaudio" id="disabledextensionsaudio" value="[% disabledextensionsaudio | html %]" size="40">
+                                                    <input name="advancedFilters" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="disabledextensionsaudioId" onclick="disableExtensionAudioForm(this.form); return false;" value="Disable Specific Audio File Extensions">
+                                                  [% END %]
+                                            </form>
+
+
+                                            <form action="" id="disableExtensionPlaylistForm">
+                                                [% WRAPPER settingGroup title="SETUP_DISABLEDEXTENSIONSPLAYLIST" desc="SETUP_DISABLEDEXTENSIONSPLAYLIST_DESC" %]
+                                                <input type="text"class="stdedit" name="disabledextensionsplaylist" id="disabledextensionsplaylist" value="[% disabledextensionsplaylist | html %]" size="40">
+                                                    <input name="advancedFilters" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="disabledextensionsplaylistId" onclick="disableExtensionPlaylistForm(this.form); return false;" value="Disable Specific Audio File Extensions">
+                                                  [% END %]
+                                            </form>
+
                                         </div>
                                     </div>                            
                                 </div>

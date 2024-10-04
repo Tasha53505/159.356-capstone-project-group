@@ -427,8 +427,12 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             </div>
         </div>
         <div class="settingsTabs">
-            <button class="tabButton active" data-tab="music">Music</button>
-            <button class="tabButton" data-tab="plugins">Plugins</button>
+        <!-- Commented out the first 2 as they have been added as their own -->
+            <!-- <button class="tabButton active" data-tab="music">Music</button>
+            <button class="tabButton" data-tab="plugins">Plugins</button> -->
+
+
+
             <button class="tabButton" data-tab="basic-info">Basic Settings</button>
             <button class="tabButton" data-tab="formatting">Formatting</button>
             <button class="tabButton" data-tab="interface">Interface</button>
@@ -1880,6 +1884,83 @@ function updateSeperatorMultipleItemTags(seperatorMultipleItemTags) {
         console.error("Error updating filters:", error);
     });
 }
+
+// --------------------------------  Advanced File Types - Disable Extension Audio  --------------------------------
+
+function disableExtensionAudioForm(form) {
+    let disabledExtensions = form.querySelector("#disabledextensionsaudio").value;
+
+        console.log("disabledextensionsaudio:", disabledExtensions);
+
+        console.log("Submitting preferences:", { disabledExtensions });
+        updateDisableExtensionAudioForm(disabledExtensions); 
+
+    }
+
+function updateDisableExtensionAudioForm(disabledExtensions) {
+    const data = {
+        id: 23,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledextensionsaudio", disabledExtensions]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("disabledextensionsaudio updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+
+// --------------------------------  Disabled Playlist File Extensions  --------------------------------
+
+function disableExtensionAudioForm(form) {
+    let disabledExtensions = form["disabledextensionsplaylist"].value;
+
+    console.log("disabledextensionsplaylist:", disabledExtensions);
+
+        console.log("Submitting preferences:", { disabledExtensions });
+        disableExtensionPlaylistForm(disabledExtensions); 
+
+
+}
+
+function disableExtensionPlaylistForm(disabledExtensions) {
+    const data = {
+        id: 24,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledextensionsplaylist", disabledExtensions]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("disabledextensionsplaylist updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
 
 
 
