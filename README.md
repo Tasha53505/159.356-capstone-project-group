@@ -135,6 +135,8 @@ which is dispatched by Slim::Control::Request
 which calls Slim::Control::Queries::mediafolderQuery
 
 (Note: bmf = browse media folder)
-
-
+---
+## Left To-do
+- Plugins
+- Plugins Settings
 
