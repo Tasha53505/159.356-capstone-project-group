@@ -2027,7 +2027,7 @@ function fileFormatConversionsForm(form) {
 
     // If there are any disabled formats, update the server
     if (disabledFormats.length > 0) {
-        updateFileFormatCoversion(disabledFormats);
+        updateFileFormatConversion(disabledFormats);
     } else {
         console.log("No disabled formats found.");
     }
@@ -2037,7 +2037,7 @@ function fileFormatConversionsForm(form) {
 
 
 
-function updateFileFormatCoversion(disabledFormats) {
+function updateFileFormatConversion(disabledFormats) {
     
     const data = {
         id: 29,
@@ -2057,25 +2057,42 @@ function updateFileFormatCoversion(disabledFormats) {
         console.log("Disabled Formats updated to:", data);
     })
     .catch(error => {
-        console.error("Error updating UnifiedArtists name:", error);
+        console.error("Error updating disabled Formats name:", error);
     });
 }
 
-function grabAllSelectNames() {
-// Select the form with the ID 'fileFormatConversionsForm'
-const form = document.querySelector('#fileFormatConversionsForm');
 
-// Select all <select> elements within the form
-const formSelects = form.querySelectorAll('select');
+function grabAllSelectNames(form) {
+    // Initialize an array to store disabled formats
+    let disabledFormats = [];
 
-// Loop through and log the 'name' attribute of each <select>
-formSelects.forEach(select => {
-    console.log(select.name);
-});
+    // Select all <select> elements within the form
+    const formSelects = form.querySelectorAll('select');
 
+    // Loop through each <select> element
+    formSelects.forEach(select => {
+        console.log("Select name:", select.name);
+        console.log("Select disabled status:", select.disabled);
+        console.log("Select value:", select.value);
+        
+        // Check if the select element itself is disabled
+        if (select.value === "disabled") {
+            console.log("Disabled format found (via disabled attribute):", select.name);
+            // Add the name of the disabled format to the array
+            disabledFormats.push(select.name);
+        }
+        
+        // Check if the selected option value is 'disabled'
+        else if (select.value === 'disabled') {
+            console.log("Disabled format found (via option value):", select.name);
+            // Add the name of the disabled format to the array
+            disabledFormats.push(select.name);
+        }
+    });
+
+    // Return the array of disabled formats
+    return disabledFormats;
 }
-
-
 
 
 
