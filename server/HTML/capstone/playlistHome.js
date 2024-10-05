@@ -1972,6 +1972,113 @@ function updateDisableExtensionPlaylistForm(disabledExtensions) {
 
 
 
+// --------------------------------  Prioritise Native  --------------------------------
+function checkBoxFileFormatForm(form) {
+    const checkboxOrNot = form["pref_prioritizeNative"].value ? '1' : '0';
+
+    console.log("Priortize Native:", checkboxOrNot);
+
+    if ((checkboxOrNot === '1' || checkboxOrNot === '0')) {
+        updatePriortizeNative(checkboxOrNot); 
+        console.log("Submitting preferences:", { checkboxOrNot });
+    } else {
+        console.error("Invalid value for prioritize native");
+
+    }
+
+
+}
+function updatePriortizeNative(checkboxOrNot) {
+    const data = {
+        id: 27,
+        method: "slim.request",
+        params: ["pref", "prioritizeNative", checkboxOrNot]
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+             "Content-Type": "application/json" 
+            },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("prioritizeNative updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating prioritizeNative:", error);
+    });
+}
+
+
+// ----------------- File type Conversions ----------------
+function fileFormatConversionsForm(form) {
+    let disabledFormats = []
+
+    disabledFormats =     grabAllSelectNames(form);
+
+    console.log("Disabled formats:", disabledFormats);
+
+    // If there are any disabled formats, update the server
+    if (disabledFormats.length > 0) {
+        updateFileFormatCoversion(disabledFormats);
+    } else {
+        console.log("No disabled formats found.");
+    }
+
+   
+}
+
+
+
+function updateFileFormatCoversion(disabledFormats) {
+    
+    const data = {
+        id: 29,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledformats", disabledFormats]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Disabled Formats updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating UnifiedArtists name:", error);
+    });
+}
+
+function grabAllSelectNames() {
+// Select the form with the ID 'fileFormatConversionsForm'
+const form = document.querySelector('#fileFormatConversionsForm');
+
+// Select all <select> elements within the form
+const formSelects = form.querySelectorAll('select');
+
+// Loop through and log the 'name' attribute of each <select>
+formSelects.forEach(select => {
+    console.log(select.name);
+});
+
+}
+
+
+
+
+
 
 // ------- BENS SETTINGS FUNCTIONS ------
 

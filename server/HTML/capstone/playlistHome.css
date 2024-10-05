@@ -834,6 +834,10 @@ transform: translate3d(0, 0, 0);
 
 /* ---------------------- SAVE BUTTON END ---------------------- */
 
+/* File Format Conversions */
+.even {
+    background-color: #323d64 !important;
+}
 
 /* ------------------------------ Settings End ------------------------------ */
 
@@ -843,7 +847,6 @@ transform: translate3d(0, 0, 0);
 .songsIframe {
     width: 100%;
     height: 220vh;
-
 }
 
 
