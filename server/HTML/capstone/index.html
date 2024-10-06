@@ -1522,7 +1522,7 @@
 
                                                 <!-- Input to put in folder to find music -->
                                                  <form id="rescanMediaForm" class="" data-testid="rescanMediaForm">
-                                                    <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="" size="40" >
+                                                    <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath"  data-testid="musicInputPath" value="" size="40" >
                                                     
                                                     <div class="prefs">
                 
@@ -1536,7 +1536,7 @@
                                                         </select>
 
 
-                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan saveSettings" id="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
+                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan saveSettings" id="rescanButton" data-testid="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
                                                     <a id="progressLink" href="/capstone/settings/server/status.html?player=">View Previous Scan Details</a>
                                                 
                                                     &nbsp;</div>
