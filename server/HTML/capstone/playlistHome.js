@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // updateAnimationBtnMargin();
 
     // Update on window resize
-    window.addEventListener('resize', updateAnimationBtnMargin);
+    // window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
 // ------------------------ Code to fetch all Songs ------------------------
