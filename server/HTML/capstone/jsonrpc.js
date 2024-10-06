@@ -23,6 +23,7 @@ app.post('/jsonrpc.js', (req, res) => {
 //*******************************************************************************
     // Check if the command is 'pref' and the preference being updated is 'language'
     if (params && params[1][0] === "pref" && params[1][1] === "language") {
+        console.log("TEST");
         const newLanguage = params[1][2];
         
         // Update the server.prefs file with file paths for Windows and Linux
@@ -1045,6 +1046,60 @@ if (params && params[1][0] === "pref" && params[1][1] === "prioritizeNative") {
          res.status(400).send('Invalid request');
     }
 
+// *******************************************************************************
+//                    ****  Title Format ****
+// ***********************************************************************************   
+if (params && params[1][0] === "pref" && params[1][1] === "titleFormat") {
+    console.log("TEST");
+    const customTitleFormat = params[1][2];
+
+
+    let filePath;
+    if (os.platform() === 'win32' || os.platform() === 'win64') {
+        filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    } else if (os.platform() === 'linux') {
+        filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    } else {
+        return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    }
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Error reading prefs file');
+        console.log("Current prefs file data DEBUG:", data); //  DEBUG
+
+        let updatedData = data.split('\n');
+        const titleFormatIndex = updatedData.findIndex(line => line.trim().startsWith("titleFormat:"));
+        if(titleFormatIndex != -1){
+            const arrayStart = titleFormatIndex + 1;
+            let end = arrayStart;
+            while(end < updatedData.length && updatedData[end].trim().startsWith('-')){
+                end++;
+            }
+            const titleFormatArray = updatedData.slice(arrayStart, end).map(line => line.replace(/^- /, '').trim());
+            if (titleFormatArray.length >= 9) {
+                titleFormatArray[8] = customTitleFormat; 
+            } else {
+                while (titleFormatArray.length < 9) {
+                    titleFormatArray.push(""); 
+                }
+                titleFormatArray[8] = customTitleFormat;
+            }
+            updatedData.splice(arrayStartIndex, endIndex - arrayStartIndex, ...titleFormatArray.map(entry => `- ${entry}`));
+
+            const newCont = updatedData.join('\n');
+            // Write the updated data back to the file
+            fs.writeFile(filePath, newCont, (err) => {
+                if (err) return res.status(500).send('Error updating prefs file');
+                console.log("Updated prefs file content:", newCont); // DEBUG
+                res.json({ result: 'titleFormat updated successfully' });
+                });
+            } else {
+                res.status(400).send('titleFormat not found');
+            }
+            });
+    } else {
+         res.status(400).send('Invalid request');
+    }
 
 
 // *******************************************************************************
