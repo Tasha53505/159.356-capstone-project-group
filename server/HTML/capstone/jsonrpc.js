@@ -23,7 +23,6 @@ app.post('/jsonrpc.js', (req, res) => {
 //*******************************************************************************
     // Check if the command is 'pref' and the preference being updated is 'language'
     if (params && params[1][0] === "pref" && params[1][1] === "language") {
-        console.log("TEST");
         const newLanguage = params[1][2];
         
         // Update the server.prefs file with file paths for Windows and Linux
