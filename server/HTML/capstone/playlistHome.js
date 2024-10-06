@@ -2076,18 +2076,12 @@ function grabAllSelectNames(form) {
         console.log("Select value:", select.value);
         
         // Check if the select element itself is disabled
-        if (select.value === "disabled") {
+        if (select.value === "DISABLED") {
             console.log("Disabled format found (via disabled attribute):", select.name);
             // Add the name of the disabled format to the array
             disabledFormats.push(select.name);
         }
-        
-        // Check if the selected option value is 'disabled'
-        else if (select.value === 'disabled') {
-            console.log("Disabled format found (via option value):", select.name);
-            // Add the name of the disabled format to the array
-            disabledFormats.push(select.name);
-        }
+      
     });
 
     // Return the array of disabled formats
