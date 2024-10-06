@@ -427,8 +427,12 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             </div>
         </div>
         <div class="settingsTabs">
-            <button class="tabButton active" data-tab="music">Music</button>
-            <button class="tabButton" data-tab="plugins">Plugins</button>
+        <!-- Commented out the first 2 as they have been added as their own -->
+            <!-- <button class="tabButton active" data-tab="music">Music</button>
+            <button class="tabButton" data-tab="plugins">Plugins</button> -->
+
+
+
             <button class="tabButton" data-tab="basic-info">Basic Settings</button>
             <button class="tabButton" data-tab="formatting">Formatting</button>
             <button class="tabButton" data-tab="interface">Interface</button>
@@ -1880,6 +1884,210 @@ function updateSeperatorMultipleItemTags(seperatorMultipleItemTags) {
         console.error("Error updating filters:", error);
     });
 }
+
+// --------------------------------  Advanced File Types - Disable Extension Audio  --------------------------------
+
+
+function disableExtensionAudioForm(form) {
+    let disabledExtensionsAudio = form["disabledextensionsaudio"].value;
+    console.log("disabledextensionsaudio  :", disabledExtensionsAudio);
+
+   
+    if (disabledExtensionsAudio) {
+        console.log("disabledextensionsaudio", disabledExtensionsAudio);
+        updateDisableExtensionAudioForm(disabledExtensionsAudio)
+        } else {
+        console.log("Updated to blank, meaning it will be blank");
+        updateDisableExtensionAudioForm('')
+    }    
+}
+
+
+
+function updateDisableExtensionAudioForm(disabledExtensionsAudio) {
+
+    const data = {
+        id: 25,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledextensionsaudio", disabledExtensionsAudio]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("disabledextensionsaudio  updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating disabledextensionsaudio:", error);
+    });
+}
+
+
+
+
+
+// --------------------------------  Disabled Playlist File Extensions  --------------------------------
+
+function disableExtensionPlaylistForm(form) {
+    let disabledExtensions = form["disabledextensionsplaylist"].value;
+
+    console.log("disabledextensionsplaylist:", disabledExtensions);
+
+        console.log("Submitting preferences:", { disabledExtensions });
+        updateDisableExtensionPlaylistForm(disabledExtensions); 
+
+
+}
+
+function updateDisableExtensionPlaylistForm(disabledExtensions) {
+    const data = {
+        id: 24,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledextensionsplaylist", disabledExtensions]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("disabledextensionsplaylist updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+// --------------------------------  Prioritise Native  --------------------------------
+function checkBoxFileFormatForm(form) {
+    const checkboxOrNot = form["pref_prioritizeNative"].value ? '1' : '0';
+
+    console.log("Priortize Native:", checkboxOrNot);
+
+    if ((checkboxOrNot === '1' || checkboxOrNot === '0')) {
+        updatePriortizeNative(checkboxOrNot); 
+        console.log("Submitting preferences:", { checkboxOrNot });
+    } else {
+        console.error("Invalid value for prioritize native");
+
+    }
+
+
+}
+function updatePriortizeNative(checkboxOrNot) {
+    const data = {
+        id: 27,
+        method: "slim.request",
+        params: ["pref", "prioritizeNative", checkboxOrNot]
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+             "Content-Type": "application/json" 
+            },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("prioritizeNative updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating prioritizeNative:", error);
+    });
+}
+
+
+// ----------------- File type Conversions ----------------
+function fileFormatConversionsForm(form) {
+    let disabledFormats = []
+
+    disabledFormats =     grabAllSelectNames(form);
+
+    console.log("Disabled formats:", disabledFormats);
+
+    // If there are any disabled formats, update the server
+    if (disabledFormats.length > 0) {
+        updateFileFormatConversion(disabledFormats);
+    } else {
+        console.log("No disabled formats found.");
+    }
+
+   
+}
+
+
+
+function updateFileFormatConversion(disabledFormats) {
+    
+    const data = {
+        id: 29,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledformats", disabledFormats]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Disabled Formats updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating disabled Formats name:", error);
+    });
+}
+
+
+function grabAllSelectNames(form) {
+    // Initialize an array to store disabled formats
+    let disabledFormats = [];
+
+    // Select all <select> elements within the form
+    const formSelects = form.querySelectorAll('select');
+
+    // Loop through each <select> element
+    formSelects.forEach(select => {
+        console.log("Select name:", select.name);
+        console.log("Select disabled status:", select.disabled);
+        console.log("Select value:", select.value);
+        
+        // Check if the select element itself is disabled
+        if (select.value === "DISABLED") {
+            console.log("Disabled format found (via disabled attribute):", select.name);
+            // Add the name of the disabled format to the array
+            disabledFormats.push(select.name);
+        }
+      
+    });
+
+    // Return the array of disabled formats
+    return disabledFormats;
+}
+
 
 
 
