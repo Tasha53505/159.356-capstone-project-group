@@ -1459,7 +1459,7 @@
                                                 [% languageoptions.$option %]
                                                 [% END %] 
                                 
-                                                <select class="stdedit" name="pref_language" id="languageSelect">
+                                                <select class="stdedit" name="pref_language" id="languageSelect" data-testid="languageSelect">
                                                     <option value="DA">Dansk</option>
                                                     <option value="DE">Deutsch</option>
                                                     <option value="EN" selected>English</option>
@@ -1521,7 +1521,7 @@
                                                 
 
                                                 <!-- Input to put in folder to find music -->
-                                                 <form id="rescanMediaForm" class="">
+                                                 <form id="rescanMediaForm" class="" data-testid="rescanMediaForm">
                                                     <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="" size="40" >
                                                     
                                                     <div class="prefs">
