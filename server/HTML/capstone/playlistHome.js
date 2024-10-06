@@ -2235,6 +2235,127 @@ function updateShowYear(showYear){
     });
 }
 
+
+// ---- SLIDER ---- ///
+/*
+document.addEventListener("DOMContentLoaded", function(){
+    document.body.addEventListener('input', function(e){
+        if(e.target && e.target.id == "itemsPerPage"){
+            console.log(e.target.value);
+            const perPageValue = document.querySelector("#itemsPerPageValue");
+            if(perPageValue){
+                console.log("Exists");
+            } else {
+                console.log("Doesnt");
+            }
+            console.log(perPageValue.textContent);
+            perPageValue.textContent = e.target.value;
+        }
+    });
+    const perPageInput = document.querySelector("#itemsPerPage");
+    const perPageValue = document.querySelector("#itemsPerPageValue");
+    perPageValue.textContent = perPageInput.value;
+});*/
+
+// -- UPDATE ITEMS PER PAGE -- //
+function perPageForm(form) {
+    let perPage = Number(form["pref_itemsPerPage"].value);
+    if (perPage < 10) updatePerPage(10);
+    else if(perPage > 500) updatePerPage(500);
+    else {
+        if(perPage) updatePerPage(perPage);
+    }
+}
+
+function updatePerPage(perPage) {
+    const data = {
+        id: 16,
+        method: "slim.request",
+        params: [ "", ["pref", "itemsPerPage", perPage]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Items per page updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Items Per Page:", error);
+    });
+}
+
+
+// -- TITLE FORMAT WEB -- //
+function titleFormatWebForm(form) {
+    let titleFormatWeb = form["pref_titleFormatWeb"].value;
+    console.log("Selected Title Format Value: ", titleFormatWeb);
+    updateTitleFormatWeb(titleFormatWeb);
+}
+
+function updateTitleFormatWeb(titleFormatWeb) {
+    const data = {
+        id: 17,
+        method: "slim.request",
+        params: [ "", ["pref", "titleFormatWeb", titleFormatWeb]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Title format updated to index:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Title Format:", error);
+    });
+}
+
+// -- CUSTOM TITLE FORMAT -- //
+function titleFormatForm(form) {
+    let titleFormat = form["pref_titleFormat"].value;
+    console.log("New Title Format: ", titleFormat);
+    updateTitleFormat(titleFormat);
+}
+
+function updateTitleFormat(titleFormat) {
+    const data = {
+        id: 18,
+        method: "slim.request",
+        params: [ "", ["pref", "titleFormat", titleFormat]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Title format updated to index:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Title Format:", error);
+    });
+    updateTitleFormatWeb(9); // Changes the index to the newly created custom index in the array
+}
+
+
 // --- DISPLAY DATA --- //
 function getPref(display, listElementId){
     fetch(`http://localhost:9000/capstone/jsonrpc.js?display=${display}`, {
@@ -2258,8 +2379,6 @@ function getPref(display, listElementId){
         console.error(`Error fetching ${display}:`, error);
     });
 }
-
-
 
 // document.getElementById('allSongs').addEventListener('click', function() {
 //     // Create the JSON-RPC request to get the media directories

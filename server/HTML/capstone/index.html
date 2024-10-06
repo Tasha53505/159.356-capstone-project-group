@@ -1604,7 +1604,7 @@
                                 <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
                                 <div class= "formatSettingsTabs">
                                     <button class ="formatSettingsArtworkTabButton active" data-tab="Artwork">Artwork</button>
-                                    <button class ="formatSettingsGuessTagsTabButton" data-tab="GuessTags">Guess Tags Formats</button>
+                                    <button class ="formatSettingsGuessTagsTabButton" data-tab="GuessTags">Guess Tags Formats</button> <!-- MAKE THIS A TEXT BOX THAT CHANGES COMMAS TO ARRAY DIVIDERS -->
                                 </div>
 
                                 <div class="formatSettingsContent"><br>
@@ -1617,7 +1617,6 @@
                                                 <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save"><br><br>
                                             </div>
                                         </form>
-
                                         [% END %]
 
                                         [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
@@ -1635,9 +1634,7 @@
                                     </div>
                                     <div class="formatSettingsGuessTagsTab" id="formatSettingsGuessTags">
                                         [% WRAPPER setting title="SETUP_GUESSFILEFORMATS" desc="SETUP_GROUP_GUESSFILEFORMATS_DESC" %]
-                                        [% FOREACH format = prefs.pref_guessFileFormats %]
-                                        <h1>test</h1>
-                                        [% END %]
+                                        <p>UNDER WORK, CAN'T DO UNTIL GET SOLUTION IS FOUND</p>
                                         <button id="addFormatButton">Add Format</button>
 
                                         [% END %]
@@ -1671,7 +1668,7 @@
                                                 </label>
                                             </div>
                                             <div class="prefs">
-                                                <input name="pref_update_showArtist" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showArtistUpdateButton" onclick="showArtistForm(this.form); return false;"  value="Save"><br><br>
+                                                <input name="pref_update_showArtist" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showArtistUpdateButton" onclick="showArtistForm(this.form); return false;"  value="Save Preference"><br><br>
                                             </div><br>
                                         </form>
                                         [% END %]
@@ -1689,7 +1686,7 @@
                                                 </label>
                                             </div>
                                             <div class="prefs">
-                                                <input name="pref_update_showYear" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showYearUpdateButton" onclick="showYearForm(this.form); return false;"  value="Save"><br><br>
+                                                <input name="pref_update_showYear" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showYearUpdateButton" onclick="showYearForm(this.form); return false;"  value="Save Preference"><br><br>
                                             </div>
                                         [% END %]
 
@@ -1697,15 +1694,79 @@
 
                                         <!-- ITEMS PER PAGE -->
                                         [% WRAPPER setting title="SETUP_ITEMSPERPAGE" desc="SETUP_ITEMSPERPAGE_DESC" %]
-                                        <form id="itemsPerPaeForm" class="">
-                                            <input type="range" class="stdedit sliderInput_10_500" name="pref_itemsPerPage" id="itemsPerPage" value="0" min="10" max="500" step="any"><br>
-                                            <p>Amount: <output id="itemsPerPageValue"></output></p>
+                                        <p>Value between 10-500. Anything under/over will default to min/max value</p>
+                                        <form id="itemsPerPageForm">
+                                            <input type="number" class="stdedit" name="pref_itemsPerPage" id="itemsPerPage" min="10" max="500">
+                                            <div class="prefs">
+                                                <input name="pref_update_itemsPerPage" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="itemsPerPageUpdateButton" onclick="perPageForm(this.form); return false;"  value="Update Items Per Page"><br><br>
+                                            </div>
                                         </form>
                                         [% END %]
 
                                     </div>
                                     <div class="interfaceSettingsFormatTab" id="interfaceSettingsFormat">
-
+                                        <!-- Title Format -->
+                                         <div class="settingSection">
+                                            <div class="settingGroup">
+                                                <div class="prefHead">Title Format</div>
+                                                <div class="prefDesc hiddenDesc">
+                                                    These are the formats available for selection both in the web interface and on players. 
+                                                </div>
+                                                <div class="prefs">
+                                                    <form id="titleFormatWebForm" class="">
+                                                        <select class="stdedit" name="pref_titleFormatWeb" id="titleFormatWeb">
+                                                            <option value="0">TITLE</option>
+                                                            <option value="1">DISC-TRACKNUM. TITLE</option>
+                                                            <option value="2">TRACKNUM. TITLE</option>
+                                                            <option value="3">TRACKNUM. ARTIST - TITLE</option>
+                                                            <option value="4">TRACKNUM. TITLE (ARTIST)</option>
+                                                            <option value="5">TRACKNUM. TITLE - ARTIST - ALBUM</option>
+                                                            <option value="6">TRACKNUM. TITLE from ALBUM by ARTIST</option>
+                                                            <option value="7">TITLE (ARTIST)</option>
+                                                            <option value="8">ARTIST - TITLE</option>
+                                                        </select>
+                                                        <input name="pref_update_titleFormatWeb" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="titleFormatWebUpdateButton" onclick="titleFormatWebForm(this.form); return false;"  value="Save Title Format"><br><br>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                         </div><br>
+                                         <!-- Custom Title Format -->
+                                         <div class="settingSection">
+                                            <div class="settingGroup">
+                                                <p>CURRENTLY ONLY CHANGES INDEX TO 9, ADDING CUSTOM VALUES ISN'T WORKING</p>
+                                                <div class="prefHead">Custom Title Format</div>
+                                                <div class="prefDesc hiddenDesc">
+                                                    <p>If you want a custom title format. Available data elements are:</p>
+                                                    <ul class="smallList">
+                                                        <li>CT (content type)</li>
+                                                        <li>TITLE</li>
+                                                        <li>GENRE</li>
+                                                        <li>TRACKNUM (tracknumber as an int)</li>
+                                                        <li>FS (file size)</li>
+                                                        <li>ARTIST</li>
+                                                        <li>COMPOSER</li>
+                                                        <li>CONDUCTOR</li>
+                                                        <li>BAND</li>
+                                                        <li>ALBUM</li>
+                                                        <li>COMMENT</li>
+                                                        <li>YEAR</li>
+                                                        <li>SECS (total seconds)</li>
+                                                        <li>DURATION (minutes and seconds)</li>
+                                                        <li>BITRATE</li>
+                                                        <li>LONGDATE (current date, long)</li>
+                                                        <li>SHORTDATE (current date, short)</li>
+                                                        <li>CURRTIME (current time)</li>
+                                                    </ul>
+                                                    <p>Elements can be separated by anything (or nothing). The separators are only used if the data elements are present.</p>
+                                                </div>
+                                                <div class="prefs">
+                                                    <form id="titleFormatForm" class="">
+                                                        <input type="text" class="stdedit" name="pref_titleFormat" id="titleFormat" value="" size="40">
+                                                        <input name="pref_update_titleFormat" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="titleFormatUpdateButton" onclick="titleFormatForm(this.form); return false;"  value="Add Custom Format"><br><br>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                         </div> 
                                     </div>
                                     <div class="interfaceSettingsTimingTab" id="interfaceSettingsTiming">
 
