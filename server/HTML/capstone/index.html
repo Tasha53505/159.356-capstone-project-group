@@ -1700,6 +1700,16 @@
                                             <div class="prefs">
                                                 <input name="pref_update_itemsPerPage" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="itemsPerPageUpdateButton" onclick="perPageForm(this.form); return false;"  value="Update Items Per Page"><br><br>
                                             </div>
+                                        </form><br>
+                                        [% END %]
+
+                                        <!-- THUMBNAIL SIZE -->
+                                        [% WRAPPER setting title="SETUP_THUMBSIZE" desc="SETUP_THUMBSIZE_DESC" %]
+                                        <form id="thumbSizeForm">
+                                            <input type="number" class="stdedit" name="pref_thumbSize" id="thumbSize" min="25" max="250">
+                                            <div class="prefs">
+                                                <input name="pref_update_thumbSize" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="thumbSizeUpdateButton" onclick="thumbSizeForm(this.form); return false;"  value="Update Thumbnail Size"><br><br>
+                                            </div>
                                         </form>
                                         [% END %]
 
@@ -1733,8 +1743,8 @@
                                          <!-- Custom Title Format -->
                                          <div class="settingSection">
                                             <div class="settingGroup">
-                                                <p>CURRENTLY ONLY CHANGES INDEX TO 9, ADDING CUSTOM VALUES ISN'T WORKING</p>
                                                 <div class="prefHead">Custom Title Format</div>
+                                                <p>CURRENTLY ONLY CHANGES INDEX TO 9, ADDING CUSTOM VALUES ISN'T WORKING</p>
                                                 <div class="prefDesc hiddenDesc">
                                                     <p>If you want a custom title format. Available data elements are:</p>
                                                     <ul class="smallList">
@@ -1753,9 +1763,6 @@
                                                         <li>SECS (total seconds)</li>
                                                         <li>DURATION (minutes and seconds)</li>
                                                         <li>BITRATE</li>
-                                                        <li>LONGDATE (current date, long)</li>
-                                                        <li>SHORTDATE (current date, short)</li>
-                                                        <li>CURRTIME (current time)</li>
                                                     </ul>
                                                     <p>Elements can be separated by anything (or nothing). The separators are only used if the data elements are present.</p>
                                                 </div>
