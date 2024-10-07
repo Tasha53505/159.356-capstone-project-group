@@ -149,7 +149,7 @@ which calls Slim::Control::Queries::mediafolderQuery
     }
     ```
 - Tests in `__tests__` folder
-### What tests have been written:
+### What tests have been written with Jest:
 - Accordion Panel Tests
 - Songs Left Panel test
 - Artists left panel test
@@ -162,6 +162,19 @@ which calls Slim::Control::Queries::mediafolderQuery
 - Behaviour Settings Release Types
 - Behaviour Settings Filters
 - Advanced File Types
+----
+## Selenium
+- `npm install selenium-webdriver`
+- `npm install mocha chai`
+- `npm install chromedriver`
+
+- Install the Extension for your browser. --> https://www.selenium.dev/downloads/
+- Checkout documentation for YOUR [specific browser](https://www.selenium.dev/documentation/webdriver/browsers/)
+- Once Selenum tests are written inside "selenium-test" folder --> make sure the extension is `.mjs`
+- Run command `npx mocha test.js` 
+
+### What tests have been written with Selenium:
+- I have mainly just automated the process with of clicking through the entire left panel to make sure everything functions correctly. This was especially useful for tiny code changes - with a click of a button it reruns the whole test
 
 
 
