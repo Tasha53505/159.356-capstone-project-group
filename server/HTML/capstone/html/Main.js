@@ -95,7 +95,7 @@ Main = {
         });
 
         // Display name
-        new SqueezeJS.UI.CompoundTitle({
+        new SqueezeJS.UI.RawTitle({
             el: 'title',
             noLink: true
         });
