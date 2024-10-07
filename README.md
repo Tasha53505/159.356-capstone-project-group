@@ -135,8 +135,39 @@ which is dispatched by Slim::Control::Request
 which calls Slim::Control::Queries::mediafolderQuery
 
 (Note: bmf = browse media folder)
+-------------------------------------
+## Selenium / Jest for testing
+---
+## Jest
+- **Documentation: ** https://jestjs.io/docs/getting-started
+- Installed Jest with `npm install --save-dev jest`
+- and `npm install --save-dev jest @testing-library/jest-dom @testing-library/dom` --> as I'm hevaily using the DOM
+-  Added to _package.json_
+    ```
+    "scripts": {
+          "test": "jest"
+    }
+    ```
+- Tests in `__tests__` folder
+### What tests have been written:
+- Accordion Panel Tests
+- Songs Left Panel test
+- Artists left panel test
+- Albums Left Panel Test
+- Basic Settings Language
+- Basic Settings Media Folders directory
+- Basic Settings Rescan button
+- Basic Settings Playlists Folder
+- Behaviour Settings Browse Artists
+- Behaviour Settings Release Types
+- Behaviour Settings Filters
+- Advanced File Types
+
+
+
 ---
 ## Left To-do
 - Plugins
 - Plugins Settings
+
 
