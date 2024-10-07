@@ -306,7 +306,7 @@
 							[%- stringCOLON %]
 						[% END %]
 						[% IF item.weblink %]
-							<a href="[% item.weblink %]" target="_blank">
+							<a href="[% item.weblink %]" target="_self">
 						[% ELSIF item.type == 'redirect' %]
 							[% IF item.web.url %]
 							<a href="[% webroot %][% item.web.url %]&amp;player=[% player | uri %]" class="browseItemLink">
