@@ -2389,6 +2389,74 @@ function updateThumbSize(thumbSize) {
     });
 }
 
+// -- THUMBNAIL SIZE -- //
+function refreshRateForm(form) {
+    let refreshRate = Number(form["pref_refreshRate"].value);
+    if (refreshRate < 3) updateRefreshRate(3);
+    else if(refreshRate > 300) updateRefreshRate(300);
+    else {
+        if(refreshRate) updateRefreshRate(refreshRate);
+    }
+}
+
+function updateRefreshRate(refreshRate) {
+    const data = {
+        id: 19,
+        method: "slim.request",
+        params: [ "", ["pref", "refreshRate", refreshRate]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Refresh Rate updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Refresh Rate:", error);
+    });
+}
+
+// -- THUMBNAIL SIZE -- //
+function thumbSizeForm(form) {
+    let thumbSize = Number(form["pref_thumbSize"].value);
+    if (thumbSize < 25) updateThumbSize(25);
+    else if(thumbSize > 250) updateThumbSize(250);
+    else {
+        if(thumbSize) updateThumbSize(thumbSize);
+    }
+}
+
+function updateThumbSize(thumbSize) {
+    const data = {
+        id: 19,
+        method: "slim.request",
+        params: [ "", ["pref", "thumbSize", thumbSize]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Thumbnail size updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Thumbnail Size:", error);
+    });
+}
+
 // --- DISPLAY DATA --- //
 function getPref(display, listElementId){
     fetch(`http://localhost:9000/capstone/jsonrpc.js?display=${display}`, {
