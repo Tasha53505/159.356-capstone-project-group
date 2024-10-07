@@ -2389,7 +2389,7 @@ function updateThumbSize(thumbSize) {
     });
 }
 
-// -- THUMBNAIL SIZE -- //
+// -- REFRESH RATE -- //
 function refreshRateForm(form) {
     let refreshRate = Number(form["pref_refreshRate"].value);
     if (refreshRate < 3) updateRefreshRate(3);
@@ -2423,21 +2423,21 @@ function updateRefreshRate(refreshRate) {
     });
 }
 
-// -- THUMBNAIL SIZE -- //
-function thumbSizeForm(form) {
-    let thumbSize = Number(form["pref_thumbSize"].value);
-    if (thumbSize < 25) updateThumbSize(25);
-    else if(thumbSize > 250) updateThumbSize(250);
+// -- TEXT TIMEOUT -- //
+function displaytexttimeoutForm(form) {
+    let displaytexttimeout = Number(form["pref_displaytexttimeout"].value);
+    if (displaytexttimeout < 1) updatedisplaytexttimeout(1);
+    else if(displaytexttimeout > 100) updatedisplaytexttimeout(100);
     else {
-        if(thumbSize) updateThumbSize(thumbSize);
+        if(displaytexttimeout) updatedisplaytexttimeout(thumbSize);
     }
 }
 
-function updateThumbSize(thumbSize) {
+function updatedisplaytexttimeout(displaytexttimeout) {
     const data = {
         id: 19,
         method: "slim.request",
-        params: [ "", ["pref", "thumbSize", thumbSize]]
+        params: [ "", ["pref", "displaytexttimeout", displaytexttimeout]]
     };
 
 
@@ -2450,10 +2450,10 @@ function updateThumbSize(thumbSize) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Thumbnail size updated to:", data);
+        console.log("Text Entry Timing updated to:", data);
     })
     .catch(error => {
-        console.error("Error updating Thumbnail Size:", error);
+        console.error("Error updating Text Entry Timing:", error);
     });
 }
 
