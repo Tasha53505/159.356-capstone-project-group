@@ -2392,7 +2392,7 @@ function updateThumbSize(thumbSize) {
 // -- REFRESH RATE -- //
 function refreshRateForm(form) {
     let refreshRate = Number(form["pref_refreshRate"].value);
-    if (refreshRate < 3) updateRefreshRate(3);
+    if (refreshRate < 2) updateRefreshRate(2);
     else if(refreshRate > 300) updateRefreshRate(300);
     else {
         if(refreshRate) updateRefreshRate(refreshRate);
@@ -2401,7 +2401,7 @@ function refreshRateForm(form) {
 
 function updateRefreshRate(refreshRate) {
     const data = {
-        id: 19,
+        id: 20,
         method: "slim.request",
         params: [ "", ["pref", "refreshRate", refreshRate]]
     };
@@ -2429,13 +2429,13 @@ function displaytexttimeoutForm(form) {
     if (displaytexttimeout < 1) updatedisplaytexttimeout(1);
     else if(displaytexttimeout > 100) updatedisplaytexttimeout(100);
     else {
-        if(displaytexttimeout) updatedisplaytexttimeout(thumbSize);
+        if(displaytexttimeout) updatedisplaytexttimeout(displaytexttimeout);
     }
 }
 
 function updatedisplaytexttimeout(displaytexttimeout) {
     const data = {
-        id: 19,
+        id: 21,
         method: "slim.request",
         params: [ "", ["pref", "displaytexttimeout", displaytexttimeout]]
     };
