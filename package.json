@@ -1,10 +1,15 @@
 {
   "dependencies": {
-    "cors": "^2.8.5"
+    "chai": "^5.1.1",
+    "chromedriver": "^129.0.2",
+    "cors": "^2.8.5",
+    "mocha": "^10.7.3",
+    "selenium-webdriver": "^4.25.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
+    "@wdio/cli": "^9.1.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0"
   },
