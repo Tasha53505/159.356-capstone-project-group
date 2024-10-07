@@ -2350,6 +2350,107 @@ function updateTitleFormat(titleFormat) {
     updateTitleFormatWeb(9); // Changes the index to the newly created custom index in the array
 }
 
+// -- THUMBNAIL SIZE -- //
+function thumbSizeForm(form) {
+    let thumbSize = Number(form["pref_thumbSize"].value);
+    if (thumbSize < 25) updateThumbSize(25);
+    else if(thumbSize > 250) updateThumbSize(250);
+    else {
+        if(thumbSize) updateThumbSize(thumbSize);
+    }
+}
+
+function updateThumbSize(thumbSize) {
+    const data = {
+        id: 19,
+        method: "slim.request",
+        params: [ "", ["pref", "thumbSize", thumbSize]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Thumbnail size updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Thumbnail Size:", error);
+    });
+}
+
+// -- REFRESH RATE -- //
+function refreshRateForm(form) {
+    let refreshRate = Number(form["pref_refreshRate"].value);
+    if (refreshRate < 2) updateRefreshRate(2);
+    else if(refreshRate > 300) updateRefreshRate(300);
+    else {
+        if(refreshRate) updateRefreshRate(refreshRate);
+    }
+}
+
+function updateRefreshRate(refreshRate) {
+    const data = {
+        id: 20,
+        method: "slim.request",
+        params: [ "", ["pref", "refreshRate", refreshRate]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Refresh Rate updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Refresh Rate:", error);
+    });
+}
+
+// -- TEXT TIMEOUT -- //
+function displaytexttimeoutForm(form) {
+    let displaytexttimeout = Number(form["pref_displaytexttimeout"].value);
+    if (displaytexttimeout < 1) updatedisplaytexttimeout(1);
+    else if(displaytexttimeout > 100) updatedisplaytexttimeout(100);
+    else {
+        if(displaytexttimeout) updatedisplaytexttimeout(displaytexttimeout);
+    }
+}
+
+function updatedisplaytexttimeout(displaytexttimeout) {
+    const data = {
+        id: 21,
+        method: "slim.request",
+        params: [ "", ["pref", "displaytexttimeout", displaytexttimeout]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Text Entry Timing updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Text Entry Timing:", error);
+    });
+}
 
 // --- DISPLAY DATA --- //
 function getPref(display, listElementId){

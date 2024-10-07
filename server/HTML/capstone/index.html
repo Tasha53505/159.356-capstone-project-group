@@ -1698,6 +1698,16 @@
                                             <div class="prefs">
                                                 <input name="pref_update_itemsPerPage" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="itemsPerPageUpdateButton" onclick="perPageForm(this.form); return false;"  value="Update Items Per Page"><br><br>
                                             </div>
+                                        </form><br>
+                                        [% END %]
+
+                                        <!-- THUMBNAIL SIZE -->
+                                        [% WRAPPER setting title="SETUP_THUMBSIZE" desc="SETUP_THUMBSIZE_DESC" %]
+                                        <form id="thumbSizeForm">
+                                            <input type="number" class="stdedit" name="pref_thumbSize" id="thumbSize" min="25" max="250">
+                                            <div class="prefs">
+                                                <input name="pref_update_thumbSize" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="thumbSizeUpdateButton" onclick="thumbSizeForm(this.form); return false;"  value="Update Thumbnail Size"><br><br>
+                                            </div>
                                         </form>
                                         [% END %]
 
@@ -1731,8 +1741,8 @@
                                          <!-- Custom Title Format -->
                                          <div class="settingSection">
                                             <div class="settingGroup">
-                                                <p>CURRENTLY ONLY CHANGES INDEX TO 9, ADDING CUSTOM VALUES ISN'T WORKING</p>
                                                 <div class="prefHead">Custom Title Format</div>
+                                                <p>CURRENTLY ONLY CHANGES INDEX TO 9, ADDING CUSTOM VALUES ISN'T WORKING</p>
                                                 <div class="prefDesc hiddenDesc">
                                                     <p>If you want a custom title format. Available data elements are:</p>
                                                     <ul class="smallList">
@@ -1751,9 +1761,6 @@
                                                         <li>SECS (total seconds)</li>
                                                         <li>DURATION (minutes and seconds)</li>
                                                         <li>BITRATE</li>
-                                                        <li>LONGDATE (current date, long)</li>
-                                                        <li>SHORTDATE (current date, short)</li>
-                                                        <li>CURRTIME (current time)</li>
                                                     </ul>
                                                     <p>Elements can be separated by anything (or nothing). The separators are only used if the data elements are present.</p>
                                                 </div>
@@ -1768,6 +1775,25 @@
                                     </div>
                                     <div class="interfaceSettingsTimingTab" id="interfaceSettingsTiming">
 
+                                        <!-- BROWSER REFRESH TIMING -->
+                                        [% WRAPPER setting title="SETUP_REFRESHRATE" desc="SETUP_REFRESHRATE_DESC" %]
+                                        <form id="refreshRateForm">
+                                            <input type="number" class="stdedit" name="pref_refreshRate" id="refreshRate" min="2" max="300">
+                                            <div class="prefs">
+                                                <input name="pref_update_refreshRate" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="refreshRateUpdateButton" onclick="refreshRateForm(this.form); return false;"  value="Change Refresh Rate"><br>
+                                            </div>
+                                        </form><br>
+                                        [% END %]
+
+                                        <!-- TEXT ENTRY TIMING -->
+                                        [% WRAPPER setting title="SETUP_DISPLAYTEXTTIMEOUT" desc="SETUP_DISPLAYTEXTTIMEOUT_DESC"%]
+                                        <form id="displaytexttimeoutForm">
+                                            <input type="number" class="stdedit" name="pref_displaytexttimeout" id="displaytexttimeout" min="1" max="100">
+                                            <div class="prefs">
+                                                <input name="pref_update_displaytexttimeout" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="displaytexttimeoutUpdateButton" onclick="displaytexttimeoutForm(this.form); return false;"  value="Change Text Timeout"><br>
+                                            </div>
+                                        </form><br>
+                                        [% END %]                                        
                                     </div>
                                 </div>
                             </div>
