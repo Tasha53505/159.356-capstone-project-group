@@ -4,6 +4,7 @@ var accordion = document.getElementsByClassName("accordion");
 var i;
 document.addEventListener('DOMContentLoaded', function () {
 
+
     
     var accordions = document.querySelectorAll('.accordionButton');
     accordions.forEach(function (accordion) {
@@ -117,20 +118,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // Media query handling
-    function updateAnimationBtnMargin() {
-        if (window.matchMedia("(max-width: 800px)").matches) {
-            animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
-        } else {
-            animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
-        }
-    }
+    // // // Media query handling
+    // // function updateAnimationBtnMargin() {
+    // //     if (window.matchMedia("(max-width: 800px)").matches) {
+    // //         animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
+    // //     } else {
+    // //         animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
+    // //     }
+    // // }
 
-    // Initial call
-    updateAnimationBtnMargin();
+    // // Initial call
+    // updateAnimationBtnMargin();
 
     // Update on window resize
-    window.addEventListener('resize', updateAnimationBtnMargin);
+    // window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
 // ------------------------ Code to fetch all Songs ------------------------
@@ -176,12 +177,6 @@ document.getElementById('allSongs').addEventListener('click', function() {
         }, 500); // Animation time + back functionality
     });
 
-//     // Use event delegation to handle dynamic content // THIS IS the code that made testButton trigger its event inside a popup code
-// document.body.addEventListener('click', function(event) {
-//     if (event.target && event.target.id === 'testButton') {
-//         console.log('testButton clicked');
-//     }
-// });
 });
 
 // function loadMusicFolder() {
@@ -2409,3 +2404,11 @@ function getPref(display, listElementId){
 //     });
 // });
 
+
+
+
+
+// Export fucntions for testing
+module.exports = {
+    rescanMedia,
+};
