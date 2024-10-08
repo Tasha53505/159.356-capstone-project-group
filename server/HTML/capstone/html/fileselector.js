@@ -122,13 +122,22 @@ Ext.extend(FileSelector, Ext.tree.TreePanel, {
 	animate: false,
 	pathSeparator: '|',
 	containerScroll: true,
+	
+	
 
-	onclick: function(node, e){
-		input = Ext.get(this.input);
-		if (input != null && input.dom.value != null) {
-			input.dom.value = node.id;
+	onclick: function(node, e) {
+		console.log('Node clicked:', node); // Log the clicked node DEBUG
+	
+		var input = Ext.get(this.input); // Use Ext.get() to find the input element by its ID or reference
+		if (input != null) {
+			input.dom.value = node.id; // Set the input field value to node's ID or any other property you need
+			console.log('Updated Input Value:', input.dom.value); // Log the updated input value for debugging
+		} else {
+			console.error('Input element not found'); // Handle case where input field is not found
 		}
 	},
+	
+	
 	
 	selectMyPath: function(){
 		// select the current setting, if available

@@ -31,6 +31,12 @@ document.querySelector('.album').addEventListener('click', function() {
 
 // ----------------------------------------- //
 
+// -- PROGRESS BAR -- 
+
+new SqueezeJS.UI.PlaytimeProgress('ctrlProgress');
+new SqueezeJS.UI.Playtime('ctrlPlaytime');
+new SqueezeJS.UI.PlaytimeRemaining('ctrlRemainingTime');
+
 
 // -- PLAYBACK BUTTONS --
 
@@ -177,10 +183,24 @@ document.getElementById('shuffleButton').addEventListener('click', function(){
     setTimeout(updateShuffleState, 200);
 });
 
+// Event listener for slider
+const value = document.querySelector("#value");
+const input = document.querySelector("#pi_input");
+value.textContent = input.value;
+input.addEventListener("input", (event) => {
+  value.textContent = event.target.value;
+});
+
 
 // ----------------------------------------- //
 
+<<<<<<< HEAD
 // -- RIGHT PANEL -- //
+=======
+
+
+// STEVES CODE
+>>>>>>> 10a144f9ef1a28afaf094a9e59278a1b50719646
 infoPanelBtn.addEventListener('click', function () {
     if(artist){
         infoPanel.classList.toggle('active');

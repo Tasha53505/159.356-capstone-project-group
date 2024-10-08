@@ -14,6 +14,7 @@
     color: #EFF8FC;
 }
 
+<<<<<<< HEAD
 /* body {
     margin-top: 0.5em;
 } */
@@ -22,6 +23,8 @@
     float: right;
 }
 
+=======
+>>>>>>> 10a144f9ef1a28afaf094a9e59278a1b50719646
 .overallContainer {
     width: auto; /* Sticks with the animation panel */
     height: 100vh;
@@ -197,10 +200,7 @@ margin-left: 1rem;
     border: none;
     padding: 1em;
     border-radius: 0% 30% 30% 0%;
-    /* margin-top: 10%; */
-    /* margin-left: 27%; */
-    margin: 0;
-    /* margin-left: 0; Starts off hugging the left side of paghe */
+    margin: 0px;
     transition: 0.6s ;
     z-index: 10;
 }
@@ -477,25 +477,38 @@ transform: translate3d(0, 0, 0);
     to { opacity: 1; }
 }
         /* ----------- Basic Settings Start ----------- */
-    .basicSettings {
+    .basicSettings, .formatSettings, .interfaceSettings, .mediaLibraryManagementSettings, .advancedSettings {
         display: none; 
     }
 
     
 
-    .basicSettingsTabs {
+    .basicSettingsTabs, .formatSettingsTabs, .interfaceSettingsTabs, .mediaLibraryManagementSettingsTabs, .advancedSettingsTabs {
         display: block;
     }
 
-    .basicSettingsContent {
+    .basicSettingsContent, .formatSettingsContent, .interfaceSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs, .advancedSettingsContent {
         background-color: #1b2444;
     }
+
+
 /* Common settings for all tabs */
 .basicSettingsLanguageTab, 
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
-.basicSettingsPlaylistsTab, 
-.basicSettingsRescanMediaTab {
+.basicSettingsPlaylistsTab,
+.mediaLibraryManagementBrowseTab, 
+.mediaLibraryManagementReleaseTypesTab, 
+.mediaLibraryManagementFiltersTab,
+.mediaLibraryManagementPlaylistsTab,
+.advancedSettingsMediaLibraryManagementTab,
+.advancedSettingsFileTypesTab,
+.formatSettingsArtworkTab,
+.formatSettingsGuessTagsTab,
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab  {
+
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
     padding: 1em;
@@ -513,13 +526,24 @@ transform: translate3d(0, 0, 0);
 .basicSettingsLanguageTab.active, 
 .basicSettingsMediaLibraryTab.active, 
 .basicSettingsMediaFoldersTab.active, 
-.basicSettingsPlaylistsTab.active, 
-.basicSettingsRescanMediaTab.active {
+.basicSettingsPlaylistsTab.active,
+.mediaLibraryManagementFiltersTab.active, 
+.mediaLibraryManagementBrowseTab.active, 
+.mediaLibraryManagementReleaseTypesTab.active,
+.mediaLibraryManagementPlaylistsTab.active,
+.advancedSettingsMediaLibraryManagementTab.active,
+.advancedSettingsFileTypesTab.active,
+.formatSettingsArtworkTab.active,
+.formatSettingsGuessTagsTab.active,
+.interfaceSettingsDisplayTab.active,
+.interfaceSettingsFormatTab.active,
+.interfaceSettingsTimingTab.active
+ {
     display: block; /* Show the active tab content */
 }
 
 
-.basicSettingsLanguageTab.active {
+.basicSettingsLanguageTab.active, .mediaLibraryManagementBrowseTabButton.active, .formatSettingsArtworkTab.active {
     padding: 1em; 
     background-color: #3A456D; 
 }
@@ -528,7 +552,19 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab,
 .basicSettingsMediaFoldersTab,
 .basicSettingsPlaylistsTab,
-.basicSettingsRescanMediaTab {
+.mediaLibraryReleaseTypesTab,
+.mediaLibraryManagementBrowseTab,
+.mediaLibraryFiltersTab,
+.mediaLibraryManagementPlaylistsTab
+.advancedSettingsMediaLibraryManagementTab,
+.advancedSettingsFileTypesTab,
+.basicSettingsRescanMediaTab,
+.basicSettingsSecurityTab,
+.formatSettingsArtworkTab,
+.formatSettingsGuessTagsTab,
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab  {
     background-color: #3A456D; 
 }
 
@@ -536,7 +572,20 @@ transform: translate3d(0, 0, 0);
 .basicSettingsLanguageTabButton, 
 .basicSettingsMediaFoldersTabButton,
 .basicSettingsPlaylistsTabButton,
-.basicSettingsRescanMediaTabButton {
+.basicSettingsMediaLibraryManagementTabButton,
+.mediaLibraryManagementBrowseTabButton,
+.mediaLibraryManagementReleaseTypesTabButton,
+.mediaLibraryManagementFiltersTabButton,
+.mediaLibraryManagementPlaylistsTabButton,
+.advancedSettingsMediaLibraryManagementTabButton,
+.advancedSettingsFileTypesTabButton,
+.basicSettingsRescanMediaTabButton,
+.basicSettingsSecurityTabButton,
+.formatSettingsArtworkTabButton,
+.formatSettingsGuessTagsTabButton,
+.interfaceSettingsDisplayTabButton,
+.interfaceSettingsFormatTabButton,
+.interfaceSettingsTimingTabButton  {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -549,7 +598,21 @@ transform: translate3d(0, 0, 0);
 .basicSettingsLanguageTabButton.active, 
 .basicSettingsMediaFoldersTabButton.active,
 .basicSettingsPlaylistsTabButton.active,
-.basicSettingsRescanMediaTabButton.active {
+.basicSettingsMediaLibraryManagementTabButton.active,
+.mediaLibraryManagementReleaseTypesTabButton.active,
+.mediaLibraryManagementBrowseTabButton.active,
+.mediaLibraryManagementFiltersTabButton.active,
+.mediaLibraryManagementPlaylistsTabButton.active,
+
+.advancedSettingsMediaLibraryManagementTabButton.active,
+.advancedSettingsFileTypesTabButton.active,
+.basicSettingsRescanMediaTabButton.active,
+.basicSettingsSecurityTabButton.active,
+.formatSettingsArtworkTabButton.active,
+.formatSettingsGuessTagsTabButton.active,
+.interfaceSettingsDisplayTabButton.active,
+.interfaceSettingsFormatTabButton.active,
+.interfaceSettingsTimingTabButton.active  {
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -557,7 +620,7 @@ transform: translate3d(0, 0, 0);
 
 /* ---- Basic Settings Language Tab Start ---- */
 
-        .basicSettingsLanguageTab {
+        .basicSettingsLanguageTab, .advancedSettingsMediaLibraryManagementTab {
             display: block; /* Makes it so that Language tab is displayed first */ 
             background-color: #3A456D; /* Darker background for contrast */
             padding: 1em;
@@ -567,7 +630,7 @@ transform: translate3d(0, 0, 0);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 0 auto;
             max-width: 400px;
-
+            
         }
 
         /* Header styling */
@@ -643,9 +706,8 @@ transform: translate3d(0, 0, 0);
 
 
         /* ---- Basic Settings Language Tab Start ---- */
-        .stdedit
+    
 
-        /* ---- Basic Settings Language Tab End ---- */
 
         /* ---- Basic Settings Buttons Start ---- */
 
@@ -654,7 +716,15 @@ transform: translate3d(0, 0, 0);
         .basicSettingsMediaLibraryTabButton,
         .basicSettingsMediaFoldersTabButton,
         .basicSettingsPlaylistsTabButton,
-        .basicSettingsRescanMediaTabButton {
+        .mediaLibraryManagementBrowseTabButton,
+        .mediaLibraryManagementReleaseTypesTabButton,
+        .mediaLibraryManagementFiltersTabButton,
+        .advancedSettingsMediaLibraryManagementTabButton,
+        .advancedSettingsFileTypesTabButton,
+        .basicSettingsRescanMediaTabButton,
+        .basicSettingsSecurityTabButton,
+        .formatSettingsArtworkTabButton,
+        .formatSettingsGuessTagsTabButton {
             display: inline;
             background-color: #1b2444;
             border: none;
@@ -669,15 +739,64 @@ transform: translate3d(0, 0, 0);
         .basicSettingsMediaLibraryTabButton.active, 
         .basicSettingsMediaFoldersTabButton.active,
         .basicSettingsPlaylistsTabButton.active,
-        .basicSettingsRescanMediaTabButton.active {
+        .mediaLibraryManagementBrowseTabButton.active,
+        .mediaLibraryManagementReleaseTypesTabButton.active,
+        .mediaLibraryManagementFiltersTabButton.active,
+        .advancedSettingsMediaLibraryManagementTabButton.active,
+        .advancedSettingsFileTypesTabButton.active,
+        .basicSettingsRescanMediaTabButton.active,
+        .basicSettingsSecurityTabButton.active,
+        .formatSettingsArtworkTabButton.active,
+        .formatSettingsGuessTagsTabButton.active,
+        .interfaceSettingsDisplayTabButton.active,
+        .interfaceSettingsFormatTabButton.active,
+        .interfaceSettingsTimingTabButton.active  {
+
             background-color: #0456C6;
             border: none;
             border-radius: 0.5em;
             cursor: pointer;
             font-size: 0.7em;
         }
+
+
+        
         /* ---- Basic Settings Buttons End ---- */
 
+    /* Library Management tabs */
+.mediaLibraryManagementSettingsContent {
+    margin-top: 5%;
+}
+
+/* ------------ Browse Folders CSS (Rescan) ------------ */
+
+        .x-window {
+            background-color: #151d3a;
+            border-radius: 30px;
+        }
+
+        .x-window .x-window-body {
+            background-color: #273047;
+            border-radius: 30px;
+
+
+        }
+
+        #filesystembrowser {
+            background-color: #2d3a5d;
+            border-radius: 30px;
+
+        }
+
+        
+        .x-btn-text {
+            background-color: #1266db;
+            padding: 10%;
+        }
+        
+      
+
+    
         /* ----------- Basic Settings End ----------- */
 
 /* ---------------------- SAVE BUTTON ---------------------- */
@@ -702,7 +821,7 @@ transform: translate3d(0, 0, 0);
 }
 
 .saveSettings {
-    margin-left: 32%;
+    margin-top: 5%;
 }
 
 /* Hover and focus effects */
@@ -723,11 +842,22 @@ transform: translate3d(0, 0, 0);
 
 /* ---------------------- SAVE BUTTON END ---------------------- */
 
+/* File Format Conversions */
+.even {
+    background-color: #323d64 !important;
+}
 
 /* ------------------------------ Settings End ------------------------------ */
 
 
 /* --------------------------- Songs CSS start --------------------------- */
+
+.songsIframe {
+    width: 100%;
+    height: 220vh;
+}
+
+
 .browsedbListItem {
     background-color: #3A456D;
     border-radius: 8px;
@@ -830,7 +960,6 @@ transform: translate3d(0, 0, 0);
         width: 100%;
         height: 100%;
         z-index: 90;
-
     }
     /* Container that hold 'Home' and 'Settings' Button */
     .overallHeadersContainer {
@@ -893,6 +1022,12 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
+.basicSettingsSecurityTab,
+.formatSettingsArtworkTab,
+.formatSettingsGuessTagsTab,
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab 
 .saveSettings
 {
     margin: 0 auto;
@@ -1005,7 +1140,14 @@ transform: translate3d(0, 0, 0);
 .basicSettingsMediaLibraryTab, 
 .basicSettingsMediaFoldersTab, 
 .basicSettingsPlaylistsTab, 
-.basicSettingsRescanMediaTab
+.basicSettingsRescanMediaTab, 
+.basicSettingsSecurityTab,
+.formatSettingsArtworkTab,
+.formatSettingsGuessTagsTab
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab,
+.saveSettings
 {
     margin: 0 auto;
     margin-right: 30%;

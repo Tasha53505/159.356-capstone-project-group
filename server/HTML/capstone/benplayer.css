@@ -120,20 +120,6 @@ body {
     position: relative;
 }
 
-.bar {
-    width: 75%;
-    height: 6px;
-    background-color: #EFF8FC;
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-    align-self:end;
-    justify-self:center;
-    margin-left:5%;
-    margin-right: 5%;
-    margin-top: 3%;
-}
-
 .buttons {
     display: flex;
     align-items: center;
@@ -298,4 +284,88 @@ body {
 .maxtime {
     margin-bottom:2px;
     padding-right: 10%;
+}
+
+
+/* PROGRESS BAR */
+
+#playtimePanel{
+    width: 75%;
+    height: 30px;
+    overflow: hidden;
+    padding-left: 45px;
+    position: relative;
+    margin-top: 20px;
+    overflow: hidden;
+    align-self:end;
+    justify-self:center;
+}
+
+#ctrlPlaytime{
+    position: absolute;
+    top: 0px;
+}
+
+#ctrlRemainingTime{
+    right: 50px;
+    position: absolute;
+    top: 0px;
+}
+
+#ctrlProgress{
+    height: 15px;
+    margin: 0px 100px 0 40px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#ctrlProgress img{
+    height: 10px;
+    width: 5px;
+    background-image:url(html/images/progress.gif);
+    background-position-x: left;
+    background-position-y: top;
+    background-size: initial;
+    background-repeat: no-repeat;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+}
+
+#ctrlProgress img.progressFillLeft {
+    background-position-x: 0px;
+    background-position-y: -30px;
+    background-repeat: repeat-x;
+}
+
+#ctrlProgress img.progressIndicator {
+    width: 2px;
+    background-position-x: -3px;
+    background-position-y: -20px;
+}
+
+#ctrlProgress img.progressFillRight {
+    background-position-x: 0px;
+    background-position-y: -40px;
+    background-repeat: repeat-x;
+}
+
+#ctrlProgress img.progressRight {
+    width: 4px;
+    background-position-x: -1px;
+    background-position-y: -10px;
+}
+
+/* Small List for settings */
+.smallList{
+    font-size: 0.8em;
+    line-height: 1.2;
+    padding-left: 20px;
+    list-style-type: disc;
+    margin: 0;
+}
+.smallList li {
+    margin: 2px 0;
+    line-height: 1.2;
 }
