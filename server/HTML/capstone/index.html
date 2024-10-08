@@ -69,7 +69,10 @@
                                         <div class="advancedSettingsContent">                                            
                                         <div class="advancedSettingsTabs">                                        
                                             <button class="advancedSettingsMediaLibraryManagementTabButton active" data-tab="advancedSettingsMediaLibraryManagement">Advanced Media Library Management</button>
-                                            <button class="advancedSettingsFileTypesTabButton active" data-tab="advancedFileTypes">Advanced File Types</button>
+                                            <button class="advancedSettingsFileTypesTabButton" data-tab="advancedFileTypes">Advanced File Types</button>
+                                            <button class="advancedSettingsServerStatusTabButton" data-tab="advancedSettingsServerStatus">Logitech Media Server Status</button>
+                                            <button class="advancedSettingsNetworkTabButton" data-tab="advancedSettingsNetwork">Network</button>
+                                            <button class="advancedSettingsPerformanceTabButton" data-tab="advancedSettingsPerformance">Performance</button>
                                         </div>
                                             
                                         <div class="advancedSettingsMediaLibraryManagementTab active" id="advancedSettingsMediaLibraryManagement"> 
@@ -145,7 +148,7 @@
                                              
                                         </div>
 
-                                        <div class="advancedSettingsFileTypesTab active" id="advancedFileTypes"> 
+                                        <div class="advancedSettingsFileTypesTab" id="advancedFileTypes"> 
                                             <form action="" id="disableExtensionAudioForm">
                                                 [% WRAPPER settingGroup title="SETUP_DISABLEDEXTENSIONSAUDIO" desc="SETUP_DISABLEDEXTENSIONSAUDIO_DESC" %]
                                                     <input type="text"class="stdedit" name="disabledextensionsaudio" id="disabledextensionsaudio" value="[% disabledextensionsaudio | html %]" size="40">
@@ -1435,6 +1438,324 @@
 
 
                                         </div>
+
+                                        <div class="advancedSettingsServerStatusTab" id="advancedSettingsServerStatus">
+                                            [% BLOCK infoItem %]
+                                            	[% WRAPPER setting title=title %]
+                                            		[% FOREACH item IN items %]
+                                            			<div>[% item.name %]</div>
+                                            		[% END %]
+                                            	[% END %]
+                                            [% END %]
+
+                                            [% PROCESS infoItem title="SERVER_STATUS" items=server.items %]
+                                            [% PROCESS infoItem title="INFORMATION_MENU_PERL" items=perl.items %]
+
+                                            [% IF library; PROCESS infoItem title="INFORMATION_MENU_LIBRARY" items=library.items; END %]
+
+                                            [% IF onlinelibrary %]
+                                                [% FOREACH service IN onlinelibrary %]
+                                                    [% PROCESS infoItem title=service.name items=service.items %]
+                                                [% END %]
+                                            [% END %]
+
+                                            [% IF progress AND NOT simple %]
+                                            	[% WRAPPER setting title="SCANNER_PROGRESS" %]
+                                            		[% progress %]
+                                            		[% IF scanning && !abortScan %]
+                                            			<div id="abortscanlink"><br/>
+                                            				<a href="[% webroot %][% path %]?playerid=[% playerid | uri %]&amp;player=[% player | uri %]&amp;abortScan=1">[% "ABORT_SCAN" | string %]</a>[%# stringCOLON %] [%# scanning | string %]
+                                            			</div>
+                                            		[% END %]
+                                            	[% END %]
+                                            [% END %]
+
+                                            [% IF players %]
+                                            	[% WRAPPER setting title = "INFORMATION_MENU_PLAYER" %]
+                                            		<div class="prefDesc">[% "SERVER_STATUS_DESC" | string %]</div>
+                                            	[% END %]
+                                            	[% FOREACH client = players.items %]
+                                            		[% WRAPPER setting title = client.name %]
+                                            			[% FOREACH item IN client.web.items; item.key %]
+                                            				[% IF item.values.0 %]
+                                            					<div>[% item.keys.0 | string %][% stringCOLON %] [% item.values.0 %]</div>
+                                            				[% END %]
+                                            			[% END %]
+                                            		[% END %]
+                                            	[% END %]
+                                            [% END %]
+
+                                            [% UNLESS simple; WRAPPER setting title = "FOLDERS"; END; END %]
+                                            [% FOREACH item IN folders.web.items %]
+                                            	[% IF item.values.0 %]
+                                            		[% WRAPPER settingSection %]
+                                            			<div class="settingGroup">
+                                            				<div class="prefHead">[% IF simple %]<b>[% END %][% item.keys.0 | string %][% IF simple %]</b>[% END %]</div>
+                                            				<div class="prefs">[% item.values.0 %]</div>
+                                            			</div>
+                                            		[% END %]
+                                            	[% END %]
+                                            [% END %]
+
+                                            [% FOREACH item IN logs.web.items %]
+                                            	[% IF item.values.0 %]
+                                            		[% WRAPPER setting title="SETUP_DEBUG_${item.keys.0}_LOG" desc="SETUP_DEBUG_${item.keys.0}_LOG_DESC" %]
+                                            			<div class="prefDesc">
+                                            				[% UNLESS simple %]<a href="[% webroot %][% item.keys.0 | lower %].log" target="log">[% END %][% item.values.0 %][% UNLESS simple %]</a>
+                                            				(<a href="[% webroot %][% item.keys.0 | lower %].log?lines=100" target="log">100</a>,
+                                            				<a href="[% webroot %][% item.keys.0 | lower %].log?lines=500" target="log">500</a>,
+                                            				<a href="[% webroot %][% item.keys.0 | lower %].log?lines=1000" target="log">1000</a>
+                                            				[% "LINES" | string %],
+                                            				<a href="/[% item.keys.0 | lower %].log?full=1">[% "EVERYTHING" | string | lower %]</a>,
+                                            				<a href="/[% item.keys.0 | lower %].log?zip=1">[% "SETUP_LOG_ZIPPED" | string %]</a>)[% END %]
+                                            			</div>
+                                            		[% END %]
+                                            	[% END %]
+                                            [% END %]
+
+                                            [% FOREACH item = info %]
+                                            	[% UNLESS item.web.hide %]
+                                            		[% WRAPPER setting title=item.name %]
+                                            			[% IF item.type == 'redirect' && item.web.url %]
+                                            				<a href="[% webroot %][% item.web.url %]?player=[% player | uri %]" [% IF item.web.target %]target="[% item.web.target %]"[% END %]>
+                                            					[% (item.web.value || item.web.url) | html_line_break %]
+                                            				</a>
+                                            			[% ELSE %]
+                                            				[% item.web.value | html_line_break %]
+                                            			[% END %]
+                                            		[% END %]
+                                            	[% END %]
+                                            [% END %]
+
+                                            <div>&nbsp;</div>
+                                        </div>
+
+                                        <div class="advancedSettingsNetworkTab" id="advancedSettingsNetwork">
+                                            <form id="webProxyForm" action="">
+                                            [% WRAPPER setting title="SETUP_WEBPROXY" desc="SETUP_WEBPROXY_DESC" %]
+                                                <input type="text" class="stdedit" name="pref_webproxy" id="webproxy" value="[% prefs.pref_webproxy | html %]" size="40">
+                                            [% END %] 
+                                            </form>
+
+                                            <form id="portNumberForm" action="">
+                                            [% WRAPPER setting title="SETUP_HTTPPORT" desc="SETUP_HTTPPORT_DESC" %]
+                                                <input type="text" class="stdedit" name="pref_httpport" id="httpport" value="[% prefs.pref_httpport | html %]" size="15">
+                                            [% END %]
+                                            </form>
+
+                                            <form id="radioStationBufferSecondsForm" action="">
+                                                [% WRAPPER settingGroup title="SETUP_BUFFERSECS" desc="SETUP_BUFFERSECS_DESC" %]
+                                                <input type="text" class="stdedit" name="pref_bufferSecs" id="bufferSecs" value="[% prefs.pref_bufferSecs | html %]" size="15">
+                                                [% END %]
+                                            </form>
+
+                                            <form id="radioStationTimeoutForm" action="">
+                                                [% WRAPPER settingGroup title="SETUP_REMOTESTREAMTIMEOUT" desc="SETUP_REMOTESTREAMTIMEOUT_DESC" %]
+                                                <input type="text"class="stdedit" name="pref_remotestreamtimeout" id="remotestreamtimeout" value="[% prefs.pref_remotestreamtimeout | html %]" size="15">
+                                                [% END %]
+                                            </form>
+
+                                            <form id="maximumWMAStreamBitrateForm" action="">
+                                                [% WRAPPER settingGroup title="SETUP_MAXWMARATE" desc="SETUP_MAXWMARATE_DESC" %]
+			                                    <select class="stdedit" name="pref_maxWMArate" id="maxWMArate">
+			                                        [% FOREACH option = ['9999', '32', '64', '96', '128', '160', '192', '256', '320'] %]
+				                                    <option [% IF prefs.pref_maxWMArate == option %]selected [% END %]value="[% option | html %]">
+					                                [% IF option == 9999 %][% "NO_LIMIT" | string %][% ELSE %][% option %] [% 'KBPS' | string %][% END %]</option>
+			                                        [%- END -%]
+			                                    </select>
+		                                        [% END %]
+                                            </form>
+
+                                            <form id="maximumMP3StreamBitrateForm" action="">
+                                            [% IF prefs.exists('pref_syncStartDelay') %]
+			                                    [% WRAPPER settingGroup title="SETUP_SYNCSTARTDELAY" desc="SETUP_SYNCSTARTDELAY_DESC" %]
+				                                <input type="text"class="stdedit" name="pref_syncStartDelay" id="syncStartDelay" value="[% prefs.pref_syncStartDelay | html %]" size="15">
+			                                    [% END %]
+		                                    [% END %]
+                                            </form>
+
+                                            <form id="tcpReadMaximumForm" action="">
+                                            [% IF prefs.exists('pref_tcpReadMaximum') %]
+				                                [% WRAPPER settingGroup title="SETUP_TCPREADMAXIMUM" desc="" %]
+				                                	<input type="text" class="stdedit" name="pref_tcpReadMaximum" id="tcpReadMaximum" value="[% prefs.pref_tcpReadMaximum | html %]" size="15">
+				                                [% END %]
+			                                [% END %]
+                                            </form>
+
+                                            <form id="tcpWriteMaximumForm" action="">
+			                                [% IF prefs.exists('pref_tcpWriteMaximum') %]
+			                                	[% WRAPPER settingGroup title="SETUP_TCPWRITEMAXIMUM" desc="" %]
+			                                		<input type="text" class="stdedit" name="pref_tcpWriteMaximum" id="tcpWriteMaximum" value="[% prefs.pref_tcpWriteMaximum | html %]" size="15">
+			                                	[% END %]
+			                                [% END %]
+                                            </form>
+
+                                            <form id="udpChunkSizeForm" action="">
+			                                [% IF prefs.exists('pref_udpChunkSize') %]
+			                                	[% WRAPPER settingGroup title="SETUP_UDPCHUNKSIZE" desc="SETUP_UDPCHUNKSIZE_DESC" %]
+			                                		<input type="text" class="stdedit" name="pref_udpChunkSize" id="udpChunkSize" value="[% prefs.pref_udpChunkSize | html %]" size="15">
+			                                	[% END %]
+			                                [% END %]
+                                            </form>
+
+                                            <form id="streamingModeForm" action="">
+                                                [% WRAPPER setting title="SETUP_ENHANCEDHTTP" desc="SETUP_ENHANCEDHTTP_DESC" %]
+		                                        <select class="stdedit" name="pref_useEnhancedHTTP" id="useEnhancedHTTP">
+			                                        <option [% IF NOT prefs.pref_useEnhancedHTTP %]selected [% END %]value="0">[% 'SETUP_DISABLE_ENHANCEDHTTP' | getstring %]</option>
+			                                        <option [% IF prefs.pref_useEnhancedHTTP == 1 %]selected [% END %]value="1">[% 'SETUP_ENABLE_PERSISTENTHTTP' | getstring %]</option>
+			                                        <option [% IF prefs.pref_useEnhancedHTTP == 2 %]selected [% END %]value="2">[% 'SETUP_ENABLE_BUFFEREDHTTP' | getstring %]</option>
+		                                        </select>
+	                                            [% END %]
+                                            </form>
+                                        </div>
+
+                                        <div class="advancedSettingsPerformanceTab" id="advancedSettingsPerformance">
+                                            <form id="databaseMemoryConfigForm" action="">
+                                                [% WRAPPER setting title="SETUP_DBHIGHMEM" desc="SETUP_DBHIGHMEM_DESC" %]
+		                                        <select class="stdedit" name="pref_dbhighmem" id="dbhighmem">
+                                                
+		                                        	<option [% IF NOT prefs.pref_dbhighmem %]selected [% END %]value="0">[% 'SETUP_DBHIGHMEM_NORMAL' | getstring %]</option>
+		                                        	<option [% IF prefs.pref_dbhighmem == 1 %]selected [% END %]value="1">[% 'SETUP_DBHIGHMEM_HIGH' | getstring %]</option>
+		                                        	<option [% IF prefs.pref_dbhighmem == 2 %]selected [% END %]value="2">[% 'SETUP_DBHIGHMEM_MAX' | getstring %]</option>
+                                                
+		                                        </select>
+	                                            [% END %]
+                                            </form>
+
+                                            <form id="triggerScanOnPreferenceChangesForm" action="">
+                                                [% WRAPPER setting title="SETUP_SCAN_ON_PREF_CHANGE" desc="SETUP_SCAN_ON_PREF_CHANGE_DESC" %]
+	                                            	<select class="stdedit" name="pref_dontTriggerScanOnPrefChange" id="dontTriggerScanOnPrefChange">
+                                                    
+	                                            		<option [% IF NOT prefs.pref_dontTriggerScanOnPrefChange %]selected [% END %]value="0">[% 'SETUP_SCAN_ON_PREF_CHANGE_ON' | getstring %]</option>
+	                                            		<option [% IF prefs.pref_dontTriggerScanOnPrefChange %]selected [% END %]value="1">[% 'SETUP_SCAN_ON_PREF_CHANGE_OFF' | getstring %]</option>
+                                                    
+	                                            	</select>
+	                                            [% END %]
+                                            </form>
+
+                                            <form id="shuffleMethodForm" action="">
+                                                [% WRAPPER setting title="SETUP_SHUFFLE_METHOD" desc="" %]
+	                                            	<select class="stdedit" name="pref_useBalancedShuffle" id="useBalancedShuffle">
+	                                            		<option [% IF !prefs.pref_useBalancedShuffle %]selected[% END %] value="0">[% "SETUP_USE_FASTER_SHUFFLE" | string %]</option>
+	                                            		<option [% IF prefs.pref_useBalancedShuffle %]selected[% END %] value="1">[% "SETUP_USE_BALANCED_SHUFFLE" | string %]</option>
+	                                            	</select>
+	                                            [% END %]
+                                            </form>
+
+                                            <form id="libraryStatisticsForm" action="">
+                                                [% WRAPPER setting title="SETUP_DISABLESTATISTICS" desc="SETUP_DISABLESTATISTICS_DESC" %]
+	                                            	<select class="stdedit" name="pref_disableStatistics" id="disableStatistics">
+                                                    
+	                                            		<option [% IF NOT prefs.pref_disableStatistics %]selected [% END %]value="0">[% 'SETUP_ENABLE_STATISTICS' | getstring %]</option>
+	                                            		<option [% IF prefs.pref_disableStatistics %]selected [% END %]value="1">[% 'SETUP_DISABLE_STATISTICS' | getstring %]</option>
+                                                    
+	                                            	</select>
+	                                            [% END %]
+                                            </form>
+
+                                            <form id="artworkPreCachingForm" action="">
+                                                [% WRAPPER setting title="SETUP_PRECACHEARTWORK" desc="SETUP_PRECACHEARTWORK_DESC" %]
+	                                            	<select class="stdedit" name="pref_precacheArtwork" id="precacheArtwork">
+                                                    
+	                                            		<option [% IF prefs.pref_precacheArtwork == 1 %]selected [% END %]value="1">[% 'SETUP_PRECACHEARTWORK_ENABLED' | getstring %]</option>
+	                                            		<option [% IF NOT prefs.pref_precacheArtwork %]selected [% END %]value="0">[% 'SETUP_PRECACHEARTWORK_DISABLED' | getstring %]</option>
+                                                    
+	                                            	</select>
+	                                            [% END %]
+                                            </form>
+
+                                            <form id="customArtSpecsForm" action="">
+                                            [% IF pref_customArtSpecs.keys.size; WRAPPER setting title="SETUP_PRECACHEARTWORK_CUSTOM_SPECS" desc="" %]
+	                                        	<p>[% stringDELETE %]</p>
+                                                                                
+	                                        	<style>
+	                                        		.specs td { padding: 5px 10px 0 0; }
+	                                        	</style>
+                                        
+	                                        	<table border="0" class="specs">
+	                                        		[% FOREACH pref = pref_customArtSpecs %]
+	                                        		<tr>
+	                                        			<td><input name="delete" type="checkbox" value="[% pref.key | html %]" id="[% pref.key | html %]"></td>
+	                                        			<td><label for="[% pref.key | html %]">[% pref.key | html %]</label></td>
+	                                        			<td><label for="[% pref.key | html %]">[% pref.value | html %]</label></td>
+	                                        		</tr>
+	                                        		[% END %]
+                                                
+	                                        	</table>
+	                                        [% END; END %]
+                                            </form>
+                                            
+                                            <form id="artworkResizingForm" action="">
+	                                        [% WRAPPER setting title="SETUP_IMAGEPROXY" desc="SETUP_IMAGEPROXY_DESC" %]
+	                                        	<select class="stdedit" name="pref_useLocalImageproxy" id="useLocalImageproxy" [% IF imageproxies.size <= 1 %]disabled[% END %]>
+                                                
+	                                        		[% FOREACH id = imageproxies.keys.sort %]
+	                                        		<option [% IF prefs.pref_useLocalImageproxy == id %]selected [% END %]value="[% id | html %]">[% imageproxies.$id %]</option>
+	                                        		[% END %]
+                                                
+	                                        	</select>
+	                                        [% END %]
+                                            </form>
+
+	                                        [% IF prioritySettings; WRAPPER settingSection %]
+                                                <form id="serverPriorityForm" action="">
+	                                        	[% WRAPPER settingGroup title="SETUP_SERVERPRIORITY" desc="SETUP_SERVERPRIORITY_DESC" %]
+	                                        		<select class="stdedit" name="pref_serverPriority" id="serverPriority">
+                                                    
+	                                        		[% option = "" %]
+	                                        		<option [% IF prefs.pref_serverPriority == option %]selected [% END %]value="[% option | html %]">[% option %] [% options.$option | getstring %]</option>
+	                                        		[% FOREACH option = [-20..20] %]
+	                                        			<option [% IF prefs.pref_serverPriority == option %]selected [% END %]value="[% option | html %]">[% option %] [% IF options.$option; options.$option | getstring; END %]</option>
+	                                        		[%- END -%]
+                                                    
+	                                        		</select>
+	                                        	[% END %]
+                                                </form>
+                                                
+                                                <form id="scannerPriorityForm" action="">
+	                                        	[% WRAPPER settingGroup title="SETUP_SCANNERPRIORITY" desc="SETUP_SCANNERPRIORITY_DESC" %]
+	                                        		<select class="stdedit" name="pref_scannerPriority" id="scannerPriority">
+                                                    
+	                                        		[% option = "" %]
+	                                        		<option [% IF prefs.pref_scannerPriority == option %]selected [% END %]value="[% option | html %]">[% option %] [% options.$option | getstring %]</option>
+	                                        		[% FOREACH option = [-20..20] %]
+	                                        			<option [% IF prefs.pref_scannerPriority == option %]selected [% END %]value="[% option | html %]">[% option %] [% IF options.$option; options.$option | getstring; END %]</option>
+	                                        		[%- END -%]
+                                                    
+	                                        		</select>
+	                                        	[% END %]
+                                                </form>
+	                                        [% END; END %]
+                                                
+                                            <form id="autoRescanForm" action="">
+	                                        [% IF prefs.exists('pref_autorescan') %]
+	                                        	[% WRAPPER setting title="SETUP_AUTO_RESCAN" desc="SETUP_AUTO_RESCAN_DESC" %]
+	                                        		<select class="stdedit" name="pref_autorescan" id="autorescan">
+	                                        			<option [% IF prefs.pref_autorescan == 1 %]selected="selected" [% END %]value="1">
+	                                        				[% 'SETUP_AUTO_RESCAN_ENABLE' | string %]
+	                                        			</option>
+	                                        			<option [% IF !prefs.pref_autorescan %]selected="selected" [% END %]value="0">
+	                                        				[% 'SETUP_AUTO_RESCAN_DISABLE' | string %]
+	                                        			</option>
+	                                        		</select>
+	                                        	[% END %]
+	                                        [% END %]
+                                            </form>
+                                                
+                                            <form id="autoRescanStatIntervalForm" action="">
+	                                        [% IF prefs.exists('pref_autorescan_stat_interval') %]
+	                                        	[% WRAPPER setting title="SETUP_AUTO_RESCAN_STAT_INTERVAL" desc="SETUP_AUTO_RESCAN_STAT_INTERVAL_DESC" %]
+	                                        		<input type="text"class="stdedit" name="pref_autorescan_stat_interval" id="autorescan_stat_interval" value="[% prefs.pref_autorescan_stat_interval | html %]" size="15">
+	                                        	[% END %]
+	                                        [% END %]
+                                            </form>
+                                                
+                                            <form id="maxPlaylistLengthForm" action="">
+	                                        [% WRAPPER setting title="SETUP_MAXPLAYLISTLENGTH" desc="SETUP_MAXPLAYLISTLENGTH_DESC" %]
+	                                        	<input type="text" class="stdedit" name="pref_maxPlaylistLength" id="pref_maxPlaylistLength" value="[% prefs.pref_maxPlaylistLength | html %]" size="15">
+	                                        [% END %]
+                                            </form>
+                                        </div>
                                     </div>                            
                                 </div>
                            
@@ -1447,7 +1768,7 @@
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
-                                        <button class="basicSettingsSecurityTabButton" data-tab="security">Security</button>
+                                        <button class="basicSettingsTabButton" data-tab="security">Security</button>
                                     </div>
                           
                                     <div class="settingsContent">

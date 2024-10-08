@@ -625,12 +625,18 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const advancedSettingsButtonClasses  = [
             '.advancedSettingsMediaLibraryManagementTabButton',
             '.advancedSettingsFileTypesTabButton',
+            '.advancedSettingsServerStatusTabButton',
+            '.advancedSettingsNetworkTabButton',
+            '.advancedSettingsPerformanceTabButton'
         ];
         const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
 
         const advancedSettingsContentClasses = [
-            '#advancedSettingsMediaLibraryManagement', // 
-            '#advancedFileTypes', //
+            '.advancedSettingsMediaLibraryManagementTab', // 
+            '.advancedSettingsFileTypesTab',
+            '.advancedSettingsServerStatusTab',
+            '.advancedSettingsNetworkTab', //
+            '.advancedSettingsPerformanceTab'
         ];
         const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
 
