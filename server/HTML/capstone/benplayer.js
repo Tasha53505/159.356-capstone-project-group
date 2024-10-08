@@ -180,33 +180,41 @@ document.getElementById('shuffleButton').addEventListener('click', function(){
 
 // ----------------------------------------- //
 
-
-// STEVES CODE
+// -- RIGHT PANEL -- //
 infoPanelBtn.addEventListener('click', function () {
-    if (!infoPanelBtn.classList.contains('active')){
-        // hide left bar
-        let overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
-        let animationBtn = document.querySelector('.animationBtn');
-        let overallContainer = document.querySelector('.overallContainer');
-        overallPlaylistContainer.classList.add('hidden');
-        animationBtn.classList.add('hidden');
-        setTimeout(function() {
-            overallContainer.style.display = 'none';
-        }, 500); // Wait for the animation to finish before hiding
-    
-        // hide bottom bar
-        let MusiclistContainer = document.querySelector('.MusiclistContainer');
-        let animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
-        MusiclistContainer.classList.remove('show');
-        animationMusiclistBtn.style.bottom = '0';
-    }
-    
-    if (!(infoPanelBtn.classList.contains('hidden')) && (artist)) {
+    if(artist){
         infoPanel.classList.toggle('active');
-    } else if (!(infoPanelBtn.classList.contains('hidden')) && (!artist)) {
-        artistPanel.classList.toggle('active');
     } else {
-        //do nothing
+        artistPanel.classList.toggle('active');
     }
 });
+
+// STEVES CODE
+// infoPanelBtn.addEventListener('click', function () {
+//     if (!infoPanelBtn.classList.contains('active')){
+//         // hide left bar
+//         let overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
+//         let animationBtn = document.querySelector('.animationBtn');
+//         let overallContainer = document.querySelector('.overallContainer');
+//         overallPlaylistContainer.classList.add('hidden');
+//         animationBtn.classList.add('hidden');
+//         setTimeout(function() {
+//             overallContainer.style.display = 'none';
+//         }, 500); // Wait for the animation to finish before hiding
+    
+//         // hide bottom bar
+//         let MusiclistContainer = document.querySelector('.MusiclistContainer');
+//         let animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
+//         MusiclistContainer.classList.remove('show');
+//         animationMusiclistBtn.style.bottom = '0';
+//     }
+    
+//     if (!(infoPanelBtn.classList.contains('hidden')) && (artist)) {
+//         infoPanel.classList.toggle('active');
+//     } else if (!(infoPanelBtn.classList.contains('hidden')) && (!artist)) {
+//         artistPanel.classList.toggle('active');
+//     } else {
+//         //do nothing
+//     }
+// });
 

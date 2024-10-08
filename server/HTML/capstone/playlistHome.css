@@ -18,8 +18,12 @@
     margin-top: 0.5em;
 } */
 
+.musicInfoPanel {
+    float: right;
+}
+
 .overallContainer {
-     width: auto; /* Sticks with the animation panel */
+    width: auto; /* Sticks with the animation panel */
     height: 100vh;
     display: flex;
     position: relative;
