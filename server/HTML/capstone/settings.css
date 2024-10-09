@@ -1,0 +1,35 @@
+/* Styling for the 'Save Settings' button */
+.stdclick {
+    text-align: center;
+    margin-top: 1em;
+    background-color: #0456C6; 
+    color: #ecf0f1; /* Light text color to match the theme */
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em 0.7em;
+    font-size: 0.6em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+/* Hover and focus effects */
+.stdclick:hover{
+    background-color: #1266db; /* Slightly lighter blue on hover/focus */
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+    outline: none;
+}
+
+.stdclick:active {
+    background-color: #093777; /* Slightly lighter blue on hover/focus */
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+    outline: none;
+}
+
+/* Disabled button styling */
+.stdclick:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+    box-shadow: none;
+}

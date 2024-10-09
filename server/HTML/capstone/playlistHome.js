@@ -979,15 +979,101 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let selectedLanguage = document.getElementById("languageSelect").value; 
 
+    // security page
+    let passwordProtection
+    let username
+    let password
+    let blockIncomingConnection
+    let allowedIPAddresses
+    let csrfProtectionLevel
+    let corsAllowedHosts
+    let insecureHTTPS = 0
+    const securityIframe = document.getElementById('securityIframe');
+    securityIframe.onload = function() {
+        const bodyContent = securityIframe.contentDocument.body.innerHTML;
+        const contentDiv = document.getElementById('securityInnerHTML')
+        contentDiv.innerHTML = bodyContent
 
+        // console.log(securityIframe)
+
+        passwordProtection = document.getElementById("authorize").value; 
+        username = document.getElementById("username").value;
+        password = document.getElementById("password").value;
+        blockIncomingConnection = document.getElementById("filterHosts").value;
+        allowedIPAddresses = document.getElementById("allowedHosts").value;
+        csrfProtectionLevel = document.getElementById("csrfProtectionLevel").value;
+        corsAllowedHosts = document.getElementById("corsAllowedHosts").value;
+
+        if (document.getElementById("insecureHTTPS"))
+            insecureHTTPS = document.getElementById("insecureHTTPS").value;
+    }
+    securityIframe.src = 'settings/server/security.html';
+
+    
 
     // Event delegation for click events
     document.body.addEventListener('click', function(e) {
+        // console.log('clicked', e)
         // Handle language selection change
+        let currentActivePage = 'Language'
+
+        // language selection
         if (e.target && e.target.id === "languageSelect") {
             selectedLanguage = e.target.value; // Update variable on change
             console.log("Language select changed to (languageSelect statement):", selectedLanguage);
         }
+
+
+
+        // security selections
+        function handleInput (type, value) {
+            // console.log(type, e.target.value)
+            switch (type) {
+                case 'username': 
+                    username = value
+                    break
+                case 'password': 
+                    password = value
+                    break
+                case 'allowedHosts': 
+                    allowedIPAddresses = value
+                    break
+                case 'corsAllowedHosts':
+                    corsAllowedHosts = value
+                    break
+            }
+        }
+
+        if (e.target && e.target.id === "authorize") {
+            passwordProtection = e.target.value;
+            console.log("authorize change to ", passwordProtection);
+        }
+        if (e.target && e.target.id === "username") {
+            e.target.removeEventListener('input', handleInput)
+            e.target.addEventListener('input', (e) => handleInput('username', e.target.value))
+        }
+        if (e.target && e.target.id === "password") {
+            e.target.removeEventListener('input', handleInput)
+            e.target.addEventListener('input', (e) => handleInput('password', e.target.value))
+        }
+        if (e.target && e.target.id === "filterHosts") {
+            blockIncomingConnection = e.target.value;
+        }
+        if (e.target && e.target.id === "allowedHosts") {
+            e.target.removeEventListener('input', handleInput)
+            e.target.addEventListener('input', (e) => handleInput('allowedHosts', e.target.value))
+        }
+        if (e.target && e.target.id === "csrfProtectionLevel") {
+            csrfProtectionLevel = e.target.value;
+        }
+        if (e.target && e.target.id === "corsAllowedHosts") {
+            e.target.removeEventListener('input', handleInput)
+            e.target.addEventListener('input', (e) => handleInput('corsAllowedHosts', e.target.value))
+        }
+        if (e.target && e.target.id === "insecureHTTPS") {
+            insecureHTTPS = e.target.value;
+        }
+
 
         // Check if the test button was clicked
         if (e.target && e.target.id === 'testButton') {
@@ -998,13 +1084,31 @@ document.addEventListener("DOMContentLoaded", function() {
         if (e.target && e.target.id === 'saveSettings') {
             e.preventDefault(); // Prevent default behavior
 
+            // check active page
+            const buttons = document.querySelectorAll('.basicSettingsTabs button');
+            // console.log(buttons)
+            buttons.forEach(button => {
+                if (button.classList.contains('active')) {
+                    // console.log('Active button found:', button);
+                    currentActivePage = button.textContent
+                }
+            });
+
             console.log("Save Settings BUTTON CLICKED");
             console.log("Selected language inside saveSettings:", selectedLanguage); // Log the selected language
 
             // Send a JSON-RPC request to update the language in the server.prefs file
-            updateLanguageSetting(selectedLanguage);  
+            console.log("current active page", currentActivePage)
+
+            switch (currentActivePage) {
+                case 'Language':
+                    updateLanguageSetting(selectedLanguage);
+                    break
+                case 'Security':
+                    updateSecuritySetting(passwordProtection, username, password, blockIncomingConnection, allowedIPAddresses, csrfProtectionLevel, corsAllowedHosts, insecureHTTPS)
+                    break
+            }
             
-        
         }
 
 
@@ -1077,7 +1181,9 @@ function updateMediaDirSetting(folderPath) {
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log(response.json())
+    })
     .then(data => {
         console.log("Media directory updated to:", data);
     })
@@ -1086,7 +1192,82 @@ function updateMediaDirSetting(folderPath) {
     });
 }
 
-// --------------------------------  Playlists Directory folder --------------------------------
+// ------------- Security selection  -------------
+function updateSecuritySetting(passwordProtection, username, password, blockIncomingConnection, allowedIPAddresses, csrfProtectionLevel, corsAllowedHosts, insecureHTTPS) { 
+    // console.log("now update ",passwordProtection, username, password, blockIncomingConnection, allowedIPAddresses, csrfProtectionLevel, corsAllowedHosts, insecureHTTPS)
+
+    async function updateSecurityData (data) {
+        fetch("<http:localhost:9000>/capstone/jsonrpc.js", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(async (response) => {
+            console.log(await response.json())
+        })
+        .then(data => {
+            console.log("Security updated:", data);
+        })
+        .catch(error => {
+            console.error("Error updating:", error);
+        });
+    }
+
+    // console.log('settingData', settingData)
+    const passwordProtectionData = {
+        id: 2,
+        method: "slim.request",
+        params: [0, ["pref", "authorize", passwordProtection]] 
+    };
+    updateSecurityData (passwordProtectionData)
+    const usernameData = {
+        id: 2,
+        method: "slim.request",
+        params: [0, ["pref", "username", username]] 
+    };
+    updateSecurityData (usernameData)
+    const passwordData = {
+        id: 2,
+        method: "slim.request",
+        params: [0, ["pref", "password", password]] 
+    };
+    updateSecurityData (passwordData)
+    const blockIncomingConnectionData = {
+        id: 2,
+        method: "slim.request",
+        params: [0, ["pref", "filterHosts", blockIncomingConnection]] 
+    };
+    updateSecurityData (blockIncomingConnectionData)
+    const allowedIPAddressesData = {
+        id: 2,
+        method: "slim.request",
+        params: [0, ["pref", "allowedHosts", allowedIPAddresses]] 
+    };
+    updateSecurityData (allowedIPAddressesData)
+    const csrfProtectionLevelData = {
+        id: 2,
+        method: "slim.request",
+        params: [0, ["pref", "csrfProtectionLevel", csrfProtectionLevel]] 
+    };
+    updateSecurityData (csrfProtectionLevelData)
+    const corsAllowedHostsData = {
+        id: 2,
+        method: "slim.request",
+        params: [0, ["pref", "corsAllowedHosts", corsAllowedHosts]] 
+    };
+    updateSecurityData (corsAllowedHostsData)
+    const insecureHTTPSData = {
+        id: 2,
+        method: "slim.request",
+        params: [0, ["pref", "insecureHTTPS", insecureHTTPS]] 
+    };
+    updateSecurityData (insecureHTTPSData).then(() => {
+        alert("Settings Saved!")
+    })
+    
+}
 
 function playlistsDirectoryForm(form) {
     console.log("playList Direrctor button clicked");
