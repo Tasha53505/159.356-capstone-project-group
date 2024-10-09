@@ -119,5 +119,68 @@ Documented issue here: https://github.com/Tasha53505/159.356-capstone-project-gr
 (Specifically for the rescan button) - but this will help in general, is that `C:` is NOT a valid path, it needed to be `C/` --> Also, I needed to format it so that it was a 2D Array
    ` const formattedPath = [folderPath];`  and `const updatedData = data.replace(/mediadirs:\s*\[.*?\]/, `mediadirs: ["${newMediaDir}"]`);`
 
+----------------------------------------
+## Notes about JSON RPC
+https://lyrion.org/reference/cli/using-the-cli/#jsonrpcjs --> Documentation is incredibly helpful
+- From what I've found and doing research, the drawback from JSON RPC is not being able to send multiple requests at one time, results in an error. Perl would have been able to do this
+- Make sure if you're dealing with file paths that they're correct.
+- 0 can be used as a placeholder for playerID --> if the command your sending supports it.
+
+-------------------------------------
+## Generating Songs
+The folder menu is created by
+Slim::Menu::BrowseLibrary::_bmf
+which gets the folder data with a 'musicfolder' request
+which is dispatched by Slim::Control::Request
+which calls Slim::Control::Queries::mediafolderQuery
+
+(Note: bmf = browse media folder)
+-------------------------------------
+## Selenium / Jest for testing
+---
+## Jest
+- **Documentation: ** https://jestjs.io/docs/getting-started
+- Installed Jest with `npm install --save-dev jest`
+- and `npm install --save-dev jest @testing-library/jest-dom @testing-library/dom` --> as I'm hevaily using the DOM
+-  Added to _package.json_
+    ```
+    "scripts": {
+          "test": "jest"
+    }
+    ```
+- Tests in `__tests__` folder
+### What tests have been written with Jest:
+- Accordion Panel Tests
+- Songs Left Panel test
+- Artists left panel test
+- Albums Left Panel Test
+- Basic Settings Language
+- Basic Settings Media Folders directory
+- Basic Settings Rescan button
+- Basic Settings Playlists Folder
+- Behaviour Settings Browse Artists
+- Behaviour Settings Release Types
+- Behaviour Settings Filters
+- Advanced File Types
+----
+## Selenium
+- `npm install selenium-webdriver`
+- `npm install mocha chai`
+- `npm install chromedriver`
+
+- Install the Extension for your browser. --> https://www.selenium.dev/downloads/
+- Checkout documentation for YOUR [specific browser](https://www.selenium.dev/documentation/webdriver/browsers/)
+- Once Selenum tests are written inside "selenium-test" folder --> make sure the extension is `.mjs`
+- Run command `npx mocha test.js` 
+
+### What tests have been written with Selenium:
+- I have mainly just automated the process with of clicking through the entire left panel to make sure everything functions correctly. This was especially useful for tiny code changes - with a click of a button it reruns the whole test
+
+
+
+---
+## Left To-do
+- Plugins
+- Plugins Settings
 
 

@@ -66,35 +66,1377 @@
 
 
                                     <div class="advancedSettingsPlugin">
-                                        <!-- [% PROCESS settings/header.html %]  -->
-                                        <div class="advancedSettingsContent">
-                                            [% "SETUP_GROUP_PLUGINS" | string %]
-                                            [% (failsafe ? "SETUP_PLUGINS_SAFEMODE" : "SETUP_GROUP_PLUGINS_DESC") | string %]
-                                            [% FOREACH plugin = sortedPlugins %]
-                                            [% name = plugins.$plugin.name %]
-                                            [% version = plugins.$plugin.version %]
-                                            [% enforce = plugins.$plugin.enforce || plugins.$plugin.errorDesc %]
-                                            [% settings = failsafe && !enforce ? '' : plugins.$plugin.optionsURL %]
-                                            [% enabled = pluginState.$plugin %]
-                                            [% title = BLOCK %]
-                                            [% name | getstring %]
-                                            [% IF version %](v[% version %])[% END %]
-                                            [% END %]
-                                            [% WRAPPER setting desc = plugins.$plugin.description %]
-                                            [% IF plugins.$plugin.errorDesc %]
-                                            [% plugins.$plugin.errorDesc %]
-                                            [% ELSE %]
-                                            [% PROCESS pluginLink %]
-                                            [% IF plugins.$plugin.opType %]
-                                            ([% "SETUP_GROUP_PLUGINS_NEEDS_RESTART" | string %])
-                                            [% END %]
-                                            [% END %]
-                                            [% END %]
-                                            [% END %]
+                                        <div class="advancedSettingsContent">                                            
+                                        <div class="advancedSettingsTabs">                                        
+                                            <button class="advancedSettingsMediaLibraryManagementTabButton active" data-tab="advancedSettingsMediaLibraryManagement">Advanced Media Library Management</button>
+                                            <button class="advancedSettingsFileTypesTabButton active" data-tab="advancedFileTypes">Advanced File Types</button>
                                         </div>
-                                
-                                        <!-- [% PROCESS settings/footer.html %] -->
-                                    </div>
+                                            
+                                        <div class="advancedSettingsMediaLibraryManagementTab active" id="advancedSettingsMediaLibraryManagement"> 
+                                                <h2>MP3 Tag Format</h2>
+
+
+                                                <form id="tagFormatForm"  action="">
+                                                    <div class="prefDesc hiddenDesc">The MP3 tag format does not provide a standard way of defining an Album Artist.  Some MP3 tagging tools use the TPE2 field for Album Artist (iTunes, Winamp, Windows Media Player) while others may use it for the intended meaning of "Band/orchestra".  Select the meaning you would like Logitech Media Server to use.  Changing this setting will start a rescan of your music library.</div>
+                                                    <input type="radio" name="pref_useTPE2AsAlbumArtist" id="pref_useTPE2AsAlbumArtist0" value="0">
+                                                    <label for="pref_useTPE2AsAlbumArtist0" class="stdlabel">Treat TPE2 MP3 tag as Band</label><br>
+                                                    <input type="radio" name="pref_useTPE2AsAlbumArtist" id="pref_useTPE2AsAlbumArtist1" value="1" checked="checked">
+                                                    <label for="pref_useTPE2AsAlbumArtist1" class="stdlabel">Treat TPE2 MP3 tag as Album Artist</label><br>
+                                                    <input name="pref_useTPE2AsAlbumArtist" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="tagFormatFormId" onclick="tagFormatForm(this.form); return false;" value="Change Tag format">
+                                                </form>
+
+
+
+
+                                                <h2>Naming Compilation Change</h2>
+                                                <form action="" id="changeCompilationNameForm">
+                                                <!-- variousArtists -->
+                                                <div class="prefs">
+                                                    <div class="prefDesc">When compilation albums are grouped together, they appear under "Various Artists" by default.  You can change that name below.</div>
+                                                    <input type="text" class="stdedit" name="pref_variousArtistsString" id="variousArtistsString" value="Yes" size="40" placeholder="Various Artists">
+                                                &nbsp;</div>
+                                                <input name="pref_variousArtistsString" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="changeCompilationNameFormId" onclick="changeCompilationNameForm(this.form); return false;" value="Change Compilation Name">
+
+                                            </form>
+                                            
+                                                <form action="" id="searchWithinWordForm">
+                                                    [% WRAPPER setting title="SETUP_SEARCHSUBSTRING" desc="SETUP_SEARCHSUBSTRING_DESC"%]
+                                                    <select class="stdedit" name="pref_searchSubString" id="searchSubString">
+
+                                                        <option value="0">Search Beginning of Words</option>
+                                                        <option  selected value="1">Search Within Words</option>
+                                            
+                                                    </select>
+                                                    <input name="saveSearchSettings" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="searchWithinWordFormId" onclick="searchWithinWordForm(this.form); return false;" value="Save Search Settings">
+
+                                                [% END %]
+                                                 </form>
+                                                
+                                                 <form action="" id="ignoreArticlesForm">
+                                                    <div class="prefDesc hiddenDesc">A list of articles ("the", "les", "los", etc.) to ignore at the beginning of artist, song or album names when sorting. Separate multiple articles by spaces or leave this list blank to disable this behavior.  Changing this setting will start a rescan of your music library.</div>
+                                                    <input type="text" class="stdedit" name="pref_ignoredarticles" id="ignoredarticles" value="The El La Los Las Le Les" size="40">
+
+                                                <input name="saveIgnoredArticles" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreArticlesFormId" onclick="ignoreArticlesForm(this.form); return false;" value="Save Ignored Articles Settings">
+
+                                                 </form>
+
+
+                                                 <form action="" id="skipSentinelFileNameForm">
+                                                  
+                                                    [% WRAPPER setting title="SETUP_SKIPSENTINEL" desc="SETUP_SKIPSENTINEL_DESC" %]
+                                                    <input type="text" class="stdedit" name="pref_skipsentinel" id="skipsentinel" value="[% prefs.pref_skipsentinel | html %]" size="40">
+                                                    <input name="savveSentinelFileName" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="skipSentinelFileNameId" onclick="skipSentinelFileNameForm(this.form); return false;" value="Skip Sentinel File Name">
+
+                                                    [% END %]
+                                            
+                                                 </form>
+                                             
+
+
+                                                <form action="" id="seperatorMultipleItemsTagsForm">
+                                                	[% WRAPPER setting title="SETUP_SPLITLIST" desc="SETUP_SPLITLIST_DESC"%]
+                                                        <input type="text"class="stdedit" name="pref_splitList" id="splitList" value="[% prefs.pref_splitList | html %]" size="40">
+                                                        <input name="seperatorMultipleItemsTags" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="skipSentinelFileNameId" onclick="seperatorMultipleItemsTagsForm(this.form); return false;" value="Save Seperator for Multiple Items in tags">
+
+                                                    [% END %]
+                                               
+
+                                                </form>
+                                             
+                                        </div>
+
+                                        <div class="advancedSettingsFileTypesTab active" id="advancedFileTypes"> 
+                                            <form action="" id="disableExtensionAudioForm">
+                                                [% WRAPPER settingGroup title="SETUP_DISABLEDEXTENSIONSAUDIO" desc="SETUP_DISABLEDEXTENSIONSAUDIO_DESC" %]
+                                                    <input type="text"class="stdedit" name="disabledextensionsaudio" id="disabledextensionsaudio" value="[% disabledextensionsaudio | html %]" size="40">
+                                                    <input name="advancedFilters" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="disabledextensionsaudioId" onclick="disableExtensionAudioForm(this.form); return false;" value="Disable Specific Audio File Extensions">
+                                                  [% END %]
+                                            </form>
+
+
+                                            <form action="" id="disableExtensionPlaylistForm">
+                                                [% WRAPPER settingGroup title="SETUP_DISABLEDEXTENSIONSPLAYLIST" desc="SETUP_DISABLEDEXTENSIONSPLAYLIST_DESC" %]
+                                                <input type="text"class="stdedit" name="disabledextensionsplaylist" id="disabledextensionsplaylist" value="[% disabledextensionsplaylist | html %]" size="40">
+                                                    <input name="advancedFilters" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="disabledextensionsplaylistId" onclick="disableExtensionPlaylistForm(this.form); return false;" value="Disable Specific Playlist File Extensions">
+                                                  [% END %]
+                                            </form>
+
+                                            <form action="" id="checkBoxFileFormatForm">
+                                                [% WRAPPER setting title="SETUP_GROUP_FORMATS_CONVERSION" desc="SETUP_GROUP_FORMATS_CONVERSION_DESC" %]
+                                                <input type="checkbox" name="pref_prioritizeNative" id="prioritizeNative" [% IF prefs.pref_prioritizeNative %] checked="1" [% END %] />
+                                                <label for="prioritizeNative">[% "SETUP_FORMATS_PREFER_NATIVE" | string %]</label>
+                                                <input name="advancedFiltersCheckbox" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="checkBoxFileFormatFormId" onclick="checkBoxFileFormatForm(this.form); return false;" value="Prioritze File Format Conevrsion">
+                                                [% END %]
+
+                                            </form>
+
+                                            <form action="" id="fileFormatConversionsForm">
+                                                <div class="settingSection">
+                                                    <table border="0" cellspacing="0">
+                                                        <tbody><tr><th>File Format</th><th>Stream Format&nbsp;&nbsp;</th><th>From</th><th>Decoder</th></tr>                                
+                                                                <tr style="height: 5px;"><td class="even" colspan="3" style="background-color: #3A456D;"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3" style="background-color: #3A456D;"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">AAC</td>
+                                                
+                                                            <td class="odd"><label for="aac-aac-*-*" class="stdlabel">AAC</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="aac-aac-*-*" id="aac-aac-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="aac-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="aac-flc-*-*" id="aac-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/flac">faad/flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="aac-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="aac-mp3-*-*" id="aac-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/lame">faad/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="aac-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="aac-pcm-*-*" id="aac-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad">faad</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn" style="background-color: #3A456D;">AIFF</td>
+                                                
+                                                            <td class="even"><label for="aif-aif-*-*" class="stdlabel">AIFF</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="aif-aif-*-*" id="aif-aif-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="aif-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="aif-flc-*-*" id="aif-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="flac/sox">flac/sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="aif-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="aif-mp3-*-*" id="aif-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="lame">lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="aif-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(I, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="aif-pcm-*-*" id="aif-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">Apple Lossless</td>
+                                                
+                                                            <td class="odd"><label for="alc-alc-*-*" class="stdlabel">Apple Lossless</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="alc-alc-*-*" id="alc-alc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="alc-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="alc-flc-*-*" id="alc-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/sox">faad/sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="alc-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="alc-mp3-*-*" id="alc-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/lame">faad/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="alc-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="alc-pcm-*-*" id="alc-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad">faad</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">Apple Lossless leading audio</td>
+                                                
+                                                            <td class="even"><label for="alcx-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="alcx-flc-*-*" id="alcx-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/sox">faad/sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="alcx-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="alcx-mp3-*-*" id="alcx-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/lame">faad/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="alcx-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="alcx-pcm-*-*" id="alcx-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad">faad</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">Monkey's Audio</td>
+                                                
+                                                            <td class="odd"><label for="ape-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ape-flc-*-*" id="ape-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="mac/flac">mac/flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="ape-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ape-mp3-*-*" id="ape-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="mac/lame">mac/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="ape-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ape-pcm-*-*" id="ape-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="mac">mac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">DFF</td>
+                                                
+                                                            <td class="even"><label for="dff-dff-*-*" class="stdlabel">DFF</label></td>
+                                                
+                                                            <td class="even">(I, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="dff-dff-*-*" id="dff-dff-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">DSF</td>
+                                                
+                                                            <td class="odd"><label for="dsf-dsf-*-*" class="stdlabel">DSF</label></td>
+                                                
+                                                            <td class="odd">(F, I)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="dsf-dsf-*-*" id="dsf-dsf-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">FLAC</td>
+                                                
+                                                            <td class="even"><label for="flc-aif-*-*" class="stdlabel">AIFF</label></td>
+                                                
+                                                            <td class="even">(I, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="flc-aif-*-*" id="flc-aif-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="flac">flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="flc-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="flc-flc-*-*" id="flc-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="flc-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(I, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="flc-mp3-*-*" id="flc-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="flac/lame">flac/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="flc-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="flc-pcm-*-*" id="flc-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="flac">flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">MP3</td>
+                                                
+                                                            <td class="odd"><label for="mp3-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(F, I)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="mp3-mp3-*-*" id="mp3-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">MPEG-4</td>
+                                                
+                                                            <td class="even"><label for="mp4-aac-*-*" class="stdlabel">AAC</label></td>
+                                                
+                                                            <td class="even">(I, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="mp4-aac-*-*" id="mp4-aac-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="mp4-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="mp4-flc-*-*" id="mp4-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/flac">faad/flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="mp4-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="mp4-mp3-*-*" id="mp4-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/lame">faad/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="mp4-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="mp4-pcm-*-*" id="mp4-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad">faad</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">MPEG-4 leading audio</td>
+                                                
+                                                            <td class="odd"><label for="mp4x-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="mp4x-flc-*-*" id="mp4x-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/flac">faad/flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="mp4x-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="mp4x-mp3-*-*" id="mp4x-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad/lame">faad/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="mp4x-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="mp4x-pcm-*-*" id="mp4x-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="faad">faad</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">Musepack</td>
+                                                
+                                                            <td class="even"><label for="mpc-aif-*-*" class="stdlabel">AIFF</label></td>
+                                                
+                                                            <td class="even">(I, R)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="mpc-aif-*-*" id="mpc-aif-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="mppdec">mppdec</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="mpc-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(I, R)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="mpc-flc-*-*" id="mpc-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="mppdec/flac">mppdec/flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="mpc-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(R, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="mpc-mp3-*-*" id="mpc-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="mppdec/lame">mppdec/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="mpc-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(R, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="mpc-pcm-*-*" id="mpc-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="mppdec">mppdec</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">Ogg FLAC</td>
+                                                
+                                                            <td class="odd"><label for="ogf-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(R, F, I)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ogf-flc-*-*" id="ogf-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="flac/sox">flac/sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="ogf-ogf-*-*" class="stdlabel">Ogg FLAC</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ogf-ogf-*-*" id="ogf-ogf-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">Ogg Vorbis</td>
+                                                
+                                                            <td class="even"><label for="ogg-aif-*-*" class="stdlabel">AIFF</label></td>
+                                                
+                                                            <td class="even">(I, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="ogg-aif-*-*" id="ogg-aif-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sox">sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="ogg-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(R, F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="ogg-flc-*-*" id="ogg-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sox">sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="ogg-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(I, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="ogg-mp3-*-*" id="ogg-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sox/lame">sox/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="ogg-ogg-*-*" class="stdlabel">Ogg Vorbis</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="ogg-ogg-*-*" id="ogg-ogg-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="ogg-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="ogg-pcm-*-*" id="ogg-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sox">sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">Opus</td>
+                                                
+                                                            <td class="odd"><label for="ops-aif-*-*" class="stdlabel">AIFF</label></td>
+                                                
+                                                            <td class="odd">(F, I)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ops-aif-*-*" id="ops-aif-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sox">sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="ops-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(I, F, R)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ops-flc-*-*" id="ops-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sox">sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="ops-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ops-mp3-*-*" id="ops-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sox/lame">sox/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="ops-ops-*-*" class="stdlabel">Opus</label></td>
+                                                
+                                                            <td class="odd">(F, I)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ops-ops-*-*" id="ops-ops-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="ops-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="odd">(F, I)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="ops-pcm-*-*" id="ops-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sox">sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">MPEG-4 SLS / HD-AAC</td>
+                                                
+                                                            <td class="even"><label for="sls-aac-*-*" class="stdlabel">AAC</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="sls-aac-*-*" id="sls-aac-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="sls-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="sls-flc-*-*" id="sls-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sls/sox">sls/sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="sls-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="sls-mp3-*-*" id="sls-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sls/lame">sls/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="sls-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="sls-pcm-*-*" id="sls-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="sls">sls</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">WAV</td>
+                                                
+                                                            <td class="odd"><label for="wav-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wav-flc-*-*" id="wav-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="flac/sox">flac/sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="wav-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wav-mp3-*-*" id="wav-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="lame">lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="wav-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="odd">(F, I)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wav-pcm-*-*" id="wav-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="wav-wav-*-*" class="stdlabel">WAV</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wav-wav-*-*" id="wav-wav-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">Windows Media</td>
+                                                
+                                                            <td class="even"><label for="wma-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(R, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wma-flc-*-*" id="wma-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec/flac">wmadec/flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="wma-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(F, R)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wma-mp3-*-*" id="wma-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec/lame">wmadec/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="wma-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(R, F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wma-pcm-*-*" id="wma-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec">wmadec</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="wma-wma-*-*" class="stdlabel">Windows Media</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wma-wma-*-*" id="wma-wma-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">WMA Lossless</td>
+                                                
+                                                            <td class="odd"><label for="wmal-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(R, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wmal-flc-*-*" id="wmal-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec/flac">wmadec/flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="wmal-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(F, R)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wmal-mp3-*-*" id="wmal-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec/lame">wmadec/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="wmal-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="odd">(F, R)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wmal-pcm-*-*" id="wmal-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec">wmadec</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="wmal-wmal-*-*" class="stdlabel">WMA Lossless</label></td>
+                                                
+                                                            <td class="odd">(I, F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wmal-wmal-*-*" id="wmal-wmal-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">WMA Pro</td>
+                                                
+                                                            <td class="even"><label for="wmap-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(F, R)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wmap-flc-*-*" id="wmap-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec/flac">wmadec/flac</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="wmap-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="even">(F, R)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wmap-mp3-*-*" id="wmap-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec/lame">wmadec/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="wmap-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="even">(F, R)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wmap-pcm-*-*" id="wmap-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wmadec">wmadec</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="wmap-wmap-*-*" class="stdlabel">WMA Pro</label></td>
+                                                
+                                                            <td class="even">(F, I)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wmap-wmap-*-*" id="wmap-wmap-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="NATIVE">Native</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn">WavPack</td>
+                                                
+                                                            <td class="odd"><label for="wvp-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wvp-flc-*-*" id="wvp-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wvunpack/sox">wvunpack/sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="wvp-mp3-*-*" class="stdlabel">MP3</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wvp-mp3-*-*" id="wvp-mp3-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wvunpack/lame">wvunpack/lame</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="odd firstColumn"></td>
+                                                
+                                                            <td class="odd"><label for="wvp-pcm-*-*" class="stdlabel">PCM</label></td>
+                                                
+                                                            <td class="odd">(F)</td>
+                                                
+                                                            <td class="odd">
+                                                                <select class="stdedit" name="wvp-pcm-*-*" id="wvp-pcm-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wvunpack">wvunpack</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                                <tr style="height: 5px;"><td class="odd" colspan="3"></td></tr>
+                                                                <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn">WavPack DSD</td>
+                                                
+                                                            <td class="even"><label for="wvpx-dff-*-*" class="stdlabel">DFF</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wvpx-dff-*-*" id="wvpx-dff-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wvunpack">wvunpack</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="wvpx-dsf-*-*" class="stdlabel">DSF</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wvpx-dsf-*-*" id="wvpx-dsf-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wvunpack">wvunpack</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                            
+                                                            
+                                                            <tr>
+                                                            <td class="even firstColumn"></td>
+                                                
+                                                            <td class="even"><label for="wvpx-flc-*-*" class="stdlabel">FLAC</label></td>
+                                                
+                                                            <td class="even">(F)</td>
+                                                
+                                                            <td class="even">
+                                                                <select class="stdedit" name="wvpx-flc-*-*" id="wvpx-flc-*-*">
+                                                                    <option value="DISABLED">Disabled</option>					<option selected="" value="wvunpack/sox">wvunpack/sox</option>
+                                                                </select>
+                                                            </td>
+                                                            </tr>
+                                                        
+                                                        <tr style="height: 5px;"><td class="even" colspan="3"></td></tr>
+                                                    </tbody></table>
+                                                    <input name="fileFormatConversions" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="fileFormatConversionsFormId" onclick="fileFormatConversionsForm(this.form); return false;" value="Save file Format Conversions">
+
+                                                    </div>
+                                                    
+
+
+
+                                            </form>
+
+
+                                        </div>
+                                    </div>                            
+                                </div>
                            
                                 <div class="basicSettings" id="basicSettings">
 
@@ -105,7 +1447,6 @@
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
-                                        <button class="basicSettingsRescanMediaTabButton" data-tab="rescanMedia">Rescan Media</button>
                                         <button class="basicSettingsSecurityTabButton" data-tab="security">Security</button>
                                     </div>
                           
@@ -117,7 +1458,7 @@
                                                 [% languageoptions.$option %]
                                                 [% END %] 
                                 
-                                                <select class="stdedit" name="pref_language" id="languageSelect">
+                                                <select class="stdedit" name="pref_language" id="languageSelect" data-testid="languageSelect">
                                                     <option value="DA">Dansk</option>
                                                     <option value="DE">Deutsch</option>
                                                     <option value="EN" selected>English</option>
@@ -138,8 +1479,11 @@
                                                     <option value="ZH_CN">简体中文 *</option>
                                                 </select>
                                                 
-                                     
-                                            </div>                                            
+
+                                            </div>                 
+                                            <br>
+                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language">
+                           
                                         </div>
 
                                        
@@ -148,7 +1492,23 @@
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
                                                 [% prefs.pref_libraryname | html %]
                                                 [% END %] [% END %] 
+
+                                                
+                                                <form id="libraryNameForm" class="">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_libraryname0" id="libraryName" value="" size="40">
+                                                    
+                                                    
+                                                    <div class="prefs">
+                                                     <input name="pref_update_libraryname" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="libraryNameUpdateButton" onclick="libraryNameForm(this.form); return false;"  value="Save Library Name"><br><br>
+                                                    </div>
+
+
+
                                             </div>
+                                        </form>
+
+
+                                        <hr />
 
                                             <div class="mediaFolders">
                                                 [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
@@ -160,8 +1520,8 @@
                                                 
 
                                                 <!-- Input to put in folder to find music -->
-                                                 <form id="rescanMediaForm" class="">
-                                                    <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath" value="" size="40" >
+                                                 <form id="rescanMediaForm" class="" data-testid="rescanMediaForm">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath"  data-testid="musicInputPath" value="" size="40" >
                                                     
                                                     <div class="prefs">
                 
@@ -175,7 +1535,7 @@
                                                         </select>
 
 
-                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan" id="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
+                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan saveSettings" id="rescanButton" data-testid="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
                                                     <a id="progressLink" href="/capstone/settings/server/status.html?player=">View Previous Scan Details</a>
                                                 
                                                     &nbsp;</div>
@@ -194,14 +1554,32 @@
 
                                             </div>
                                         </div>
+
+
                                         <div class="basicSettingsPlaylistsTab" id="playlistsFolder">
                                             <div class="playListsFolder">
                                                 [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
                                                 [% prefs.pref_playlistdir | html %]
-                                                [% END %] [% END %] 
-                                            </div>
-                                        </div>
+                                                <p>Format it like this (NOTE - the ":" is NEEDED. It will not update if you do not have the ':') <br>  C:\Program Files\SongsCopy</p> 
 
+                                                [% END %] [% END %] 
+                                                <br>
+
+
+                                                <form id="playlistsDirectoryForm" class="">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_playlistdir0" id="playlistDirPath" value="" size="40">
+                                                    
+                                                    
+                                                    <div class="prefs">
+                                                     <input name="pref_update_playlistdir0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="playlistDirUpdateButton" onclick="playlistsDirectoryForm(this.form); return false;"  value="Scan for Playlist"><br><br>
+                                                    </div>
+
+                                            
+
+                                            </div>
+                                        </form>
+                                        </div>
+                                                             
                                 
 
                                         <div class="basicSettingsSecurityTab" id="security">
@@ -210,14 +1588,443 @@
                                         </div>
 
                                   </div>
-                                  <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Settings">
 
 
 
 
                                 </div>
                             <!------------- Basic Settings Language Tab Content End ------------->
+
+                            <!------------- Formatting Settings --------------------------------->
+                            <div class = "formatSettings" id = "formatSettings">
+                                <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
+                                <div class= "formatSettingsTabs">
+                                    <button class ="formatSettingsArtworkTabButton active" data-tab="Artwork">Artwork</button>
+                                    <button class ="formatSettingsGuessTagsTabButton" data-tab="GuessTags">Guess Tags Formats</button> <!-- MAKE THIS A TEXT BOX THAT CHANGES COMMAS TO ARRAY DIVIDERS -->
+                                </div>
+
+                                <div class="formatSettingsContent"><br>
+                                    <div class="formatSettingsArtworkTab active" id="formatSettingsArtwork">
+                                        [% WRAPPER setting title="SETUP_COVERART" desc="SETUP_COVERART_DESC" %]
+                                        [% prefs.pref_coverArt | html %]
+                                        <form id="coverArtForm" class="">
+                                            <input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="" size="40">
+                                            <div class="prefs">
+                                                <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save"><br><br>
+                                            </div>
+                                        </form>
+                                        [% END %]
+
+                                        [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
+                                        [% prefs.pref_artfolder | html %]
+                                        <p>Data provided MUST be in a file format</p>
+                                        <form id="artworkFolderForm" class="">
+                                            <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
+                                            <div class="prefs"></div>
+                                                <input name="pref_update_artfolder" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="artFolderUpdateButton" onclick="artFolderForm(this.form); return false;"  value="Save"><br><br>
+                                            </div>
+                                        </form>
+
+                                        [% END %]
+
+                                    </div>
+                                    <div class="formatSettingsGuessTagsTab" id="formatSettingsGuessTags">
+                                        [% WRAPPER setting title="SETUP_GUESSFILEFORMATS" desc="SETUP_GROUP_GUESSFILEFORMATS_DESC" %]
+                                        <p>UNDER WORK, CAN'T DO UNTIL GET SOLUTION IS FOUND</p>
+                                        <button id="addFormatButton">Add Format</button>
+
+                                        [% END %]
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!------------ INTERFACE SETTINGS -->
+                            <div class = "interfaceSettings" id = "interfaceSettings">
+                                <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
+                                <div class= "interfaceSettingsTabs">
+                                    <button class ="interfaceSettingsDisplayTabButton active" data-tab="Display">Display</button>
+                                    <button class ="interfaceSettingsFormatTabButton" data-tab="Format">Formatting</button>
+                                    <button class ="interfaceSettingsTimingTabButton" data-tab="Timing">Timing</button>
+                                </div>
+
+                                <div class="interfaceSettingsContent"><br>
+                                    <div class="interfaceSettingsDisplayTab active" id="interfaceSettingsDisplay">
+                                        <!-- Show Artist Option-->
+                                        [% WRAPPER settingGroup title="SETUP_SHOWARTIST" desc="SETUP_SHOWARTIST_DESC" %]
+                                        <form id="showArtistForm" class="">
+                                            <div class="radio-buttons">
+                                                <label>
+                                                    <input type="radio" name="pref_showArtist" id="showArtistDisabled" value="0">
+                                                    [% 'DISABLED' | getstring %]
+                                                </label><br>
+                                                <label>
+                                                    <input type="radio" name="pref_showArtist" id="showArtistEnabled" value="1">
+                                                    [% 'ENABLED' | getstring %]
+                                                </label>
+                                            </div>
+                                            <div class="prefs">
+                                                <input name="pref_update_showArtist" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showArtistUpdateButton" onclick="showArtistForm(this.form); return false;"  value="Save Preference"><br><br>
+                                            </div><br>
+                                        </form>
+                                        [% END %]
+                                        <!-- Show Year Option -->
+                                        [% WRAPPER settingGroup title="SETUP_SHOWYEAR" desc="SETUP_SHOWYEAR_DESC" %]
+                                        <form id="showYearForm" class="">
+                                            <div class="radio-buttons">
+                                                <label>
+                                                    <input type="radio" name="pref_showYear" id="showYearDisabled" value="0">
+                                                    [% 'DISABLED' | getstring %]
+                                                </label><br>
+                                                <label>
+                                                    <input type="radio" name="pref_showYear" id="showYearEnabled" value="1">
+                                                    [% 'ENABLED' | getstring %]
+                                                </label>
+                                            </div>
+                                            <div class="prefs">
+                                                <input name="pref_update_showYear" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showYearUpdateButton" onclick="showYearForm(this.form); return false;"  value="Save Preference"><br><br>
+                                            </div>
+                                        [% END %]
+
+                                        </form>
+
+                                        <!-- ITEMS PER PAGE -->
+                                        [% WRAPPER setting title="SETUP_ITEMSPERPAGE" desc="SETUP_ITEMSPERPAGE_DESC" %]
+                                        <p>Value between 10-500. Anything under/over will default to min/max value</p>
+                                        <form id="itemsPerPageForm">
+                                            <input type="number" class="stdedit" name="pref_itemsPerPage" id="itemsPerPage" min="10" max="500">
+                                            <div class="prefs">
+                                                <input name="pref_update_itemsPerPage" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="itemsPerPageUpdateButton" onclick="perPageForm(this.form); return false;"  value="Update Items Per Page"><br><br>
+                                            </div>
+                                        </form><br>
+                                        [% END %]
+
+                                        <!-- THUMBNAIL SIZE -->
+                                        [% WRAPPER setting title="SETUP_THUMBSIZE" desc="SETUP_THUMBSIZE_DESC" %]
+                                        <form id="thumbSizeForm">
+                                            <input type="number" class="stdedit" name="pref_thumbSize" id="thumbSize" min="25" max="250">
+                                            <div class="prefs">
+                                                <input name="pref_update_thumbSize" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="thumbSizeUpdateButton" onclick="thumbSizeForm(this.form); return false;"  value="Update Thumbnail Size"><br><br>
+                                            </div>
+                                        </form>
+                                        [% END %]
+
+                                    </div>
+                                    <div class="interfaceSettingsFormatTab" id="interfaceSettingsFormat">
+                                        <!-- Title Format -->
+                                         <div class="settingSection">
+                                            <div class="settingGroup">
+                                                <div class="prefHead">Title Format</div>
+                                                <div class="prefDesc hiddenDesc">
+                                                    These are the formats available for selection both in the web interface and on players. 
+                                                </div>
+                                                <div class="prefs">
+                                                    <form id="titleFormatWebForm" class="">
+                                                        <select class="stdedit" name="pref_titleFormatWeb" id="titleFormatWeb">
+                                                            <option value="0">TITLE</option>
+                                                            <option value="1">DISC-TRACKNUM. TITLE</option>
+                                                            <option value="2">TRACKNUM. TITLE</option>
+                                                            <option value="3">TRACKNUM. ARTIST - TITLE</option>
+                                                            <option value="4">TRACKNUM. TITLE (ARTIST)</option>
+                                                            <option value="5">TRACKNUM. TITLE - ARTIST - ALBUM</option>
+                                                            <option value="6">TRACKNUM. TITLE from ALBUM by ARTIST</option>
+                                                            <option value="7">TITLE (ARTIST)</option>
+                                                            <option value="8">ARTIST - TITLE</option>
+                                                        </select>
+                                                        <input name="pref_update_titleFormatWeb" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="titleFormatWebUpdateButton" onclick="titleFormatWebForm(this.form); return false;"  value="Save Title Format"><br><br>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                         </div><br>
+                                         <!-- Custom Title Format -->
+                                         <div class="settingSection">
+                                            <div class="settingGroup">
+                                                <div class="prefHead">Custom Title Format</div>
+                                                <p>CURRENTLY ONLY CHANGES INDEX TO 9, ADDING CUSTOM VALUES ISN'T WORKING</p>
+                                                <div class="prefDesc hiddenDesc">
+                                                    <p>If you want a custom title format. Available data elements are:</p>
+                                                    <ul class="smallList">
+                                                        <li>CT (content type)</li>
+                                                        <li>TITLE</li>
+                                                        <li>GENRE</li>
+                                                        <li>TRACKNUM (tracknumber as an int)</li>
+                                                        <li>FS (file size)</li>
+                                                        <li>ARTIST</li>
+                                                        <li>COMPOSER</li>
+                                                        <li>CONDUCTOR</li>
+                                                        <li>BAND</li>
+                                                        <li>ALBUM</li>
+                                                        <li>COMMENT</li>
+                                                        <li>YEAR</li>
+                                                        <li>SECS (total seconds)</li>
+                                                        <li>DURATION (minutes and seconds)</li>
+                                                        <li>BITRATE</li>
+                                                    </ul>
+                                                    <p>Elements can be separated by anything (or nothing). The separators are only used if the data elements are present.</p>
+                                                </div>
+                                                <div class="prefs">
+                                                    <form id="titleFormatForm" class="">
+                                                        <input type="text" class="stdedit" name="pref_titleFormat" id="titleFormat" value="" size="40">
+                                                        <input name="pref_update_titleFormat" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="titleFormatUpdateButton" onclick="titleFormatForm(this.form); return false;"  value="Add Custom Format"><br><br>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                         </div> 
+                                    </div>
+                                    <div class="interfaceSettingsTimingTab" id="interfaceSettingsTiming">
+
+                                        <!-- BROWSER REFRESH TIMING -->
+                                        [% WRAPPER setting title="SETUP_REFRESHRATE" desc="SETUP_REFRESHRATE_DESC" %]
+                                        <form id="refreshRateForm">
+                                            <input type="number" class="stdedit" name="pref_refreshRate" id="refreshRate" min="2" max="300">
+                                            <div class="prefs">
+                                                <input name="pref_update_refreshRate" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="refreshRateUpdateButton" onclick="refreshRateForm(this.form); return false;"  value="Change Refresh Rate"><br>
+                                            </div>
+                                        </form><br>
+                                        [% END %]
+
+                                        <!-- TEXT ENTRY TIMING -->
+                                        [% WRAPPER setting title="SETUP_DISPLAYTEXTTIMEOUT" desc="SETUP_DISPLAYTEXTTIMEOUT_DESC"%]
+                                        <form id="displaytexttimeoutForm">
+                                            <input type="number" class="stdedit" name="pref_displaytexttimeout" id="displaytexttimeout" min="1" max="100">
+                                            <div class="prefs">
+                                                <input name="pref_update_displaytexttimeout" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="displaytexttimeoutUpdateButton" onclick="displaytexttimeoutForm(this.form); return false;"  value="Change Text Timeout"><br>
+                                            </div>
+                                        </form><br>
+                                        [% END %]                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!------------- Management Library organisation Tab  (Behaviour settings) ------------->
+                            <div class="mediaLibraryManagementSettings" id="mediaLibraryManagementSettings">
+
+                                <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
+
+                                <div class="mediaLibraryManagementSettingsTabs">                                        
+                                    <button class="mediaLibraryManagementBrowseTabButton active" data-tab="browseArtists">Browse Artists</button>
+                                    <button class="mediaLibraryManagementReleaseTypesTabButton" data-tab="releaseTypes">Release Types</button>
+                                    <button class="mediaLibraryManagementFiltersTabButton" data-tab="filters">Filters</button>
+                                    <button class="mediaLibraryManagementPlaylistsTabButton" data-tab="playlists">Playlists</button>
+                                </div>
+                      
+                                <div class="mediaLibraryManagementSettingsContent">
+
+                                    <div class="mediaLibraryManagementBrowseTab active" id="mediaLibraryManagementBrowseArtists">
+                                        <form action="" class="unifiedArtistsForm">
+                                            [% WRAPPER settingSection %]
+                                            [% WRAPPER settingGroup title="SETUP_ARTISTS_BROWSE_MODES" desc="SETUP_ARTISTS_BROWSE_MODES_DESC" %]
+                                                <select class="stdedit" name="pref_useUnifiedArtistsList" id="useUnifiedArtistsList">[% prefs.pref_useUnifiedArtistsList %]
+                                    
+                                                    <option [% IF prefs.pref_useUnifiedArtistsList %]selected [% END %] value="1">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_ON' | string %]</option>
+                                                    <option [% IF NOT prefs.pref_useUnifiedArtistsList%]selected [% END %] value="0">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_OFF' | string %]</option>
+                                    
+                                                </select>
+                                            [% END %]
+                                        [% END %]
+                                            <input name="pref_unifiedArtists0" type="submit" class="stdclick rescanButton disableOnScan saveSettings" id="unifiedArtists" onclick="unifiedArtistsForm(this.form); return false;"   value="Save How you Browse Artists"><br><br>
+                                        <!-- Option 1 in prefs: useUnifiedArtistsList = 1  and if option 2 is clicked (Use 2 seperate lists), useUnifiedArtistsList = 0  -->
+                                     </form>
+
+                                    </div>
+
+                                    <div class="mediaLibraryManagementReleaseTypesTab" id="mediaLibraryManagementReleaseTypes">
+                                            
+                                            <!-- Release Types, ignore or not -->
+                                            <form id="ignoreReleaseTypesForm">
+                                                [% WRAPPER settingGroup title="SETUP_RELEASE_TYPES" desc=""%]
+                                                <select class="stdedit" name="pref_ignoreReleaseTypes" id="ignoreReleaseTypes">
+                                                    <option [% IF NOT prefs.pref_ignoreReleaseTypes %]selected [% END %]value="0">[% 'SETUP_IGNORE_RELEASE_TYPES_0' | string %]</option>
+                                                    <option [% IF prefs.pref_ignoreReleaseTypes %]selected [% END %]value="1">[% 'SETUP_IGNORE_RELEASE_TYPES_1' | string %]</option>
+                                                </select>
+                                                [% END %]
+
+  
+                                                <input name="pref_unifiedArtists0" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreReleaseTypes" onclick="ignoreReleaseTypesForm(this.form); return false;" value="Save Release Types for Albums">
+                                            </form>
+
+                                            <br style="margin-bottom: 10%;">
+
+                                           <!-- Checkbox -->
+                                           <form id="cleanupReleaseTypesForm">
+                                         
+                                            [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
+                                                <input type="checkbox" [% IF prefs.pref_cleanupReleaseTypes %]checked="1"[% END %] class="stdedit" name="pref_cleanupReleaseTypes" id="pref_cleanupReleaseTypes" value="1" />
+                                                <label for="pref_cleanupReleaseTypes" class="stdlabel">[% "SETUP_CLEANUP_RELEASE_TYPES" | string %]</label>
+                                            [% END; ELSE %]
+                                                <input type="hidden" name="pref_cleanupReleaseTypes" value="[% IF prefs.pref_cleanupReleaseTypes %]1[% END %]">
+                                            [% END %]
+
+                                                <input name="pref_cleanupReleaseTypes" type="button" style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreReleaseTypes" onclick="cleanupReleaseTypesForm(this.form); return false;" value="Save Recognising EPs and Singles">
+                                        </form>
+
+                                        <br style="margin-bottom: 10%;">
+
+                                            <!-- Release types to include -->
+                                            <form id="groupArtistAlbumsByReleaseTypeForm">
+
+                                                <h4 style="margin-top: 2%;">Release types to include</h4>
+                                                [% IF !prefs.pref_ignoreReleaseTypes; WRAPPER settingGroup title="" desc="" %]
+                                                    <select class="stdedit" name="pref_groupArtistAlbumsByReleaseType" id="groupArtistAlbumsByReleaseType">
+                                                        <option [% IF prefs.pref_groupArtistAlbumsByReleaseType == 1 %]selected [% END %]value="1">[% 'SETUP_GROUP_BY_RELEASE_TYPES_1' | string %]</option>
+                                                        <option [% IF prefs.pref_groupArtistAlbumsByReleaseType == 2 %]selected [% END %]value="2">[% 'SETUP_GROUP_BY_RELEASE_TYPES_2' | string %]</option>
+                                                        <option [% IF NOT prefs.pref_groupArtistAlbumsByReleaseType %]selected [% END %]value="0">[% 'SETUP_GROUP_BY_RELEASE_TYPES_0' | string %]</option>
+                                                    </select>
+                                                [% END; ELSE %]
+                                                    <input type="hidden" name="pref_groupArtistAlbumsByReleaseType" value="[% IF prefs.pref_groupArtistAlbumsByReleaseType %]1[% END %]">
+                                                    <input type="hidden" name="pref_cleanupReleaseTypes" value="[% IF prefs.pref_cleanupReleaseTypes %]1[% END %]">
+                                                [% END %]
+                                                <input type="button" class="stdclick rescanButton saveSettings" style="font-size: 15px;" onclick="groupArtistAlbumsByReleaseTypeForm(this.form); return false;" value="Save Group Artist Albums By Release Type">
+                                        </form>
+                                          
+                                    </div>
+                                    
+                                    <div class="mediaLibraryManagementFiltersTab" id="mediaLibraryManagementFilters">
+                                        <form action="" id="noGenreFilterForm">
+                                            [% IF !prefs.pref_ignoreReleaseTypes AND prefs.pref_groupArtistAlbumsByReleaseType; WRAPPER settingGroup title="SETUP_RELEASE_TYPES_COMPOSER_ALBUM_GROUP_OPTIONS" desc="SETUP_RELEASE_TYPES_COMPOSER_ALBUM_GROUP_OPTIONS_DESC" %]
+                                                <input type="radio" name="pref_showComposerReleasesbyAlbum" id="pref_showComposerReleasesbyAlbum0" value="0" [% IF NOT prefs.pref_showComposerReleasesbyAlbum %]checked="checked"[% END %] />
+                                                <label for="pref_showComposerReleasesbyAlbum0" class="stdlabel">[% 'SETUP_RELEASE_TYPES_COMPOSER_ROLE_GROUPING_0' | getstring %]</label><br/>
+                                                <input type="radio" name="pref_showComposerReleasesbyAlbum" id="pref_showComposerReleasesbyAlbum1" value="1" [% IF prefs.pref_showComposerReleasesbyAlbum == 1 %]checked="checked"[% END %] />
+                                                <label for="pref_showComposerReleasesbyAlbum1" class="stdlabel">[% 'SETUP_RELEASE_TYPES_COMPOSER_ROLE_GROUPING_1' | getstring %]</label><br/>
+                                                <input type="radio" name="pref_showComposerReleasesbyAlbum" id="pref_showComposerReleasesbyAlbum2" value="2" [% IF prefs.pref_showComposerReleasesbyAlbum == 2 %]checked="checked"[% END %] />
+                                                <label for="pref_showComposerReleasesbyAlbum2" class="stdlabel">[% 'SETUP_RELEASE_TYPES_COMPOSER_ROLE_GROUPING_2' | getstring %]</label>
+                                                <input type="text" class="stdedit" name="pref_showComposerReleasesbyAlbumGenres" id="showComposerReleasesbyAlbumGenres" value="[% prefs.pref_showComposerReleasesbyAlbumGenres | html %]" size="40" placeholder="[% "GENRES" | string | html %]"><br/>
+                                            [% END; ELSE %]
+                                                <input type="hidden" name="pref_showComposerReleasesbyAlbum" value="[% prefs.pref_showComposerReleasesbyAlbum %]" />
+                                                <input type="hidden" name="pref_showComposerReleasesbyAlbumGenres" value="[% prefs.pref_showComposerReleasesbyAlbumGenres %]" />
+                                            [% END %]                                        
+
+                                    
+                                            [% WRAPPER setting title="SETUP_NOGENREFILTER" desc="SETUP_NOGENREFILTER_DESC"%]
+                                                <select class="stdedit" name="pref_noGenreFilter" id="noGenreFilter">
+                                                    <option [% IF NOT prefs.pref_noGenreFilter %]selected [% END %]value="0">[% 'SETUP_NOGENREFILTER_0' | string %]</option>
+                                                    <option [% IF prefs.pref_noGenreFilter %]selected [% END %]value="1">[% 'SETUP_NOGENREFILTER_1' | string %]</option>
+                                                </select>
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveGenreFiltersButton" onclick="noGenreFilterForm(this.form); return false;" value="Save  Genre Filters"><br>
+
+                                            [% END %]
+
+                                        </form>
+                                    
+                                        
+                                        <form action="" id="noRoleFilterForm">
+
+                                            [% WRAPPER setting title="SETUP_NOROLEFILTER" desc="SETUP_NOROLEFILTER_DESC"%]
+                                                <select class="stdedit" name="pref_noRoleFilter" id="noRoleFilter">
+                                                    <option [% IF NOT prefs.pref_noRoleFilter %]selected [% END %] value="0">[% 'SETUP_NOROLEFILTER_0' | string %]</option>
+                                                    <option [% IF prefs.pref_noRoleFilter %]selected [% END %] value="1">[% 'SETUP_NOROLEFILTER_1' | string %]</option>
+                                                </select>
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveRoleFiltersButton" onclick="noRoleFilterForm(this.form); return false;" value="Save Role Filters"><br>
+
+                                            [% END %]
+
+                                        </form>
+
+
+                                        <form action="" id="ageLimitForm">
+                                            [% WRAPPER setting title="SETUP_BROWSEAGELIMIT" desc="SETUP_BROWSEAGELIMIT_DESC"%]
+                                                <input type="text"class="stdedit" name="pref_browseagelimit" id="browseagelimit" value="[% prefs.pref_browseagelimit || 100 %]" size="15">
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveAgeLimitFilterButton" onclick="ageLimitForm(this.form); return false;" value="Save Number of albums displayed"><br>
+
+                                                [% END %]
+
+                                        </form>
+
+                                        <form action="" id="groupDiscsForm">
+
+                                            [% WRAPPER setting title="SETUP_GROUPDISCS" desc="SETUP_GROUPDISCS_DESC"%]
+                                            <select class="stdedit" name="pref_groupdiscs" id="groupdiscs">
+                                    
+                                                <option [% IF NOT prefs.pref_groupdiscs %]selected [% END %]value="0">[% 'SETUP_GROUPDISCS_0' | string %]</option>
+                                                <option [% IF prefs.pref_groupdiscs %]selected [% END %]value="1">[% 'SETUP_GROUPDISCS_1' | string %]</option>
+                                    
+                                            </select>
+                                            <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveGroupFilterButton" onclick="groupDiscsForm(this.form); return false;" value="Save Group Discs"><br>
+
+                                            [% END %]
+
+                                        </form>
+
+                                    </div>
+
+
+                                    <div class="mediaLibraryManagementPlaylistsTab" id="mediaLibraryManagementPlaylists">
+                                        <form action="" id="playlistPersistForm">
+
+                                            [% WRAPPER setting title="SETUP_PERSISTPLAYLISTS" desc="SETUP_PERSISTPLAYLISTS_DESC"%]
+                                            <select class="stdedit" name="pref_persistPlaylists" id="persistPlaylists">
+                                    
+                                                <option [% IF NOT prefs.pref_persistPlaylists %]selected [% END %]value="0">[% 'SETUP_PERSISTPLAYLISTS_0' | string %]</option>
+                                                <option [% IF prefs.pref_persistPlaylists %]selected [% END %]value="1">[% 'SETUP_PERSISTPLAYLISTS_1' | string %]</option>
+                                    
+                                            </select>
+
+                                            <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="playlistPersistFormId" onclick="playlistPersistForm(this.form); return false;" value="Save Playlist Persistence"><br>
+
+                                        [% END %]
+                                        
+                                        </form>
+
+
+                                        <form action="" id="saveShuffledPlaylistForm">
+                                           
+                                            [% WRAPPER setting title="SETUP_SAVESHUFFLED" desc="SETUP_SAVESHUFFLED_DESC"%]
+                                                <select class="stdedit" name="pref_saveShuffled" id="saveShuffled">
+                                        
+                                                    <option [% IF NOT prefs.pref_saveShuffled %]selected [% END %]value="0">[% 'SETUP_SAVESHUFFLED_0' | string %]</option>
+                                                    <option [% IF prefs.pref_saveShuffled %]selected [% END %]value="1">[% 'SETUP_SAVESHUFFLED_1' | string %]</option>
+                                        
+                                                </select>
+                                                <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveShuffledPlaylistFormId" onclick="saveShuffledPlaylistForm(this.form); return false;" value="Save Shuffled Playlist"><br>
+
+                                            [% END %]
+                                        
+                                       
+                                        </form>
+
+
+                                        <form action="" id="reshuffleOnRepeatForm">
+                                           
+                                            [% WRAPPER setting title="SETUP_RESHUFFLEONREPEAT" desc="SETUP_RESHUFFLEONREPEAT_DESC"%]
+                                            <select class="stdedit" name="pref_reshuffleOnRepeat" id="reshuffleOnRepeat">
+                                    
+                                                <option [% IF NOT prefs.pref_reshuffleOnRepeat %]selected [% END %]value="0">[% 'SETUP_RESHUFFLEONREPEAT_0' | string %]</option>
+                                                <option [% IF prefs.pref_reshuffleOnRepeat %]selected [% END %]value="1">[% 'SETUP_RESHUFFLEONREPEAT_1' | string %]</option>
+                                    
+                                            </select>
+                                            <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="reshuffleRepeatFormId" onclick="reshuffleOnRepeatForm(this.form); return false;" value="Save Reshuffling on repeat setting"><br>
+
+                                        [% END %]
+
+                                        
+                                       
+                                        </form>
+
+
+                                    </div>
+
+
+
+                                    
+
+
+
+
+
+                                </div>
                         </div>
+
+
+                       
+
+                        </div>
+                       
+
+                        </div>
+
+
+                     
+                       
              
                 </div>
          
@@ -238,10 +2045,14 @@
                             
 
                                             <a href="http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" target="">MUSIC FOLDER</a>
-
-        	               
-
                                             You have: [% song_count %] total. <br>
+
+                                            <iframe src="http://161.29.197.94.localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" frameborder="0" class="songsIframe" id="songsIframe">
+                                                    
+                                            </iframe>
+
+                                            
+
                                             Artist [% " " _ stringBY _ " " %] [%- FILTER null %] 
                                             [% IF item.artists; contributorsText = item.artists; ELSE %] 
                                             [% contributorsText = [ item.artist ] %] 

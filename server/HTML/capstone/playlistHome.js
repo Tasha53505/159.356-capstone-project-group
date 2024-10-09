@@ -4,6 +4,7 @@ var accordion = document.getElementsByClassName("accordion");
 var i;
 document.addEventListener('DOMContentLoaded', function () {
 
+
     
     var accordions = document.querySelectorAll('.accordionButton');
     accordions.forEach(function (accordion) {
@@ -117,20 +118,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // Media query handling
-    function updateAnimationBtnMargin() {
-        if (window.matchMedia("(max-width: 800px)").matches) {
-            animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
-        } else {
-            animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
-        }
-    }
+    // // // Media query handling
+    // // function updateAnimationBtnMargin() {
+    // //     if (window.matchMedia("(max-width: 800px)").matches) {
+    // //         animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
+    // //     } else {
+    // //         animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
+    // //     }
+    // // }
 
-    // Initial call
-    updateAnimationBtnMargin();
+    // // Initial call
+    // updateAnimationBtnMargin();
 
     // Update on window resize
-    window.addEventListener('resize', updateAnimationBtnMargin);
+    // window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
 // ------------------------ Code to fetch all Songs ------------------------
@@ -176,12 +177,6 @@ document.getElementById('allSongs').addEventListener('click', function() {
         }, 500); // Animation time + back functionality
     });
 
-//     // Use event delegation to handle dynamic content // THIS IS the code that made testButton trigger its event inside a popup code
-// document.body.addEventListener('click', function(event) {
-//     if (event.target && event.target.id === 'testButton') {
-//         console.log('testButton clicked');
-//     }
-// });
 });
 
 // function loadMusicFolder() {
@@ -375,6 +370,21 @@ document.getElementById('radioTuneInTitle').addEventListener('click', function()
 });
 
 
+// --------------------------- Iframe --------------------------------------
+const iframe = document.getElementById('songsIframe');
+
+// Send a message to the iframe once it loads
+iframe.onload = function() {
+    iframe.contentWindow.postMessage({ color: '#adffc3', font: 'Arial' }, '*');
+};
+
+window.addEventListener('message', function(event) {
+    document.body.style.backgroundColor = event.data.color; // Set text color
+    document.body.style.fontFamily = event.data.font; // Set font family
+});
+
+
+
 // --------------- Settings Button ------------------------
 // Event listener for the settings button
 document.getElementById('settingsButton').addEventListener('click', function() {
@@ -412,9 +422,16 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             </div>
         </div>
         <div class="settingsTabs">
-            <button class="tabButton active" data-tab="music">Music</button>
-            <button class="tabButton" data-tab="plugins">Plugins</button>
-            <button class="tabButton" data-tab="basic-info">Basic Settings | Information</button>
+        <!-- Commented out the first 2 as they have been added as their own -->
+            <!-- <button class="tabButton active" data-tab="music">Music</button>
+            <button class="tabButton" data-tab="plugins">Plugins</button> -->
+
+
+
+            <button class="tabButton" data-tab="basic-info">Basic Settings</button>
+            <button class="tabButton" data-tab="formatting">Formatting</button>
+            <button class="tabButton" data-tab="interface">Interface</button>
+            <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
         <div class="settingsContent">
             <div class="tabContent active" id="music">
@@ -427,6 +444,17 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             </div>
             <div class="tabContent" id="basic-info">
                 <div class="basicSettingsContent"></div>
+            </div>
+            <div class="tabContent" id="formatting">
+                <div class="formatSettingsContent"></div>
+            </div>
+            <div class="tabContent" id="interface">
+                <div class="interfaceSettingsContent"></div>
+            </div>
+
+          <div class="tabContent" id="media-library-management">
+                <div class="mediaLibraryManagementContent"></div>
+
             </div>
         </div>
     `;
@@ -462,6 +490,10 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 } else {
                     console.error("No content found for tab ID:", this.getAttribute('data-tab'));
                 }
+
+                // DISPLAY DATA FUNCTIONS
+                getPref('artfolder', 'art-folder');
+                getPref('coverArt', 'cover-art');
             });
         });
     
@@ -473,7 +505,50 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         } else {
             console.error('.basicSettingsContent element not found.');
         }
-    
+
+        // Add formatting content
+        const formatSettingsContent = settingsContainer.querySelector('.formatSettingsContent');
+        if(formatSettingsContent){
+            const formatSettings = document.querySelector('.formatSettings')?.innerHTML || '';
+            formatSettingsContent.innerHTML = formatSettings;
+        } else {
+            console.error('.formatSettingsContent element not found.');
+        }
+
+        // Interface Content
+        const interfaceSettingsContent = settingsContainer.querySelector('.interfaceSettingsContent');
+        if(formatSettingsContent){
+            const interfaceSettings = document.querySelector('.interfaceSettings')?.innerHTML || '';
+            interfaceSettingsContent.innerHTML = interfaceSettings;
+        } else {
+            console.error('.interfaceSettingsContent element not found.');
+        }
+
+
+        // Add the content of `.mediaLibraryManagement` to `.mediaLibraryManagementContent`
+        const mediaLibraryManagementContent = settingsContainer.querySelector('.mediaLibraryManagementContent');
+            if (mediaLibraryManagementContent) {
+                const mediaLibraryManagementSettings = document.querySelector('.mediaLibraryManagementSettings')?.innerHTML || '';
+                mediaLibraryManagementContent.innerHTML = mediaLibraryManagementSettings;
+            } else {
+                console.error('.mediaLibraryManagementSettings element not found.');
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // ------------ Basic Settings -------------
+
         // Initialize Basic Settings Tab Switching
         const buttonClasses = [
             '.basicSettingsLanguageTabButton',
@@ -481,8 +556,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsMediaFoldersTabButton',
             '.basicSettingsPlaylistsTabButton',
             '.basicSettingsRescanMediaTabButton',
-            '.basicSettingsSecurityTabButton'
-        ];
+            '.basicSettingsSecurityTabButton'        ];
         const basicSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClasses.join(', '));
     
         const contentClasses = [
@@ -494,6 +568,73 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.basicSettingsSecurityTab'
         ];
         const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
+
+        // ---------- FORMAT SETTINGS ----------
+        const buttonClassesFormatting =[
+            '.formatSettingsArtworkTabButton',
+            '.formatSettingsGuessTagsTabButton'
+        ];
+        const formatSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClassesFormatting.join(', '));
+
+        const formatContentClasses=[
+            '.formatSettingsArtworkTab',
+            '.formatSettingsGuessTagsTab'
+        ];
+        const formatSettingsTabContent = settingsContainer.querySelectorAll(formatContentClasses.join(', '));
+
+
+        // ---------- INTERFACE SETTINGS ----------
+        const buttonClassesInterface =[
+            '.interfaceSettingsDisplayTabButton',
+            '.interfaceSettingsFormatTabButton',
+            '.interfaceSettingsTimingTabButton'
+        ];
+        const interfaceSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClassesInterface.join(', '));
+
+        const interfaceContentClasses=[
+            '.interfaceSettingsDisplayTab',
+            '.interfaceSettingsFormatTab',
+            '.interfaceSettingsTimingTab'
+        ];
+        const interfaceSettingsTabContent = settingsContainer.querySelectorAll(interfaceContentClasses.join(', '));
+
+
+        // ------------ Media Library management -------------
+        // Initialize Basic Settings Tab Switching  for Media Library management
+        const buttonClassesMediaLibraryManagement = [
+            '.mediaLibraryManagementBrowseTabButton',
+            '.mediaLibraryManagementReleaseTypesTabButton',
+            '.mediaLibraryManagementFiltersTabButton',
+            '.mediaLibraryManagementPlaylistsTabButton'
+        
+        ];
+        const mediaLibraryManagementTabsButtons = settingsContainer.querySelectorAll(buttonClassesMediaLibraryManagement.join(', '));
+    
+        const MediaLibraryManagementcontentClasses = [
+            '.mediaLibraryManagementBrowseTab',
+            '.mediaLibraryManagementReleaseTypesTab',
+            '.mediaLibraryManagementFiltersTab',
+            '.mediaLibraryManagementPlaylistsTab'
+
+
+        ];
+        const mediaLibraryManagementTabContent = settingsContainer.querySelectorAll(MediaLibraryManagementcontentClasses.join(', '));
+
+
+        // ------------ Advanced File Type Settings and Advanced Media Library Management settings -------------
+        const advancedSettingsButtonClasses  = [
+            '.advancedSettingsMediaLibraryManagementTabButton',
+            '.advancedSettingsFileTypesTabButton',
+        ];
+        const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
+
+        const advancedSettingsContentClasses = [
+            '#advancedSettingsMediaLibraryManagement', // 
+            '#advancedFileTypes', //
+        ];
+        const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
+
+
     
         // Function to hide all tab contents
         function hideAllTabsContent() {
@@ -502,6 +643,38 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 tab.classList.remove('active'); // Remove active class
             });
         }
+
+        // Function to hide all format contents
+        function hideAllFormatContent() {
+            formatSettingsTabContent.forEach(tab => {
+                tab.style.display = 'none'; // Hide tab
+                tab.classList.remove('active'); // Remove active class
+            });
+        }
+
+        // Function to hide all interface contents
+        function hideAllInterfaceContent() {
+            interfaceSettingsTabContent.forEach(tab => {
+                tab.style.display = 'none'; // Hide tab
+                tab.classList.remove('active'); // Remove active class
+            });
+        }
+        
+        // Function to hide all Library Management Media
+    function hideAllLibraryManagementTabsContent() {
+        mediaLibraryManagementTabContent.forEach(tab => {
+            tab.style.display = 'none';  // Hide the tab
+            tab.classList.remove('active');  // Remove active class
+        });
+    }
+
+      // Function to hide all Advanced Settings tab contents
+      function hideAllAdvancedSettingsTabsContent() {
+        advancedSettingsTabContent.forEach(tab => {
+            tab.style.display = 'none';  // Hide the tab
+            tab.classList.remove('active');  // Remove active class
+        });
+    }
     
         // Function to show the .basicSettings container
         function showBasicSettings() {
@@ -512,8 +685,40 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 // console.log('Basic settings container not found.');
             }
         }
+
+        function showFormatSettings(){
+            const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
+            if(formatSettingsContainer) {
+                formatSettingsContainer.style.display = 'block';
+                // get functionTODO 
+            } else {
+
+            }
+        }
+
+        // Show interface container
+        function showInterfaceSettings(){
+            const interfaceSettingsContainer = settingsContainer.querySelector('.interfaceSettings');
+            if(interfaceSettingsContainer) {
+                interfaceSettingsContainer.style.display = 'block';
+                // get functionTODO 
+            } else {
+
+            }
+        }
     
-        // Function to hide the .basicSettings container
+
+        // Function to show the Media Library Management container
+        function showMediaLibraryManagement() {
+            const mediaLibraryManagementContainer = settingsContainer.querySelector('.mediaLibraryManagementSettings');
+            if (mediaLibraryManagementContainer) {
+                mediaLibraryManagementContainer.style.display = 'block';  // Ensure the container is displayed
+            } else {
+                // console.error('Media Library Management container not found.');
+            }
+        }
+
+                // Function to hide the .basicSettings container
         function hideBasicSettings() {
             const basicSettingsContainer = settingsContainer.querySelector('.basicSettings');
             if (basicSettingsContainer) {
@@ -522,6 +727,39 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 // console.log('Basic settings container not found.');
             }
         }
+
+        function hideFormatSettings() {
+            const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
+            if(formatSettingsContainer) {
+                formatSettingsContainer.style.display = 'none';
+            }
+        }
+
+        // Hide interface settings
+        function hideInterfaceSettings() {
+            const interfaceSettingsContainer = settingsContainer.querySelector('.interfaceSettings');
+            if(interfaceSettingsContainer) {
+                interfaceSettingsContainer.style.display = 'none';
+            }
+        }
+
+        // Hide Media Library Management
+        function hideMediaLibraryManagementSettings() {
+            const mediaLibraryManagementContainer = settingsContainer.querySelector('.mediaLibraryManagementSettings');
+            if (mediaLibraryManagementContainer) {
+                mediaLibraryManagementContainer.style.display = 'none';
+            } else {
+                // console.log('Basic settings container not found.');
+            }
+        }
+
+          // Function to hide all advanced settings tab contents
+    function hideAllAdvancedSettingsTabsContent() {
+        advancedSettingsTabContent.forEach(tab => {
+            tab.style.display = 'none';  // Hide the tab
+            tab.classList.remove('active');  // Remove active class
+        });
+    }
     
         // Add click event listeners to each tab button
         basicSettingsTabsButtons.forEach(button => {
@@ -548,14 +786,116 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 this.classList.add('active'); // Add active class to the clicked button
             });
         });
+
+        // Add click event listeners to each format tab button
+        formatSettingsTabsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                showFormatSettings();
+                hideAllFormatContent();
+                formatSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+                const selectedTabId = this.getAttribute('data-tab');
+                const selectedTabContent = settingsContainer.querySelector(`#formatSettings${selectedTabId}`);
+                console.log(selectedTabId);
+                if(selectedTabContent){
+                    selectedTabContent.style.display = 'block';
+                    selectedTabContent.classList.add('active');
+                } else {
+                    console.error("No content found for tab ID: ", selectedTabId);
+                }
+                this.classList.add('active');
+            });
+        });
+
+        // Add click event listeners to each interface tab button
+        interfaceSettingsTabsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                showInterfaceSettings();
+                hideAllInterfaceContent();
+                interfaceSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+                const selectedTabId = this.getAttribute('data-tab');
+                const selectedTabContent = settingsContainer.querySelector(`#interfaceSettings${selectedTabId}`);
+                console.log(selectedTabId);
+                if(selectedTabContent){
+                    selectedTabContent.style.display = 'block';
+                    selectedTabContent.classList.add('active');
+                } else {
+                    console.error("No content found for tab ID: ", selectedTabId);
+                }
+                this.classList.add('active');
+            });
+        });
     
+    
+        // Add click event listeners to each media library tab button
+        mediaLibraryManagementTabsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Show Media Library Management container
+                showMediaLibraryManagement();
+        
+                // Hide all tab contents
+                hideAllLibraryManagementTabsContent();
+        
+                // Remove active class from all buttons
+                mediaLibraryManagementTabsButtons.forEach(btn => btn.classList.remove('active'));
+        
+                // Show the selected tab content and add the active class to the clicked button
+                const selectedTabId = this.getAttribute('data-tab');
+                const selectedTabContent = settingsContainer.querySelector(`#mediaLibraryManagement${selectedTabId.charAt(0).toUpperCase() + selectedTabId.slice(1)}`);
+                console.log(selectedTabId);
+                if (selectedTabContent) {
+                    selectedTabContent.style.display = 'block'; // Show the selected tab content
+                    selectedTabContent.classList.add('active'); // Add active class to the selected tab content
+                } else {
+                    console.error("No content found for tab ID:", selectedTabId); // Error
+                }
+        
+                this.classList.add('active'); // Add active class to the clicked button
+            });
+        });
+        
+// Add click event listeners to each advanced settings tab button
+advancedSettingsTabsButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        // Hide all advanced settings tab contents
+        hideAllAdvancedSettingsTabsContent();
+
+        // Remove active class from all buttons
+        advancedSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Show the selected tab content and add the active class to the clicked button
+        const selectedTabId = this.getAttribute('data-tab');
+        const selectedTabContent = settingsContainer.querySelector(`#${selectedTabId}`);
+        if (selectedTabContent) {
+            selectedTabContent.style.display = 'block'; // Show the selected tab content
+            selectedTabContent.classList.add('active'); // Add active class to the selected tab content
+        } else {
+            console.error("No content found for tab ID:", selectedTabId); // Error
+        }
+
+        this.classList.add('active'); // Add active class to the clicked button
+    });
+});
+
+    // Initially hide all advanced settings content
+        hideAllAdvancedSettingsTabsContent();
         hideBasicSettings();
+        hideMediaLibraryManagementSettings();
+        hideFormatSettings();
+        hideInterfaceSettings();
     
         // Trigger click on the Language tab button to display its content by default
         const languageTabButton = settingsContainer.querySelector('.basicSettingsLanguageTabButton');
         if (languageTabButton) {
             languageTabButton.click();
         }
+
+        // Trigger click on the first tab button to display its content by default 
+        const firstAdvancedTabButton = advancedSettingsTabsButtons[0];
+        if (firstAdvancedTabButton) {
+            firstAdvancedTabButton.click(); // Simulate a click on the first tab button to show its content
+        }
+
+
     }
     
     
@@ -638,7 +978,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 document.addEventListener("DOMContentLoaded", function() {
 
     let selectedLanguage = document.getElementById("languageSelect").value; 
-    let folderPath = document.getElementById('musicInputPath').value;
 
     // security page
     let passwordProtection
@@ -771,76 +1110,16 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
         }
-    // -------------------------------- Rescan Settings folder --------------------------------
 
-  
-
-        //   if (e.target && e.target.id === 'rescanButton') {
-        //     e.preventDefault(); // Prevent default behavior
-        //     console.log("Rescan button clicked");
-
-        //     const form = document.getElementById('rescanMediaForm');
-
-        //     // Use dynamic field name or ID if needed
-        //     // const dynamicFieldName = "pref_mediadirs0";  // Dynamically constructed
-        //     // let folderPath = form[dynamicFieldName].value.trim();  // Access form input dynamically
-        //     // let folderPath = document.getElementById('musicInputPath').value.trim();
-        //     let folderPath = form["pref_mediadirs0"].value;
-
-
-
-
-        //     // Get the folder path from the input field ( id: 'musicInputPath')
-        //     // let folderPath = document.getElementById('musicInputPath').value;
-        //     console.log("Captured folder path:", folderPath);
-
-           
-        //     if (folderPath) {
-        //         console.log("Rescan put in for folder path:", folderPath);
-
-        //         updateMediaDirSetting(folderPath);
-
-
-        //     } else {
-        //         console.error("Folder path is empty. Please input a valid path.");
-        //     }    
-        // }
 
     });
 });
 
 
-  //  Testing dynmaic code with random form TO DELETE
-  function rescanMediaForm(form) {
-    console.log("Rescan button clicked");
-
-    // const form = document.getElementById('rescanMediaForm');
-
-
-    let folderPath = form["pref_mediadirs0"].value;
 
 
 
-
-    // Get the folder path from the input field ( id: 'musicInputPath')
-    // let folderPath = document.getElementById('musicInputPath').value;
-    console.log("Captured folder path:", folderPath);
-
-   
-    if (folderPath) {
-        console.log("Rescan put in for folder path:", folderPath);
-
-        updateMediaDirSetting(folderPath);
-
-
-    } else {
-        console.error("Folder path is empty. Please input a valid path.");
-    }    
-}
-
-
-
-// ------------- Language selection  -------------
+// -------------------------------- Language Selection --------------------------------
 function updateLanguageSetting(language) { 
     const data = {
         id: 2,
@@ -864,7 +1143,25 @@ function updateLanguageSetting(language) {
     });
 }
 
-// -------------  Rescan folder path -------------
+// -------------------------------- Rescan Settings folder --------------------------------
+
+function rescanMediaForm(form) {
+    console.log("Rescan button clicked");
+
+    let folderPath = form["pref_mediadirs0"].value;
+    console.log("Captured folder path:", folderPath);
+
+   
+    if (folderPath) {
+        console.log("Rescan put in for folder path:", folderPath);
+        updateMediaDirSetting(folderPath);
+    } else {
+        console.error("Folder path is empty. Please input a valid path.");
+    }    
+}
+
+
+
 function updateMediaDirSetting(folderPath) {
     const formattedPath = [folderPath];
 
@@ -972,6 +1269,1393 @@ function updateSecuritySetting(passwordProtection, username, password, blockInco
     
 }
 
+function playlistsDirectoryForm(form) {
+    console.log("playList Direrctor button clicked");
+
+
+    let folderPath = form["pref_playlistdir0"].value;
+    console.log("Captured folder path for playlists:", folderPath);
+
+   
+    if (folderPath) {
+        console.log("Playlist directory put in for folder path:", folderPath);
+        updatePlaylistPath(folderPath);
+    } else {
+        console.log("Updated to blank, meaning you don't want to save playlists");
+        updatePlaylistPath('');
+
+    }    
+}
+
+
+
+function updatePlaylistPath(folderPath) {
+
+    // const formattedPath = [folderPath];
+
+    const data = {
+        id: 3,
+        method: "slim.request",
+        params: [ "", ["pref", "playlistdir", folderPath]]
+    };
+
+
+    console.log("Sending this data to server:", data); // DEBUG
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Playlist directory updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating playlist directory:", error);
+    });
+}
+
+// --------------------------------  Media Library Name  --------------------------------
+
+function libraryNameForm(form) {
+    console.log("playList Direrctor button clicked");
+
+
+    let libraryName = form["pref_libraryname0"].value;
+    console.log("library Name :", libraryName);
+
+   
+    if (libraryName) {
+        console.log("Playlist directory put in for folder path:", libraryName);
+        updatelibraryName(libraryName);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updatelibraryName('');
+
+    }    
+}
+
+
+
+function updatelibraryName(libraryName) {
+
+    const data = {
+        id: 3,
+        method: "slim.request",
+        params: [ "", ["pref", "libraryname", libraryName]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Library name updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating  Library name:", error);
+    });
+}
+
+// --------------------------------  Browse Artists (Unified Artists)  --------------------------------
+
+function unifiedArtistsForm(form) {
+
+    let unifiedArtists = form["pref_useUnifiedArtistsList"].value;
+    console.log("Unified Artists:", unifiedArtists);
+
+    if (unifiedArtists !== undefined && (unifiedArtists === "0" || unifiedArtists === "1")) {
+        console.log("Submitting unified artists preference: (0 or 1)", unifiedArtists);
+        updateUnifiedArtists(unifiedArtists);
+    } else {
+        console.error("Invalid value for unified artists selection");
+    }   
+}
+
+
+
+function updateUnifiedArtists(unifiedArtists) {
+    
+    const data = {
+        id: 4,
+        method: "slim.request",
+        params: [ "", ["pref", "useUnifiedArtistsList", unifiedArtists]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Browse Artists updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating UnifiedArtists name:", error);
+    });
+}
+
+
+// --------------------------------  Enabling Release Types for Albums (Or ignorring)  --------------------------------
+
+function ignoreReleaseTypesForm(form) {
+    let ignoreReleaseTypes = form["pref_ignoreReleaseTypes"].value;
+
+    console.log("Ignore Release types:", ignoreReleaseTypes);
+
+    if ((ignoreReleaseTypes === "0" || ignoreReleaseTypes === "1")) {
+        console.log("Submitting preferences:", { ignoreReleaseTypes });
+        updateIgnoreReleaseTypes(ignoreReleaseTypes); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateIgnoreReleaseTypes(ignoreReleaseTypes) {
+    const data = {
+        id: 7,
+        method: "slim.request",
+        params: [ "", ["pref", "ignoreReleaseTypes", ignoreReleaseTypes]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("ignoreReleaseTypes updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+// --------------------------------  Recognising EPs and singles  --------------------------------
+function cleanupReleaseTypesForm(form) {
+    const cleanupReleaseTypes = form["pref_cleanupReleaseTypes"].value ? '1' : '0';
+
+    console.log("Recognising Release types:", cleanupReleaseTypes);
+
+    if ((cleanupReleaseTypes === '0' || cleanupReleaseTypes === '1')) {
+        updateCleanupReleaseTypes(cleanupReleaseTypes); 
+        console.log("Submitting preferences:", { cleanupReleaseTypes });
+    } else {
+        console.error("Invalid value for Recognising EPs And singles");
+
+    }
+
+
+}
+
+function updateCleanupReleaseTypes(cleanupReleaseTypes) {
+    const data = {
+        id: 8,
+        method: "slim.request",
+        params: ["pref", "cleanupReleaseTypes", cleanupReleaseTypes]
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+             "Content-Type": "application/json" 
+            },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Cleanup Release Types updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Cleanup Release Types:", error);
+    });
+}
+
+// --------------------------------  Release Types to Include (Grouping) --------------------------------
+function groupArtistAlbumsByReleaseTypeForm(form) {
+    let groupReleaseTypes = form["pref_groupArtistAlbumsByReleaseType"].value;
+
+    console.log("groupArtistAlbumsByReleaseType:", groupReleaseTypes);
+
+    if ((groupReleaseTypes === "0" || groupReleaseTypes === "1" || groupReleaseTypes === "2")) {
+        console.log("Submitting preferences:", { groupReleaseTypes });
+        updateGroupArtistAlbumsByReleaseType(groupReleaseTypes); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateGroupArtistAlbumsByReleaseType(groupReleaseTypes) {
+    const data = {
+        id: 11,
+        method: "slim.request",
+        params: [ "", ["pref", "groupArtistAlbumsByReleaseType", groupReleaseTypes]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("groupArtistAlbumsByReleaseType updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+// --------------------------------  Tag Format setttings --------------------------------
+function tagFormatForm(form) {
+    let tagFormat = form["pref_useTPE2AsAlbumArtist"].value;
+
+    console.log("pref_useTPE2AsAlbumArtist:", tagFormat);
+
+    if ((tagFormat === "0" || tagFormat === "1")) {
+        console.log("Submitting preferences:", { tagFormat });
+        updateTagFormat(tagFormat); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateTagFormat(tagFormat) {
+    const data = {
+        id: 11,
+        method: "slim.request",
+        params: [ "", ["pref", "useTPE2AsAlbumArtist", tagFormat]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("useTPE2AsAlbumArtist updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+// --------------------------------  Change Compilation Name  --------------------------------
+
+function changeCompilationNameForm(form) {
+    let compilationName = form["variousArtistsString"].value;
+    console.log("Compialtion  :", compilationName);
+
+   
+    if (compilationName) {
+        console.log("Compilation Name", compilationName);
+        udpateChangeCompilationName(compilationName)
+        } else {
+        console.log("Updated to blank, meaning iot will be default. Various Artists");
+        udpateChangeCompilationName('')
+    }    
+}
+
+
+
+function udpateChangeCompilationName(compilationName) {
+
+    const data = {
+        id: 3,
+        method: "slim.request",
+        params: [ "", ["pref", "variousArtistsString", compilationName]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Compilation name updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating  Library name:", error);
+    });
+}
+
+
+// --------------------------------  Search within words --------------------------------
+function searchWithinWordForm(form) {
+    let searchWithinWords = form["pref_searchSubString"].value;
+
+    console.log("searchWithinWords:", searchWithinWords);
+
+    if ((searchWithinWords === "0" || searchWithinWords === "1")) {
+        console.log("Submitting preferences:", { searchWithinWords });
+        updateSearchWithinWords(searchWithinWords); 
+    } else {
+        console.error("Invalid value search within words selection");
+
+    }
+}
+
+
+function updateSearchWithinWords(searchWithinWords) {
+    const data = {
+        id: 13,
+        method: "slim.request",
+        params: [ "", ["pref", "searchSubString", searchWithinWords]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Search substring updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+// --------------------------------  Ignored Articles --------------------------------
+function ignoreArticlesForm(form) {
+    let ignoredarticles = form["pref_ignoredarticles"].value;
+
+    console.log("ignoredarticles:", ignoredarticles);
+
+        console.log("Submitting preferences:", { ignoredarticles });
+        updateIgnoredArticles(ignoredarticles); 
+
+
+}
+
+//ignoredarticles
+function updateIgnoredArticles(ignoredarticles) {
+    const data = {
+        id: 13,
+        method: "slim.request",
+        params: [ "", ["pref", "ignoredarticles", ignoredarticles]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Search substring updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+// --------------------------------  Library Filters  --------------------------------
+
+// --------  Genres for Albumms and Tracks  --------
+function noGenreFilterForm(form) {
+    let noGenreFilter = form["pref_noGenreFilter"].value;
+
+    console.log("No Genre Filter:", noGenreFilter);
+
+    if ((noGenreFilter === "0" || noGenreFilter === "1")) {
+        console.log("Submitting preferences:", { noGenreFilter });
+        updateGenreLibraryFilter(noGenreFilter); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateGenreLibraryFilter(noGenreFilter) {
+    const data = {
+        id: 5,
+        method: "slim.request",
+        params: [ "", ["pref", "noGenreFilter", noGenreFilter]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("No genre Filter updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+// --------  Contributor Roles  --------
+
+function noRoleFilterForm(form) {
+    console.log("Form received:", form);  // Debug form element
+
+
+    let noRoleFilter = form["pref_noRoleFilter"].value;
+    console.log("Role Filter:", noRoleFilter);
+
+    if ((noRoleFilter === "0" || noRoleFilter === "1")) {
+        console.log("Submitting preferences:", { noRoleFilter });
+        updateRoleLibraryFilter(noRoleFilter); 
+    } else {
+        console.error("Invalid value for genre or role filter selection");
+
+    }
+}
+
+
+function updateRoleLibraryFilter(noRoleFilter) {
+    const data = {
+        id: 6,
+        method: "slim.request",
+        params: [ "", ["pref", "noRoleFilter", noRoleFilter]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("No Role Filter updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+
+// --------  Age Limit (Amount of albums that display) --------
+function ageLimitForm(form) {
+    let ageLimitFilter = form["pref_browseagelimit"].value;
+        console.log("Role Filter:", ageLimitFilter);
+
+   
+        updateAgeLimitFilter(ageLimitFilter); 
+   
+}
+
+
+function updateAgeLimitFilter(ageLimitFilter) {
+    const data = {
+        id: 15,
+        method: "slim.request",
+        params: [ "", ["pref", "browseagelimit", ageLimitFilter]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Age Limit (albums) updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+// --------  Group Discs --------
+
+
+function groupDiscsForm(form) {
+
+    let groupDiscs = form["pref_groupdiscs"].value;
+    console.log("Group Discs:", groupDiscs);
+
+    if (groupDiscs !== undefined && (groupDiscs === "0" || groupDiscs === "1")) {
+        console.log("Submitting unified artists preference: (0 or 1)", groupDiscs);
+        updategroupDiscs(groupDiscs);
+    } else {
+        console.error("Invalid value for unified artists selection");
+    }   
+}
+
+
+
+function updategroupDiscs(groupDiscs) {
+    
+    const data = {
+        id: 17,
+        method: "slim.request",
+        params: [ "", ["pref", "groupdiscs", groupDiscs]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Group Discs updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating groupDiscs:", error);
+    });
+}
+
+
+
+
+// --------  Playlist Persistence --------
+
+
+function playlistPersistForm(form) {
+
+    let playlistPersist = form["pref_persistPlaylists"].value;
+    console.log("Group Discs:", playlistPersist);
+
+    if (playlistPersist !== undefined && (playlistPersist === "0" || playlistPersist === "1")) {
+        updatePlaylistPersist(playlistPersist);
+    } else {
+        console.error("Invalid value for Playlist Perrsist selection");
+    }   
+}
+
+
+
+function updatePlaylistPersist(playlistPersist) {
+    
+    const data = {
+        id: 18,
+        method: "slim.request",
+        params: [ "", ["pref", "persistPlaylists", playlistPersist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("persistPlaylists updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating persistPlaylists:", error);
+    });
+}
+
+// --------  Save Shuffled Playlists --------
+
+function saveShuffledPlaylistForm(form) {
+
+    let saveShuffledPlaylst = form["pref_saveShuffled"].value;
+    console.log("Save Shuffled:", saveShuffledPlaylst);
+
+    if (saveShuffledPlaylst !== undefined && (saveShuffledPlaylst === "0" || saveShuffledPlaylst === "1")) {
+        updateShuffledPlaylist(saveShuffledPlaylst);
+    } else {
+        console.error("Invalid value for Playlist Perrsist selection");
+    }   
+}
+
+
+
+function updateShuffledPlaylist(shuffledPlaylist) {
+    
+    const data = {
+        id: 19,
+        method: "slim.request",
+        params: [ "", ["pref", "saveShuffled", shuffledPlaylist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("persistPlaylists updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating persistPlaylists:", error);
+    });
+}
+
+
+// --------  Reshuffle On Repeat --------
+
+function reshuffleOnRepeatForm(form) {
+
+    let reshuffleOnRepeat = form["pref_reshuffleOnRepeat"].value;
+    console.log("Save Shuffled:", reshuffleOnRepeat);
+
+    if (reshuffleOnRepeat !== undefined && (reshuffleOnRepeat === "0" || reshuffleOnRepeat === "1")) {
+        updateReshuffleOnRepeat(reshuffleOnRepeat);
+    } else {
+        console.error("Invalid value for pref_reshuffleOnRepeat");
+    }   
+}
+
+
+
+function updateReshuffleOnRepeat(reshuffleOnRepeat) {
+    
+    const data = {
+        id: 20,
+        method: "slim.request",
+        params: [ "", ["pref", "reshuffleOnRepeat", reshuffleOnRepeat]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("reshuffleOnRepeat updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating reshuffleOnRepeat:", error);
+    });
+}
+
+
+
+
+// --------------------------------  Skip Sentinel FileName --------------------------------
+function skipSentinelFileNameForm(form) {
+    let skipSentinel = form["pref_skipsentinel"].value;
+
+    console.log("skipSentinel:", skipSentinel);
+
+        console.log("Submitting preferences:", { skipSentinel });
+        updateSkipSentinel(skipSentinel); 
+
+
+}
+
+//skipSentinel
+function updateSkipSentinel(skipSentinel) {
+    const data = {
+        id: 13,
+        method: "slim.request",
+        params: [ "", ["pref", "skipsentinel", skipSentinel]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("skipsentinel updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+// --------------------------------  Seperrator for multiple items in tags --------------------------------
+function seperatorMultipleItemsTagsForm(form) {
+    let seperatorMultipleItemTags = form["pref_splitList"].value;
+
+    console.log("seperator:", seperatorMultipleItemTags);
+
+        console.log("Submitting preferences:", { seperatorMultipleItemTags });
+        updateSeperatorMultipleItemTags(seperatorMultipleItemTags); 
+
+
+}
+
+//seperatorMultipleItemTags
+function updateSeperatorMultipleItemTags(seperatorMultipleItemTags) {
+    const data = {
+        id: 22,
+        method: "slim.request",
+        params: [ "", ["pref", "splitList", seperatorMultipleItemTags]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("seperatorMultipleItemTags updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+// --------------------------------  Advanced File Types - Disable Extension Audio  --------------------------------
+
+
+function disableExtensionAudioForm(form) {
+    let disabledExtensionsAudio = form["disabledextensionsaudio"].value;
+    console.log("disabledextensionsaudio  :", disabledExtensionsAudio);
+
+   
+    if (disabledExtensionsAudio) {
+        console.log("disabledextensionsaudio", disabledExtensionsAudio);
+        updateDisableExtensionAudioForm(disabledExtensionsAudio)
+        } else {
+        console.log("Updated to blank, meaning it will be blank");
+        updateDisableExtensionAudioForm('')
+    }    
+}
+
+
+
+function updateDisableExtensionAudioForm(disabledExtensionsAudio) {
+
+    const data = {
+        id: 25,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledextensionsaudio", disabledExtensionsAudio]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("disabledextensionsaudio  updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating disabledextensionsaudio:", error);
+    });
+}
+
+
+
+
+
+// --------------------------------  Disabled Playlist File Extensions  --------------------------------
+
+function disableExtensionPlaylistForm(form) {
+    let disabledExtensions = form["disabledextensionsplaylist"].value;
+
+    console.log("disabledextensionsplaylist:", disabledExtensions);
+
+        console.log("Submitting preferences:", { disabledExtensions });
+        updateDisableExtensionPlaylistForm(disabledExtensions); 
+
+
+}
+
+function updateDisableExtensionPlaylistForm(disabledExtensions) {
+    const data = {
+        id: 24,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledextensionsplaylist", disabledExtensions]]
+
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("disabledextensionsplaylist updated:", data);
+    })
+    .catch(error => {
+        console.error("Error updating filters:", error);
+    });
+}
+
+
+
+// --------------------------------  Prioritise Native  --------------------------------
+function checkBoxFileFormatForm(form) {
+    const checkboxOrNot = form["pref_prioritizeNative"].value ? '1' : '0';
+
+    console.log("Priortize Native:", checkboxOrNot);
+
+    if ((checkboxOrNot === '1' || checkboxOrNot === '0')) {
+        updatePriortizeNative(checkboxOrNot); 
+        console.log("Submitting preferences:", { checkboxOrNot });
+    } else {
+        console.error("Invalid value for prioritize native");
+
+    }
+
+
+}
+function updatePriortizeNative(checkboxOrNot) {
+    const data = {
+        id: 27,
+        method: "slim.request",
+        params: ["pref", "prioritizeNative", checkboxOrNot]
+    };
+
+    fetch("http://localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+             "Content-Type": "application/json" 
+            },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("prioritizeNative updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating prioritizeNative:", error);
+    });
+}
+
+
+// ----------------- File type Conversions ----------------
+function fileFormatConversionsForm(form) {
+    let disabledFormats = []
+
+    disabledFormats =     grabAllSelectNames(form);
+
+    console.log("Disabled formats:", disabledFormats);
+
+    // If there are any disabled formats, update the server
+    if (disabledFormats.length > 0) {
+        updateFileFormatConversion(disabledFormats);
+    } else {
+        console.log("No disabled formats found.");
+    }
+
+   
+}
+
+
+
+function updateFileFormatConversion(disabledFormats) {
+    
+    const data = {
+        id: 29,
+        method: "slim.request",
+        params: [ "", ["pref", "disabledformats", disabledFormats]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Disabled Formats updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating disabled Formats name:", error);
+    });
+}
+
+
+function grabAllSelectNames(form) {
+    // Initialize an array to store disabled formats
+    let disabledFormats = [];
+
+    // Select all <select> elements within the form
+    const formSelects = form.querySelectorAll('select');
+
+    // Loop through each <select> element
+    formSelects.forEach(select => {
+        console.log("Select name:", select.name);
+        console.log("Select disabled status:", select.disabled);
+        console.log("Select value:", select.value);
+        
+        // Check if the select element itself is disabled
+        if (select.value === "DISABLED") {
+            console.log("Disabled format found (via disabled attribute):", select.name);
+            // Add the name of the disabled format to the array
+            disabledFormats.push(select.name);
+        }
+      
+    });
+
+    // Return the array of disabled formats
+    return disabledFormats;
+}
+
+
+
+
+// ------- BENS SETTINGS FUNCTIONS ------
+
+// ----- Update Coverart ---
+function coverArtForm(form) {
+    let coverArt = form["pref_coverArt"].value;
+    console.log("Cover Art :", coverArt);
+
+   
+    if (coverArt) {
+        console.log("Cover Artwork default location:", coverArt);
+        updateCoverArt(coverArt);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateCoverArt('');
+
+    }    
+}
+
+function updateCoverArt(coverArt) {
+
+    const data = {
+        id: 14,
+        method: "slim.request",
+        params: [ "", ["pref", "coverArt", coverArt]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Cover Art default updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Cover Art:", error);
+    });
+}
+
+// ----- Update Artwork Folder -----
+function artFolderForm(form) {
+    let artFolder = form["pref_artfolder"].value;
+    console.log("Artwork Folder :", artFolder);
+
+   
+    if (artFolder) {
+        console.log("Artwork Folder location:", artFolder);
+        updateArtFolder(artFolder);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateArtFolder('');
+
+    }    
+}
+
+function updateArtFolder(artFolder) {
+
+    const data = {
+        id: 15,
+        method: "slim.request",
+        params: [ "", ["pref", "artfolder", artFolder]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Artwork Folder updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Artwork Folder:", error);
+    });
+}
+
+// --- UPDATE SHOW ARTIST ---
+function showArtistForm(form){
+    let showArtist = form["pref_showArtist"].value;
+    console.log("Show Artists: ", showArtist);
+    updateShowArtist(showArtist);
+}
+
+function updateShowArtist(showArtist){
+    const data = {
+        id: 16,
+        method: "slim.request",
+        params: [ "", ["pref", "showArtist", showArtist]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Show Artist updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Show Artist:", error);
+    });
+}
+
+// --- UPDATE SHOW YEAR ---
+function showYearForm(form){
+    let showYear = form["pref_showYear"].value;
+    console.log("Show Year: ", showYear);
+    updateShowYear(showYear);
+}
+
+function updateShowYear(showYear){
+    const data = {
+        id: 16,
+        method: "slim.request",
+        params: [ "", ["pref", "showYear", showYear]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Show Year updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Show Year:", error);
+    });
+}
+
+
+// ---- SLIDER ---- ///
+/*
+document.addEventListener("DOMContentLoaded", function(){
+    document.body.addEventListener('input', function(e){
+        if(e.target && e.target.id == "itemsPerPage"){
+            console.log(e.target.value);
+            const perPageValue = document.querySelector("#itemsPerPageValue");
+            if(perPageValue){
+                console.log("Exists");
+            } else {
+                console.log("Doesnt");
+            }
+            console.log(perPageValue.textContent);
+            perPageValue.textContent = e.target.value;
+        }
+    });
+    const perPageInput = document.querySelector("#itemsPerPage");
+    const perPageValue = document.querySelector("#itemsPerPageValue");
+    perPageValue.textContent = perPageInput.value;
+});*/
+
+// -- UPDATE ITEMS PER PAGE -- //
+function perPageForm(form) {
+    let perPage = Number(form["pref_itemsPerPage"].value);
+    if (perPage < 10) updatePerPage(10);
+    else if(perPage > 500) updatePerPage(500);
+    else {
+        if(perPage) updatePerPage(perPage);
+    }
+}
+
+function updatePerPage(perPage) {
+    const data = {
+        id: 16,
+        method: "slim.request",
+        params: [ "", ["pref", "itemsPerPage", perPage]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Items per page updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Items Per Page:", error);
+    });
+}
+
+
+// -- TITLE FORMAT WEB -- //
+function titleFormatWebForm(form) {
+    let titleFormatWeb = form["pref_titleFormatWeb"].value;
+    console.log("Selected Title Format Value: ", titleFormatWeb);
+    updateTitleFormatWeb(titleFormatWeb);
+}
+
+function updateTitleFormatWeb(titleFormatWeb) {
+    const data = {
+        id: 17,
+        method: "slim.request",
+        params: [ "", ["pref", "titleFormatWeb", titleFormatWeb]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Title format updated to index:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Title Format:", error);
+    });
+}
+
+// -- CUSTOM TITLE FORMAT -- //
+function titleFormatForm(form) {
+    let titleFormat = form["pref_titleFormat"].value;
+    console.log("New Title Format: ", titleFormat);
+    updateTitleFormat(titleFormat);
+}
+
+function updateTitleFormat(titleFormat) {
+    const data = {
+        id: 18,
+        method: "slim.request",
+        params: [ "", ["pref", "titleFormat", titleFormat]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Title format updated to index:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Title Format:", error);
+    });
+    updateTitleFormatWeb(9); // Changes the index to the newly created custom index in the array
+}
+
+// -- THUMBNAIL SIZE -- //
+function thumbSizeForm(form) {
+    let thumbSize = Number(form["pref_thumbSize"].value);
+    if (thumbSize < 25) updateThumbSize(25);
+    else if(thumbSize > 250) updateThumbSize(250);
+    else {
+        if(thumbSize) updateThumbSize(thumbSize);
+    }
+}
+
+function updateThumbSize(thumbSize) {
+    const data = {
+        id: 19,
+        method: "slim.request",
+        params: [ "", ["pref", "thumbSize", thumbSize]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Thumbnail size updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Thumbnail Size:", error);
+    });
+}
+
+// -- REFRESH RATE -- //
+function refreshRateForm(form) {
+    let refreshRate = Number(form["pref_refreshRate"].value);
+    if (refreshRate < 2) updateRefreshRate(2);
+    else if(refreshRate > 300) updateRefreshRate(300);
+    else {
+        if(refreshRate) updateRefreshRate(refreshRate);
+    }
+}
+
+function updateRefreshRate(refreshRate) {
+    const data = {
+        id: 20,
+        method: "slim.request",
+        params: [ "", ["pref", "refreshRate", refreshRate]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Refresh Rate updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Refresh Rate:", error);
+    });
+}
+
+// -- TEXT TIMEOUT -- //
+function displaytexttimeoutForm(form) {
+    let displaytexttimeout = Number(form["pref_displaytexttimeout"].value);
+    if (displaytexttimeout < 1) updatedisplaytexttimeout(1);
+    else if(displaytexttimeout > 100) updatedisplaytexttimeout(100);
+    else {
+        if(displaytexttimeout) updatedisplaytexttimeout(displaytexttimeout);
+    }
+}
+
+function updatedisplaytexttimeout(displaytexttimeout) {
+    const data = {
+        id: 21,
+        method: "slim.request",
+        params: [ "", ["pref", "displaytexttimeout", displaytexttimeout]]
+    };
+
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Text Entry Timing updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Text Entry Timing:", error);
+    });
+}
+
+// --- DISPLAY DATA --- //
+function getPref(display, listElementId){
+    fetch(`http://localhost:9000/capstone/jsonrpc.js?display=${display}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        //const listElement = document.getElementById(listElementId);
+        //listElement.innerHTML = '';
+        console.log(data.value);
+    })
+    .catch(error => {
+        console.error(`Error fetching ${display}:`, error);
+    });
+}
 
 // document.getElementById('allSongs').addEventListener('click', function() {
 //     // Create the JSON-RPC request to get the media directories
@@ -1002,3 +2686,11 @@ function updateSecuritySetting(passwordProtection, username, password, blockInco
 //     });
 // });
 
+
+
+
+
+// Export fucntions for testing
+module.exports = {
+    rescanMedia,
+};
