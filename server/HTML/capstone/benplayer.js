@@ -225,3 +225,5 @@ infoPanelBtn.addEventListener('click', function () {
     }
 });
 
+module.exports = { updateShuffleState };
+
