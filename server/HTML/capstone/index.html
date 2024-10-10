@@ -70,6 +70,7 @@
                                         <div class="advancedSettingsTabs">                                        
                                             <button class="advancedSettingsMediaLibraryManagementTabButton active" data-tab="advancedSettingsMediaLibraryManagement">Advanced Media Library Management</button>
                                             <button class="advancedSettingsFileTypesTabButton active" data-tab="advancedFileTypes">Advanced File Types</button>
+                                            <button class="advancedSettingsSecurityTabButton active" data-tab="security">Security</button>
                                         </div>
                                             
                                         <div class="advancedSettingsMediaLibraryManagementTab active" id="advancedSettingsMediaLibraryManagement"> 
@@ -1435,7 +1436,11 @@
 
 
                                         </div>
-                                    </div>                            
+                                        <div class="advancedSettingsSecurityTab active" id="security">
+                                            <iframe name="settings" width="100%" frameborder="0" scrolling="auto" id="securityIframe" style="display: block; width: 100%;"></iframe>  
+                                        </div>
+
+                                    </div>
                                 </div>
                            
                                 <div class="basicSettings" id="basicSettings">
@@ -1447,7 +1452,6 @@
                                         <button class="basicSettingsLanguageTabButton active" data-tab="language">Language</button>
                                         <button class="basicSettingsMediaFoldersTabButton" data-tab="mediaFolders">Media Folders</button>
                                         <button class="basicSettingsPlaylistsTabButton" data-tab="playlistsFolder">Playlists Folder</button>
-                                        <button class="basicSettingsSecurityTabButton" data-tab="security">Security</button>
                                     </div>
                           
                                     <div class="settingsContent">
@@ -1582,11 +1586,7 @@
                                                              
                                 
 
-                                        <div class="basicSettingsSecurityTab" id="security">
-                                            <div class="security" id="securityInnerHTML"></div>
-                                            <iframe name="settings" width="100%" frameborder="0" scrolling="auto" id="securityIframe" style="display: none;"></iframe>
-                                        </div>
-
+                                        
                                   </div>
 
 

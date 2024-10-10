@@ -242,23 +242,6 @@ Main = {
 						});
 					}
 				}
-
-				// const softwareIframe = document.getElementById('softwareIframe');
-				// const securityIframe = document.getElementById('securityIframe');
-				// softwareIframe.onload = function() {
-				// 	const bodyContent = softwareIframe.contentDocument.body.innerHTML;
-				// 	const contentDiv = document.getElementById('softwareInnerHTML')
-				// 	contentDiv.innerHTML = bodyContent
-				// }
-				// securityIframe.onload = function() {
-				// 	const bodyContent = securityIframe.contentDocument.body.innerHTML;
-				// 	const contentDiv = document.getElementById('securityInnerHTML')
-				// 	contentDiv.innerHTML = bodyContent
-				// 	console.log(securityIframe)
-				// }
-
-				// securityIframe.src = '[% webroot %]settings/server/security.html';
-				// softwareIframe.src = '[% webroot %]settings/server/software.html';
 			},
 		
 			show: function(inputField, filter){
