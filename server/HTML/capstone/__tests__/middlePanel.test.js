@@ -13,12 +13,12 @@ global.SqueezeJS = {
 
 document.body.innerHTML = html;
 
-describe('Button functionality', () => {
+describe('Button functions working', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
 
-    test('see if the togglePause function works', () => {
+    test('see if togglePause  works', () => {
         // Button exists
         const playPauseButton = document.getElementById('playPause');
         expect(playPauseButton).toBeInTheDocument();

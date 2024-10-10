@@ -1089,7 +1089,6 @@ document.addEventListener("DOMContentLoaded", function() {
             insecureHTTPS = e.target.value;
         }
 
-
         // Check if the test button was clicked
         if (e.target && e.target.id === 'testButton') {
             console.log('testButton clicked');
