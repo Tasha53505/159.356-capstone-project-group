@@ -461,6 +461,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
     document.body.appendChild(settingsContainer);
 
+
     settingsContainer.querySelector('.backButtonSettings').addEventListener('click', function() {
         settingsContainer.classList.remove('showSettings');
         setTimeout(function() {
@@ -625,16 +626,16 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const advancedSettingsButtonClasses  = [
             '.advancedSettingsMediaLibraryManagementTabButton',
             '.advancedSettingsFileTypesTabButton',
+            '.advancedSettingsSecurityTabButton'
         ];
         const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
 
         const advancedSettingsContentClasses = [
             '#advancedSettingsMediaLibraryManagement', // 
             '#advancedFileTypes', //
+            '#security'
         ];
         const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
-
-
     
         // Function to hide all tab contents
         function hideAllTabsContent() {
@@ -954,6 +955,30 @@ advancedSettingsTabsButtons.forEach(button => {
             updateTabListeners();
     
             advancedButton.click();
+
+
+
+            const rect = document.getElementsByClassName('advancedSettingsTabs')[1].getBoundingClientRect()
+            const duplicates = document.querySelectorAll('[id="securityIframe"]');
+            // Check for duplicate elements
+            if (duplicates.length > 1) {
+                // Delete the first element
+                duplicates[0].remove();
+                // console.log('The element with the first duplicate ID has been deleted.');
+            }
+            // Calculate the distance from the top of the inner div to the bottom of the viewport
+            const distanceToViewportBottom = window.innerHeight - rect.bottom;
+
+            // console.log('The distance from the top of the internal div to the bottom of the viewport:', distanceToViewportBottom);
+            const securityIframe = document.getElementById('securityIframe');
+            securityIframe.setAttribute('style', 'height: ' + (distanceToViewportBottom - 70) + 'px')
+            // securityIframe.style.height =  (distanceToViewportBottom - 20) + 'px'
+            securityIframe.onload = function () {
+                // console.log(securityIframe)
+                console.log('load security iframe')
+            }
+            securityIframe.src = 'settings/server/security.html'
+            
         }
     }
     
@@ -980,34 +1005,24 @@ document.addEventListener("DOMContentLoaded", function() {
     let selectedLanguage = document.getElementById("languageSelect").value; 
 
     // security page
-    let passwordProtection
-    let username
-    let password
-    let blockIncomingConnection
-    let allowedIPAddresses
-    let csrfProtectionLevel
-    let corsAllowedHosts
-    let insecureHTTPS = 0
-    const securityIframe = document.getElementById('securityIframe');
-    securityIframe.onload = function() {
-        const bodyContent = securityIframe.contentDocument.body.innerHTML;
-        const contentDiv = document.getElementById('securityInnerHTML')
-        contentDiv.innerHTML = bodyContent
+    // const securityIframe = document.getElementById('securityIframe');
+    // securityIframe.onload = function() {
+    //     const outerDiv = document.getElementsByClassName('settingsContainerClicked')[0];
+    //     const innerDiv = document.getElementById('security');
 
-        // console.log(securityIframe)
+    //     const outerRect = outerDiv.getBoundingClientRect();
+    //     const outerBottom = outerRect.bottom;
 
-        passwordProtection = document.getElementById("authorize").value; 
-        username = document.getElementById("username").value;
-        password = document.getElementById("password").value;
-        blockIncomingConnection = document.getElementById("filterHosts").value;
-        allowedIPAddresses = document.getElementById("allowedHosts").value;
-        csrfProtectionLevel = document.getElementById("csrfProtectionLevel").value;
-        corsAllowedHosts = document.getElementById("corsAllowedHosts").value;
+    //     const innerRect = innerDiv.getBoundingClientRect();
+    //     const innerTop = innerRect.top;
 
-        if (document.getElementById("insecureHTTPS"))
-            insecureHTTPS = document.getElementById("insecureHTTPS").value;
-    }
-    securityIframe.src = 'settings/server/security.html';
+    //     const distanceToOuterBottom = outerBottom - innerTop;
+
+    //     console.log('内部 div 顶部到外部 div 底部的距离:', distanceToOuterBottom);
+    // }
+    // securityIframe.src = 'settings/server/security.html';
+
+    
 
     
 
@@ -1081,36 +1096,35 @@ document.addEventListener("DOMContentLoaded", function() {
         } 
         
         // Check if the save settings button was clicked
-        if (e.target && e.target.id === 'saveSettings') {
-            e.preventDefault(); // Prevent default behavior
+        // if (e.target && e.target.id === 'saveSettings') {
+        //     e.preventDefault(); // Prevent default behavior
 
-            // check active page
-            const buttons = document.querySelectorAll('.basicSettingsTabs button');
-            // console.log(buttons)
-            buttons.forEach(button => {
-                if (button.classList.contains('active')) {
-                    // console.log('Active button found:', button);
-                    currentActivePage = button.textContent
-                }
-            });
+        //     // check active page
+        //     const buttons = document.querySelectorAll('.basicSettingsTabs button');
+        //     // console.log(buttons)
+        //     buttons.forEach(button => {
+        //         if (button.classList.contains('active')) {
+        //             // console.log('Active button found:', button);
+        //             currentActivePage = button.textContent
+        //         }
+        //     });
 
-            console.log("Save Settings BUTTON CLICKED");
-            console.log("Selected language inside saveSettings:", selectedLanguage); // Log the selected language
+        //     console.log("Save Settings BUTTON CLICKED");
+        //     console.log("Selected language inside saveSettings:", selectedLanguage); // Log the selected language
 
-            // Send a JSON-RPC request to update the language in the server.prefs file
-            console.log("current active page", currentActivePage)
+        //     // Send a JSON-RPC request to update the language in the server.prefs file
+        //     console.log("current active page", currentActivePage)
 
-            switch (currentActivePage) {
-                case 'Language':
-                    updateLanguageSetting(selectedLanguage);
-                    break
-                case 'Security':
-                    updateSecuritySetting(passwordProtection, username, password, blockIncomingConnection, allowedIPAddresses, csrfProtectionLevel, corsAllowedHosts, insecureHTTPS)
-                    break
-            }
+        //     switch (currentActivePage) {
+        //         case 'Language':
+        //             updateLanguageSetting(selectedLanguage);
+        //             break
+        //         case 'Security':
+        //             updateSecuritySetting(passwordProtection, username, password, blockIncomingConnection, allowedIPAddresses, csrfProtectionLevel, corsAllowedHosts, insecureHTTPS)
+        //             break
+        //     }
             
-        }
-
+        // }
 
     });
 });

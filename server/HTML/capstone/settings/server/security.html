@@ -1,56 +1,172 @@
-[% WRAPPER settingSection %]
-	[% WRAPPER settingGroup title="SETUP_AUTHORIZE" desc="SETUP_AUTHORIZE_DESC" %]
-		<select class="stdedit" name="pref_authorize" id="authorize">
+[% IF userAgent.match('(?i)Android|WebKit.*Mobile|MSIE.*Mobile|Opera Mini');
+      mobileBrowser = 1;
+   END %]
+[%- BLOCK pluginLink -%]
+[%- END -%]
+[% IF NOT ajaxUpdate %]
+<!-- Begin settingsheader.html -->
+[% FILTER null %]
 
-			<option [% IF NOT prefs.pref_authorize %]selected [% END %]value="0">[% 'SETUP_NO_AUTHORIZE' | getstring %]</option>
-			<option [% IF prefs.pref_authorize %]selected [% END %]value="1">[% 'SETUP_AUTHORIZE' | getstring %]</option>
+	[% IF NOT useTabList; pwd_list = BLOCK %]
 
-		</select>
-	[% END %]
-
-	[% WRAPPER settingGroup title="SETUP_USERNAME" desc="" %]
-		<input type="text" class="stdedit" name="pref_username" id="username" value="[% prefs.pref_username | html %]" size="40">
-	[% END %]
-
-	[% WRAPPER settingGroup title="SETUP_PASSWORD" desc="" %]
-		<input type="password" class="stdedit" name="pref_password" id="password" value="[% prefs.pref_password | html %]" size="40">
-	[% END %]
-
-[% END %]
-
-[% WRAPPER settingSection %]
-	[% WRAPPER settingGroup title="SETUP_IPFILTER_HEAD" desc="SETUP_IPFILTER_DESC" %]
-		<select class="stdedit" name="pref_filterHosts" id="filterHosts">
-
-			<option [% IF NOT prefs.pref_filterHosts %]selected [% END %]value="0">[% 'SETUP_NO_IPFILTER' | getstring %]</option>
-			<option [% IF prefs.pref_filterHosts %]selected [% END %]value="1">[% 'SETUP_IPFILTER' | getstring %]</option>
-
-		</select>
-	[% END %]
-
-	[% WRAPPER settingGroup title="SETUP_FILTERRULE_HEAD" desc="SETUP_FILTERRULE_DESC" %]
-		<input type="text" class="stdedit" name="pref_allowedHosts" id="allowedHosts" value="[% prefs.pref_allowedHosts | html %]" size="40">
-	[% END %]
-
-	[% WRAPPER settingGroup title="SETUP_CSRFPROTECTIONLEVEL" desc="SETUP_CSRFPROTECTIONLEVEL_DESC" %]
-		<select class="stdedit" name="pref_csrfProtectionLevel" id="csrfProtectionLevel">
-
-			<option [% IF prefs.pref_csrfProtectionLevel == 0 %]selected [% END %]value="0">[% 'NONE' | getstring %]</option>
-			<option [% IF prefs.pref_csrfProtectionLevel == 1 %]selected [% END %]value="1">[% 'MEDIUM' | getstring %]</option>
-			<option [% IF prefs.pref_csrfProtectionLevel == 2 %]selected [% END %]value="2">[% 'HIGH' | getstring %]</option>
-
-		</select>
-	[% END %]
-
-	[% WRAPPER settingGroup title="SETUP_CORS_ALLOWED_HOSTS" desc="SETUP_CORS_ALLOWED_HOSTS_DESC" %]
-		<input type="text" class="stdedit" name="pref_corsAllowedHosts" id="corsAllowedHosts" value="[% prefs.pref_corsAllowedHosts | html %]" size="40">
-	[% END %]
-
-	[% IF enforceInsecureHTTPS %]
-		<input type="hidden" name="pref_insecureHTTPS" value="[% prefs.pref_insecureHTTPS | html %]" />
-	[% ELSE; WRAPPER settingGroup title="SETUP_INSECURE_HTTPS" desc="SETUP_INSECURE_HTTPS_DESC" %]
-		<input type="checkbox" name="pref_insecureHTTPS" id="insecureHTTPS" [% IF prefs.pref_insecureHTTPS %] checked="checked" [% END %] />
-		<label for="insecureHTTPS">[% "SETUP_INSECURE_HTTPS2" | string %]</label>
 	[% END; END %]
+
+	[% pageHeaderScripts = BLOCK %]
+		[% pageHeaderScripts %]
+		<script type="text/javascript" src="[% webroot %]html/prototype.js?r=[% revision %]" ></script>
+		<script type="text/javascript" src="[% webroot %]html/scriptaculous/scriptaculous.js?load=effects,controls&amp;r=[% revision %]" ></script>
+		<script type="text/javascript" src="[% webroot %]html/global.js?r=[% revision %]" ></script>
+		<script type="text/javascript">
+			[% PROCESS html/settings.js %]
+			[%- IF NOT useTabList %]
+			new Event.observe(window, 'load', function(){ initSettingsForm(); });
+			[%- END %]
+		</script>
+
+		
+		<style>
+			body {
+				background-color: #3A456D !important;
+			}
+
+			.settingGroup input {
+				width: 90%;
+			}
+
+		</style>
+		<link rel="stylesheet" href="../../playlistHome.css">
+		<link rel="stylesheet" href="../../infoPanel.css">
+	[% END %]
+
+	[% IF useTabList; pageHeaderInfo = BLOCK %]
+ 		
+ 	[% END; END %]
+
 [% END %]
+
+[% noSpacer = 1; PROCESS pageheader.html noHomeLink=mobileBrowser %]
+[% IF playerid && needsClient; pagetitle='PLAYER_SETTINGS' | string; ELSE; pagetitle = 'SERVER_SETTINGS' | string; END %]
+
+<div id="statusarea" class="statusarea">
+	[%- IF warning %]
+		[% warning %]
+	[% END -%]
+</div>
+
+<div id="settingsRegion">
+[% END %]
+<form name="settingsForm" id="settingsForm" method="post" action="[% webroot %][% path %][% IF playerid %]?playerid=[% playerid | uri %][% END %]">
+<div id="innerSettingsBlock">
+<div id="fileselectorautocomplete" class="fileselectorautocomplete" style="display:none"></div>
+<div id="fileselectorindicator" class="fileselectorindicator" style="display:none"><img src="/html/images/wait.gif"></div>
+
+	<input type=hidden value="0" name="useAJAX">
+	<input type=hidden value="[% page %]" name="page">
+	[% IF playerid && needsClient %]<input type=hidden value="[% playerid | html %]" name="playerid">[% END %]
+	[% IF player %]<input type=hidden value="[% player | html %]" name="player">[% END %]
+
+	[% WRAPPER settingSection %]
+		[% WRAPPER settingGroup title="SETUP_AUTHORIZE" desc="SETUP_AUTHORIZE_DESC" %]
+			<select class="stdedit" name="pref_authorize" id="authorize">
+
+				<option [% IF NOT prefs.pref_authorize %]selected [% END %]value="0">[% 'SETUP_NO_AUTHORIZE' | getstring %]</option>
+				<option [% IF prefs.pref_authorize %]selected [% END %]value="1">[% 'SETUP_AUTHORIZE' | getstring %]</option>
+
+			</select>
+		[% END %]
+
+		[% WRAPPER settingGroup title="SETUP_USERNAME" desc="" %]
+			<input type="text" class="stdedit" name="pref_username" id="username" value="[% prefs.pref_username | html %]" size="40">
+		[% END %]
+
+		[% WRAPPER settingGroup title="SETUP_PASSWORD" desc="" %]
+			<input type="password" class="stdedit" name="pref_password" id="password" value="[% prefs.pref_password | html %]" size="40">
+		[% END %]
+
+		[% WRAPPER settingGroup title="SETUP_PASSWORD_REPEAT" desc="" %]
+			<input type="password" class="stdedit" name="pref_password_repeat" id="password" value="[% prefs.pref_password | html %]" size="40">
+		[% END %]
+	[% END %]
+
+	[% WRAPPER settingSection %]
+		[% WRAPPER settingGroup title="SETUP_IPFILTER_HEAD" desc="SETUP_IPFILTER_DESC" %]
+			<select class="stdedit" name="pref_filterHosts" id="filterHosts">
+
+				<option [% IF NOT prefs.pref_filterHosts %]selected [% END %]value="0">[% 'SETUP_NO_IPFILTER' | getstring %]</option>
+				<option [% IF prefs.pref_filterHosts %]selected [% END %]value="1">[% 'SETUP_IPFILTER' | getstring %]</option>
+
+			</select>
+		[% END %]
+
+		[% WRAPPER settingGroup title="SETUP_FILTERRULE_HEAD" desc="SETUP_FILTERRULE_DESC" %]
+			<input type="text" class="stdedit" name="pref_allowedHosts" id="allowedHosts" value="[% prefs.pref_allowedHosts | html %]" size="40">
+		[% END %]
+
+		[% WRAPPER settingGroup title="SETUP_CSRFPROTECTIONLEVEL" desc="SETUP_CSRFPROTECTIONLEVEL_DESC" %]
+			<select class="stdedit" name="pref_csrfProtectionLevel" id="csrfProtectionLevel">
+
+				<option [% IF prefs.pref_csrfProtectionLevel == 0 %]selected [% END %]value="0">[% 'NONE' | getstring %]</option>
+				<option [% IF prefs.pref_csrfProtectionLevel == 1 %]selected [% END %]value="1">[% 'MEDIUM' | getstring %]</option>
+				<option [% IF prefs.pref_csrfProtectionLevel == 2 %]selected [% END %]value="2">[% 'HIGH' | getstring %]</option>
+
+			</select>
+		[% END %]
+
+		[% WRAPPER settingGroup title="SETUP_CORS_ALLOWED_HOSTS" desc="SETUP_CORS_ALLOWED_HOSTS_DESC" %]
+			<input type="text" class="stdedit" name="pref_corsAllowedHosts" id="corsAllowedHosts" value="[% prefs.pref_corsAllowedHosts | html %]" size="40">
+		[% END %]
+
+		[% IF enforceInsecureHTTPS %]
+			<input type="hidden" name="pref_insecureHTTPS" value="[% prefs.pref_insecureHTTPS | html %]" />
+		[% ELSE; WRAPPER settingGroup title="SETUP_INSECURE_HTTPS" desc="SETUP_INSECURE_HTTPS_DESC" %]
+			<input type="checkbox" name="pref_insecureHTTPS" id="insecureHTTPS" [% IF prefs.pref_insecureHTTPS %] checked="checked" [% END %] />
+			<label for="insecureHTTPS">[% "SETUP_INSECURE_HTTPS2" | string %]</label>
+		[% END; END %]
+	[% END %]
+
+	<input type="hidden" name="pageAntiCSRFToken" value="[% pageAntiCSRFToken | html %]">
+
+[%- IF versionInfo -%]<br>
+
+	<div class="settingSection">
+
+		<div class="prefHead">[% "INFORMATION_DIAGSTRING" | string  %]</div>
+
+		[% IF versionInfo -%]
+			<p>[% versionInfo %]</p>
+		[%- END %]
+
+		[%- IF newVersion %]
+			<p>[% newVersion %]</p>
+		[% END -%]
+	</div>
+[%- END %]
+
+[%# add event handlers to all fields which have a validator %]
+<script type="text/javascript">
+	[%- FOREACH pref = validate; IF pref.value %]
+	new Event.observe('[% pref.key %]', 'blur', function(){ prefValidate($('[% pref.key %]'), '[% namespace %]'); } );
+	[%- END; END %]
+
+	// add an event handler to folder/file selector fields
+	$$('.selectFolder').each(function(ele) {
+		new Ajax.FileSelector(ele, true);
+	});
+
+	$$('.selectFile').each(function(ele) {
+		new Ajax.FileSelector(ele, false);
+	});
+</script>
+</div>
+<div id="prefsSubmit">
+	[%- IF NOT nosubmit %]<input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="[% "SAVE_SETTINGS" | string %]">[% END %]
+	<input type="hidden" name="saveSettings" value="1">
+</div>
+</form>
+[%- IF NOT ajaxUpdate -%]
+</div>
+<!-- End settingsfooter.html -->
+[%- PROCESS pagefooter.html -%]
+[%- END -%]
+
 
