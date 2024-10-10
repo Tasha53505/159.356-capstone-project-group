@@ -960,16 +960,16 @@ advancedSettingsTabsButtons.forEach(button => {
 
             const rect = document.getElementsByClassName('advancedSettingsTabs')[1].getBoundingClientRect()
             const duplicates = document.querySelectorAll('[id="securityIframe"]');
-            // 检查是否存在重复的元素
+            // Check for duplicate elements
             if (duplicates.length > 1) {
-                // 删除第一个元素
+                // Delete the first element
                 duplicates[0].remove();
-                // console.log('已删除第一个重复 ID 的元素。');
+                // console.log('The element with the first duplicate ID has been deleted.');
             }
-            // 计算内部 div 顶部到视口底部的距离
+            // Calculate the distance from the top of the inner div to the bottom of the viewport
             const distanceToViewportBottom = window.innerHeight - rect.bottom;
 
-            // console.log('内部 div 顶部到视口底部的距离:', distanceToViewportBottom);
+            // console.log('The distance from the top of the internal div to the bottom of the viewport:', distanceToViewportBottom);
             const securityIframe = document.getElementById('securityIframe');
             securityIframe.setAttribute('style', 'height: ' + (distanceToViewportBottom - 70) + 'px')
             // securityIframe.style.height =  (distanceToViewportBottom - 20) + 'px'
