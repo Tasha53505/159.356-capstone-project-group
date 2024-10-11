@@ -70,6 +70,7 @@
                                         <div class="advancedSettingsTabs">                                        
                                             <button class="advancedSettingsMediaLibraryManagementTabButton active" data-tab="advancedSettingsMediaLibraryManagement">Advanced Media Library Management</button>
                                             <button class="advancedSettingsFileTypesTabButton active" data-tab="advancedFileTypes">Advanced File Types</button>
+                                            <button class ="advancedSettingsFormatTabButton active" data-tab="formatSettings">Formatting</button>
                                             <button class="advancedSettingsSecurityTabButton active" data-tab="security">Security</button>
                                             <button class="advancedSettingsSoftwareUpdateTabButton active" data-tab="software">Software Update</button>
                                         </div>
@@ -1437,6 +1438,32 @@
 
 
                                         </div>
+                                        <div class="advancedSettingsFormatTab active" id="formatSettings">
+                                            [% WRAPPER setting title="SETUP_COVERART" desc="SETUP_COVERART_DESC" %]
+                                            [% prefs.pref_coverArt | html %]
+                                            <form id="coverArtForm" class="">
+                                                <input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="" size="40">
+                                                <div class="prefs">
+                                                    <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save Default Artwork"><br><br>
+                                                </div>
+                                            </form>
+                                            [% END %]
+    
+                                            [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
+                                            [% prefs.pref_artfolder | html %]
+                                            <p>Data provided MUST be in a file format</p>
+                                            <form id="artworkFolderForm" class="">
+                                                <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
+                                                <div class="prefs"></div>
+                                                    <input name="pref_update_artfolder" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="artFolderUpdateButton" onclick="artFolderForm(this.form); return false;"  value="Save Artwork Folder"><br><br>
+                                                </div>
+                                            </form>
+    
+                                            [% END %]
+    
+                                        </div>                                       
+                                        
+
                                         <div class="advancedSettingsSecurityTab active" id="security">
                                             <iframe name="settings" width="100%" frameborder="0" scrolling="auto" id="securityIframe" style="display: block; width: 100%;"></iframe>  
                                         </div>
@@ -1598,50 +1625,6 @@
 
                                 </div>
                             <!------------- Basic Settings Language Tab Content End ------------->
-
-                            <!------------- Formatting Settings --------------------------------->
-                            <div class = "formatSettings" id = "formatSettings">
-                                <hr  style="margin-top: 0px; margin-bottom: 0.5em;"/>
-                                <div class= "formatSettingsTabs">
-                                    <button class ="formatSettingsArtworkTabButton active" data-tab="Artwork">Artwork</button>
-                                    <button class ="formatSettingsGuessTagsTabButton" data-tab="GuessTags">Guess Tags Formats</button> <!-- MAKE THIS A TEXT BOX THAT CHANGES COMMAS TO ARRAY DIVIDERS -->
-                                </div>
-
-                                <div class="formatSettingsContent"><br>
-                                    <div class="formatSettingsArtworkTab active" id="formatSettingsArtwork">
-                                        [% WRAPPER setting title="SETUP_COVERART" desc="SETUP_COVERART_DESC" %]
-                                        [% prefs.pref_coverArt | html %]
-                                        <form id="coverArtForm" class="">
-                                            <input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="" size="40">
-                                            <div class="prefs">
-                                                <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save"><br><br>
-                                            </div>
-                                        </form>
-                                        [% END %]
-
-                                        [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
-                                        [% prefs.pref_artfolder | html %]
-                                        <p>Data provided MUST be in a file format</p>
-                                        <form id="artworkFolderForm" class="">
-                                            <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
-                                            <div class="prefs"></div>
-                                                <input name="pref_update_artfolder" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="artFolderUpdateButton" onclick="artFolderForm(this.form); return false;"  value="Save"><br><br>
-                                            </div>
-                                        </form>
-
-                                        [% END %]
-
-                                    </div>
-                                    <div class="formatSettingsGuessTagsTab" id="formatSettingsGuessTags">
-                                        [% WRAPPER setting title="SETUP_GUESSFILEFORMATS" desc="SETUP_GROUP_GUESSFILEFORMATS_DESC" %]
-                                        <p>UNDER WORK, CAN'T DO UNTIL GET SOLUTION IS FOUND</p>
-                                        <button id="addFormatButton">Add Format</button>
-
-                                        [% END %]
-                                    </div>
-                                </div>
-
-                            </div>
 
                             <!------------ INTERFACE SETTINGS -->
                             <div class = "interfaceSettings" id = "interfaceSettings">
