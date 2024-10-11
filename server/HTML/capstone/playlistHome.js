@@ -445,9 +445,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <div class="tabContent" id="basic-info">
                 <div class="basicSettingsContent"></div>
             </div>
-            <div class="tabContent" id="formatting">
-                <div class="formatSettingsContent"></div>
-            </div>
             <div class="tabContent" id="interface">
                 <div class="interfaceSettingsContent"></div>
             </div>
@@ -507,18 +504,10 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             console.error('.basicSettingsContent element not found.');
         }
 
-        // Add formatting content
-        const formatSettingsContent = settingsContainer.querySelector('.formatSettingsContent');
-        if(formatSettingsContent){
-            const formatSettings = document.querySelector('.formatSettings')?.innerHTML || '';
-            formatSettingsContent.innerHTML = formatSettings;
-        } else {
-            console.error('.formatSettingsContent element not found.');
-        }
 
         // Interface Content
         const interfaceSettingsContent = settingsContainer.querySelector('.interfaceSettingsContent');
-        if(formatSettingsContent){
+        if(interfaceSettingsContent){
             const interfaceSettings = document.querySelector('.interfaceSettings')?.innerHTML || '';
             interfaceSettingsContent.innerHTML = interfaceSettings;
         } else {
@@ -570,20 +559,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         ];
         const basicSettingsTabsContent = settingsContainer.querySelectorAll(contentClasses.join(', '));
 
-        // ---------- FORMAT SETTINGS ----------
-        const buttonClassesFormatting =[
-            '.formatSettingsArtworkTabButton',
-            '.formatSettingsGuessTagsTabButton'
-        ];
-        const formatSettingsTabsButtons = settingsContainer.querySelectorAll(buttonClassesFormatting.join(', '));
-
-        const formatContentClasses=[
-            '.formatSettingsArtworkTab',
-            '.formatSettingsGuessTagsTab'
-        ];
-        const formatSettingsTabContent = settingsContainer.querySelectorAll(formatContentClasses.join(', '));
-
-
         // ---------- INTERFACE SETTINGS ----------
         const buttonClassesInterface =[
             '.interfaceSettingsDisplayTabButton',
@@ -626,6 +601,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const advancedSettingsButtonClasses  = [
             '.advancedSettingsMediaLibraryManagementTabButton',
             '.advancedSettingsFileTypesTabButton',
+            '.formatSettingsArtworkTabButton',
             '.advancedSettingsSecurityTabButton'
         ];
         const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
@@ -633,6 +609,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const advancedSettingsContentClasses = [
             '#advancedSettingsMediaLibraryManagement', // 
             '#advancedFileTypes', //
+            '.formatSettingsArtworkTab',
             '#security'
         ];
         const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
@@ -641,14 +618,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         function hideAllTabsContent() {
             basicSettingsTabsContent.forEach(tab => {
                 tab.style.display = 'none'; 
-                tab.classList.remove('active'); // Remove active class
-            });
-        }
-
-        // Function to hide all format contents
-        function hideAllFormatContent() {
-            formatSettingsTabContent.forEach(tab => {
-                tab.style.display = 'none'; // Hide tab
                 tab.classList.remove('active'); // Remove active class
             });
         }
@@ -687,16 +656,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             }
         }
 
-        function showFormatSettings(){
-            const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
-            if(formatSettingsContainer) {
-                formatSettingsContainer.style.display = 'block';
-                // get functionTODO 
-            } else {
-
-            }
-        }
-
         // Show interface container
         function showInterfaceSettings(){
             const interfaceSettingsContainer = settingsContainer.querySelector('.interfaceSettings');
@@ -726,13 +685,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 basicSettingsContainer.style.display = 'none';
             } else {
                 // console.log('Basic settings container not found.');
-            }
-        }
-
-        function hideFormatSettings() {
-            const formatSettingsContainer = settingsContainer.querySelector('.formatSettings');
-            if(formatSettingsContainer) {
-                formatSettingsContainer.style.display = 'none';
             }
         }
 
@@ -785,25 +737,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
                 }
                 
                 this.classList.add('active'); // Add active class to the clicked button
-            });
-        });
-
-        // Add click event listeners to each format tab button
-        formatSettingsTabsButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                showFormatSettings();
-                hideAllFormatContent();
-                formatSettingsTabsButtons.forEach(btn => btn.classList.remove('active'));
-                const selectedTabId = this.getAttribute('data-tab');
-                const selectedTabContent = settingsContainer.querySelector(`#formatSettings${selectedTabId}`);
-                console.log(selectedTabId);
-                if(selectedTabContent){
-                    selectedTabContent.style.display = 'block';
-                    selectedTabContent.classList.add('active');
-                } else {
-                    console.error("No content found for tab ID: ", selectedTabId);
-                }
-                this.classList.add('active');
             });
         });
 
@@ -881,7 +814,6 @@ advancedSettingsTabsButtons.forEach(button => {
         hideAllAdvancedSettingsTabsContent();
         hideBasicSettings();
         hideMediaLibraryManagementSettings();
-        hideFormatSettings();
         hideInterfaceSettings();
     
         // Trigger click on the Language tab button to display its content by default

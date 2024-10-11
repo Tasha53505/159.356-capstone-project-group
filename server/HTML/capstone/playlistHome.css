@@ -534,7 +534,7 @@ transform: translate3d(0, 0, 0);
 }
 
 
-.basicSettingsLanguageTab.active, .mediaLibraryManagementBrowseTabButton.active, .formatSettingsArtworkTab.active {
+.basicSettingsLanguageTab.active, .mediaLibraryManagementBrowseTabButton.active {
     padding: 1em; 
     background-color: #3A456D; 
 }
