@@ -626,14 +626,16 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const advancedSettingsButtonClasses  = [
             '.advancedSettingsMediaLibraryManagementTabButton',
             '.advancedSettingsFileTypesTabButton',
-            '.advancedSettingsSecurityTabButton'
+            '.advancedSettingsSecurityTabButton',
+            '.advancedSettingsSoftwareUpdateTabButton'
         ];
         const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
 
         const advancedSettingsContentClasses = [
             '#advancedSettingsMediaLibraryManagement', // 
             '#advancedFileTypes', //
-            '#security'
+            '#security',
+            '#software'
         ];
         const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
     
@@ -956,32 +958,74 @@ advancedSettingsTabsButtons.forEach(button => {
     
             advancedButton.click();
 
-
-
-            const rect = document.getElementsByClassName('advancedSettingsTabs')[1].getBoundingClientRect()
-            const duplicates = document.querySelectorAll('[id="securityIframe"]');
-            // Check for duplicate elements
-            if (duplicates.length > 1) {
-                // Delete the first element
-                duplicates[0].remove();
-                // console.log('The element with the first duplicate ID has been deleted.');
-            }
-            // Calculate the distance from the top of the inner div to the bottom of the viewport
-            const distanceToViewportBottom = window.innerHeight - rect.bottom;
-
-            // console.log('The distance from the top of the internal div to the bottom of the viewport:', distanceToViewportBottom);
+    
+            deleteDuplicates('securityIframe')
             const securityIframe = document.getElementById('securityIframe');
-            securityIframe.setAttribute('style', 'height: ' + (distanceToViewportBottom - 70) + 'px')
-            // securityIframe.style.height =  (distanceToViewportBottom - 20) + 'px'
+            securityIframe.src = 'settings/server/security.html'
             securityIframe.onload = function () {
                 // console.log(securityIframe)
-                console.log('load security iframe')
+                // console.log('load security iframe')
+                let timerId = setInterval(() => {
+                    const iframeDocument = securityIframe.contentDocument || securityIframe.contentWindow.document;
+
+                    // 获取 body 的高度
+                    const bodyHeight = iframeDocument.body.scrollHeight;
+                    if (bodyHeight > 0) {
+                        // console.log('Iframe 内部 body 的高度:', bodyHeight);
+                        securityIframe.setAttribute('style', 'height: ' + (bodyHeight + 7) + 'px')
+                        clearInterval(timerId)
+                    }
+                }, 100)
             }
-            securityIframe.src = 'settings/server/security.html'
-            
+
+            deleteDuplicates('softwareIframe')
+            const softwareIframe = document.getElementById('softwareIframe');
+            softwareIframe.src = 'settings/server/software.html'
+            softwareIframe.onload = function () {
+                // console.log(softwareIframe)
+                // console.log('load software iframe')
+                let timerId = setInterval(() => {
+                    const iframeDocument = softwareIframe.contentDocument || softwareIframe.contentWindow.document;
+
+                    // 获取 body 的高度
+                    const bodyHeight = iframeDocument.body.scrollHeight;
+                    if (bodyHeight > 0) {
+                        // console.log('Iframe 内部 body 的高度:', bodyHeight);
+                        softwareIframe.setAttribute('style', 'height: ' + (bodyHeight + 50) + 'px')
+                        const elements = iframeDocument.getElementsByClassName('stdclick')
+                        console.log(elements)
+                        for (let i = 0; i < elements.length; i++) {
+                            if (elements[i].name === 'checkForUpdateNow') {
+                                targetElement = elements[i];
+                                targetElement.style.backgroundColor = '#0456C6';
+                                targetElement.style.color = '#ecf0f1'; // Light text color
+                                targetElement.style.border = 'none';
+                                targetElement.style.borderRadius = '5px';
+                                targetElement.style.padding = '0.8em 1.5em';
+                                targetElement.style.fontSize = '0.7em';
+                                targetElement.style.fontWeight = 'bold';
+                                targetElement.style.marginTop = '10px';
+                                targetElement.style.width = '100%';
+                                targetElement.style.cursor = 'pointer';
+                                targetElement.style.transition = 'background-color 0.3s, transform 0.2s';
+                                targetElement.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.2)'; // Soft shadow
+                                break
+                            }
+                        }
+                        clearInterval(timerId)
+                    }
+                }, 100)
+            }
         }
     }
     
+    function deleteDuplicates(id) {
+        const duplicates = document.querySelectorAll('[id="' + id + '"]');
+        if (duplicates.length > 1) {
+            for (let i = 0; i < duplicates.length - 1; i++)
+                duplicates[i].remove();
+        }
+    }
 
     function removeAdvancedTab() {
         var advancedButton = document.querySelector('.tabButton[data-tab="advanced"]');

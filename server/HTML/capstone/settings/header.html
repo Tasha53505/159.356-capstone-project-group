@@ -2,16 +2,13 @@
       mobileBrowser = 1;
    END %]
 [%- BLOCK pluginLink -%]
-	[% IF enabled && settings.length > 0 %]
-		<a href="[% webroot %]settings/[% settings %]?player=[% playerURI %]&amp;playerid=[% playerURI %]">[% 'SETTINGS' | string %]</a>
-	[%- END -%]
 [%- END -%]
 [% IF NOT ajaxUpdate %]
 <!-- Begin settingsheader.html -->
 [% FILTER null %]
 
 	[% IF NOT useTabList; pwd_list = BLOCK %]
-		[%- PROCESS setting_chooser.html setting_chooser_noHome = 1 %]
+
 	[% END; END %]
 
 	[% pageHeaderScripts = BLOCK %]
@@ -25,16 +22,30 @@
 			new Event.observe(window, 'load', function(){ initSettingsForm(); });
 			[%- END %]
 		</script>
+
+		
+		<style>
+			body {
+				background-color: #3A456D !important;
+			}
+
+			.settingGroup input {
+				width: 90%;
+			}
+
+		</style>
+		<link rel="stylesheet" href="../../playlistHome.css">
+		<link rel="stylesheet" href="../../infoPanel.css">
 	[% END %]
 
 	[% IF useTabList; pageHeaderInfo = BLOCK %]
- 		[%- PROCESS setting_chooser.html setting_chooser_noHome = 1 %]
+ 		
  	[% END; END %]
 
 [% END %]
 
-[% IF playerid && needsClient; pagetitle='PLAYER_SETTINGS' | string; ELSE; pagetitle = 'SERVER_SETTINGS' | string; END %]
 [% noSpacer = 1; PROCESS pageheader.html noHomeLink=mobileBrowser %]
+[% IF playerid && needsClient; pagetitle='PLAYER_SETTINGS' | string; ELSE; pagetitle = 'SERVER_SETTINGS' | string; END %]
 
 <div id="statusarea" class="statusarea">
 	[%- IF warning %]
@@ -53,5 +64,3 @@
 	<input type=hidden value="[% page %]" name="page">
 	[% IF playerid && needsClient %]<input type=hidden value="[% playerid | html %]" name="playerid">[% END %]
 	[% IF player %]<input type=hidden value="[% player | html %]" name="player">[% END %]
-
-<!-- End settingsheader.html -->
