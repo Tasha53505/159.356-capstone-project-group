@@ -466,17 +466,17 @@ transform: translate3d(0, 0, 0);
     to { opacity: 1; }
 }
         /* ----------- Basic Settings Start ----------- */
-    .basicSettings, .formatSettings, .interfaceSettings, .mediaLibraryManagementSettings, .advancedSettings {
+    .basicSettings, .interfaceSettings, .mediaLibraryManagementSettings, .advancedSettings {
         display: none; 
     }
 
     
 
-    .basicSettingsTabs, .formatSettingsTabs, .interfaceSettingsTabs, .mediaLibraryManagementSettingsTabs, .advancedSettingsTabs {
+    .basicSettingsTabs, .interfaceSettingsTabs, .mediaLibraryManagementSettingsTabs, .advancedSettingsTabs {
         display: block;
     }
 
-    .basicSettingsContent, .formatSettingsContent, .interfaceSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs, .advancedSettingsContent {
+    .basicSettingsContent, .interfaceSettingsContent, .mediaLibraryManagementContent, .mediaLibraryManagementSettingsTabs, .advancedSettingsContent {
         background-color: #1b2444;
     }
 
@@ -495,8 +495,6 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsSecurityTab,
 .advancedSettingsFileTypesTab,
 .advancedSettingsFormatTabButton,
-.formatSettingsArtworkTab,
-.formatSettingsGuessTagsTab,
 .interfaceSettingsDisplayTab,
 .interfaceSettingsFormatTab,
 .interfaceSettingsTimingTab  {
@@ -527,8 +525,6 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsSecurityTab.active,
 .advancedSettingsFormatTab.active,
 .advancedSettingsFileTypesTab.active,
-.formatSettingsArtworkTab.active,
-.formatSettingsGuessTagsTab.active,
 .interfaceSettingsDisplayTab.active,
 .interfaceSettingsFormatTab.active,
 .interfaceSettingsTimingTab.active
@@ -556,8 +552,6 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsFileTypesTab,
 .basicSettingsRescanMediaTab,
 .basicSettingsSecurityTab,
-.formatSettingsArtworkTab,
-.formatSettingsGuessTagsTab,
 .interfaceSettingsDisplayTab,
 .interfaceSettingsFormatTab,
 .interfaceSettingsTimingTab  {
@@ -579,8 +573,6 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsFileTypesTabButton,
 .basicSettingsRescanMediaTabButton,
 .basicSettingsSecurityTabButton,
-.formatSettingsArtworkTabButton,
-.formatSettingsGuessTagsTabButton,
 .interfaceSettingsDisplayTabButton,
 .interfaceSettingsFormatTabButton,
 .interfaceSettingsTimingTabButton  {
@@ -608,8 +600,6 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsFileTypesTabButton.active,
 .basicSettingsRescanMediaTabButton.active,
 .basicSettingsSecurityTabButton.active,
-.formatSettingsArtworkTabButton.active,
-.formatSettingsGuessTagsTabButton.active,
 .interfaceSettingsDisplayTabButton.active,
 .interfaceSettingsFormatTabButton.active,
 .interfaceSettingsTimingTabButton.active  {
@@ -724,9 +714,7 @@ transform: translate3d(0, 0, 0);
         .advancedSettingsSecurityTabButton,
         .advancedSettingsFileTypesTabButton,
         .basicSettingsRescanMediaTabButton,
-        .basicSettingsSecurityTabButton,
-        .formatSettingsArtworkTabButton,
-        .formatSettingsGuessTagsTabButton {
+        .basicSettingsSecurityTabButton {
             display: inline;
             background-color: #1b2444;
             border: none;
@@ -750,8 +738,6 @@ transform: translate3d(0, 0, 0);
         .advancedSettingsFileTypesTabButton.active,
         .basicSettingsRescanMediaTabButton.active,
         .basicSettingsSecurityTabButton.active,
-        .formatSettingsArtworkTabButton.active,
-        .formatSettingsGuessTagsTabButton.active,
         .interfaceSettingsDisplayTabButton.active,
         .interfaceSettingsFormatTabButton.active,
         .interfaceSettingsTimingTabButton.active  {
@@ -1027,8 +1013,6 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
 .basicSettingsSecurityTab,
-.formatSettingsArtworkTab,
-.formatSettingsGuessTagsTab,
 .interfaceSettingsDisplayTab,
 .interfaceSettingsFormatTab,
 .interfaceSettingsTimingTab 
@@ -1146,8 +1130,6 @@ transform: translate3d(0, 0, 0);
 .basicSettingsPlaylistsTab, 
 .basicSettingsRescanMediaTab, 
 .basicSettingsSecurityTab,
-.formatSettingsArtworkTab,
-.formatSettingsGuessTagsTab
 .interfaceSettingsDisplayTab,
 .interfaceSettingsFormatTab,
 .interfaceSettingsTimingTab,
