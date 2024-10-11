@@ -429,7 +429,6 @@ document.getElementById('settingsButton').addEventListener('click', function() {
 
 
             <button class="tabButton" data-tab="basic-info">Basic Settings</button>
-            <button class="tabButton" data-tab="formatting">Formatting</button>
             <button class="tabButton" data-tab="interface">Interface</button>
             <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
@@ -601,7 +600,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const advancedSettingsButtonClasses  = [
             '.advancedSettingsMediaLibraryManagementTabButton',
             '.advancedSettingsFileTypesTabButton',
-            '.formatSettingsArtworkTabButton',
+            '.advancedSettingsFormatTabButton',
             '.advancedSettingsSecurityTabButton'
         ];
         const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
@@ -609,7 +608,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const advancedSettingsContentClasses = [
             '#advancedSettingsMediaLibraryManagement', // 
             '#advancedFileTypes', //
-            '.formatSettingsArtworkTab',
+            '#formatSettings',
             '#security'
         ];
         const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
