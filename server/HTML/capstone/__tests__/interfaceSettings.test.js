@@ -13,6 +13,30 @@ describe('Interface Settings', () => {
         jest.clearAllMocks();
     });
 
+    // See if drop down menu exists and includes value 3
+    test('title format dropdown menu exists and has an option of value 3 and text "TRACKNUM. ARTIST - TITLE"', () => {
+        const titleFormatMenu = document.getElementById('titleFormatWeb');
+        expect(titleFormatMenu).toBeInTheDocument();
+        const options = Array.from(titleFormatMenu.options);
+        const optionExist = options.some(option => option.value.includes('3'));
+        expect(optionExist).toBe(true);
+        optionsExist = options.some(option => option.textContent.includes('TRACKNUM. ARTIST - TITLE'));
+        expect(optionExist).toBe(true);
+    });
+
+    // Min Max values for thumbSize
+    test('thumbnail size min value is 25 and max is 250', () => {
+        const thumbSize = document.getElementById('thumbSize');
+        thumbSize.value = 20;
+        expect(thumbSize.validity.valid).toBe(false);
+
+        thumbSize.value = 50;
+        expect(thumbSize.validity.valid).toBe(true);
+
+        thumbSize.value = 5000;
+        expect(thumbSize.validity.valid).toBe(false);
+    });
+
     // Test one button for each panel
     test('displays button for updating items per page', () => {
         const updateButton = screen.getByRole('button', { name: /Update Items Per Page/i });
