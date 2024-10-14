@@ -192,7 +192,16 @@ margin-left: 1rem;
     margin: 0px;
     transition: 0.6s ;
     z-index: 10;
+    cursor: pointer;
 }
+
+.animationBtn:hover {
+    background-color: #20294B; /* Darken the background color */
+    transform: scale(1.05); /* Slightly make bigger */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+
 
 .accordionPanel {
     max-height: 0;
