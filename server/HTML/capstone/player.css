@@ -8,11 +8,9 @@
 
    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pacifico&family=Poetsen+One&display=swap');
 
-
+/* --- GENERAL CSS --- */
 * {
     font-family: "Inter", sans-serif;
-    /* margin: 2px;
-    padding: 2px; */
     margin: 0px;
     box-sizing: border-box;
     color: #EFF8FC;
@@ -36,6 +34,7 @@ body {
     min-height: 75%;
 }
 
+/* --- IMAGE PANEL --- */
 .albumContainer {
     grid-row: 1;
     display: flex;
@@ -83,6 +82,7 @@ body {
     border-radius: 50%;
 }
 
+/* --- SONG INFORMATION --- */
 .textContainer {
     grid-row: 2;
     display: grid;
@@ -99,6 +99,7 @@ body {
     font-size: 16px;
 }
 
+/* --- PLAYER MENU ITEMS --- */
 .playerContainer {
     grid-row: 3;
     display: flex;
@@ -120,6 +121,23 @@ body {
     position: relative;
 }
 
+.timeInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.playtime {
+    margin-bottom:2px;
+    padding-left: 10%;
+}
+
+.maxtime {
+    margin-bottom:2px;
+    padding-right: 10%;
+}
+
+/* --- BUTTONS --- */
 .buttons {
     display: flex;
     align-items: center;
@@ -270,24 +288,7 @@ body {
     padding-bottom: .5em;
 }
 
-.timeInfo{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.playtime {
-    margin-bottom:2px;
-    padding-left: 10%;
-}
-
-.maxtime {
-    margin-bottom:2px;
-    padding-right: 10%;
-}
-
-
-/* PROGRESS BAR */
+/* --- PROGRESS BAR --- */
 
 #playtimePanel{
     width: 75%;
@@ -356,6 +357,9 @@ body {
     background-position-x: -1px;
     background-position-y: -10px;
 }
+
+
+/* --- ADDITIONAL CSS --- */
 
 /* Small List for settings */
 .smallList{
