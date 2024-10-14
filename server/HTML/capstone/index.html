@@ -17,7 +17,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Capstone Skin Home</title>
     <link rel="stylesheet" href="playlistHome.css">
     <link rel="stylesheet" href="benplayer.css">
     <link rel="stylesheet" href="infoPanel.css">
@@ -2029,9 +2029,6 @@
                                     <div class="songsList" >
                                         <div style="margin: 3rem;">
                             
-                                            <li><a href="clixmlbrowser/clicmd=browselibrary+items&amp;linktitle=BROWSE_MUSIC_FOLDER&amp;mode=bmf/?player=">Try this</a></li>
-
-                                            <a href="http://localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" target="">MUSIC FOLDER</a>
                                             You have: [% song_count %] total. <br>
 
                                             <iframe src="http://localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" frameborder="0" class="songsIframe" id="songsIframe">
@@ -2075,11 +2072,13 @@
                                     <div class="albumsList">
                                         <div style="margin: 3rem;">
                                          You have: [% album_count %] total. <br />                           
-                                         
-                                         <!-- [% album_count %] [% "WITH" | string %] [% song_count %] [% stringBY %] [% artist_count %] 
-                                         [% IF albumDuration %]([% "LENGTH" | string %][% stringCOLON %] [% albumDuration %])[% END %] -->
+                                            <iframe src="http://localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_BY_ALBUMARTIST&role_id=ALBUMARTIST&mode=artists/?player=10%3Af6%3A0a%3A92%3A1d%3A96" frameborder="0" class="albumsIframe" ></iframe>
+                                            
+                                        
 
-
+                                            
+                     
+                                            
                                         </div>
                                     </div>
 
@@ -2106,8 +2105,24 @@
                                     [% contributorsText.join(', ') %]
 
 
-
-                                    [% " " _ stringBY _ " " %]
+                                                         
+                                                <!-- This LINKS ALL THE FOLDERS -->
+                                            <div class="homeMenuSection">
+                                                <div>[% "BROWSE_MUSIC" | string | upper %]</div>
+                                                <ul>
+                                                [%- FOREACH item = additionalLinkOrder.browse %]
+                                                    [%- IF additionalLinks.browse.exists(item) %]
+                                                    <li><a href="[% additionalLinks.browse.$item | html %]player=[% playerURI %]">[% item | getstring | html %]</a></li>
+                                                    [% IF item == 'SEARCH' && additionalLinks.search.ADVANCEDSEARCH %]
+                                                    <li><a href="[% additionalLinks.search.ADVANCEDSEARCH | html %]player=[% playerURI %]">[% "ADVANCEDSEARCH" | getstring | html %]</a></li>
+                                                    [% END %]
+                                                    [%- END %]
+                                                [%- END %]
+                                                [%- FOREACH link = additionalLinks.browse; IF !additionalLinkOrder.browse.grep(link.key).size %]
+                                                    <li><a href="[% link.value | html %]player=[% playerURI %]">[% link.key | getstring | html %]</a></li>
+                                                [%- END; END %]
+                                                </ul>
+                                            </div>
 
                                         </div>
                                     </div>
