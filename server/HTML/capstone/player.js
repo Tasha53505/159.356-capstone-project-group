@@ -1,3 +1,5 @@
+// -- JS FOR THE MAIN MUSIC PLAYER FEATURES -- //
+
 // IMAGE CODE
 var infoPanelBtn = document.querySelector('.infoPanelBtn');
 var infoPanel = document.querySelector('.infoPanel');
