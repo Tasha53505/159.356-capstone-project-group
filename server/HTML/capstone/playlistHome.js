@@ -973,6 +973,8 @@ advancedSettingsTabsButtons.forEach(button => {
 });
 
 
+
+
 // ----------------- Save settings, speciifically Language -----------------
 // Looking into JSON RPC.js
 document.addEventListener("DOMContentLoaded", function() {
