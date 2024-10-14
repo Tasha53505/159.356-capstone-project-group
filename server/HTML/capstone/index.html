@@ -2089,40 +2089,9 @@
                                         <div style="margin: 3rem;">
                                             You have: [% artist_count %] total.
 
-                                [% " " _ stringBY _ " " %]
-                                    [%- FILTER null %]
-                                    [% IF item.artists; contributorsText = item.artists; ELSE %]
-                                    [% contributorsText = [ item.artist ] %]
+                                            <iframe src="http://localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_BY_ALL_ARTISTS&mode=artists/?player=10%3Af6%3A0a%3A92%3A1d%3A96" frameborder="0" class="artistsIframe"></iframe>
 
-                                    [% contributors = item.artistsWithAttributes || itemobj.artistsWithAttributes %]
-
-                                    [% FOREACH contributorTuple IN contributors %]
-
-                                        [% contributorsText.push(contributorTuple.name) %]
-
-                                    [% END %]
-                                    [% END; END -%]
-                                    [% contributorsText.join(', ') %]
-
-
-                                                         
-                                                <!-- This LINKS ALL THE FOLDERS -->
-                                            <div class="homeMenuSection">
-                                                <div>[% "BROWSE_MUSIC" | string | upper %]</div>
-                                                <ul>
-                                                [%- FOREACH item = additionalLinkOrder.browse %]
-                                                    [%- IF additionalLinks.browse.exists(item) %]
-                                                    <li><a href="[% additionalLinks.browse.$item | html %]player=[% playerURI %]">[% item | getstring | html %]</a></li>
-                                                    [% IF item == 'SEARCH' && additionalLinks.search.ADVANCEDSEARCH %]
-                                                    <li><a href="[% additionalLinks.search.ADVANCEDSEARCH | html %]player=[% playerURI %]">[% "ADVANCEDSEARCH" | getstring | html %]</a></li>
-                                                    [% END %]
-                                                    [%- END %]
-                                                [%- END %]
-                                                [%- FOREACH link = additionalLinks.browse; IF !additionalLinkOrder.browse.grep(link.key).size %]
-                                                    <li><a href="[% link.value | html %]player=[% playerURI %]">[% link.key | getstring | html %]</a></li>
-                                                [%- END; END %]
-                                                </ul>
-                                            </div>
+                                          
 
                                         </div>
                                     </div>
@@ -2193,6 +2162,7 @@
                                             <form name="tune" method="post" id="tune" action="[% webroot %]tunein.html">
                                                 <input type="hidden" name="player" value="[% player %]">
                                                 [% 'RADIO_TUNEIN_RADIOURL' | string %]
+                                                [% PROCESS tunein.html %]
 
                                                 <table>
                                                     <tr>
@@ -2233,24 +2203,32 @@
                     <button class="accordionButton">Favourites</button>
                     <div class="accordionPanel">
                         <div class="pluginsContainer">
-                            <div class="pluginExample"></div>
-                            <div class="pluginExample"></div>
-                            <div class="pluginExample"></div>
-                            <div class="pluginExample"></div>
-                            <div class="pluginExample"></div>
-
-                            <div class="pluginExample"></div>                                
-                            <div class="pluginExample"></div>
-                            <div class="pluginExample"></div>
-                            <div class="pluginExample"></div>
-                            <div class="pluginExample"></div>
+                                           
+                         
+                            <iframe src="http://localhost:9000/capstone/plugins/Favorites/index.html?player=10%3Af6%3A0a%3A92%3A1d%3A96" frameborder="0"></iframe>
                         </div>
                     </div>
                     <hr />
                 </ul>
             <!-- Plugins end -->
 
-
+                       <!-- This LINKS ALL THE FOLDERS -->
+                                            <!-- <div class="homeMenuSection">
+                                                <div>[% "BROWSE_MUSIC" | string | upper %]</div>
+                                                <ul>
+                                                [%- FOREACH item = additionalLinkOrder.browse %]
+                                                    [%- IF additionalLinks.browse.exists(item) %]
+                                                    <li><a href="[% additionalLinks.browse.$item | html %]player=[% playerURI %]">[% item | getstring | html %]</a></li>
+                                                    [% IF item == 'SEARCH' && additionalLinks.search.ADVANCEDSEARCH %]
+                                                    <li><a href="[% additionalLinks.search.ADVANCEDSEARCH | html %]player=[% playerURI %]">[% "ADVANCEDSEARCH" | getstring | html %]</a></li>
+                                                    [% END %]
+                                                    [%- END %]
+                                                [%- END %]
+                                                [%- FOREACH link = additionalLinks.browse; IF !additionalLinkOrder.browse.grep(link.key).size %]
+                                                    <li><a href="[% link.value | html %]player=[% playerURI %]">[% link.key | getstring | html %]</a></li>
+                                                [%- END; END %]
+                                                </ul>
+                                            </div> -->
 
                 </div>
             </div>
@@ -2258,6 +2236,7 @@
     </div>
     <!-- Pull out tab for home music -->
     <button class="animationBtn">
+        <span></span>
         <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24">
             <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                 <path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0-6 0m10 0a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/>
