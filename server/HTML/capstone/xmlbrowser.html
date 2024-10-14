@@ -11,6 +11,13 @@
 		background-color: #1B2444;
 	}
 
+	.mainBody {
+
+	}
+	.breadcrumbs {
+		background-color: #1B2444;
+		color: white;
+	}
 	
 	.browsedbListItem {
     background-color: #3A456D !important;
@@ -65,16 +72,6 @@
 	[% searchquery = 'query=' _ query _ '&amp;' %]
 [% END %]
 
-[% FILTER null %]
-[% pageicon = 'RADIO'; noSpacer = NOT streaminfo; %]
-[% pwd_list = [];
-	FOREACH crumb IN crumb;
-		crumbItem = BLOCK %]
-			<a href="[% path %]?[% searchquery | uri | replace("'", "%27") %]player=[% playerURI %]&amp;index=[% crumb.index %]&amp;sess=[% sess %]">[% crumb.name | html %]</a>
-		[% END %]
-		[% pwd_list.push(crumbItem) %]
-	[% END %]
-[% END # filter -%]
 
 [% IF useAJAX %][% pageHeaderScripts = BLOCK %]
 	<script TYPE="text/javascript">[% PROCESS html/vars.js %]</script>
@@ -259,14 +256,14 @@
 			[% lctype = item.web.group | lower; IF details.${ lctype } || details.contributors.${item.web.group}; NEXT; END %]
 
 			[%- BLOCK gencontrol -%]
-				[% IF item.simpleAlbumLink && (item.playLink  || item.insertLink || item.addLink || item.removeLink) %]
+				[% IF item.simpleAlbumLink && (item.playLink  || item.insertLink || item.addLink || item.removeLink ) %]
 					[% IF item.playLink; WRAPPER playlink %]href="[% webroot %][% item.playLink %]&player=[% playerURI %]"[% END; END %]
 					[% IF item.addLink; WRAPPER addlink %]href="[% webroot %][% item.addLink %]&player=[% playerURI %]"[% END; END %]
 					[% IF item.mixersLink; WRAPPER cmdlink cmdimage='b_mix.gif' cmdtitle='MORE' %]href="[% webroot %][% item.mixersLink %]?player=[% playerURI %]" target="[% browserTarget %][% END; END %]
 				[% ELSIF item.type == 'audio' || item.type == 'playlist' || item.enclosure || item.play %]
 				[% WRAPPER playlink %]href="[% path %]?[% searchquery %]action=play[% IF item.type == 'playlist' %]all[% END %]&amp;index=[% item.index || index _ (start + loop.index) %]&amp;player=[% player | uri %]&amp;sess=[% sess %]" target="_self"[% END %]
 
-				[% WRAPPER addlink %]href="[% path %]?[% searchquery %]action=add[% IF item.type == 'playlist' %]all[% END %]&amp;index=[% item.index || index _ (start + loop.index) %]&amp;player=[% player | uri %]&amp;sess=[% sess %]"[% END %]
+				[% WRAPPER addlink %]href="[% path %]?[% searchquery %]action=add[% IF item.type == 'playlist' %]all[% END %]&amp;index=[% item.index || index _ (start + loop.index) %]&amp;player=[% player | uri %]&amp;sess=[% sess %] onclick="redirectToHome()" "[% END %]
 					[% IF item.mixersLink; WRAPPER cmdlink cmdimage='b_mix.gif' cmdtitle='MORE' %]
 						href="[% webroot %][% item.mixersLink %]&player=[% playerURI %]" [% IF browserTarget %]target="[% browserTarget %]"[% END %]
 					[% END; END %]
@@ -362,3 +359,12 @@
 
 [% IF NOT ajaxUpdate %]</div>[% PROCESS pagefooter.html %][% END %]
 
+<script>
+function redirectToHome() {
+    // Get the "Home" anchor link
+    const homeLink = document.getElementById('homeAnchor');
+    // Redirect the browser to the href of the "Home" link
+    window.location.href = homeLink.href;
+}
+
+</script>

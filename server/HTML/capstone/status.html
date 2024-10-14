@@ -8,5 +8,21 @@
   </head>
   <body bgcolor="#FFFFFF">
 
-    [% PROCESS xmlbrowser.html %]
+    <a href="http://localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96" id="homeAnchor" style="background-color: #1B2444;">Home </a>
 
+
+
+
+<script>
+
+function redirectToHome() {
+    // Get the "Home" anchor link
+    const homeLink = document.getElementById('homeAnchor');
+    // Redirect the browser to the href of the "Home" link
+    window.location.href = homeLink.href;
+}
+
+redirectToHome(); // Call function
+
+
+</script>
