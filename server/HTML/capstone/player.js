@@ -1,10 +1,10 @@
+// -- JS FOR THE MAIN MUSIC PLAYER FEATURES -- //
+
 // IMAGE CODE
 var infoPanelBtn = document.querySelector('.infoPanelBtn');
 var infoPanel = document.querySelector('.infoPanel');
 var artistPanel = document.querySelector('.infoArtistPanel');
-var coverDisplay = document.querySelector('.album');
 var artist = true;
-
 
 // Cover -> Artist -> Cover...
 document.querySelector('.album').addEventListener('click', function() {
@@ -59,10 +59,12 @@ var repeat = new SqueezeJS.UI.Buttons.Repeat({ // Repeat
     noText: true
 });
 
+// Other button variables
 var playPause = document.getElementById("playPause");
 var repeatDisplay = document.getElementById("repeatButton");
 var shuffleDisplay = document.getElementById("shuffleButton");
 
+// CSS animation function for the album cover
 function animateButton(button){
     button.classList.add('animatePlay');
     setTimeout(function(){
