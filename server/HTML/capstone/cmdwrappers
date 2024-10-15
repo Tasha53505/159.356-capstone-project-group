@@ -71,7 +71,7 @@
 
 [%- BLOCK morelink -%]
 	[%- PROCESS cmdlink
-		cmdtitle = "MORE"
+		cmdtitle = "SOMETHING"
 		cmdimage = "b_mmmix.gif" -%]
 [%- END -%]
 
