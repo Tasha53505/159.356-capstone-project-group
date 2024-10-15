@@ -1,3 +1,5 @@
+[% SET GLOBAL play_title = "PLAYYYYYYY" %]
+
 [%- FILTER null %]
 
 [%# set statusroot to either status.html or status_header.html, depending on which you use %]

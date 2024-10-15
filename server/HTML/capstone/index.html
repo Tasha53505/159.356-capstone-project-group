@@ -2104,76 +2104,7 @@
                             <hr />
                         </ul>
                 
-                    <!-- Radio -->
-                    <ul class="accordionContainer">
-                        <button class="accordionButton">Radio</button>
-                        <div class="accordionPanel">
-                            <div class="allRadioContainer">
-                                <div class="radioTuneInTitle" id="radioTuneInTitle">Radio Tune In</div>
-                                <div class="radioTuneIn" id="radioTuneIn">
-                                                                                
-                                            [% pagetitle = 'RADIO_TUNEIN' | string %]
-                                            [% pageicon = icons.TUNEINURL %]
-                                            [% pageHeaderMenu = BLOCK %]
-                                                / [% 'RADIO_TUNEIN' | string %]
-                                            [% END %]
-                                            [% extJsScripts = BLOCK %]
-                                           
-                                            [% END %]
-                                            [% PROCESS pageheader.html %]
-
-                                            <br>
-
-                                            [% IF url %]
-                                                <p><b>
-                                                [% 'RADIO_TUNED_IN' | string %] [% url %]
-                                                </b></p>
-                                                <br/>
-                                                
-                                                <script type="text/javascript" language="JavaScript">
-                                                // Reload the status frame in 5 seconds to display the newly added playlist item
-                                                setTimeout( "refreshStatus()", 5000 );
-                                                </script>
-                                            [% END %]
-
-                                            <form name="tune" method="post" id="tune" action="[% webroot %]tunein.html">
-                                                <input type="hidden" name="player" value="[% player %]">
-                                                [% 'RADIO_TUNEIN_RADIOURL' | string %]
-                                                [% PROCESS tunein.html %]
-
-                                                <table>
-                                                    <tr>
-                                                        <td style="vertical-align:bottom;"><input type="text" class="stdedit" name="url" id="url" size="50%"></td>
-                                                        <td>
-                                                            <input type="submit" id="tuneInSubmit" class="stdclick" value="[% 'RADIO_TUNEIN_CHOOSE' | string %]">
-                                                            <span id="tuneIn" style="vertical-align:bottom;"></span>
-                                                        </td>
-                                                        <td>
-                                                            <input type="submit" id="tuneInAdd" name="tuneInAdd" class="stdclick" value="[% 'ADD' | string %]">
-                                                            <span id="add" style="vertical-align:bottom;"></span>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </form>
-
-                                            <br/>
-
-                                            <p>[% 'RADIO_TUNEIN_DESC' | string %]</p>
-
-                                            <br/>
-
-                                            [% PROCESS pagefooter.html %]
-
-                                </div>
-
-                    
-                                                              
-                            
-                            </div>
-                        </div>
-                        <hr />
-                    </ul>
-                <!-- Rdio end -->
+                 
 
                 <!-- Favourites? -->
                 <ul class="accordionContainer">
@@ -2187,6 +2118,7 @@
                     </div>
                     <hr />
                 </ul>
+
 
 
             <!-- Plugins / My App accordion -->
@@ -2208,6 +2140,28 @@
                 <!-- Plugins end -->
 
             <!-- Plugins end -->
+
+
+            
+                   <!-- Radio -->
+                   <ul class="accordionContainer">
+                    <button class="accordionButton">Radio</button>
+                    <div class="accordionPanel">
+                        <div class="allRadioContainer">
+                            <div class="radioTuneInTitle" id="radioTuneInTitle">Radio Tune In</div>
+                            <div class="radioTuneIn" id="radioTuneIn">
+                                    [% PROCESS tunein.html %]
+                            </div>
+
+                
+                                                          
+                        
+                        </div>
+                    </div>
+                    <hr />
+
+                </ul>
+            <!-- Radio end -->
 
                        <!-- This LINKS ALL THE FOLDERS -->
                                             <!-- <div class="homeMenuSection">

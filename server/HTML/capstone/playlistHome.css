@@ -142,6 +142,24 @@ margin-left: 1rem;
     cursor: pointer;
 }
 
+.radioTuneIn {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    background-color: #3A456D;
+    border-radius: 10px;
+    padding: 2%;
+    margin-top: 10%;
+}
+
+
+#radioTuneInContent {
+    margin-left: auto;
+    text-align: center;
+    display: flex;
+
+}
+
 .allMusicSelect:hover, .radioTuneInTitle:hover {
     color: #bbd3dd;
     transition: 0.2s ease;

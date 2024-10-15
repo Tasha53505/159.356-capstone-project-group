@@ -333,7 +333,7 @@ document.getElementById('radioTuneInTitle').addEventListener('click', function()
 
     // Add back button and header
     newRadioTuneInContainer.innerHTML = 
-        `<h3>Radio Tune In</h3>
+        `<h3 class="radioTuneInTitle">Radio Tune In</h3>
 
         <button class="backButton">
             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
