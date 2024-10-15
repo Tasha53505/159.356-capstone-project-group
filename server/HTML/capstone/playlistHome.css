@@ -133,7 +133,7 @@ margin-left: 1rem;
 
 
 /* ------------ My Music CSS | Radio CSS--------------- */
-.allMusicSelect, .radioTuneInTitle {
+.allMusicSelect, .radioTuneInAccordionTitle {
     flex-direction: column;
     width: 100%;
     /* padding: 0.5em; */
@@ -142,22 +142,47 @@ margin-left: 1rem;
     cursor: pointer;
 }
 
+.radioIframe {
+    width: 60vh;
+    height: 60vh;
+
+}
+
 .radioTuneIn {
     display: flex;
-    margin: auto;
-    justify-content: center;
-    background-color: #3A456D;
     border-radius: 10px;
+    background-color: #3A456D;
     padding: 2%;
     margin-top: 10%;
+
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+  
+    align-content: center;
+    align-items: center;
+    align-self: center;
 }
 
 
 #radioTuneInContent {
     margin-left: auto;
+    background-color: #151d3a;
     text-align: center;
     display: flex;
+    justify-content: center;
 
+}
+
+/* Inside div */
+.radioTuneInTitle {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+    font-size: 26px;
+    font-weight: 400;
+    padding: 20px;
+       
 }
 
 .allMusicSelect:hover, .radioTuneInTitle:hover {
