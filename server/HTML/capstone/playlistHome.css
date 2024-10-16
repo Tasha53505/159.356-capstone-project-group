@@ -958,9 +958,15 @@ transform: translate3d(0, 0, 0);
 
 /* --------------------------- Songs CSS start --------------------------- */
 
-.songsIframe, .albumsIframe, .artistsIframe, .songInfoIframe, .artistInfoIframe {
+.songsIframe, .albumsIframe, .artistsIframe {
     width: 100%;
     height: 220vh;
+}
+
+.songInfoIframe, .artistInfoIframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .favouritesIframe {
