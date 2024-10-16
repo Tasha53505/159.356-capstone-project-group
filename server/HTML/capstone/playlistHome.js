@@ -1200,6 +1200,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // -------------------------------- Language Selection --------------------------------
+
+
+function updateLanguageSettingForm(form) {
+    console.log("LanguageSetting Clicked");
+
+    let langauge = form["pref_language"].value;
+    console.log("Lnagugae", langauge);
+    
+    updateLanguageSetting(langauge);
+    
+}
+
+
 function updateLanguageSetting(language) { 
     const data = {
         id: 2,
@@ -1207,7 +1220,7 @@ function updateLanguageSetting(language) {
         params: [0, ["pref", "language", language]] 
     };
 
-    fetch("<http:localhost:9000>/capstone/jsonrpc.js", {
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -1222,6 +1235,10 @@ function updateLanguageSetting(language) {
         console.error("Error updating language:", error);
     });
 }
+
+
+
+
 
 // -------------------------------- Rescan Settings folder --------------------------------
 
