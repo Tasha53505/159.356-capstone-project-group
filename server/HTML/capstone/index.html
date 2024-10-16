@@ -1894,6 +1894,7 @@
                                     <div class="settingsContent">
 
                                         <div class="basicSettingsLanguageTab active" id="language">
+                                            <form action="" id="languageSettingForm" class="languageSettingForm">
                                             <div class="language">     
                                                 <h4>Change Language</h4>
                                                 <div class="tooltipContainer">
@@ -1935,8 +1936,8 @@
 
                                             </div>                 
                                             <br>
-                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language" style="width: 100%;">
-                           
+                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language" style="width: 100%; " onclick="updateLanguageSettingForm(this.form)">
+                                        </form>
                                         </div>
 
                                        
@@ -2959,6 +2960,7 @@
                 </div>
             </div>
         </div>
+
         <button class="animationMusiclistBtn">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6em" height="3em"
                 viewBox="0 0 34 34" fill="none">
