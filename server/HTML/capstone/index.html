@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="playlistHome.css">
     <link rel="stylesheet" href="benplayer.css">
     <link rel="stylesheet" href="infoPanel.css">
-    
+
     <script type="text/javascript" src="/html/ext/adapter/ext/ext-base.js?r=[% revision %]"></script>
     <script type="text/javascript" src="/html/ext/ext-all.js?r=[% revision %]"></script>
     <script type="text/javascript">[% PROCESS html/vars.js %]</script>
@@ -1533,25 +1533,29 @@
                                         <div class="advancedSettingsNetworkTab" id="advancedSettingsNetwork">
                                             <form id="webProxyForm" action="">
                                             [% WRAPPER setting title="SETUP_WEBPROXY" desc="SETUP_WEBPROXY_DESC" %]
-                                                <input type="text" class="stdedit" name="pref_webproxy" id="webproxy" value="[% prefs.pref_webproxy | html %]" size="40">
-                                            [% END %] 
+                                                <input type="text" class="stdedit" name="pref_webproxy" id="webproxy" value="[% prefs.webproxy | html %]" size="40">
+                                                <input name="pref_update_web_proxy" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="webProxyFormButton" onclick="webProxyForm(this.form); return false;" value="Save web proxy">
+                                            [% END %]
                                             </form>
 
                                             <form id="portNumberForm" action="">
                                             [% WRAPPER setting title="SETUP_HTTPPORT" desc="SETUP_HTTPPORT_DESC" %]
-                                                <input type="text" class="stdedit" name="pref_httpport" id="httpport" value="[% prefs.pref_httpport | html %]" size="15">
+                                                <input type="text" class="stdedit" name="pref_httpport" id="httpport" value="[% prefs.httpport | html %]" size="15">
+                                                <input type="button" name="pref_update_http_port" class="stdclick rescanButton disableOnScan saveSettings" id="portNumberFormButton" onclick="portNumberForm(this.form); return false;" value="Save port number">
                                             [% END %]
                                             </form>
 
                                             <form id="radioStationBufferSecondsForm" action="">
                                                 [% WRAPPER settingGroup title="SETUP_BUFFERSECS" desc="SETUP_BUFFERSECS_DESC" %]
-                                                <input type="text" class="stdedit" name="pref_bufferSecs" id="bufferSecs" value="[% prefs.pref_bufferSecs | html %]" size="15">
+                                                <input type="text" class="stdedit" name="pref_bufferSecs" id="bufferSecs" value="[% prefs.bufferSecs | html %]" size="15">
+                                                <input type="button" name="pref_update_buffer_secs" class="stdclick rescanButton disableOnScan saveSettings" id="radioStationBufferSecondsFormButton" onclick="radioStationBufferSecondsForm(this.form); return false;" value="Save buffer seconds">
                                                 [% END %]
                                             </form>
 
                                             <form id="radioStationTimeoutForm" action="">
                                                 [% WRAPPER settingGroup title="SETUP_REMOTESTREAMTIMEOUT" desc="SETUP_REMOTESTREAMTIMEOUT_DESC" %]
-                                                <input type="text"class="stdedit" name="pref_remotestreamtimeout" id="remotestreamtimeout" value="[% prefs.pref_remotestreamtimeout | html %]" size="15">
+                                                <input type="text"class="stdedit" name="pref_remotestreamtimeout" id="remotestreamtimeout" value="[% prefs.remotestreamtimeout | html %]" size="15">
+                                                <input type="button" name="pref_update_remote_stream_timeout" class="stdclick rescanButton disableOnScan saveSettings" id="radioStationTimeoutFormButton" onclick="radioStationTimeoutForm(this.form); return false;" value="Save remote stream timeout">
                                                 [% END %]
                                             </form>
 
@@ -1563,40 +1567,45 @@
 					                                [% IF option == 9999 %][% "NO_LIMIT" | string %][% ELSE %][% option %] [% 'KBPS' | string %][% END %]</option>
 			                                        [%- END -%]
 			                                    </select>
+                                                <input type="button" name="pref_update_maxWMArate" class="stdclick rescanButton disableOnScan saveSettings" id="maximumWMAStreamBitrateFormButton" onclick="maximumWMAStreamBitrateForm(this.form); return false;" value="Save maximum WMA stream bitrate">
 		                                        [% END %]
                                             </form>
 
-                                            <form id="maximumMP3StreamBitrateForm" action="">
                                             [% IF prefs.exists('pref_syncStartDelay') %]
+                                            <form id="syncStartDelay" action="">
 			                                    [% WRAPPER settingGroup title="SETUP_SYNCSTARTDELAY" desc="SETUP_SYNCSTARTDELAY_DESC" %]
 				                                <input type="text"class="stdedit" name="pref_syncStartDelay" id="syncStartDelay" value="[% prefs.pref_syncStartDelay | html %]" size="15">
-			                                    [% END %]
-		                                    [% END %]
+			                                    <input type="button" name="pref_update_sync_start_delay" class="stdclick rescanButton disableOnScan saveSettings" id="syncStartDelayButton" onclick="syncStartDelayForm(this.form); return false;" value="Save sync start delay">
+                                                [% END %]
                                             </form>
+		                                    [% END %]
 
-                                            <form id="tcpReadMaximumForm" action="">
                                             [% IF prefs.exists('pref_tcpReadMaximum') %]
+                                            <form id="tcpReadMaximumForm" action="">
 				                                [% WRAPPER settingGroup title="SETUP_TCPREADMAXIMUM" desc="" %]
 				                                	<input type="text" class="stdedit" name="pref_tcpReadMaximum" id="tcpReadMaximum" value="[% prefs.pref_tcpReadMaximum | html %]" size="15">
+                                                    <input type="button" name="pref_update_tcp_read_maximum" class="stdclick rescanButton disableOnScan saveSettings" id="tcpReadMaximumFormButton" onclick="tcpReadMaximumForm(this.form); return false;" value="Save TCP read maximum">
 				                                [% END %]
-			                                [% END %]
                                             </form>
+			                                [% END %]
 
-                                            <form id="tcpWriteMaximumForm" action="">
 			                                [% IF prefs.exists('pref_tcpWriteMaximum') %]
+                                            <form id="tcpWriteMaximumForm" action="">
 			                                	[% WRAPPER settingGroup title="SETUP_TCPWRITEMAXIMUM" desc="" %]
 			                                		<input type="text" class="stdedit" name="pref_tcpWriteMaximum" id="tcpWriteMaximum" value="[% prefs.pref_tcpWriteMaximum | html %]" size="15">
+                                                    <input type="button" name="pref_update_tcp_write_maximum" class="stdclick rescanButton disableOnScan saveSettings" id="tcpWriteMaximumFormButton" onclick="tcpWriteMaximumForm(this.form); return false;" value="Save TCP write maximum">
 			                                	[% END %]
-			                                [% END %]
                                             </form>
+			                                [% END %]
 
-                                            <form id="udpChunkSizeForm" action="">
 			                                [% IF prefs.exists('pref_udpChunkSize') %]
+                                            <form id="udpChunkSizeForm" action="">
 			                                	[% WRAPPER settingGroup title="SETUP_UDPCHUNKSIZE" desc="SETUP_UDPCHUNKSIZE_DESC" %]
 			                                		<input type="text" class="stdedit" name="pref_udpChunkSize" id="udpChunkSize" value="[% prefs.pref_udpChunkSize | html %]" size="15">
+                                                    <input type="button" name="pref_update_udp_chunk_size" class="stdclick rescanButton disableOnScan saveSettings" id="udpChunkSizeFormButton" onclick="udpChunkSizeForm(this.form); return false;" value="Save UDP chunk size">
 			                                	[% END %]
-			                                [% END %]
                                             </form>
+			                                [% END %]
 
                                             <form id="streamingModeForm" action="">
                                                 [% WRAPPER setting title="SETUP_ENHANCEDHTTP" desc="SETUP_ENHANCEDHTTP_DESC" %]
@@ -1605,6 +1614,7 @@
 			                                        <option [% IF prefs.pref_useEnhancedHTTP == 1 %]selected [% END %]value="1">[% 'SETUP_ENABLE_PERSISTENTHTTP' | getstring %]</option>
 			                                        <option [% IF prefs.pref_useEnhancedHTTP == 2 %]selected [% END %]value="2">[% 'SETUP_ENABLE_BUFFEREDHTTP' | getstring %]</option>
 		                                        </select>
+                                                <input type="button" name="pref_update_unhanced_http" class="stdclick rescanButton disableOnScan saveSettings" id="streamingModeFormButton" onclick="streamingModeForm(this.form); return false;" value="Save streaming mode">
 	                                            [% END %]
                                             </form>
                                         </div>
@@ -1619,6 +1629,7 @@
 		                                        	<option [% IF prefs.pref_dbhighmem == 2 %]selected [% END %]value="2">[% 'SETUP_DBHIGHMEM_MAX' | getstring %]</option>
                                                 
 		                                        </select>
+                                                <input type="button" name="pref_update_dbhighmem" class="stdclick rescanButton disableOnScan saveSettings" id="databaseMemoryConfigFormButton" onclick="databaseMemoryConfigForm(this.form); return false;" value="Save database memory configuration">
 	                                            [% END %]
                                             </form>
 
@@ -1630,6 +1641,7 @@
 	                                            		<option [% IF prefs.pref_dontTriggerScanOnPrefChange %]selected [% END %]value="1">[% 'SETUP_SCAN_ON_PREF_CHANGE_OFF' | getstring %]</option>
                                                     
 	                                            	</select>
+                                                    <input type="button" name="pref_update_dontTriggerScanOnPrefChange" class="stdclick rescanButton disableOnScan saveSettings" id="triggerScanOnPreferenceChangesFormButton" onclick="triggerScanOnPreferenceChangesForm(this.form); return false;" value="Save trigger scan on preference changes">
 	                                            [% END %]
                                             </form>
 
@@ -1639,6 +1651,7 @@
 	                                            		<option [% IF !prefs.pref_useBalancedShuffle %]selected[% END %] value="0">[% "SETUP_USE_FASTER_SHUFFLE" | string %]</option>
 	                                            		<option [% IF prefs.pref_useBalancedShuffle %]selected[% END %] value="1">[% "SETUP_USE_BALANCED_SHUFFLE" | string %]</option>
 	                                            	</select>
+                                                    <input type="button" name="pref_update_useBalancedShuffle" class="stdclick rescanButton disableOnScan saveSettings" id="shuffleMethodFormButton" onclick="shuffleMethodForm(this.form); return false;" value="Save shuffle method">
 	                                            [% END %]
                                             </form>
 
@@ -1650,6 +1663,7 @@
 	                                            		<option [% IF prefs.pref_disableStatistics %]selected [% END %]value="1">[% 'SETUP_DISABLE_STATISTICS' | getstring %]</option>
                                                     
 	                                            	</select>
+                                                    <input type="button" name="pref_update_disableStatistics" class="stdclick rescanButton disableOnScan saveSettings" id="libraryStatisticsFormButton" onclick="libraryStatisticsForm(this.form); return false;" value="Save library statistics">
 	                                            [% END %]
                                             </form>
 
@@ -1661,11 +1675,12 @@
 	                                            		<option [% IF NOT prefs.pref_precacheArtwork %]selected [% END %]value="0">[% 'SETUP_PRECACHEARTWORK_DISABLED' | getstring %]</option>
                                                     
 	                                            	</select>
+                                                    <input type="button" name="pref_update_precacheArtwork" class="stdclick rescanButton disableOnScan saveSettings" id="artworkPreCachingFormButton" onclick="artworkPreCachingForm(this.form); return false;" value="Save artwork pre-caching">
 	                                            [% END %]
                                             </form>
 
                                             <form id="customArtSpecsForm" action="">
-                                            [% IF pref_customArtSpecs.keys.size; WRAPPER setting title="SETUP_PRECACHEARTWORK_CUSTOM_SPECS" desc="" %]
+                                                [% IF pref_customArtSpecs.keys.size; WRAPPER setting title="SETUP_PRECACHEARTWORK_CUSTOM_SPECS" desc="" %]
 	                                        	<p>[% stringDELETE %]</p>
                                                                                 
 	                                        	<style>
@@ -1682,7 +1697,7 @@
 	                                        		[% END %]
                                                 
 	                                        	</table>
-	                                        [% END; END %]
+                                                [% END; END %]
                                             </form>
                                             
                                             <form id="artworkResizingForm" action="">
@@ -1694,6 +1709,7 @@
 	                                        		[% END %]
                                                 
 	                                        	</select>
+                                                <input type="button" name="pref_update_useLocalImageproxy" class="stdclick rescanButton disableOnScan saveSettings" id="artworkResizingFormButton" onclick="artworkResizingForm(this.form); return false;" value="Save image proxy">
 	                                        [% END %]
                                             </form>
 
@@ -1709,6 +1725,7 @@
 	                                        		[%- END -%]
                                                     
 	                                        		</select>
+                                                    <input type="button" name="pref_update_serverPriority" class="stdclick rescanButton disableOnScan saveSettings" id="serverPriorityFormButton" onclick="serverPriorityForm(this.form); return false;" value="Save server priority">
 	                                        	[% END %]
                                                 </form>
                                                 
@@ -1723,12 +1740,13 @@
 	                                        		[%- END -%]
                                                     
 	                                        		</select>
+                                                    <input type="button" name="pref_update_scannerPriority" class="stdclick rescanButton disableOnScan saveSettings" id="scannerPriorityFormButton" onclick="scannerPriorityForm(this.form); return false;" value="Save scanner priority">
 	                                        	[% END %]
                                                 </form>
 	                                        [% END; END %]
                                                 
-                                            <form id="autoRescanForm" action="">
 	                                        [% IF prefs.exists('pref_autorescan') %]
+                                            <form id="autoRescanForm" action="">
 	                                        	[% WRAPPER setting title="SETUP_AUTO_RESCAN" desc="SETUP_AUTO_RESCAN_DESC" %]
 	                                        		<select class="stdedit" name="pref_autorescan" id="autorescan">
 	                                        			<option [% IF prefs.pref_autorescan == 1 %]selected="selected" [% END %]value="1">
@@ -1738,21 +1756,24 @@
 	                                        				[% 'SETUP_AUTO_RESCAN_DISABLE' | string %]
 	                                        			</option>
 	                                        		</select>
+                                                    <input type="button" name="pref_update_autorescan" class="stdclick rescanButton disableOnScan saveSettings" id="autoRescanFormButton" onclick="autoRescanForm(this.form); return false;" value="Save auto rescan">
 	                                        	[% END %]
-	                                        [% END %]
                                             </form>
+	                                        [% END %]
                                                 
-                                            <form id="autoRescanStatIntervalForm" action="">
 	                                        [% IF prefs.exists('pref_autorescan_stat_interval') %]
+                                            <form id="autoRescanStatIntervalForm" action="">
 	                                        	[% WRAPPER setting title="SETUP_AUTO_RESCAN_STAT_INTERVAL" desc="SETUP_AUTO_RESCAN_STAT_INTERVAL_DESC" %]
 	                                        		<input type="text"class="stdedit" name="pref_autorescan_stat_interval" id="autorescan_stat_interval" value="[% prefs.pref_autorescan_stat_interval | html %]" size="15">
+                                                    <input type="button" name="pref_update_autorescan_stat_interval" class="stdclick rescanButton disableOnScan saveSettings" id="autoRescanStatIntervalFormButton" onclick="autoRescanStatIntervalForm(this.form); return false;" value="Save auto rescan stat interval">
 	                                        	[% END %]
-	                                        [% END %]
                                             </form>
+	                                        [% END %]
                                                 
                                             <form id="maxPlaylistLengthForm" action="">
 	                                        [% WRAPPER setting title="SETUP_MAXPLAYLISTLENGTH" desc="SETUP_MAXPLAYLISTLENGTH_DESC" %]
 	                                        	<input type="text" class="stdedit" name="pref_maxPlaylistLength" id="pref_maxPlaylistLength" value="[% prefs.pref_maxPlaylistLength | html %]" size="15">
+                                                <input type="button" name="pref_update_maxPlaylistLength" class="stdclick rescanButton disableOnScan saveSettings" id="maxPlaylistLengthFormButton" onclick="maxPlaylistLengthForm(this.form); return false;" value="Save max playlist length">
 	                                        [% END %]
                                             </form>
                                         </div>
@@ -2376,7 +2397,7 @@
 
                                             
 
-                                            Artist [% " " _ stringBY _ " " %] [%- FILTER null %] 
+                                            Artist Test [% " " _ stringBY _ " " %] [%- FILTER null %] 
                                             [% IF item.artists; contributorsText = item.artists; ELSE %] 
                                             [% contributorsText = [ item.artist ] %] 
                                             [% contributors = item.artistsWithAttributes || itemobj.artistsWithAttributes %] 
@@ -2891,64 +2912,31 @@
             </div>
         </div>
     </div>
+    <button class="infoPanelBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24">
+            <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12" y2="8" />
+            </g>
+        </svg>
+    </button>
     <div class="musicInfoPanel">
         <div class="infoPanel">
             <div class="infoPanelContainer">
-                <img class="infoPanelImage" src="HybridTheory.jpg" alt="info icon">
-                <div class="infoPanelContent">
-                    <h2 class="artistHeader2">Song Title</h2>
-                    <p>Artist: Artist Name</p>
-                    <hr>
-                    <p>Album: Album Title</p>
-                    <hr>
-                    <p>Genre: Album Genre</p>
-                    <hr>
-                    <p>Year: Release Year</p>
-                    <hr>
-                    <p>Comment: This is a comment</p>
-                    <hr>
-                    <p>File Format: file type</p>
-                    <hr>
-                    <p>Duration: Length of Song</p>
-                    <hr>
-                    <p>Bitrate: Bitrate of Song</p>
-                    <hr>
-                    <p>Sample Rate: Samplerate of Song</p>
-                    <hr>
-                    <p>Sample Size: </p>
-                    <hr>
-                    <p>File Length:</p>
-                    <hr>
-                    <p>Play Count:</p>
-                    <hr>
-                    <p>Location:</p>
-                    <hr>
-                    <p>Date Modified:</p>
-                </div>
+                <iframe src="http://localhost:9000/capstone/songinfo.html?item=1" frameborder="0" class="songsIframe" id="songsIframe">
+                                       
+                </iframe>
+                
             </div>
         </div>
         <div class="infoArtistPanel">
             <div class="infoPanelContainer">
-                <img class="infoPanelImage" src="HybridTheory.jpg" alt="info icon">
-                <div class="infoPanelContent">
-                    <h2>Artist Name</h2>
-                    <p>Album 1</p>
-                    <hr>
-                    <p>Album 2</p>
-                    <hr>
-                    <p>Album 3</p>
-                </div>
+                <iframe src="http://localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&artist_id=10&library_id=&mode=albums&linktitle=Artist%20(Charles%20Lloyd%2C%20Zakir%20Hussain%20%26%20Eric%20Harland)" frameborder="0" class="songsIframe" id="songsIframe">
+
+                </iframe>
             </div>
         </div>
-        <button class="infoPanelBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24">
-                <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="12" y1="16" x2="12" y2="12" />
-                    <line x1="12" y1="8" x2="12" y2="8" />
-                </g>
-            </svg>
-        </button>
     </div>
 
    

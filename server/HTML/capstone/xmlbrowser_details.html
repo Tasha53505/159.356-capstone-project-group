@@ -57,7 +57,7 @@
 	[% IF streaminfo.item.summary %]
 		[% item = streaminfo.item.summary | html; title = "XML_SUMMARY"; PROCESS songInfoItem %]
 	[% END %]
-	
+
 	[% IF streaminfo.item.link %]
 		[% item = BLOCK %]<a href="[% streaminfo.item.link | html %]" target="_blank">[% streaminfo.item.link | html %]</a>[% END %]
 		[% PROCESS songInfoItem title = "XML_LINK" %]

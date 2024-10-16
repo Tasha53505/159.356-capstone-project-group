@@ -2,6 +2,7 @@
 	body {
 		background-color: #1b2444;
 	}
+
 	/* Style for songInfo container */
 	#songInfo {
 		background-color: #1b2444; 
@@ -16,37 +17,37 @@
 	/* Style for cover art section */
 	#COVERART {
 		margin-bottom: 15px;
-		text-align: left;
-
 	}
 	
 	#COVERART img {
 		border-radius: 8px;
 		transition: transform 0.3s ease;
-		height: 20%;
-		width: 20%;
+		
+		
 		transition: color 0.3s ease;
-		animation: slideInFromLeft 1s ease-out; 
-
+		animation: slideInFromLeft 1s ease-out;
 	}
 	
 	#COVERART img:hover {
 		transform: scale(1.05);
 	}
+
+	.songInfoContent {
+		display: inline-block;
+		margin-left: 15px;
+
+	}
 	
 	/* Style for songInfoItems */
 	#linkedSongInfoItems {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		background-color: #3A456D;
 		padding: 5%;
 		border-radius: 25px;
 		border: 2px solid #3A456D;
 		box-shadow: rgba(255, 255, 255, 0.589) 0px 2px 5px;	}
 	
-	.songInfoText {
-		margin: 10px 0;
-	}
 	
 	a {
 		color: #ffffff;
@@ -123,29 +124,29 @@
 
 <div id="songInfo">
 
-	<div id="COVERART">
-		<span class="songInfoText">
-			[% IF image || plugin_meta.cover || plugin_meta.icon %]
-				[%# Display plugin cover or icon %]
-				[% IF image || plugin_meta.cover %]
-				[% UNLESS image.match('^http'); image = image.replace('^/?', webroot); END %]
-				<a href="[% image || plugin_meta.cover %]" target="cover">
-					<img src="[% image || plugin_meta.cover | resizeimage(150, 150, 'f') %]" srcset="[% image || plugin_meta.cover | resizeimage(300, 300, 'f') %] 2x" alt="coverArt">
-				</a>
-				[% ELSIF plugin_meta.icon %]
-				<img src="[% plugin_meta.icon %].png" alt="coverArt" onLoad="resize(this)">
-				[% END %]
-			[% ELSE %]
-				[%# fall back to 0 for cover link if itemobj.id isn't going to give us a valid id %]
-				<a href="/music/[% itemobj.id || 0 %]/cover.jpg" [% UNLESS notarget %]target="cover"[% END %]>
-					[% coverUrl = "/music/" _ (itemobj.id || 0) _ "/cover" %]
-					<img src="[% coverUrl | resizeimage(150, 150, 'f') %]" srcset="[% coverUrl | resizeimage(300, 300, 'f') %]" alt="coverArt">
-				</a>
-			[% END %]
-		</span>
-	</div>
-
+	
 	<div id="linkedSongInfoItems">
+		<div id="COVERART">
+			<div class="songInfoContent">
+				[% IF image || plugin_meta.cover || plugin_meta.icon %]
+					[%# Display plugin cover or icon %]
+					[% IF image || plugin_meta.cover %]
+					[% UNLESS image.match('^http'); image = image.replace('^/?', webroot); END %]
+					<a href="[% image || plugin_meta.cover %]" target="cover">
+						<img src="[% image || plugin_meta.cover | resizeimage(150, 150, 'f') %]" srcset="[% image || plugin_meta.cover | resizeimage(300, 300, 'f') %] 2x" alt="coverArt">
+					</a>
+					[% ELSIF plugin_meta.icon %]
+					<img src="[% plugin_meta.icon %].png" alt="coverArt" onLoad="resize(this)">
+					[% END %]
+				[% ELSE %]
+					[%# fall back to 0 for cover link if itemobj.id isn't going to give us a valid id %]
+					<a href="/music/[% itemobj.id || 0 %]/cover.jpg" [% UNLESS notarget %]target="cover"[% END %]>
+						[% coverUrl = "/music/" _ (itemobj.id || 0) _ "/cover" %]
+						<img src="[% coverUrl | resizeimage(150, 150, 'f') %]" srcset="[% coverUrl | resizeimage(300, 300, 'f') %]" alt="coverArt">
+					</a>
+				[% END %]
+			</div>
+			<div class="songInfoContent">
 		[% IF songInfoPlayLinks; songInfoPlayLinks; END %]
 
 		[%- albumInfo = BLOCK %]
@@ -255,6 +256,10 @@
 			[% ELSIF itemobj.albumreplaygain %]
 				[% item = itemobj.albumreplaygain.name |html; title = "ALBUMREPLAYGAIN"; PROCESS songInfoItem %]
 			[% END %]
+
+			</div>
+		
+		</div>
 	</div>
 
 </div>

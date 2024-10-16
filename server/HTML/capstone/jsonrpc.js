@@ -612,6 +612,76 @@ if (params && params[1][0] === "pref" && params[1][1] === "ignoredarticles") {
     } else {
          res.status(400).send('Invalid request');
     }
+
+// *******************************************************************************
+//                         **** Web Proxy ****
+// *******************************************************************************
+    // if(params && params[1][0] === "pref" && params[1][1] === "webproxy") {
+    //     const newWebProxy = params[1][2];
+    //     console.log("New webproxy value:", newWebProxy);
+
+    //     let filePath;
+    //     if (os.platform() === 'win32' || os.platform() === 'win64') {
+    //         filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    //         console.log("Windows path:", filePath);
+    //     } else if (os.platform() === 'linux') {
+    //         filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    //         console.log("Linux path:", filePath);
+    //     } else {
+    //         return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    //     }
+
+    //     console.log("Reading prefs file:", filePath);
+    //     fs.readFile(filePath, 'utf8', (err, data) => {
+    //         if (err) return res.status(500).send('Error reading prefs file');
+    //         console.log("Current prefs file data DEBUG:", data);
+
+    //         // Replace the mediadirs line with the new directory
+    //         const updatedData = data.replace(/webproxy:\s*\S+/g, `webproxy: ["${newWebProxy}"]`);
+            
+    //         // Write the updated data back to the file
+    //         fs.writeFile(filePath, updatedData, (err) => {
+    //             if (err) return res.status(500).send('Error updating prefs file');
+    //             console.log("Updated prefs file content:", updatedData);
+    //             res.json({ result: 'Web Proxy updated successfully' });
+    //         });
+    //     });
+    // }
+
+    // *******************************************************************************
+    //                         **** HTTP PORT ****
+    // *******************************************************************************
+    // if(params && params[1][0] === "pref" && params[1][1] === "httpport") {
+    //     const newHttpPort = params[1][2];
+    //     console.log("New httpport value:", newHttpPort);
+
+    //     let filePath;
+    //     if (os.platform() === 'win32' || os.platform() === 'win64') {
+    //         filePath = path.join('C:', 'ProgramData', 'Squeezebox', 'prefs', 'server.prefs');
+    //         console.log("Windows path:", filePath);
+    //     } else if (os.platform() === 'linux') {
+    //         filePath = '/var/lib/squeezeboxserver/prefs/server.prefs';
+    //         console.log("Linux path:", filePath);
+    //     } else {
+    //         return res.status(500).send('Unsupported OS - This has only been coded for Windows and Linux');
+    //     }
+
+    //     console.log("Reading prefs file:", filePath);
+    //     fs.readFile(filePath, 'utf8', (err, data) => {
+    //         if (err) return res.status(500).send('Error reading prefs file');
+    //         console.log("Current prefs file data DEBUG:", data);
+
+    //         // Replace the mediadirs line with the new directory
+    //         const updatedData = data.replace(/httpport:\s*\S+/g, `httpport: ["${newHttpPort}"]`);
+            
+    //         // Write the updated data back to the file
+    //         fs.writeFile(filePath, updatedData, (err) => {
+    //             if (err) return res.status(500).send('Error updating prefs file');
+    //             console.log("Updated prefs file content:", updatedData);
+    //             res.json({ result: 'HTTP Port updated successfully' });
+    //         });
+    //     });
+    // }
 });
 
 app.get('/jsonrpc.js', (req, res) => {
