@@ -54,8 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var animationBtn = document.querySelector('.animationBtn');
     var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
     var MusiclistContainer = document.querySelector('.MusiclistContainer');
-    var infoPanel = document.querySelector('.infoPanel');
-    var infoPanelArtist = document.querySelector('.infoArtistPanel');
     var musicInfoPanel = document.querySelector('.musicInfoPanel');
     var infoPanelBtn = document.querySelector('.infoPanelBtn');
 
@@ -75,12 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 500); // Wait for the animation to finish before hiding
 
             // hide right bar
-            if(!infoPanel.classList.contains('hidden')) {
-                infoPanel.classList.add('hidden');
-            }
-            if(!infoPanelArtist.classList.contains('hidden')) {
-                infoPanelArtist.classList.add('hidden');
-            }
             if(!musicInfoPanel.classList.contains('hidden')) {
                 musicInfoPanel.classList.add('hidden');
             }
@@ -102,19 +94,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 500); // Wait for the animation to finish before hiding
         }
 
-        if(musicInfoPanel.classList.contains('hidden') && infoPanel.classList.contains('hidden') && infoPanelArtist.classList.contains('hidden')) {
+        if(musicInfoPanel.classList.contains('hidden')) {
             musicInfoPanel.classList.remove('hidden');
-
-            if(!artist) {
-                infoPanelArtist.classList.remove('hidden');
-            } else if(artist) {
-                infoPanel.classList.remove('hidden');
-            }
-        } else if (infoPanel.classList.contains('hidden') && !musicInfoPanel.classList.contains('hidden')) {
-            infoPanelArtist.classList.add('hidden');
-            musicInfoPanel.classList.add('hidden');
-        } else if (infoPanelArtist.classList.contains('hidden') && !musicInfoPanel.classList.contains('hidden')) {
-            infoPanel.classList.add('hidden');
+        } else {
             musicInfoPanel.classList.add('hidden');
         }
             
@@ -127,8 +109,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var animationBtn = document.querySelector('.animationBtn');
     var MusiclistContainer = document.querySelector('.MusiclistContainer');
     var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
-    var infoPanel = document.querySelector('.infoPanel');
-    var infoPanelArtist = document.querySelector('.infoArtistPanel');
     var musicInfoPanel = document.querySelector('.musicInfoPanel');
     
     // Set initial state (only the button should be visible)
@@ -137,8 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
     overallPlaylistContainer.classList.add('hidden');
     animationBtn.classList.remove('hidden');
     
-    infoPanel.classList.add('hidden');
-    infoPanelArtist.classList.add('hidden');
     musicInfoPanel.classList.add('hidden');
 
     // Event listener for the animation button
@@ -155,12 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
             animationMusiclistBtn.style.bottom = '0';
 
             // hide right bar
-            if(!infoPanel.classList.contains('hidden')) {
-                infoPanel.classList.add('hidden');
-            }
-            if(!infoPanelArtist.classList.contains('hidden')) {
-                infoPanelArtist.classList.add('hidden');
-            }
+
             if(!musicInfoPanel.classList.contains('hidden')) {
                 musicInfoPanel.classList.add('hidden');
             }
