@@ -266,7 +266,7 @@
 
 			[% lctype = item.web.group | lower; IF details.${ lctype } || details.contributors.${item.web.group}; NEXT; END %]
         <!-- Add to queue -->
-
+		 
 			[%- BLOCK gencontrol -%]
 				[% IF item.simpleAlbumLink && (item.playLink  || item.insertLink || item.addLink || item.removeLink ) %]
 					[% IF item.playLink; WRAPPER playlink %]href="[% webroot %][% item.playLink %]&player=[% playerURI %]"[% END; END %]
