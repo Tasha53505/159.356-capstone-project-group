@@ -107,7 +107,6 @@
 [% IF streaminfo %]
 	[% IF streaminfo.item.enclosure || streaminfo.item.url %]
 	<div id="songInfoHeader">
-		<div style="padding: 20px; background-color: aqua;"></div>
 		[% WRAPPER playlink %]href="[% path %]?[% searchquery %]action=play&amp;index=[% streaminfo.index %]&amp;player=[% player | uri %]&amp;sess=[% sess %]"[% END %] [% stringPLAY %]<br />
 		[% WRAPPER addlink %]href="[% path %]?[% searchquery %]action=add&amp;index=[% streaminfo.index %]&amp;player=[% player | uri %]&amp;sess=[% sess %]"[% END %] [% "ADD_TO_PLAYLIST" | string %]
 	</div>
