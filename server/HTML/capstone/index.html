@@ -70,12 +70,12 @@
                                         <div class="advancedSettingsTabs">                                        
                                             <button class="advancedSettingsMediaLibraryManagementTabButton active" data-tab="advancedSettingsMediaLibraryManagement">Advanced Media Library Management</button>
                                             <button class="advancedSettingsFileTypesTabButton" data-tab="advancedFileTypes">Advanced File Types</button>
-                                            <button class ="advancedSettingsFormatTabButton active" data-tab="formatSettings">Formatting</button>
-                                            <button class="advancedSettingsSecurityTabButton active" data-tab="security">Security</button>
-                                            <button class="advancedSettingsSoftwareUpdateTabButton active" data-tab="software">Software Update</button>
+                                            <button class="advancedSettingsFormatTabButton active" data-tab="formatSettings">Formatting</button>
                                             <button class="advancedSettingsServerStatusTabButton" data-tab="advancedSettingsServerStatus">Logitech Media Server Status</button>
                                             <button class="advancedSettingsNetworkTabButton" data-tab="advancedSettingsNetwork">Network</button>
                                             <button class="advancedSettingsPerformanceTabButton" data-tab="advancedSettingsPerformance">Performance</button>
+                                            <button class="advancedSettingsSecurityTabButton active" data-tab="security">Security</button>
+                                            <button class="advancedSettingsSoftwareUpdateTabButton active" data-tab="software">Software Update</button>
                                         </div>
                                             
                                         <div class="advancedSettingsMediaLibraryManagementTab active" id="advancedSettingsMediaLibraryManagement"> 
@@ -1574,95 +1574,33 @@
 
                                         </div>
 
+                                        <div class="advancedSettingsFormatTab active" id="formatSettings">
+                                            [% WRAPPER setting title="SETUP_COVERART" desc="SETUP_COVERART_DESC" %]
+                                            [% prefs.pref_coverArt | html %]
+                                            <form id="coverArtForm" class="">
+                                                <input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="" size="40">
+                                                <div class="prefs">
+                                                    <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save Default Artwork"><br><br>
+                                                </div>
+                                            </form>
+                                            [% END %]
+    
+                                            [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
+                                            [% prefs.pref_artfolder | html %]
+                                            <p>Data provided MUST be in a file format</p>
+                                            <form id="artworkFolderForm" class="">
+                                                <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
+                                                <div class="prefs">
+                                                    <input name="pref_update_artfolder" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="artFolderUpdateButton" onclick="artFolderForm(this.form); return false;"  value="Save Artwork Folder"><br><br>
+                                                </div>
+                                            </form>
+    
+                                            [% END %]
+    
+                                        </div> 
+
                                         <div class="advancedSettingsServerStatusTab" id="advancedSettingsServerStatus">
-                                            [% BLOCK infoItem %]
-                                            	[% WRAPPER setting title=title %]
-                                            		[% FOREACH item IN items %]
-                                            			<div>[% item.name %]</div>
-                                            		[% END %]
-                                            	[% END %]
-                                            [% END %]
-
-                                            [% PROCESS infoItem title="SERVER_STATUS" items=server.items %]
-                                            [% PROCESS infoItem title="INFORMATION_MENU_PERL" items=perl.items %]
-
-                                            [% IF library; PROCESS infoItem title="INFORMATION_MENU_LIBRARY" items=library.items; END %]
-
-                                            [% IF onlinelibrary %]
-                                                [% FOREACH service IN onlinelibrary %]
-                                                    [% PROCESS infoItem title=service.name items=service.items %]
-                                                [% END %]
-                                            [% END %]
-
-                                            [% IF progress AND NOT simple %]
-                                            	[% WRAPPER setting title="SCANNER_PROGRESS" %]
-                                            		[% progress %]
-                                            		[% IF scanning && !abortScan %]
-                                            			<div id="abortscanlink"><br/>
-                                            				<a href="[% webroot %][% path %]?playerid=[% playerid | uri %]&amp;player=[% player | uri %]&amp;abortScan=1">[% "ABORT_SCAN" | string %]</a>[%# stringCOLON %] [%# scanning | string %]
-                                            			</div>
-                                            		[% END %]
-                                            	[% END %]
-                                            [% END %]
-
-                                            [% IF players %]
-                                            	[% WRAPPER setting title = "INFORMATION_MENU_PLAYER" %]
-                                            		<div class="prefDesc">[% "SERVER_STATUS_DESC" | string %]</div>
-                                            	[% END %]
-                                            	[% FOREACH client = players.items %]
-                                            		[% WRAPPER setting title = client.name %]
-                                            			[% FOREACH item IN client.web.items; item.key %]
-                                            				[% IF item.values.0 %]
-                                            					<div>[% item.keys.0 | string %][% stringCOLON %] [% item.values.0 %]</div>
-                                            				[% END %]
-                                            			[% END %]
-                                            		[% END %]
-                                            	[% END %]
-                                            [% END %]
-
-                                            [% UNLESS simple; WRAPPER setting title = "FOLDERS"; END; END %]
-                                            [% FOREACH item IN folders.web.items %]
-                                            	[% IF item.values.0 %]
-                                            		[% WRAPPER settingSection %]
-                                            			<div class="settingGroup">
-                                            				<div class="prefHead">[% IF simple %]<b>[% END %][% item.keys.0 | string %][% IF simple %]</b>[% END %]</div>
-                                            				<div class="prefs">[% item.values.0 %]</div>
-                                            			</div>
-                                            		[% END %]
-                                            	[% END %]
-                                            [% END %]
-
-                                            [% FOREACH item IN logs.web.items %]
-                                            	[% IF item.values.0 %]
-                                            		[% WRAPPER setting title="SETUP_DEBUG_${item.keys.0}_LOG" desc="SETUP_DEBUG_${item.keys.0}_LOG_DESC" %]
-                                            			<div class="prefDesc">
-                                            				[% UNLESS simple %]<a href="[% webroot %][% item.keys.0 | lower %].log" target="log">[% END %][% item.values.0 %][% UNLESS simple %]</a>
-                                            				(<a href="[% webroot %][% item.keys.0 | lower %].log?lines=100" target="log">100</a>,
-                                            				<a href="[% webroot %][% item.keys.0 | lower %].log?lines=500" target="log">500</a>,
-                                            				<a href="[% webroot %][% item.keys.0 | lower %].log?lines=1000" target="log">1000</a>
-                                            				[% "LINES" | string %],
-                                            				<a href="/[% item.keys.0 | lower %].log?full=1">[% "EVERYTHING" | string | lower %]</a>,
-                                            				<a href="/[% item.keys.0 | lower %].log?zip=1">[% "SETUP_LOG_ZIPPED" | string %]</a>)[% END %]
-                                            			</div>
-                                            		[% END %]
-                                            	[% END %]
-                                            [% END %]
-
-                                            [% FOREACH item = info %]
-                                            	[% UNLESS item.web.hide %]
-                                            		[% WRAPPER setting title=item.name %]
-                                            			[% IF item.type == 'redirect' && item.web.url %]
-                                            				<a href="[% webroot %][% item.web.url %]?player=[% player | uri %]" [% IF item.web.target %]target="[% item.web.target %]"[% END %]>
-                                            					[% (item.web.value || item.web.url) | html_line_break %]
-                                            				</a>
-                                            			[% ELSE %]
-                                            				[% item.web.value | html_line_break %]
-                                            			[% END %]
-                                            		[% END %]
-                                            	[% END %]
-                                            [% END %]
-
-                                            <div>&nbsp;</div>
+                                            <iframe name="serverstatus" width="100%" frameborder="0" scrolling="auto" id="serverStatusIframe" style="display: block; width: 100%;"></iframe>  
                                         </div>
 
                                         <div class="advancedSettingsNetworkTab" id="advancedSettingsNetwork">
@@ -1912,32 +1850,6 @@
 	                                        [% END %]
                                             </form>
                                         </div>
-                                    </div>                            
-                                        <div class="advancedSettingsFormatTab active" id="formatSettings">
-                                            [% WRAPPER setting title="SETUP_COVERART" desc="SETUP_COVERART_DESC" %]
-                                            [% prefs.pref_coverArt | html %]
-                                            <form id="coverArtForm" class="">
-                                                <input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="" size="40">
-                                                <div class="prefs">
-                                                    <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save Default Artwork"><br><br>
-                                                </div>
-                                            </form>
-                                            [% END %]
-    
-                                            [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
-                                            [% prefs.pref_artfolder | html %]
-                                            <p>Data provided MUST be in a file format</p>
-                                            <form id="artworkFolderForm" class="">
-                                                <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
-                                                <div class="prefs"></div>
-                                                    <input name="pref_update_artfolder" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="artFolderUpdateButton" onclick="artFolderForm(this.form); return false;"  value="Save Artwork Folder"><br><br>
-                                                </div>
-                                            </form>
-    
-                                            [% END %]
-    
-                                        </div>                                       
-                                        
 
                                         <div class="advancedSettingsSecurityTab active" id="security">
                                             <iframe name="settings" width="100%" frameborder="0" scrolling="auto" id="securityIframe" style="display: block; width: 100%;"></iframe>  

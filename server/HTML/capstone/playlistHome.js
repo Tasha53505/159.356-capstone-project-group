@@ -671,20 +671,23 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.advancedSettingsMediaLibraryManagementTabButton',
             '.advancedSettingsFileTypesTabButton',
             '.advancedSettingsFormatTabButton',
-            '.advancedSettingsSecurityTabButton',
-            '.advancedSettingsSoftwareUpdateTabButton',
             '.advancedSettingsServerStatusTabButton',
             '.advancedSettingsNetworkTabButton',
-            '.advancedSettingsPerformanceTabButton'
+            '.advancedSettingsPerformanceTabButton',
+            '.advancedSettingsSecurityTabButton',
+            '.advancedSettingsSoftwareUpdateTabButton'
         ];
         const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
 
         const advancedSettingsContentClasses = [
             '.advancedSettingsMediaLibraryManagementTab', // 
             '.advancedSettingsFileTypesTab',
+            '.advancedSettingsFormatTab',
             '.advancedSettingsServerStatusTab',
             '.advancedSettingsNetworkTab', //
-            '.advancedSettingsPerformanceTab'
+            '.advancedSettingsPerformanceTab',
+            '.advancedSettingsSecurityTab',
+            '.advancedSettingsSoftwareUpdateTab'
         ];
         const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
     
@@ -962,6 +965,20 @@ advancedSettingsTabsButtons.forEach(button => {
     
             advancedButton.click();
 
+            deleteDuplicates('serverStatusIframe')
+            const serverStatusIframe = document.getElementById('serverStatusIframe');
+            serverStatusIframe.src = 'settings/server/status.html'
+            serverStatusIframe.onload = function () {
+                let timerId = setInterval(() => {
+                    const iframeDocument = serverStatusIframe.contentDocument || serverStatusIframe.contentWindow.document;
+
+                    const bodyHeight = iframeDocument.body.scrollHeight;
+                    if (bodyHeight > 0) {
+                        serverStatusIframe.setAttribute('style', 'height: ' + (bodyHeight + 7) + 'px')
+                        clearInterval(timerId)
+                    }
+                }, 100)
+            }
     
             deleteDuplicates('securityIframe')
             const securityIframe = document.getElementById('securityIframe');
