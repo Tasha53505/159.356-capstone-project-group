@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         animationBtn.classList.toggle('hidden');
-        updateAnimationBtnMargin();
+
     });
 
 
@@ -179,48 +179,6 @@ document.getElementById('allSongs').addEventListener('click', function() {
 
 });
 
-// function loadMusicFolder() {
-//     const url = "http:localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/?player=10:f6:0a:92:1d:96";
-    
-//     fetch(url)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Network response was not ok');
-//             }
-//             return response.text(); // Or use .json() if the data is JSON
-//         })
-//         .then(data => {
-//             // Display the fetched data inside the songsList div
-//             document.querySelector('.songsList').innerHTML = data;
-//         })
-//         .catch(error => console.error('Error fetching the music folder:', error));
-// }
-
-
-
-
-
-// Play Songs
-function playSong(url) {
-
-    fetch(url)
-      .then(response => response.text())
-      .then(data => {
-        console.log("Song playback started");
-
-      })
-      .catch(error => console.error("Error playing song:", error));
-  }
-
-  // Add song to queue
-  function addToQueue(url) {
-    fetch(url)
-      .then(response => response.text())
-      .then(data => {
-        console.log("Song added to queue");
-      })
-      .catch(error => console.error("Error adding song to queue:", error));
-}
 
 
 
@@ -333,7 +291,7 @@ document.getElementById('radioTuneInTitle').addEventListener('click', function()
 
     // Add back button and header
     newRadioTuneInContainer.innerHTML = 
-        `<h3>Radio Tune In</h3>
+        `<h3 class="radioTuneInTitle">Radio Tune In</h3>
 
         <button class="backButton">
             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
@@ -368,6 +326,60 @@ document.getElementById('radioTuneInTitle').addEventListener('click', function()
 
 
 });
+
+// ------------------------ Code to fetch all Favourites ------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('allFavourites').addEventListener('click', function() {
+        // Create a new container for the favourites
+        var newFavouritesContainer = document.createElement('div');
+        newFavouritesContainer.classList.add('newFavouritesContainer');
+
+        var animationBtn = document.querySelector('.animationBtn');
+        if (animationBtn) {
+            animationBtn.style.display = 'none';
+        }
+
+        // Add back button and header
+        newFavouritesContainer.innerHTML = 
+            `<h3 class="favouritesTitle">Favourites</h3>
+            <button class="backButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 1024 1024">
+                    <path fill="#ffffff" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64"/>
+                    <path fill="#ffffff" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312z"/>
+                </svg>
+            </button>
+            <div id="favouritesList"></div>`; 
+
+        // Append the new container to the body
+        document.body.appendChild(newFavouritesContainer);
+
+        // Clone the favouritesList element to avoid issues with the original
+        var favouritesList = document.querySelector('.favouritesList').cloneNode(true);
+        favouritesList.style.display = 'block'; // Display it
+        newFavouritesContainer.querySelector('#favouritesList').appendChild(favouritesList);
+
+        // Show the new container
+        newFavouritesContainer.style.display = 'block'; // Make sure it's visible
+        setTimeout(function () {
+            newFavouritesContainer.classList.add('showNewFavouritesContainer');
+        }, 10);
+
+        // Back Button functionality
+        newFavouritesContainer.querySelector('.backButton').addEventListener('click', function () {
+            newFavouritesContainer.classList.remove('showNewFavouritesContainer');
+            setTimeout(function () {
+                newFavouritesContainer.remove();
+                if (animationBtn) {
+                    animationBtn.style.display = 'block';
+                }
+            }, 500); // Animation time + back functionality
+        });
+    });
+});
+
+
+
+
 
 
 // --------------------------- Iframe --------------------------------------
@@ -433,7 +445,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
         <div class="settingsContent">
-            <div class="tabContent active" id="music">
+            <div class="tabContent" id="music">
                 <p class="settingsTextContent">My Music</p>
                 <p class="settingsTextContent">Itunes</p>
                 <p class="settingsTextContent">Interface and Player</p>
@@ -441,7 +453,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <div class="tabContent" id="plugins">
                 <p class="settingsTextContent">Manage Plugins</p>
             </div>
-            <div class="tabContent" id="basic-info">
+            <div class="tabContent active" id="basic-info">
                 <div class="basicSettingsContent"></div>
             </div>
             <div class="tabContent" id="interface">
