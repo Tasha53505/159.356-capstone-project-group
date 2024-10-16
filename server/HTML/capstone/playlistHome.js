@@ -3554,7 +3554,7 @@ function getPref(display, listElementId){
 
 
 
-// Export fucntions for testing
-module.exports = {
-    rescanMedia,
-};
+// // Export fucntions for testing
+// module.exports = {
+//     rescanMedia,
+// };
