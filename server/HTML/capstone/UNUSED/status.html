@@ -8,16 +8,16 @@
   </head>
   <body bgcolor="#FFFFFF">
 	<h3>[% playermodel _ "_MUSIC_PLAYER" | string %] [% IF player_name %][% player_name | html %][% END %]</h3>
-  	[% IF player_chooser_list %]<form method="get" action="[% webroot %]index.html" target="_top">[% "CURRENT_PLAYER" | string %] <select name="player">[% player_chooser_list %]</select><input class="stdclick" type="submit" value="Change"></form>[% END %]
+  	[% IF player_chooser_list %]<form method="get" action="[% webroot %]index.html" target="_self">[% "CURRENT_PLAYER" | string %] <select name="player">[% player_chooser_list %]</select><input class="stdclick" type="submit" value="Change"></form>[% END %]
    <div id="playingStatus">
     [% IF modeplay %][% "PLAYING" | string %][% END %]
     [% IF modepause %][% "PAUSED_ON" | string %][% END %]
     [% IF modestop %][% "STOPPED_ON" | string %][% END %]
     [% IF currentsong %][% currentsong %] [% "OUT_OF" | string %] [% songcount %][% END %][% stringCOLON %]
    </div>
-   <div class="playingSong"><a [% songinfoHRef %] target="browser">[% songtitle %]</a>
+   <div class="playingSong"><a [% songinfoHRef %] target="_self">[% songtitle %]</a>
    [% IF itemobj.album.title.defined && itemobj.album.title != noAlbum %]
-    [% stringFROM %] <a [% albumHRef %] target="browser">[% itemobj.album.title | html %]</a>
+    [% stringFROM %] <a [% albumHRef %] target="_self">[% itemobj.album.title | html %]</a>
    [%- END %]
    [% IF itemobj.artist && itemobj.artist != noArtist %]
     [% PROCESS artistsAsHTML.html %]
@@ -40,8 +40,8 @@
 [% IF isplayer %]<br>
 
     [% "PLAYER" | string %][% stringCOLON %]
-               [% IF mode == 'off' %]<a target="_top" href="index.html?player=[% playerURI %]&amp;p0=power&amp;p1=1">[% END %][% IF mode != 'off' %]<b>[% END %][% "ON" | string %][% IF mode != 'off' %]</b>[% END %][% IF mode == 'off' %]</a>[% END %]/[% IF mode != 'off' %]<a
-               target="_top" href="index.html?player=[% playerURI %]&amp;p0=power&amp;p1=0">[% END %][% IF mode == 'off' %]<b>[% END %][% "OFF" | string %][% IF mode == 'off' %]</b>[% END %][% IF mode != 'off' %]</a>[% END %]
+               [% IF mode == 'off' %]<a target="_self" href="index.html?player=[% playerURI %]&amp;p0=power&amp;p1=1">[% END %][% IF mode != 'off' %]<b>[% END %][% "ON" | string %][% IF mode != 'off' %]</b>[% END %][% IF mode == 'off' %]</a>[% END %]/[% IF mode != 'off' %]<a
+               target="_self" href="index.html?player=[% playerURI %]&amp;p0=power&amp;p1=0">[% END %][% IF mode == 'off' %]<b>[% END %][% "OFF" | string %][% IF mode == 'off' %]</b>[% END %][% IF mode != 'off' %]</a>[% END %]
 
 <br><br>
 [% PROCESS volumecontrol.html %]
