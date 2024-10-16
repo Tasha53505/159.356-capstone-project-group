@@ -1575,28 +1575,47 @@
                                         </div>
 
                                         <div class="advancedSettingsFormatTab active" id="formatSettings">
-                                            [% WRAPPER setting title="SETUP_COVERART" desc="SETUP_COVERART_DESC" %]
-                                            [% prefs.pref_coverArt | html %]
-                                            <form id="coverArtForm" class="">
-                                                <input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="" size="40">
-                                                <div class="prefs">
-                                                    <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save Default Artwork"><br><br>
+                                            <!-- Artwork -->
+                                            <div class="tooltipDrowndown">     
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <h4 style="display: inline-block; vertical-align: middle;">Artwork</h4>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                    </div>
+                                                        <div class="tooltip">  
+                                                            Images of album artwork, when available, are displayed when viewing an album or song information. Artwork images are found in the ID3 tags for individual songs or can reside in the same folder as song files. By default, images named "cover.jpg", "folder.jpg", "album.jpg", or "thumb.jpg" are used. You can specify an additional file name to use for album art images. You can specify different file names for thumbnail or full size images. Prefix the option with % and you can follow it with any string made up of the same elements available for Title Formats (eg %ARTIST - ALBUM, will look for Artist - Album.jpg to fit the artist and album information found).
+                                                        </div>
                                                 </div>
-                                            </form>
-                                            [% END %]
-    
-                                            [% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
-                                            [% prefs.pref_artfolder | html %]
-                                            <p>Data provided MUST be in a file format</p>
-                                            <form id="artworkFolderForm" class="">
-                                                <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
-                                                <div class="prefs">
-                                                    <input name="pref_update_artfolder" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="artFolderUpdateButton" onclick="artFolderForm(this.form); return false;"  value="Save Artwork Folder"><br><br>
+                                                <form id="coverArtForm" class="">
+                                                    <input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="" size="40"><br><br>
+                                                    <div class="prefs">
+                                                        <input name="pref_update_coverArt" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="covertArtUpdateButton" onclick="coverArtForm(this.form); return false;"  value="Save Default Artwork"><br><br>
+                                                    </div>
+                                                </form>
+                                            </div>  
+                                            <hr><br>
+                                            <!-- Artwork Folder -->
+                                            <div class="tooltipDrowndown">     
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <h4 style="display: inline-block; vertical-align: middle;">Artwork Folder</h4>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                    </div>
+                                                        <div class="tooltip">  
+                                                            You may choose to store all your artwork in a single folder, using the variable filenames option above. Enter the location of the Artwork files here. Regardless of this location, Logitech Media Server will still look for artwork in the same path as each audio file if no matching artwork is found in the Artwork Folder. Data provided MUST be in a file format                                                       
+                                                        </div>
                                                 </div>
-                                            </form>
-    
-                                            [% END %]
-    
+                                                <form id="artworkFolderForm" class="">
+                                                    <input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40"><br><br>
+                                                    <div class="prefs">
+                                                        <input name="pref_update_artfolder" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="artFolderUpdateButton" onclick="artFolderForm(this.form); return false;"  value="Save Artwork Folder"><br><br>
+                                                    </div>
+                                                </form>
+                                            </div>  
                                         </div> 
 
                                         <div class="advancedSettingsServerStatusTab" id="advancedSettingsServerStatus">
