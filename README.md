@@ -175,12 +175,14 @@ which calls Slim::Control::Queries::mediafolderQuery
 
 ### What tests have been written with Selenium:
 - I have mainly just automated the process with of clicking through the entire left panel to make sure everything functions correctly. This was especially useful for tiny code changes - with a click of a button it reruns the whole test
-
+---
+## Favourites Plugin
+- Favourites plugin has been created by inheritenting the EN's skin plugin content, but overwriting the index file. You can see this by following path: Squeezebox\server\Slim\Plugin\Favorites\HTML\capstone\plugins\Favorites
 
 
 ---
 ## Left To-do
-- Plugins
+- Plugins (Favourites Plugin has been complete though)
 - Plugins Settings
 
 
