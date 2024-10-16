@@ -371,3 +371,10 @@ body {
     margin: 2px 0;
     line-height: 1.2;
 }
+
+/* --- DROPDOWN MENU IN SETTINGS --- */
+.tooltipDrowndown {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}

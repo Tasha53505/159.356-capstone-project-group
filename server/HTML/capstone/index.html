@@ -2087,125 +2087,180 @@
                                 <div class="interfaceSettingsContent"><br>
                                     <div class="interfaceSettingsDisplayTab active" id="interfaceSettingsDisplay">
                                         <!-- Show Artist Option-->
-                                        [% WRAPPER settingGroup title="SETUP_SHOWARTIST" desc="SETUP_SHOWARTIST_DESC" %]
-                                        <form id="showArtistForm" class="">
-                                            <div class="radio-buttons">
-                                                <label>
-                                                    <input type="radio" name="pref_showArtist" id="showArtistDisabled" value="0">
-                                                    [% 'DISABLED' | getstring %]
-                                                </label><br>
-                                                <label>
-                                                    <input type="radio" name="pref_showArtist" id="showArtistEnabled" value="1">
-                                                    [% 'ENABLED' | getstring %]
-                                                </label>
+                                        <div class="tooltipDrowndown">     
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <h4 style="display: inline-block; vertical-align: middle;">Show Artist with Album</h4>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                </div>
+                                                    <div class="tooltip">  
+                                                        You may choose to show the artist when browsing by Albums. When enabled, the album's artist will be shown next to the album title.
+                                                    </div>
                                             </div>
-                                            <div class="prefs">
-                                                <input name="pref_update_showArtist" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showArtistUpdateButton" onclick="showArtistForm(this.form); return false;"  value="Save Preference"><br><br>
-                                            </div><br>
-                                        </form>
-                                        [% END %]
+                                            <form id="showArtistForm" class="">
+                                                <div class="radio-buttons">
+                                                    <label>
+                                                        <input type="radio" name="pref_showArtist" id="showArtistDisabled" value="0">
+                                                        [% 'DISABLED' | getstring %]
+                                                    </label><br>
+                                                    <label>
+                                                        <input type="radio" name="pref_showArtist" id="showArtistEnabled" value="1">
+                                                        [% 'ENABLED' | getstring %]
+                                                    </label>
+                                                </div><br>
+                                                <div class="prefs">
+                                                    <input name="pref_update_showArtist" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showArtistUpdateButton" onclick="showArtistForm(this.form); return false;"  value="Save Preference"><br><br>
+                                                </div>
+                                            </form>
+                                        
+                                        </div>  
+                                        <hr><br>
                                         <!-- Show Year Option -->
-                                        [% WRAPPER settingGroup title="SETUP_SHOWYEAR" desc="SETUP_SHOWYEAR_DESC" %]
-                                        <form id="showYearForm" class="">
-                                            <div class="radio-buttons">
-                                                <label>
-                                                    <input type="radio" name="pref_showYear" id="showYearDisabled" value="0">
-                                                    [% 'DISABLED' | getstring %]
-                                                </label><br>
-                                                <label>
-                                                    <input type="radio" name="pref_showYear" id="showYearEnabled" value="1">
-                                                    [% 'ENABLED' | getstring %]
-                                                </label>
+                                        <div class="tooltipDrowndown">     
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <h4 style="display: inline-block; vertical-align: middle;">Show Year with Albums</h4>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                </div>
+                                                    <div class="tooltip">  
+                                                        You may choose to show the album year when browsing by Albums or by Artwork. When enabled, the album year will be shown next to the album title.
+                                                    </div>
                                             </div>
-                                            <div class="prefs">
-                                                <input name="pref_update_showYear" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showYearUpdateButton" onclick="showYearForm(this.form); return false;"  value="Save Preference"><br><br>
-                                            </div>
-                                        [% END %]
-
-                                        </form>
-
+                                            <form id="showYearForm" class="">
+                                                <div class="radio-buttons">
+                                                    <label>
+                                                        <input type="radio" name="pref_showYear" id="showYearDisabled" value="0">
+                                                        [% 'DISABLED' | getstring %]
+                                                    </label><br>
+                                                    <label>
+                                                        <input type="radio" name="pref_showYear" id="showYearEnabled" value="1">
+                                                        [% 'ENABLED' | getstring %]
+                                                    </label>
+                                                </div><br>
+                                                <div class="prefs">
+                                                    <input name="pref_update_showYear" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="showYearUpdateButton" onclick="showYearForm(this.form); return false;"  value="Save Preference"><br><br>
+                                                </div>    
+                                            </form>
+                                        </div>  
+                                        <hr><br>
                                         <!-- ITEMS PER PAGE -->
-                                        [% WRAPPER setting title="SETUP_ITEMSPERPAGE" desc="SETUP_ITEMSPERPAGE_DESC" %]
-                                        <p>Value between 10-500. Anything under/over will default to min/max value</p>
-                                        <form id="itemsPerPageForm">
-                                            <input type="number" class="stdedit" name="pref_itemsPerPage" id="itemsPerPage" min="10" max="500">
-                                            <div class="prefs">
-                                                <input name="pref_update_itemsPerPage" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="itemsPerPageUpdateButton" onclick="perPageForm(this.form); return false;"  value="Update Items Per Page"><br><br>
+                                        <div class="tooltipDrowndown">     
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <h4 style="display: inline-block; vertical-align: middle;">Items Per Page</h4>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                </div>
+                                                    <div class="tooltip">  
+                                                        This option controls the number of items displayed on each page. Value between 10-500. Anything under/over will default to min/max value
+                                                    </div>
                                             </div>
-                                        </form><br>
-                                        [% END %]
-
+                                            <form id="itemsPerPageForm">
+                                                <input type="number" class="stdedit" name="pref_itemsPerPage" id="itemsPerPage" min="10" max="500"><br><br>
+                                                <div class="prefs">
+                                                    <input name="pref_update_itemsPerPage" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="itemsPerPageUpdateButton" onclick="perPageForm(this.form); return false;"  value="Update Items Per Page"><br><br>
+                                                </div>
+                                            </form>
+                                        </div>  
+                                        <hr><br>
                                         <!-- THUMBNAIL SIZE -->
-                                        [% WRAPPER setting title="SETUP_THUMBSIZE" desc="SETUP_THUMBSIZE_DESC" %]
-                                        <form id="thumbSizeForm">
-                                            <input type="number" class="stdedit" name="pref_thumbSize" id="thumbSize" min="25" max="250">
-                                            <div class="prefs">
-                                                <input name="pref_update_thumbSize" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="thumbSizeUpdateButton" onclick="thumbSizeForm(this.form); return false;"  value="Update Thumbnail Size"><br><br>
+                                        <div class="tooltipDrowndown">     
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <h4 style="display: inline-block; vertical-align: middle;">Thumbnail Size</h4>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                </div>
+                                                    <div class="tooltip">  
+                                                        Choose the size in pixels (25-250) for the default thumbnail image when browsing by artwork. Default is 100.
+                                                    </div>
                                             </div>
-                                        </form>
-                                        [% END %]
-
+                                            <form id="thumbSizeForm">
+                                                <input type="number" class="stdedit" name="pref_thumbSize" id="thumbSize" min="25" max="250"><br><br>
+                                                <div class="prefs">
+                                                    <input name="pref_update_thumbSize" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="thumbSizeUpdateButton" onclick="thumbSizeForm(this.form); return false;"  value="Update Thumbnail Size"><br><br>
+                                                </div>
+                                            </form>
+                                        </div>  
+                                        <hr><br>
                                     </div>
                                     <div class="interfaceSettingsFormatTab" id="interfaceSettingsFormat">
                                         <!-- Title Format -->
-                                         <div class="settingSection">
-                                            <div class="settingGroup">
-                                                <div class="prefHead">Title Format</div>
-                                                <div class="prefDesc hiddenDesc">
-                                                    These are the formats available for selection both in the web interface and on players. 
+                                        <div class="tooltipDrowndown">     
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <h4 style="display: inline-block; vertical-align: middle;">Title Format</h4>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
                                                 </div>
-                                                <div class="prefs">
-                                                    <form id="titleFormatWebForm" class="">
-                                                        <select class="stdedit" name="pref_titleFormatWeb" id="titleFormatWeb">
-                                                            <option value="0">TITLE</option>
-                                                            <option value="1">DISC-TRACKNUM. TITLE</option>
-                                                            <option value="2">TRACKNUM. TITLE</option>
-                                                            <option value="3">TRACKNUM. ARTIST - TITLE</option>
-                                                            <option value="4">TRACKNUM. TITLE (ARTIST)</option>
-                                                            <option value="5">TRACKNUM. TITLE - ARTIST - ALBUM</option>
-                                                            <option value="6">TRACKNUM. TITLE from ALBUM by ARTIST</option>
-                                                            <option value="7">TITLE (ARTIST)</option>
-                                                            <option value="8">ARTIST - TITLE</option>
-                                                        </select>
-                                                        <input name="pref_update_titleFormatWeb" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="titleFormatWebUpdateButton" onclick="titleFormatWebForm(this.form); return false;"  value="Save Title Format"><br><br>
-                                                    </form>
-                                                </div>
+                                                    <div class="tooltip">  
+                                                        These are the formats available for selection both in the web interface and on players. 
+                                                    </div>
                                             </div>
-                                         </div><br>
+                                            <div class="prefs">
+                                                <form id="titleFormatWebForm" class="">
+                                                    <select class="stdedit" name="pref_titleFormatWeb" id="titleFormatWeb">
+                                                        <option value="0">TITLE</option>
+                                                        <option value="1">DISC-TRACKNUM. TITLE</option>
+                                                        <option value="2">TRACKNUM. TITLE</option>
+                                                        <option value="3">TRACKNUM. ARTIST - TITLE</option>
+                                                        <option value="4">TRACKNUM. TITLE (ARTIST)</option>
+                                                        <option value="5">TRACKNUM. TITLE - ARTIST - ALBUM</option>
+                                                        <option value="6">TRACKNUM. TITLE from ALBUM by ARTIST</option>
+                                                        <option value="7">TITLE (ARTIST)</option>
+                                                        <option value="8">ARTIST - TITLE</option>
+                                                    </select><br><br>
+                                                    <input name="pref_update_titleFormatWeb" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="titleFormatWebUpdateButton" onclick="titleFormatWebForm(this.form); return false;"  value="Save Title Format"><br><br>
+                                                </form>
+                                            </div>
+                                        </div>  
+                                        <hr><br>
                                          <!-- Custom Title Format -->
-                                         <div class="settingSection">
-                                            <div class="settingGroup">
-                                                <div class="prefHead">Custom Title Format</div>
-                                                <p>CURRENTLY ONLY CHANGES INDEX TO 9, ADDING CUSTOM VALUES ISN'T WORKING</p>
-                                                <div class="prefDesc hiddenDesc">
-                                                    <p>If you want a custom title format. Available data elements are:</p>
-                                                    <ul class="smallList">
-                                                        <li>CT (content type)</li>
-                                                        <li>TITLE</li>
-                                                        <li>GENRE</li>
-                                                        <li>TRACKNUM (tracknumber as an int)</li>
-                                                        <li>FS (file size)</li>
-                                                        <li>ARTIST</li>
-                                                        <li>COMPOSER</li>
-                                                        <li>CONDUCTOR</li>
-                                                        <li>BAND</li>
-                                                        <li>ALBUM</li>
-                                                        <li>COMMENT</li>
-                                                        <li>YEAR</li>
-                                                        <li>SECS (total seconds)</li>
-                                                        <li>DURATION (minutes and seconds)</li>
-                                                        <li>BITRATE</li>
-                                                    </ul>
-                                                    <p>Elements can be separated by anything (or nothing). The separators are only used if the data elements are present.</p>
+                                         <div class="tooltipDrowndown">     
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <h4 style="display: inline-block; vertical-align: middle;">Custom Title Format</h4>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
                                                 </div>
-                                                <div class="prefs">
-                                                    <form id="titleFormatForm" class="">
-                                                        <input type="text" class="stdedit" name="pref_titleFormat" id="titleFormat" value="" size="40">
-                                                        <input name="pref_update_titleFormat" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="titleFormatUpdateButton" onclick="titleFormatForm(this.form); return false;"  value="Add Custom Format"><br><br>
-                                                    </form>
-                                                </div>
+                                                    <div class="tooltip">  
+                                                        This is currently an experimental feature, and may not work as intended. If you want a custom title format. Available data elements are:
+                                                        <ul class="smallList">
+                                                            <li>CT (content type)</li>
+                                                            <li>TITLE</li>
+                                                            <li>GENRE</li>
+                                                            <li>TRACKNUM (tracknumber as an int)</li>
+                                                            <li>FS (file size)</li>
+                                                            <li>ARTIST</li>
+                                                            <li>COMPOSER</li>
+                                                            <li>CONDUCTOR</li>
+                                                            <li>BAND</li>
+                                                            <li>ALBUM</li>
+                                                            <li>COMMENT</li>
+                                                            <li>YEAR</li>
+                                                            <li>SECS (total seconds)</li>
+                                                            <li>DURATION (minutes and seconds)</li>
+                                                            <li>BITRATE</li>
+                                                        </ul>
+                                                        Elements can be separated by anything (or nothing). The separators are only used if the data elements are present.
+                                                    </div>
                                             </div>
-                                         </div> 
+                                            <div class="prefs">
+                                                <form id="titleFormatForm" class="">
+                                                    <input type="text" class="stdedit" name="pref_titleFormat" id="titleFormat" value="" size="40"><br><br>
+                                                    <input name="pref_update_titleFormat" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="titleFormatUpdateButton" onclick="titleFormatForm(this.form); return false;"  value="Add Custom Format"><br><br>
+                                                </form>
+                                            </div>
+                                        </div>  
+                                        <hr><br>
                                     </div>
                                     <div class="interfaceSettingsTimingTab" id="interfaceSettingsTiming">
 
