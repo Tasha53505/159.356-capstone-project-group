@@ -66,12 +66,23 @@
 
 </style>
 
-
+<!-- TODO: Remove if Code is not needed, add back in if it is
 [% IF query %]
 	[%# Add the search query to each link if available %]
 	[% searchquery = 'query=' _ query _ '&amp;' %]
 [% END %]
 
+[% FILTER null %]
+[% pageicon = 'RADIO'; noSpacer = NOT streaminfo; %]
+[% pwd_list = [];
+	FOREACH crumb IN crumb;
+		crumbItem = BLOCK %]
+			<a href="[% path %]?[% searchquery | uri | replace("'", "%27") %]player=[% playerURI %]&amp;index=[% crumb.index %]&amp;sess=[% sess %]">[% crumb.name | html %]</a>
+		[% END %]
+		[% pwd_list.push(crumbItem) %]
+	[% END %]
+[% END # filter -%]
+-->
 
 [% IF useAJAX %][% pageHeaderScripts = BLOCK %]
 	<script TYPE="text/javascript">[% PROCESS html/vars.js %]</script>

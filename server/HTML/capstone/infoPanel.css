@@ -8,6 +8,11 @@
 
 .musicInfoPanel {
     float: right;
+    width: 100%;
+}
+
+.musicInfoPanel.hidden {
+    display: none;
 }
 
 .infoPanelImage {
@@ -21,9 +26,9 @@
     width: 90%
 }
 
-.infoPanel.active {
+.infoPanel {
     /* background-color: #ccccce; */
-    width: 75%;
+    width: 100%;
     height: 100vh;
 
     float: right;
@@ -36,13 +41,13 @@
     overflow-y: scroll;
 }
 
-.infoPanel {
+.infoPanel.hidden {
     overflow: hidden;
     display: none;
 }
 
-.infoArtistPanel.active {
-    width: 75%;
+.infoArtistPanel {
+    width: 100%;
     height: 100vh;
 
     float: right;
@@ -55,7 +60,7 @@
     overflow-y: scroll;
 }
 
-.infoArtistPanel {
+.infoArtistPanel.hidden {
     overflow: hidden;
     display: none;
 }
@@ -77,7 +82,8 @@
 }
 
 .infoPanelContainer {
-    padding: 10%;
+    height: 100%;
+    width: 100%;
 }
 
 .artistHeader2 {
@@ -91,4 +97,10 @@
     padding: 0.5em;
     border-radius: 30% 0% 0% 30%;
     z-index: 5;
+}
+
+.songInfoFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
 }

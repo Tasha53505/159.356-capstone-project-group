@@ -557,7 +557,10 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsFormatTabButton,
 .interfaceSettingsDisplayTab,
 .interfaceSettingsFormatTab,
-.interfaceSettingsTimingTab  {
+.interfaceSettingsTimingTab,
+.advancedSettingsServerStatusTab,
+.advancedSettingsPerformanceTab,
+.advancedSettingsNetworkTab {
 
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
@@ -588,8 +591,11 @@ transform: translate3d(0, 0, 0);
 .advancedSettingsFileTypesTab.active,
 .interfaceSettingsDisplayTab.active,
 .interfaceSettingsFormatTab.active,
-.interfaceSettingsTimingTab.active
- {
+.interfaceSettingsTimingTab.active,
+.advancedSettingsServerStatusTab.active,
+.advancedSettingsPerformanceTab.active,
+.advancedSettingsNetworkTab.active
+{
     display: block; /* Show the active tab content */
 }
 
@@ -616,7 +622,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsSecurityTab,
 .interfaceSettingsDisplayTab,
 .interfaceSettingsFormatTab,
-.interfaceSettingsTimingTab  {
+.interfaceSettingsTimingTab,
+.advancedSettingsServerStatusTab,
+.advancedSettingsPerformanceTab,
+.advancedSettingsNetworkTab {
     background-color: #3A456D; 
 }
 
@@ -638,7 +647,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsSecurityTabButton,
 .interfaceSettingsDisplayTabButton,
 .interfaceSettingsFormatTabButton,
-.interfaceSettingsTimingTabButton  {
+.interfaceSettingsTimingTabButton,
+.advancedSettingsServerStatusTabButton,
+.advancedSettingsPerformanceTabButton,
+.advancedSettingsNetworkTabButton  {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -656,7 +668,6 @@ transform: translate3d(0, 0, 0);
 .mediaLibraryManagementBrowseTabButton.active,
 .mediaLibraryManagementFiltersTabButton.active,
 .mediaLibraryManagementPlaylistsTabButton.active,
-
 .advancedSettingsMediaLibraryManagementTabButton.active,
 .advancedSettingsFormatTabButton.active,
 .advancedSettingsSecurityTabButton.active,
@@ -666,7 +677,10 @@ transform: translate3d(0, 0, 0);
 .basicSettingsSecurityTabButton.active,
 .interfaceSettingsDisplayTabButton.active,
 .interfaceSettingsFormatTabButton.active,
-.interfaceSettingsTimingTabButton.active  {
+.interfaceSettingsTimingTabButton.active,
+.advancedSettingsServerStatusTabButton.active,
+.advancedSettingsPerformanceTabButton.active,
+.advancedSettingsNetworkTabButton.active  {
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -779,7 +793,9 @@ transform: translate3d(0, 0, 0);
         .advancedSettingsSoftwareUpdateTabButton,
         .advancedSettingsFileTypesTabButton,
         .basicSettingsRescanMediaTabButton,
-        .basicSettingsSecurityTabButton {
+        .advancedSettingsServerStatusTabButton,
+        .advancedSettingsPerformanceTabButton,
+        .advancedSettingsNetworkTabButton {
             display: inline;
             background-color: #1b2444;
             border: none;
@@ -806,7 +822,10 @@ transform: translate3d(0, 0, 0);
         .basicSettingsSecurityTabButton.active,
         .interfaceSettingsDisplayTabButton.active,
         .interfaceSettingsFormatTabButton.active,
-        .interfaceSettingsTimingTabButton.active  {
+        .interfaceSettingsTimingTabButton.active,
+        .advancedSettingsServerStatusTabButton.active,
+        .advancedSettingsPerformanceTabButton.active,
+        .advancedSettingsNetworkTabButton.active {
 
             background-color: #0456C6;
             border: none;

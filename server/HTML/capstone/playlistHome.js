@@ -54,6 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var animationBtn = document.querySelector('.animationBtn');
     var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
     var MusiclistContainer = document.querySelector('.MusiclistContainer');
+    var infoPanel = document.querySelector('.infoPanel');
+    var infoPanelArtist = document.querySelector('.infoArtistPanel');
+    var musicInfoPanel = document.querySelector('.musicInfoPanel');
+    var infoPanelBtn = document.querySelector('.infoPanelBtn');
 
     animationMusiclistBtn.addEventListener('click', function () {
         if (MusiclistContainer.classList.contains('show')) {
@@ -71,11 +75,50 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 500); // Wait for the animation to finish before hiding
 
             // hide right bar
-            // infoPanelBtn.classList.add('hidden')
-            infoPanel.classList.remove('active')
+            if(!infoPanel.classList.contains('hidden')) {
+                infoPanel.classList.add('hidden');
+            }
+            if(!infoPanelArtist.classList.contains('hidden')) {
+                infoPanelArtist.classList.add('hidden');
+            }
+            if(!musicInfoPanel.classList.contains('hidden')) {
+                musicInfoPanel.classList.add('hidden');
+            }
         }
     });
 
+
+    infoPanelBtn.addEventListener('click', function () {
+        if(MusiclistContainer.classList.contains('show')) {
+            MusiclistContainer.classList.remove('show');
+            animationMusiclistBtn.style.bottom = '0';
+        }
+
+        if(!overallPlaylistContainer.classList.contains('hidden')) {
+            overallPlaylistContainer.classList.add('hidden');
+            animationBtn.classList.add('hidden');
+            setTimeout(function() {
+                overallContainer.style.display = 'none';
+            }, 500); // Wait for the animation to finish before hiding
+        }
+
+        if(musicInfoPanel.classList.contains('hidden') && infoPanel.classList.contains('hidden') && infoPanelArtist.classList.contains('hidden')) {
+            musicInfoPanel.classList.remove('hidden');
+
+            if(!artist) {
+                infoPanelArtist.classList.remove('hidden');
+            } else if(artist) {
+                infoPanel.classList.remove('hidden');
+            }
+        } else if (infoPanel.classList.contains('hidden') && !musicInfoPanel.classList.contains('hidden')) {
+            infoPanelArtist.classList.add('hidden');
+            musicInfoPanel.classList.add('hidden');
+        } else if (infoPanelArtist.classList.contains('hidden') && !musicInfoPanel.classList.contains('hidden')) {
+            infoPanel.classList.add('hidden');
+            musicInfoPanel.classList.add('hidden');
+        }
+            
+    });
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -84,12 +127,19 @@ document.addEventListener('DOMContentLoaded', function () {
     var animationBtn = document.querySelector('.animationBtn');
     var MusiclistContainer = document.querySelector('.MusiclistContainer');
     var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
+    var infoPanel = document.querySelector('.infoPanel');
+    var infoPanelArtist = document.querySelector('.infoArtistPanel');
+    var musicInfoPanel = document.querySelector('.musicInfoPanel');
     
     // Set initial state (only the button should be visible)
     overallContainer.style.display = 'none';  // overallContainer is hidden initially
-
+   
     overallPlaylistContainer.classList.add('hidden');
     animationBtn.classList.remove('hidden');
+    
+    infoPanel.classList.add('hidden');
+    infoPanelArtist.classList.add('hidden');
+    musicInfoPanel.classList.add('hidden');
 
     // Event listener for the animation button
     animationBtn.addEventListener('click', function () {
@@ -105,7 +155,15 @@ document.addEventListener('DOMContentLoaded', function () {
             animationMusiclistBtn.style.bottom = '0';
 
             // hide right bar
-            infoPanel.classList.remove('active')
+            if(!infoPanel.classList.contains('hidden')) {
+                infoPanel.classList.add('hidden');
+            }
+            if(!infoPanelArtist.classList.contains('hidden')) {
+                infoPanelArtist.classList.add('hidden');
+            }
+            if(!musicInfoPanel.classList.contains('hidden')) {
+                musicInfoPanel.classList.add('hidden');
+            }
         } else {
             overallPlaylistContainer.classList.add('hidden');
             setTimeout(function() {
@@ -612,18 +670,21 @@ document.getElementById('settingsButton').addEventListener('click', function() {
         const advancedSettingsButtonClasses  = [
             '.advancedSettingsMediaLibraryManagementTabButton',
             '.advancedSettingsFileTypesTabButton',
+            '.advancedSettingsFormatTabButton',
             '.advancedSettingsSecurityTabButton',
             '.advancedSettingsSoftwareUpdateTabButton',
-            '.advancedSettingsFormatTabButton'
+            '.advancedSettingsServerStatusTabButton',
+            '.advancedSettingsNetworkTabButton',
+            '.advancedSettingsPerformanceTabButton'
         ];
         const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
 
         const advancedSettingsContentClasses = [
-            '#advancedSettingsMediaLibraryManagement', // 
-            '#advancedFileTypes', //
-            '#security',
-            '#software',
-            '#formatSettings'
+            '.advancedSettingsMediaLibraryManagementTab', // 
+            '.advancedSettingsFileTypesTab',
+            '.advancedSettingsServerStatusTab',
+            '.advancedSettingsNetworkTab', //
+            '.advancedSettingsPerformanceTab'
         ];
         const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
     
@@ -2266,6 +2327,790 @@ function grabAllSelectNames(form) {
     return disabledFormats;
 }
 
+// -------- KONRADS SETTINGS FUNCTIONS ------
+
+// --------  Web Proxy ------
+function webProxyForm(form) {
+    let webProxy = form["pref_webproxy"].value;
+    console.log("Web Proxy:", webProxy);
+
+    if (webProxy) {
+        console.log("Web Proxy:", webProxy);
+        updateWebProxy(webProxy);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateWebProxy('');
+    }
+}
+
+function updateWebProxy(webProxy) {
+    const data = {
+        id: 30,
+        method: "slim.request",
+        params: [ "", ["pref", "webproxy", webProxy]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Web Proxy updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Web Proxy:", error);
+    });
+}
+
+// -------- PORT NUMBER ------
+function portNumberForm(form) {
+    let portNumber = form["pref_httpport"].value;
+    console.log("Port Number:", portNumber);
+
+    if (portNumber) {
+        console.log("Port Number:", portNumber);
+        updatePortNumber(portNumber);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updatePortNumber('');
+    }
+}
+
+function updatePortNumber(portNumber) {
+    const data = {
+        id: 31,
+        method: "slim.request",
+        params: [ "", ["pref", "httpport", portNumber]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Port Number updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Port Number:", error);
+    });
+}
+
+// -------- Radio Buffer Seconds ---------
+function radioStationBufferSecondsForm(form) {
+    let radioBufferSeconds = form["pref_bufferSecs"].value;
+    console.log("Radio Buffer Seconds:", radioBufferSeconds);
+
+    if (radioBufferSeconds) {
+        console.log("Radio Buffer Seconds:", radioBufferSeconds);
+        updateRadioBufferSeconds(radioBufferSeconds);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateRadioBufferSeconds('');
+    }
+}
+
+function updateRadioBufferSeconds(radioBufferSeconds) {
+    const data = {
+        id: 32,
+        method: "slim.request",
+        params: [ "", ["pref", "bufferSecs", radioBufferSeconds]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Radio Buffer Seconds updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Radio Buffer Seconds:", error);
+    });
+}
+
+// -------- Remote Stream Timeout ---------
+function radioStationTimeoutForm(form) {
+    let radioTimeout = form["pref_remotestreamtimeout"].value;
+    console.log("Radio Timeout:", radioTimeout);
+
+    if (radioTimeout) {
+        console.log("Radio Timeout:", radioTimeout);
+        updateRadioTimeout(radioTimeout);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateRadioTimeout('');
+    }
+}
+
+function updateRadioTimeout(radioTimeout) {
+    const data = {
+        id: 33,
+        method: "slim.request",
+        params: [ "", ["pref", "remotestreamtimeout", radioTimeout]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Radio Timeout updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Radio Timeout:", error);
+    });
+}
+
+// -------- max WMA Bitrate ---------
+function maximumWMAStreamBitrateForm(form) {
+    let maxWMAStreamBitrate = form["pref_maxWMArate"].value;
+    console.log("Max WMA Bitrate:", maxWMAStreamBitrate);
+
+    if (maxWMAStreamBitrate) {
+        console.log("Max WMA Bitrate:", maxWMAStreamBitrate);
+        updateMaxWMAStreamBitrate(maxWMAStreamBitrate);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateMaxWMAStreamBitrate('');
+    }
+}
+
+function updateMaxWMAStreamBitrate(maxWMAStreamBitrate) {
+    const data = {
+        id: 34,
+        method: "slim.request",
+        params: [ "", ["pref", "maxWMArate", maxWMAStreamBitrate]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Max WMA Bitrate updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Max WMA Bitrate:", error);
+    });
+}
+
+// -------- max MP3 Stream Bitrate ---------
+function syncStartDelayForm(form) {
+    let syncStartDelay = form["pref_syncStartDelay"].value;
+    console.log("Sync Start Delay:", syncStartDelay);
+
+    if (syncStartDelay) {
+        console.log("Sync Start Delay:", syncStartDelay);
+        updateSyncStartDelay(syncStartDelay);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateSyncStartDelay('');
+    }
+}
+
+function updateSyncStartDelay(syncStartDelay) {
+    const data = {
+        id: 36,
+        method: "slim.request",
+        params: [ "", ["pref", "syncStartDelay", syncStartDelay]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Sync Start Delay updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Sync Start Delay:", error);
+    });
+}
+
+
+// -------- TCP Read Maximum ---------
+function tcpReadMaximumForm(form) {
+    let tcpReadMaximum = form["pref_tcpReadMaximum"].value;
+    console.log("TCP Read Maximum:", tcpReadMaximum);
+
+    if (tcpReadMaximum) {
+        console.log("TCP Read Maximum:", tcpReadMaximum);
+        updateTCPReadMaximum(tcpReadMaximum);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateTCPReadMaximum('');
+    }
+}
+
+function updateTCPReadMaximum(tcpReadMaximum) {
+    const data = {
+        id: 37,
+        method: "slim.request",
+        params: [ "", ["pref", "tcpReadMaximum", tcpReadMaximum]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("TCP Read Maximum updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating TCP Read Maximum:", error);
+    });
+}
+
+// -------- TCP Write Maximum ---------
+function tcpWriteMaximumForm(form) {
+    let tcpWriteMaximum = form["pref_tcpWriteMaximum"].value;
+    console.log("TCP Write Maximum:", tcpWriteMaximum);
+
+    if (tcpWriteMaximum) {
+        console.log("TCP Write Maximum:", tcpWriteMaximum);
+        updateTCPWriteMaximum(tcpWriteMaximum);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateTCPWriteMaximum('');
+    }
+}
+
+function updateTCPWriteMaximum(tcpWriteMaximum) {
+    const data = {
+        id: 38,
+        method: "slim.request",
+        params: [ "", ["pref", "tcpWriteMaximum", tcpWriteMaximum]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("TCP Write Maximum updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating TCP Write Maximum:", error);
+    });
+}
+
+
+// -------- UDP Chunk Size ---------
+function udpChunkSizeForm(form) {
+    let udpChunkSize = form["pref_udpChunkSize"].value;
+    console.log("UDP Chunk Size:", udpChunkSize);
+
+    if (udpChunkSize) {
+        console.log("UDP Chunk Size:", udpChunkSize);
+        updateUDPChunkSize(udpChunkSize);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateUDPChunkSize('');
+    }
+}
+
+function updateUDPChunkSize(udpChunkSize) {
+    const data = {
+        id: 39,
+        method: "slim.request",
+        params: [ "", ["pref", "udpChunkSize", udpChunkSize]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("UDP Chunk Size updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating UDP Chunk Size:", error);
+    });
+}
+
+
+// -------- HTTP Streaming Mode ---------
+function streamingModeForm(form) {
+    let streamingMode = form["pref_useEnhancedHTTP"].value;
+    console.log("Streaming Mode:", streamingMode);
+
+    if (streamingMode) {
+        console.log("Streaming Mode:", streamingMode);
+        updateStreamingMode(streamingMode);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateStreamingMode('');
+    }
+}
+
+function updateStreamingMode(streamingMode) {
+    const data = {
+        id: 35,
+        method: "slim.request",
+        params: [ "", ["pref", "useEnhancedHTTP", streamingMode]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Streaming Mode updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Streaming Mode:", error);
+    });
+}
+
+
+// -------- PERFORMANCE SETTINGS --------
+
+// -------- Database Memory Configuration ---------
+function databaseMemoryConfigForm(form) {
+    let databaseMemoryConfig = form["pref_dbhighmem"].value;
+    console.log("Database Memory Configuration:", databaseMemoryConfig);
+
+    if (databaseMemoryConfig) {
+        console.log("Database Memory Configuration:", databaseMemoryConfig);
+        updateDatabaseMemoryConfig(databaseMemoryConfig);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateDatabaseMemoryConfig('');
+    }
+}
+
+function updateDatabaseMemoryConfig(databaseMemoryConfig) {
+    const data = {
+        id: 40,
+        method: "slim.request",
+        params: [ "", ["pref", "dbhighmem", databaseMemoryConfig]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Database Memory Configuration updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Database Memory Configuration:", error);
+    });
+}
+
+// -------- Trigger Scan on Preference Change ---------
+function triggerScanOnPreferenceChangesForm(form) {
+    let triggerScanOnPreferenceChanges = form["pref_dontTriggerScanOnPrefChange"].value;
+    console.log("Trigger Scan on Preference Change:", triggerScanOnPreferenceChanges);
+
+    if (triggerScanOnPreferenceChanges) {
+        console.log("Trigger Scan on Preference Change:", triggerScanOnPreferenceChanges);
+        updateTriggerScanOnPreferenceChanges(triggerScanOnPreferenceChanges);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateTriggerScanOnPreferenceChanges('');
+    }
+}
+
+function updateTriggerScanOnPreferenceChanges(triggerScanOnPreferenceChanges) {
+    const data = {
+        id: 41,
+        method: "slim.request",
+        params: [ "", ["pref", "dontTriggerScanOnPrefChange", triggerScanOnPreferenceChanges]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Trigger Scan on Preference Change updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Trigger Scan on Preference Change:", error);
+    });
+}
+
+// -------- Shuffle Method ---------
+function shuffleMethodForm(form){
+    let shuffleMethod = form["pref_useBalancedShuffle"].value;
+    console.log("Shuffle Method:", shuffleMethod);
+
+    if (shuffleMethod) {
+        console.log("Shuffle Method:", shuffleMethod);
+        updateShuffleMethod(shuffleMethod);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateShuffleMethod('');
+    }
+}
+
+function updateShuffleMethod(shuffleMethod) {
+    const data = {
+        id: 42,
+        method: "slim.request",
+        params: [ "", ["pref", "useBalancedShuffle", shuffleMethod]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Shuffle Method updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Shuffle Method:", error);
+    });
+}
+
+// -------- Disable Library Statistics
+function libraryStatisticsForm(form) {
+    let libraryStatistics = form["pref_disableStatistics"].value;
+    console.log("Library Statistics:", libraryStatistics);
+
+    if (libraryStatistics) {
+        console.log("Library Statistics:", libraryStatistics);
+        updateLibraryStatistics(libraryStatistics);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateLibraryStatistics('');
+    }
+}
+
+function updateLibraryStatistics(libraryStatistics) {
+    const data = {
+        id: 43,
+        method: "slim.request",
+        params: [ "", ["pref", "disableStatistics", libraryStatistics]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Library Statistics updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Library Statistics:", error);
+    });
+}
+
+// -------- Precache Artworks ---------
+function artworkPreCachingForm(form) {
+    let artworkPreCaching = form["pref_precacheArtwork"].value;
+    console.log("Artwork PreCaching:", artworkPreCaching);
+
+    if (artworkPreCaching) {
+        console.log("Artwork PreCaching:", artworkPreCaching);
+        updateArtworkPreCaching(artworkPreCaching);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateArtworkPreCaching('');
+    }
+}
+
+function updateArtworkPreCaching(artworkPreCaching) {
+    const data = {
+        id: 44,
+        method: "slim.request",
+        params: [ "", ["pref", "precacheArtwork", artworkPreCaching]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Artwork PreCaching updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Artwork PreCaching:", error);
+    });
+}
+
+// -------- Artwork Resizing ---------
+function artworkResizingForm(form) {
+    let artworkResizing = form["pref_useLocalImageproxy"].value;
+    console.log("Artwork Resizing:", artworkResizing);
+
+    if (artworkResizing) {
+        console.log("Artwork Resizing:", artworkResizing);
+        updateArtworkResizing(artworkResizing);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateArtworkResizing('');
+    }
+}
+
+function updateArtworkResizing(artworkResizing) {
+    const data = {
+        id: 45,
+        method: "slim.request",
+        params: [ "", ["pref", "useLocalImageproxy", artworkResizing]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Artwork Resizing updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Artwork Resizing:", error);
+    });
+}
+
+// -------- Server Priority ---------
+function serverPriorityForm(form) {
+    let serverPriority = form["pref_serverPriority"].value;
+    console.log("Server Priority:", serverPriority);
+
+    if (serverPriority) {
+        console.log("Server Priority:", serverPriority);
+        updateServerPriority(serverPriority);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateServerPriority('');
+    }
+}
+
+function updateServerPriority(serverPriority) {
+    const data = {
+        id: 46,
+        method: "slim.request",
+        params: [ "", ["pref", "serverPriority", serverPriority]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Server Priority updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Server Priority:", error);
+    });
+}
+
+// -------- Scanner Priority ---------
+function scannerPriorityForm(form) {
+    let serverPriority = form["pref_scannerPriority"].value;
+    console.log("Scanner Priority:", scannerPriority);
+
+    if (scannerPriority) {
+        console.log("Scanner Priority:", scannerPriority);
+        updateScannerPriority(scannerPriority);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateScannerPriority('');
+    }
+}
+
+function updateScannerPriority(scannerPriority) {
+    const data = {
+        id: 46,
+        method: "slim.request",
+        params: [ "", ["pref", "scannerPriority", scannerPriority]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Scanner Priority updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Scanner Priority:", error);
+    });
+}
+
+// -------- Auto Rescan ---------
+function autoRescanForm(form) {
+    let autoRescan = form["pref_autorescan"].value;
+    console.log("Auto Rescan:", autoRescan);
+
+    if (autoRescan) {
+        console.log("Auto Rescan:", autoRescan);
+        updateAutoRescan(autoRescan);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateAutoRescan('');
+    }
+}
+
+function updateAutoRescan(autoRescan) {
+    const data = {
+        id: 47,
+        method: "slim.request",
+        params: [ "", ["pref", "autorescan", autoRescan]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Auto Rescan updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Auto Rescan:", error);
+    });
+}
+
+// -------- Auto Rescan Interval ---------
+function autoRescanStatIntervalForm(form) {
+    let autoRescanStatInterval = form["pref_autorescan_stat_interval"].value;
+    console.log("Auto Rescan Stat Interval:", autoRescanStatInterval);
+
+    if (autoRescanStatInterval) {
+        console.log("Auto Rescan Stat Interval:", autoRescanStatInterval);
+        updateAutoRescanStatInterval(autoRescanStatInterval);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateAutoRescanStatInterval('');
+    }
+}
+
+function updateAutoRescanStatInterval(autoRescanStatInterval) {
+    const data = {
+        id: 48,
+        method: "slim.request",
+        params: [ "", ["pref", "autorescan_stat_interval", autoRescanStatInterval]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Auto Rescan Stat Interval updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Auto Rescan Stat Interval:", error);
+    });
+}
+
+// -------- Max Playlist length ---------
+function maxPlaylistLengthForm(form) {
+    let maxPlaylistLength = form["pref_maxPlaylistLength"].value;
+    console.log("Max Playlist Length:", maxPlaylistLength);
+
+    if (maxPlaylistLength) {
+        console.log("Max Playlist Length:", maxPlaylistLength);
+        updateMaxPlaylistLength(maxPlaylistLength);
+    } else {
+        console.log("Updated to blank, meaning it will not have a name");
+        updateMaxPlaylistLength('');
+    }
+}
+
+function updateMaxPlaylistLength(maxPlaylistLength) {
+    const data = {
+        id: 49,
+        method: "slim.request",
+        params: [ "", ["pref", "maxPlaylistLength", maxPlaylistLength]]
+    };
+
+    fetch("http:localhost:9000/capstone/jsonrpc.js", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Max Playlist Length updated to:", data);
+    })
+    .catch(error => {
+        console.error("Error updating Max Playlist Length:", error);
+    });
+}
 
 
 
