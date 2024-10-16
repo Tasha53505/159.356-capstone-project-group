@@ -147,8 +147,11 @@ which calls Slim::Control::Queries::mediafolderQuery
     "scripts": {
           "test": "jest"
     }
+
     ```
 - Tests in `__tests__` folder
+- Run tests with `npm run test`
+- 
 ### What tests have been written with Jest:
 - Accordion Panel Tests
 - Songs Left Panel test
