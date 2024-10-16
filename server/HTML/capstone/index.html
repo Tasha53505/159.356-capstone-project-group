@@ -76,11 +76,23 @@
                                         </div>
                                             
                                         <div class="advancedSettingsMediaLibraryManagementTab active" id="advancedSettingsMediaLibraryManagement"> 
-                                                <h2>MP3 Tag Format</h2>
-
+                                                <h4>MP3 Tag Format</h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                            The MP3 tag format does not provide a standard way of defining an Album Artist. Some MP3 tagging tools use the TPE2 field for Album Artist (iTunes, Winamp, Windows Media Player) while others may use it for the intended meaning of "Band/orchestra". Select the meaning you would like Logitech Media Server to use. Changing this setting will start a rescan of your music library.                                                        </div>
+                                                </div>
+                                                
+                                                
 
                                                 <form id="tagFormatForm"  action="">
-                                                    <div class="prefDesc hiddenDesc">The MP3 tag format does not provide a standard way of defining an Album Artist.  Some MP3 tagging tools use the TPE2 field for Album Artist (iTunes, Winamp, Windows Media Player) while others may use it for the intended meaning of "Band/orchestra".  Select the meaning you would like Logitech Media Server to use.  Changing this setting will start a rescan of your music library.</div>
                                                     <input type="radio" name="pref_useTPE2AsAlbumArtist" id="pref_useTPE2AsAlbumArtist0" value="0">
                                                     <label for="pref_useTPE2AsAlbumArtist0" class="stdlabel">Treat TPE2 MP3 tag as Band</label><br>
                                                     <input type="radio" name="pref_useTPE2AsAlbumArtist" id="pref_useTPE2AsAlbumArtist1" value="1" checked="checked">
@@ -91,11 +103,25 @@
 
 
 
-                                                <h2>Naming Compilation Change</h2>
+                                                <h4>Naming Compilation Change                                </h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                            When compilation albums are grouped together, they appear under "Various Artists" by default. You can change that name below.
+                                                        </div>
+                                                 </div>
+                                                
+
                                                 <form action="" id="changeCompilationNameForm">
                                                 <!-- variousArtists -->
                                                 <div class="prefs">
-                                                    <div class="prefDesc">When compilation albums are grouped together, they appear under "Various Artists" by default.  You can change that name below.</div>
                                                     <input type="text" class="stdedit" name="pref_variousArtistsString" id="variousArtistsString" value="Yes" size="40" placeholder="Various Artists">
                                                 &nbsp;</div>
                                                 <input name="pref_variousArtistsString" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="changeCompilationNameFormId" onclick="changeCompilationNameForm(this.form); return false;" value="Change Compilation Name">
@@ -103,7 +129,24 @@
                                             </form>
                                             
                                                 <form action="" id="searchWithinWordForm">
-                                                    [% WRAPPER setting title="SETUP_SEARCHSUBSTRING" desc="SETUP_SEARCHSUBSTRING_DESC"%]
+                                                    <h4>Search Within Words                                                    </h4>
+                                                    <div class="tooltipContainer">
+                                                        <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                                <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                            </svg>  
+                                                            <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                        </div>
+                                                        
+                                                      
+                                                            <div class="tooltip">  
+                                                                When you search for media files, you can have your server find matches for items that contain words that begin with the same letters in your search string or contain words that have the search string anywhere in the word. For example, searching the beginnings of words for "RAIN" in would find items with the word "RAINBOW". Searching within words would also return item containing the word "TRAIN".                                                      
+                                                            </div>
+                                                     </div>
+                                                    
+
+                                                     
+                                                    [% WRAPPER setting %]
                                                     <select class="stdedit" name="pref_searchSubString" id="searchSubString">
 
                                                         <option value="0">Search Beginning of Words</option>
@@ -116,7 +159,21 @@
                                                  </form>
                                                 
                                                  <form action="" id="ignoreArticlesForm">
-                                                    <div class="prefDesc hiddenDesc">A list of articles ("the", "les", "los", etc.) to ignore at the beginning of artist, song or album names when sorting. Separate multiple articles by spaces or leave this list blank to disable this behavior.  Changing this setting will start a rescan of your music library.</div>
+                                                    <h4> Ignore Articles                        </h4>
+                                                    <div class="tooltipContainer">
+                                                        <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                                <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                            </svg>  
+                                                            <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                        </div>
+                                                        
+                                                      
+                                                            <div class="tooltip">  
+                                                                A list of articles ("the", "les", "los", etc.) to ignore at the beginning of artist, song or album names when sorting. Separate multiple articles by spaces or leave this list blank to disable this behavior. Changing this setting will start a rescan of your music library.                                                            </div>
+                                                     </div>
+                                                    
+                                                    
                                                     <input type="text" class="stdedit" name="pref_ignoredarticles" id="ignoredarticles" value="The El La Los Las Le Les" size="40">
 
                                                 <input name="saveIgnoredArticles" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="ignoreArticlesFormId" onclick="ignoreArticlesForm(this.form); return false;" value="Save Ignored Articles Settings">
@@ -125,7 +182,21 @@
 
 
                                                  <form action="" id="skipSentinelFileNameForm">
-                                                  
+                                                    <h4> Skip Sentinel Filename                                                    </h4>
+                                                    <div class="tooltipContainer">
+                                                        <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                                <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                            </svg>  
+                                                            <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                        </div>
+                                                        
+                                                      
+                                                            <div class="tooltip">  
+                                                                Media (sub)folders that contain a file with this name are skipped.
+                                                            </div>
+                                                     </div>
+
                                                     [% WRAPPER setting title="SETUP_SKIPSENTINEL" desc="SETUP_SKIPSENTINEL_DESC" %]
                                                     <input type="text" class="stdedit" name="pref_skipsentinel" id="skipsentinel" value="[% prefs.pref_skipsentinel | html %]" size="40">
                                                     <input name="savveSentinelFileName" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="skipSentinelFileNameId" onclick="skipSentinelFileNameForm(this.form); return false;" value="Skip Sentinel File Name">
@@ -137,7 +208,22 @@
 
 
                                                 <form action="" id="seperatorMultipleItemsTagsForm">
-                                                	[% WRAPPER setting title="SETUP_SPLITLIST" desc="SETUP_SPLITLIST_DESC"%]
+                                                    <h4> Separator for Multiple Items in Tags                                                    </h4>
+                                                    <div class="tooltipContainer">
+                                                        <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                                <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                            </svg>  
+                                                            <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                        </div>
+                                                        
+                                                      
+                                                            <div class="tooltip">  
+                                                                Logitech Media Server can extract multiple artist, album titles and genres from the tags inside your music files. If it finds any of the words or characters below in your tags, it will create individual listings for each item. For example, if you put a semicolon in the list below, a song with an artist tag of "J. S. Bach;Michael Tilson Thomas" will appear in the artists area for both "J. S. Bach" and "Michael Tilson Thomas". Changing this setting will start a rescan of your music library.                                                         
+                                                            </div>
+                                                     </div>
+
+                                                	[% WRAPPER setting %]
                                                         <input type="text"class="stdedit" name="pref_splitList" id="splitList" value="[% prefs.pref_splitList | html %]" size="40">
                                                         <input name="seperatorMultipleItemsTags" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="skipSentinelFileNameId" onclick="seperatorMultipleItemsTagsForm(this.form); return false;" value="Save Seperator for Multiple Items in tags">
 
@@ -150,7 +236,23 @@
 
                                         <div class="advancedSettingsFileTypesTab active" id="advancedFileTypes"> 
                                             <form action="" id="disableExtensionAudioForm">
-                                                [% WRAPPER settingGroup title="SETUP_DISABLEDEXTENSIONSAUDIO" desc="SETUP_DISABLEDEXTENSIONSAUDIO_DESC" %]
+                                                <h4> Disabled Audio File Extensions                                                </h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                            Logitech Media Server will look in the Media Folders for all supported file types (audio files and cue sheets). To disable specific file types from being processed when scanning the Music Folder, enter a comma separated list of file extensions below. E.g.: cue, mp4, aac
+                                                            </div>
+                                                 </div>
+
+
+                                                [% WRAPPER settingGroup  %]
                                                     <input type="text"class="stdedit" name="disabledextensionsaudio" id="disabledextensionsaudio" value="[% disabledextensionsaudio | html %]" size="40">
                                                     <input name="advancedFilters" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="disabledextensionsaudioId" onclick="disableExtensionAudioForm(this.form); return false;" value="Disable Specific Audio File Extensions">
                                                   [% END %]
@@ -158,13 +260,43 @@
 
 
                                             <form action="" id="disableExtensionPlaylistForm">
-                                                [% WRAPPER settingGroup title="SETUP_DISABLEDEXTENSIONSPLAYLIST" desc="SETUP_DISABLEDEXTENSIONSPLAYLIST_DESC" %]
+                                                <h4> Disabled Playlist File Extensions                                                </h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                            Logitech Media Server will look in the Playlist Folder for all supported file types (playlist files and cue sheets). To disable specific file types from being processed when scanning the Playlist Folder, enter a comma separated list of file extensions below. E.g.: m3u, pls, cue                                                            
+                                                        </div>
+                                                 </div>
+
+
+                                                [% WRAPPER settingGroup   %]
                                                 <input type="text"class="stdedit" name="disabledextensionsplaylist" id="disabledextensionsplaylist" value="[% disabledextensionsplaylist | html %]" size="40">
                                                     <input name="advancedFilters" type="button"   style="font-size: 15px;" class="stdclick rescanButton disableOnScan saveSettings" id="disabledextensionsplaylistId" onclick="disableExtensionPlaylistForm(this.form); return false;" value="Disable Specific Playlist File Extensions">
                                                   [% END %]
                                             </form>
 
                                             <form action="" id="checkBoxFileFormatForm">
+                                                <h4> File Format Conversion Setup                                                </h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                            Logitech Media Server can convert audio file formats on-the-fly for playback on your player. You can disable specific formats below by unchecking them. Only the name of the binary is shown here. To see/edit the entire command line, you will need to open convert.conf. Click Change to save your changes.                                                        </div>
+                                                 </div>
+
                                                 [% WRAPPER setting title="SETUP_GROUP_FORMATS_CONVERSION" desc="SETUP_GROUP_FORMATS_CONVERSION_DESC" %]
                                                 <input type="checkbox" name="pref_prioritizeNative" id="prioritizeNative" [% IF prefs.pref_prioritizeNative %] checked="1" [% END %] />
                                                 <label for="prioritizeNative">[% "SETUP_FORMATS_PREFER_NATIVE" | string %]</label>
@@ -1860,9 +1992,14 @@
                                 <div class="mediaLibraryManagementSettingsContent">
 
                                     <div class="mediaLibraryManagementBrowseTab active" id="mediaLibraryManagementBrowseArtists">
+
+                                        <h4>Browse Artists</h4>
+                          
+                                        [% WRAPPER settingGroup  desc="SETUP_ARTISTS_BROWSE_MODES_DESC" %]
+
+
                                         <form action="" class="unifiedArtistsForm">
                                             [% WRAPPER settingSection %]
-                                            [% WRAPPER settingGroup title="SETUP_ARTISTS_BROWSE_MODES" desc="SETUP_ARTISTS_BROWSE_MODES_DESC" %]
                                                 <select class="stdedit" name="pref_useUnifiedArtistsList" id="useUnifiedArtistsList">[% prefs.pref_useUnifiedArtistsList %]
                                     
                                                     <option [% IF prefs.pref_useUnifiedArtistsList %]selected [% END %] value="1">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_ON' | string %]</option>
@@ -1929,7 +2066,23 @@
                                     
                                     <div class="mediaLibraryManagementFiltersTab" id="mediaLibraryManagementFilters">
                                         <form action="" id="noGenreFilterForm">
-                                            [% IF !prefs.pref_ignoreReleaseTypes AND prefs.pref_groupArtistAlbumsByReleaseType; WRAPPER settingGroup title="SETUP_RELEASE_TYPES_COMPOSER_ALBUM_GROUP_OPTIONS" desc="SETUP_RELEASE_TYPES_COMPOSER_ALBUM_GROUP_OPTIONS_DESC" %]
+                                            <h4>Filter Genres at the Album & Track Level                                            </h4>
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                    <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                </div>
+                                                
+                                              
+                                                    <div class="tooltip">  
+                                                        Filtering can be done when Browsing Genres to only show the albums & tracks that match the selected genre.
+                                                    </div>
+                                            </div>
+                                            
+                                            [% IF !prefs.pref_ignoreReleaseTypes AND prefs.pref_groupArtistAlbumsByReleaseType; WRAPPER settingGroup   %]
+
                                                 <input type="radio" name="pref_showComposerReleasesbyAlbum" id="pref_showComposerReleasesbyAlbum0" value="0" [% IF NOT prefs.pref_showComposerReleasesbyAlbum %]checked="checked"[% END %] />
                                                 <label for="pref_showComposerReleasesbyAlbum0" class="stdlabel">[% 'SETUP_RELEASE_TYPES_COMPOSER_ROLE_GROUPING_0' | getstring %]</label><br/>
                                                 <input type="radio" name="pref_showComposerReleasesbyAlbum" id="pref_showComposerReleasesbyAlbum1" value="1" [% IF prefs.pref_showComposerReleasesbyAlbum == 1 %]checked="checked"[% END %] />
@@ -1943,7 +2096,7 @@
                                             [% END %]                                        
 
                                     
-                                            [% WRAPPER setting title="SETUP_NOGENREFILTER" desc="SETUP_NOGENREFILTER_DESC"%]
+                                            [% WRAPPER setting %]
                                                 <select class="stdedit" name="pref_noGenreFilter" id="noGenreFilter">
                                                     <option [% IF NOT prefs.pref_noGenreFilter %]selected [% END %]value="0">[% 'SETUP_NOGENREFILTER_0' | string %]</option>
                                                     <option [% IF prefs.pref_noGenreFilter %]selected [% END %]value="1">[% 'SETUP_NOGENREFILTER_1' | string %]</option>
@@ -1957,7 +2110,21 @@
                                         
                                         <form action="" id="noRoleFilterForm">
 
-                                            [% WRAPPER setting title="SETUP_NOROLEFILTER" desc="SETUP_NOROLEFILTER_DESC"%]
+                                            <h4>Filter Contributor Roles at the Album & Track Level                                            </h4>
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                    <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                </div>
+                                                
+                                              
+                                                    <div class="tooltip">  
+                                                        Filtering can be done when Browsing Artists to only show the albums & tracks that match the selected role (eg. ALBUMARTIST, COMPOSER etc.).                                                    </div>
+                                                    </div>          
+
+                                            [% WRAPPER setting %]
                                                 <select class="stdedit" name="pref_noRoleFilter" id="noRoleFilter">
                                                     <option [% IF NOT prefs.pref_noRoleFilter %]selected [% END %] value="0">[% 'SETUP_NOROLEFILTER_0' | string %]</option>
                                                     <option [% IF prefs.pref_noRoleFilter %]selected [% END %] value="1">[% 'SETUP_NOROLEFILTER_1' | string %]</option>
@@ -1970,7 +2137,24 @@
 
 
                                         <form action="" id="ageLimitForm">
-                                            [% WRAPPER setting title="SETUP_BROWSEAGELIMIT" desc="SETUP_BROWSEAGELIMIT_DESC"%]
+
+                                            <h4>New Music Limit                                            </h4>
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                    <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                </div>
+                                                
+                                              
+                                                    <div class="tooltip">  
+                                                        Choose the number of recent albums to display when browsing for new music. Default is 100
+                                                    </div>  
+                                                </div>
+                                                  
+
+                                            [% WRAPPER setting %]
                                                 <input type="text"class="stdedit" name="pref_browseagelimit" id="browseagelimit" value="[% prefs.pref_browseagelimit || 100 %]" size="15">
                                                 <input name="pref_libraryFilters0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="saveAgeLimitFilterButton" onclick="ageLimitForm(this.form); return false;" value="Save Number of albums displayed"><br>
 
@@ -1980,7 +2164,21 @@
 
                                         <form action="" id="groupDiscsForm">
 
-                                            [% WRAPPER setting title="SETUP_GROUPDISCS" desc="SETUP_GROUPDISCS_DESC"%]
+                                            <h4>Group Discs                                         </h4>
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                    <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                </div>
+                                                
+                                              
+                                                    <div class="tooltip">  
+                                                        You can specify if multiple disc sets are treated as a single album (with a single name) or as multiple albums, each with a unique name per disc, for example "Album Title (Disc 2 of 3)". Changing this setting will start a rescan of your music library.                                                    </div>  
+                                                </div>
+
+                                            [% WRAPPER setting %]
                                             <select class="stdedit" name="pref_groupdiscs" id="groupdiscs">
                                     
                                                 <option [% IF NOT prefs.pref_groupdiscs %]selected [% END %]value="0">[% 'SETUP_GROUPDISCS_0' | string %]</option>
@@ -1999,7 +2197,24 @@
                                     <div class="mediaLibraryManagementPlaylistsTab" id="mediaLibraryManagementPlaylists">
                                         <form action="" id="playlistPersistForm">
 
-                                            [% WRAPPER setting title="SETUP_PERSISTPLAYLISTS" desc="SETUP_PERSISTPLAYLISTS_DESC"%]
+
+                                            <h4>Maintain Client Playlists                                            </h4>
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                    <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                </div>
+                                                
+                                              
+                                                    <div class="tooltip">  
+                                                        Logitech Media Server can remember the last playlist of songs that were Now Playing when the application starts.
+                                                    </div>
+                                                </div>
+
+
+                                            [% WRAPPER setting %]
                                             <select class="stdedit" name="pref_persistPlaylists" id="persistPlaylists">
                                     
                                                 <option [% IF NOT prefs.pref_persistPlaylists %]selected [% END %]value="0">[% 'SETUP_PERSISTPLAYLISTS_0' | string %]</option>
@@ -2016,7 +2231,24 @@
 
                                         <form action="" id="saveShuffledPlaylistForm">
                                            
-                                            [% WRAPPER setting title="SETUP_SAVESHUFFLED" desc="SETUP_SAVESHUFFLED_DESC"%]
+                                            
+                                            <h4>Save Shuffled Playlist                                            </h4>
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                    <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                </div>
+                                                
+                                              
+                                                    <div class="tooltip">  
+                                                        When you choose to save a playlist, and it's been shuffled, you can choose to save it in the original order the songs were added or in the shuffled order.                                                    
+                                                    </div>
+                                                </div>
+
+
+                                            [% WRAPPER setting %]
                                                 <select class="stdedit" name="pref_saveShuffled" id="saveShuffled">
                                         
                                                     <option [% IF NOT prefs.pref_saveShuffled %]selected [% END %]value="0">[% 'SETUP_SAVESHUFFLED_0' | string %]</option>
@@ -2032,8 +2264,26 @@
 
 
                                         <form action="" id="reshuffleOnRepeatForm">
+
+                                            <h4>Reshuffle on Repeat</h4>
+                                            <div class="tooltipContainer">
+                                                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                    </svg>  
+                                                    <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                </div>
+                                                
+                                              
+                                                    <div class="tooltip">  
+                                                        Logitech Media Server can reshuffle shuffled playlists after each complete pass through the list, if desired.
+                                                    </div>
+                                                </div>
+
+
+                                            
                                            
-                                            [% WRAPPER setting title="SETUP_RESHUFFLEONREPEAT" desc="SETUP_RESHUFFLEONREPEAT_DESC"%]
+                                            [% WRAPPER setting %]
                                             <select class="stdedit" name="pref_reshuffleOnRepeat" id="reshuffleOnRepeat">
                                     
                                                 <option [% IF NOT prefs.pref_reshuffleOnRepeat %]selected [% END %]value="0">[% 'SETUP_RESHUFFLEONREPEAT_0' | string %]</option>
