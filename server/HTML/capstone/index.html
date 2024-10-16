@@ -1488,11 +1488,23 @@
                                     <div class="settingsContent">
 
                                         <div class="basicSettingsLanguageTab active" id="language">
-                                            <div class="language">                                              
-                                                [% extJsScripts = BLOCK %] [% END %] [% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %] 
-                                                [% languageoptions.$option %]
-                                                [% END %] 
-                                
+                                            <div class="language">     
+                                                <h4>Change Language</h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                          Select the dropdown below, choose a language and click the "Save Settings" Button. You will need to REFRESH upon saving.
+                                                        </div>
+                                                </div>
+                                                
+                                              
                                                 <select class="stdedit" name="pref_language" id="languageSelect" data-testid="languageSelect">
                                                     <option value="DA">Dansk</option>
                                                     <option value="DE">Deutsch</option>
@@ -1517,14 +1529,29 @@
 
                                             </div>                 
                                             <br>
-                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language">
+                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language" style="width: 100%;">
                            
                                         </div>
 
                                        
                                         <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
                                             <div class="mediaLibrary" >
-                                                [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_LIBRARY_NAME" desc="SETUP_LIBRARY_NAME_DESC" %] 
+                                                <h4>Media Library Name</h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                           [% WRAPPER settingGroup  desc="SETUP_LIBRARY_NAME_DESC" %] 
+                                                        </div>
+                                                </div>
+                                                
+                                                [% WRAPPER settingSection %]
                                                 [% prefs.pref_libraryname | html %]
                                                 [% END %] [% END %] 
 
@@ -1546,12 +1573,30 @@
                                         <hr />
 
                                             <div class="mediaFolders">
-                                                [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
-                                                [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
-                                                [% mediadir.path %]
-        
-                                                [% IF mediadir.path %][% END %]
-                                                [% END %]  
+                                             
+
+                                                <h4>Media Folders</h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                            [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
+                                                            [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
+                                                            [% mediadir.path %]
+                    
+                                                            [% IF mediadir.path %][% END %]
+                                                            [% END %]  
+            
+                                                        </div>
+                                                </div>
+
+                                                
                                                 
 
                                                 <!-- Input to put in folder to find music -->
@@ -1582,7 +1627,7 @@
 
 
                                                 <!-- Button to browse folders-->
-                                                <input type="button" value="Browse" class="browseFolders filesystembrowser" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
+                                                <input type="button" value="Browse" class="browseFolders filesystembrowser saveSettings" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
                                                 <br />
                                                 <br />
 
@@ -1592,12 +1637,29 @@
 
 
                                         <div class="basicSettingsPlaylistsTab" id="playlistsFolder">
-                                            <div class="playListsFolder">
-                                                [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
-                                                [% prefs.pref_playlistdir | html %]
-                                                <p>Format it like this (NOTE - the ":" is NEEDED. It will not update if you do not have the ':') <br>  C:\Program Files\SongsCopy</p> 
+                                            <div class="playListsFolder" style="height: 40vh;">
 
-                                                [% END %] [% END %] 
+                                                <h4>Playlists Folder</h4>
+                                                <div class="tooltipContainer">
+                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                                                        </svg>  
+                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
+                                                    </div>
+                                                    
+                                                  
+                                                        <div class="tooltip">  
+                                                            [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
+                                                            [% prefs.pref_playlistdir | html %]
+                                                         Format it like this (NOTE - the ":" is NEEDED. It will not update if you do not have the ':') <br>  C:\Program Files\SongsCopy</p> 
+            
+                                                            [% END %] [% END %] 
+                                                        </div>
+                                                </div>
+
+
+                                           
                                                 <br>
 
 
@@ -2120,7 +2182,7 @@
                     </div>
                     <hr />
                 </ul>
-                
+
                 
     
                 

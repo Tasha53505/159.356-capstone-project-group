@@ -445,7 +445,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <button class="tabButton" data-tab="media-library-management">Media Library Management </button>
         </div>
         <div class="settingsContent">
-            <div class="tabContent active" id="music">
+            <div class="tabContent" id="music">
                 <p class="settingsTextContent">My Music</p>
                 <p class="settingsTextContent">Itunes</p>
                 <p class="settingsTextContent">Interface and Player</p>
@@ -453,7 +453,7 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             <div class="tabContent" id="plugins">
                 <p class="settingsTextContent">Manage Plugins</p>
             </div>
-            <div class="tabContent" id="basic-info">
+            <div class="tabContent active" id="basic-info">
                 <div class="basicSettingsContent"></div>
             </div>
             <div class="tabContent" id="interface">

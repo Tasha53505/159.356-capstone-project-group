@@ -861,39 +861,70 @@ transform: translate3d(0, 0, 0);
     text-align: center;
     margin-top: 1.5em;
 }
-
 /* Styling for the 'Save Settings' button */
-#prefsSubmit input#saveSettings, .saveSettings {
-    background-color: #0456C6; 
-    color: #ecf0f1; /* Light text color to match the theme */
-    border: none;
-    border-radius: 5px;
-    padding: 0.8em 1.5em;
-    font-size: 1.1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow */
-}
-
+#prefsSubmit input#saveSettings,
 .saveSettings {
-    margin-top: 5%;
+    background: linear-gradient(135deg, #323d64, #0456C6);
+    border: none;
+    border-radius: 30px; /* Rounded corners */
+    color: #ffffff;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Hover and focus effects */
 #prefsSubmit input#saveSettings:hover,
-#prefsSubmit input#saveSettings:focus, .saveSettings:hover {
-    background-color: #1266db; /* Slightly lighter blue on hover/focus */
-    transform: translateY(-2px); /* Subtle lift effect on hover */
-    outline: none;
+.saveSettings:hover {
+    background: linear-gradient(135deg, #0456C6, #323d64);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px); /* Lift effect */
+}
+
+#prefsSubmit input#saveSettings:before,
+.saveSettings:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+#prefsSubmit input#saveSettings:hover:before,
+.saveSettings:hover:before {
+    width: 150%;
+    height: 150%;
+    opacity: 0;
+}
+
+#prefsSubmit input#saveSettings:active,
+.saveSettings:active {
+    transform: translateY(1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Disabled button styling */
-#prefsSubmit input#saveSettings:disabled {
+#prefsSubmit input#saveSettings:disabled,
+.saveSettings:disabled {
     background-color: #7f8c8d;
     cursor: not-allowed;
     box-shadow: none;
+    opacity: 0.7; /* Faded effect for disabled state */
 }
+
 
 
 /* ---------------------- SAVE BUTTON END ---------------------- */
@@ -989,8 +1020,60 @@ transform: translate3d(0, 0, 0);
     text-decoration: none;
     color: #ffffff;
 }
+/* ----------- Tooltips --------------- */
+.tooltipContainer {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 100000;
+}
 
+.help-icon {
+    fill: #ffffff; /* Icon color */
+    transition: fill 0.2s;
+}
 
+.tooltip {
+    visibility: hidden;
+    background-color: #0F1731;
+    color: #ffffff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    position: absolute;
+    top: 110%; /* Position below the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: normal; /* Allows text wrapping */
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100000;
+    width: 200px; /* Set a fixed width */
+    max-width: 100%; /* Ensure it doesn't exceed its container */
+    word-wrap: break-word; /* Ensures long words are wrapped */
+}
+
+/* Arrow above the tooltip */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* At the top of the tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #0F1731 transparent;
+}
+
+.tooltipContainer:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltipContainer:hover .help-icon {
+    fill: #1266db; /* Change icon color on hover */
+}
 
 
 
