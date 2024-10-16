@@ -43,8 +43,138 @@
 
 <br>
 
+<style scoped>
+	html {
+		background-color: #3A456D;
+		padding: 5px;
+		border-radius: 10px;
+	}
+
+	#tune {
+		background-color: #364169;
+		display: flex;
+		justify-content: center;
+		padding: 5px;
+		border-radius: 2px;
+	}
+
+
+	#tuneInSubmit, #tuneInAdd {
+    background-color: #0456C6;
+	color: white;
+    padding: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+	#tuneInSubmit:hover, #tuneInAdd:hover  {
+		transform: scale(1.1);
+		box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.14), 
+					0px 6px 4px rgba(0, 0, 0, 0.12), 
+					0px 2px 8px rgba(0, 0, 0, 0.2);
+	}
+
+
+	#add {
+		background-color: greenyellow;
+	}
+
+	.radioDescription {
+		background-color: red;
+	}
+
+	.radioTuneInTitle {
+		background-color: #0F1731;
+		color: white;
+		padding: 5px;
+		margin: auto;
+		display: flex;
+		font: 100;
+	}
+
+
+    /* Styling for the tooltip container */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #0f1731;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 125%; /* Position below the element */
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* Top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #0f1731 transparent;
+
+}
+
+    /* Show the tooltip text when hovering */
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+
+#homeMenu {
+	background-color:  #3A456D;
+}
+
+.radioInput {
+	background-color: #0f1731;
+	padding: 6px;
+	width: 80%;
+	color: white;
+	font-size: 18px;
+
+}
+
+.toolTipContainer {
+	width: 100%;
+	background-color: #3A456D;
+	display: flex;
+	justify-content: center;
+	justify-self: center;
+	justify-items: center;
+
+	align-content: center;
+	align-items: center;
+	align-self: center;
+}
+
+.largeAttribute {
+	background-color: #364069 !important;
+	padding: 10px;
+	border-radius: 2px;
+	color: white;
+}
+</style>
+
 [% IF url %]
-	<p><b>
+	<p class="radioTuneInTitle"><b>
 	[% 'RADIO_TUNED_IN' | string %] [% url %]
 	</b></p>
 	<br/>
@@ -55,28 +185,39 @@
 	</script>
 [% END %]
 
-<form name="tune" method="post" id="tune" action="[% webroot %]tunein.html">
-	<input type="hidden" name="player" value="[% player %]">
-	[% 'RADIO_TUNEIN_RADIOURL' | string %]
+<form name="tune" method="post" id="tune" action="" onsubmit="handleSubmit();">
+    <input type="hidden" name="player" class="radioInput" value="[% player %]">
+    [% 'RADIO_TUNEIN_RADIOURL' | string %]
 
-	<table>
-		<tr>
-			<td style="vertical-align:bottom;"><input type="text" class="stdedit" name="url" id="url" size="50%"></td>
-			<td>
-				<input type="submit" id="tuneInSubmit" class="stdclick" value="[% 'RADIO_TUNEIN_CHOOSE' | string %]">
-				<span id="tuneIn" style="vertical-align:bottom;"></span>
-			</td>
-			<td>
-				<input type="submit" id="tuneInAdd" name="tuneInAdd" class="stdclick" value="[% 'ADD' | string %]">
-				<span id="add" style="vertical-align:bottom;"></span>
-			</td>
-		</tr>
-	</table>
+    <table>
+        <tr>
+            <td style="vertical-align:bottom;">
+                <input type="text" class="radioInput stdedit" name="url" id="url" size="50%">
+            </td>
+            <td>
+                <input type="submit" id="tuneInSubmit" class="stdclick" value="[% 'RADIO_TUNEIN_CHOOSE' | string %]">
+                <span id="tuneIn" style="vertical-align:bottom;"></span>
+            </td>
+            <td>
+                <input type="submit" id="tuneInAdd" name="tuneInAdd" class="stdclick" value="[% 'ADD' | string %]">
+                <span id="add" style="vertical-align:bottom;"></span>
+            </td>
+        </tr>
+    </table>
 </form>
 
-<br/>
 
-<p>[% 'RADIO_TUNEIN_DESC' | string %]</p>
+<br/>
+<div class="toolTipContainer">
+	<p class="tooltip">
+		Need Help? <br> <br>
+	
+		<svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" style="color: white; margin-left: 15px;" viewBox="0 0 24 24"><path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22"/></svg>
+		<span class="tooltiptext"> [% 'RADIO_TUNEIN_DESC' | string %]</span>
+	</p>
+</div>
+
+
 
 <br/>
 
