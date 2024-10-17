@@ -68,9 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // hide left bar
             overallPlaylistContainer.classList.add('hidden');
             animationBtn.classList.add('hidden');
-            setTimeout(function() {
                 overallContainer.style.display = 'none';
-            }, 500); // Wait for the animation to finish before hiding
 
             // hide right bar
             if(!musicInfoPanel.classList.contains('hidden')) {
@@ -78,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+    
 
 
     infoPanelBtn.addEventListener('click', function () {
@@ -89,9 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if(!overallPlaylistContainer.classList.contains('hidden')) {
             overallPlaylistContainer.classList.add('hidden');
             animationBtn.classList.add('hidden');
-            setTimeout(function() {
                 overallContainer.style.display = 'none';
-            }, 500); // Wait for the animation to finish before hiding
         }
 
         if(musicInfoPanel.classList.contains('hidden')) {
@@ -124,9 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Toggle the display of the overallContainer
         if (overallContainer.style.display === 'none') {
             overallContainer.style.display = 'flex';
-            setTimeout(function() {
                 overallPlaylistContainer.classList.remove('hidden');
-            }, 10);  // Delay to ensure flex is applied before animation
 
             // hide bottom bar
             MusiclistContainer.classList.remove('show');
@@ -139,9 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } else {
             overallPlaylistContainer.classList.add('hidden');
-            setTimeout(function() {
                 overallContainer.style.display = 'none';
-            }, 500); // Wait for the animation to finish before hiding
         }
 
         animationBtn.classList.toggle('hidden');
@@ -3548,3 +3541,6 @@ function getPref(display, listElementId){
 // module.exports = {
 //     rescanMedia,
 // };
+
+
+// ADJUSTED ANIMATRIOINS
