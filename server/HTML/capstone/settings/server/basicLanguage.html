@@ -1,0 +1,45 @@
+[% extJsScripts = BLOCK %]
+	<script TYPE="text/javascript">
+		Ext.onReady(function(){
+			var el = Ext.get('progressLink');
+			if (el) {
+				el.on('click', function(){
+					Settings.activate('INFORMATION');
+				})
+			}
+
+			// check for rescan, disable/enable rescan buttons if needed
+			new Ext.util.TaskRunner().start({
+				run: function(items) {
+					SqueezeJS.Controller.request({
+						params: [ '', [ "rescan", "?" ] ],
+
+						success: function(response) {
+							response = Ext.util.JSON.decode(response.responseText);
+
+							if (response && response.result) {
+								items.each(function(item) {
+									item.dom.disabled = response.result['_rescan'] ? true : false;
+								});
+							}
+						}
+					})
+				},
+				args: [ Ext.select('.disableOnScan') ],
+				interval: 2000
+			});
+		});
+	</script>
+[% END %]
+[% PROCESS settings/header.html %]
+
+	[% WRAPPER setting title="SETUP_LANGUAGE" desc="SETUP_LANGUAGE_DESC" %]
+		<select class="stdedit" name="pref_language" id="language">
+		
+		[% FOREACH option = languageoptions.sort %]
+			<option [% IF prefs.pref_language == option %]selected="selected" [% END %]value="[% option | html %]">[% languageoptions.$option %]</option>
+		[%- END -%]
+		
+		</select>
+	[% END %]
+[% PROCESS settings/footer.html %]
