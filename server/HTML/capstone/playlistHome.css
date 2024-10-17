@@ -14,7 +14,34 @@
     color: #EFF8FC;
 }
 
+.overallContainer {
+     width: auto; /* Sticks with the animation panel */
+    height: 100vh;
+    display: flex;
+    position: relative;
+    /* justify-content: center; */
+    display: none;
+}
 
+.overallPlaylistContainer {
+    background-color: #20294B;
+    height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
+    /* width: 45%; */
+    width: 100%;
+    margin-bottom: 100%;
+    border-radius: 0em 1em 1em 0em;
+    transition: transform 0.5s ease-in-out; /* Slide animation */
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+}
+
+.overallPlaylistContainer.hidden {
+    transform: translateX(-100%); /* Slide animation when Music button is clicked*/
+}
+
+.animationBtn.hidden {
+    margin-left: 0; /* animation button will move WITH the overallBtn Container */
+}
 
 
 
@@ -206,38 +233,6 @@ margin-left: 1rem;
     margin-top: 5%;
 }
 
-
-
-.overallContainer {
-    width: auto; /* Sticks with the animation panel */
-   height: 100vh;
-   display: flex;
-   position: relative;
-   /* justify-content: center; */
-   display: none;
-}
-
-.overallPlaylistContainer {
-   background-color: #20294B;
-   height: 100vh; /* This makes sure to adjusts to any screen-size on desktop to always take up 100% view height */
-   /* width: 45%; */
-   width: 100%;
-   margin-bottom: 100%;
-   border-radius: 0em 1em 1em 0em;
-   transition: transform 0.5s ease-in-out; /* Slide animation */
-   overflow-y: auto; /* Adds scroll bar */
-   overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
-}
-
-.overallPlaylistContainer.hidden {
-   transform: translateX(-100%); /* Slide animation when Music button is clicked*/
-}
-
-.animationBtn.hidden {
-   margin-left: 0; /* animation button will move WITH the overallBtn Container */
-}
-
-
 /* Animation  button - TASHA */
 .animationBtn {
     background-color: #0456C6;
@@ -245,7 +240,6 @@ margin-left: 1rem;
     padding: 1em;
     border-radius: 0% 30% 30% 0%;
     margin: 0px;
-
     z-index: 10;
     cursor: pointer;
 }
