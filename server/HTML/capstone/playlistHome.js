@@ -52,66 +52,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
     var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
-    var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
-    var MusiclistContainer = document.querySelector('.MusiclistContainer');
-    var infoPanel = document.querySelector('.infoPanel');
-    var infoPanelArtist = document.querySelector('.infoArtistPanel');
     var musicInfoPanel = document.querySelector('.musicInfoPanel');
     var infoPanelBtn = document.querySelector('.infoPanelBtn');
 
-    animationMusiclistBtn.addEventListener('click', function () {
-        if (MusiclistContainer.classList.contains('show')) {
-            MusiclistContainer.classList.remove('show');
-            animationMusiclistBtn.style.bottom = '0';
-        } else {
-            MusiclistContainer.classList.add('show');
-            animationMusiclistBtn.style.bottom = '50vh';
-
-            // hide left bar
-            overallPlaylistContainer.classList.add('hidden');
-            animationBtn.classList.add('hidden');
-                overallContainer.style.display = 'none';
-
-            // hide right bar
-            if(!infoPanel.classList.contains('hidden')) {
-                infoPanel.classList.add('hidden');
-            }
-            if(!infoPanelArtist.classList.contains('hidden')) {
-                infoPanelArtist.classList.add('hidden');
-            }
-            if(!musicInfoPanel.classList.contains('hidden')) {
-                musicInfoPanel.classList.add('hidden');
-            }
-        }
-    });
-    
-
 
     infoPanelBtn.addEventListener('click', function () {
-        if(MusiclistContainer.classList.contains('show')) {
-            MusiclistContainer.classList.remove('show');
-            animationMusiclistBtn.style.bottom = '0';
-        }
-
         if(!overallPlaylistContainer.classList.contains('hidden')) {
             overallPlaylistContainer.classList.add('hidden');
             animationBtn.classList.add('hidden');
                 overallContainer.style.display = 'none';
         }
 
-        if(musicInfoPanel.classList.contains('hidden') && infoPanel.classList.contains('hidden') && infoPanelArtist.classList.contains('hidden')) {
+        if(musicInfoPanel.classList.contains('hidden')) {
             musicInfoPanel.classList.remove('hidden');
-
-            if(!artist) {
-                infoPanelArtist.classList.remove('hidden');
-            } else if(artist) {
-                infoPanel.classList.remove('hidden');
-            }
-        } else if (infoPanel.classList.contains('hidden') && !musicInfoPanel.classList.contains('hidden')) {
-            infoPanelArtist.classList.add('hidden');
-            musicInfoPanel.classList.add('hidden');
-        } else if (infoPanelArtist.classList.contains('hidden') && !musicInfoPanel.classList.contains('hidden')) {
-            infoPanel.classList.add('hidden');
+        } else {
             musicInfoPanel.classList.add('hidden');
         }
             
@@ -122,10 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
     var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
-    var MusiclistContainer = document.querySelector('.MusiclistContainer');
-    var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
-    var infoPanel = document.querySelector('.infoPanel');
-    var infoPanelArtist = document.querySelector('.infoArtistPanel');
     var musicInfoPanel = document.querySelector('.musicInfoPanel');
     
     // Set initial state (only the button should be visible)
@@ -134,8 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
     overallPlaylistContainer.classList.add('hidden');
     animationBtn.classList.remove('hidden');
     
-    infoPanel.classList.add('hidden');
-    infoPanelArtist.classList.add('hidden');
     musicInfoPanel.classList.add('hidden');
 
     // Event listener for the animation button
@@ -143,19 +91,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Toggle the display of the overallContainer
         if (overallContainer.style.display === 'none') {
             overallContainer.style.display = 'flex';
-                overallPlaylistContainer.classList.remove('hidden');
-
-            // hide bottom bar
-            MusiclistContainer.classList.remove('show');
-            animationMusiclistBtn.style.bottom = '0';
+            overallPlaylistContainer.classList.remove('hidden');
 
             // hide right bar
-            if(!infoPanel.classList.contains('hidden')) {
-                infoPanel.classList.add('hidden');
-            }
-            if(!infoPanelArtist.classList.contains('hidden')) {
-                infoPanelArtist.classList.add('hidden');
-            }
+
             if(!musicInfoPanel.classList.contains('hidden')) {
                 musicInfoPanel.classList.add('hidden');
             }
@@ -167,22 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
         animationBtn.classList.toggle('hidden');
 
     });
-
-
-    // // // Media query handling
-    // // function updateAnimationBtnMargin() {
-    // //     if (window.matchMedia("(max-width: 800px)").matches) {
-    // //         animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
-    // //     } else {
-    // //         animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
-    // //     }
-    // // }
-
-    // // Initial call
-    // updateAnimationBtnMargin();
-
-    // Update on window resize
-    // window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
 // ------------------------ Code to fetch all Songs ------------------------
@@ -1360,7 +1283,7 @@ function updateSecuritySetting(passwordProtection, username, password, blockInco
 }
 
 function playlistsDirectoryForm(form) {
-    console.log("playList Direrctor button clicked");
+    console.log("playList Directory button clicked");
 
 
     let folderPath = form["pref_playlistdir0"].value;
@@ -1411,7 +1334,7 @@ function updatePlaylistPath(folderPath) {
 // --------------------------------  Media Library Name  --------------------------------
 
 function libraryNameForm(form) {
-    console.log("playList Direrctor button clicked");
+    console.log("playList Directory button clicked");
 
 
     let libraryName = form["pref_libraryname0"].value;
@@ -3473,7 +3396,7 @@ function updateRefreshRate(refreshRate) {
     });
 }
 
-// -- TEXT TIMEOUT -- //
+// -- TEXT TIMEOUT -- 
 function displaytexttimeoutForm(form) {
     let displaytexttimeout = Number(form["pref_displaytexttimeout"].value);
     if (displaytexttimeout < 1) updatedisplaytexttimeout(1);
