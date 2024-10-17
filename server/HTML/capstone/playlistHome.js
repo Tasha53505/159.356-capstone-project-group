@@ -3396,7 +3396,7 @@ function updateRefreshRate(refreshRate) {
     });
 }
 
-// -- TEXT TIMEOUT -- //
+// -- TEXT TIMEOUT -- 
 function displaytexttimeoutForm(form) {
     let displaytexttimeout = Number(form["pref_displaytexttimeout"].value);
     if (displaytexttimeout < 1) updatedisplaytexttimeout(1);
