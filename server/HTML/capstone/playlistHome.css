@@ -1094,22 +1094,147 @@ transform: translate3d(0, 0, 0);
 
 /* Media Queries */
 
-/* 890px or less */
-  @media only screen and (max-width: 890px) {
-    .animationBtn {
-        transform: translateX(40%);
-        margin-bottom: 50%;
+
+
+  /* 480 px or less */
+@media only screen and (max-width: 450px){
+    .animationBtn, .animationBtn:hover {
+        transform: translateX(75%);
+        margin-bottom: 130%;
         border-radius: 50%;
         z-index: 100; 
+        background-color: #0456C6;
     }
-
 
     .animationBtn svg {
         width: 2em;
         height: 2em;
     }
 
+
+    
     /* The container that holds all the divs*/
+    .overallPlaylistContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vh;
+        height: 100%;
+        z-index: 90;
+
+    }
+    /* Container that hold 'Home' and 'Settings' Button */
+    .overallHeadersContainer {
+        font-size: 15px;
+        margin-top: 20px;
+      }
+
+
+      .homeTitleContainer {
+        width: 100%;
+
+      }
+      .settingsButton {
+        margin-left: 15rem;
+
+
+      }
+
+    /* Container that holds 'My music' 'myApps' etc */
+    .accordionContainer {
+        
+    }
+
+    .accordionPanel {
+
+    }
+    /* Panels that pop up when clicked i.e Songs under My Music*/
+    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked, .newRadioTuneInContainer, .newFavouritesContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 95;
+        overflow-y: auto; /* Adds scroll bar */
+        overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+    }
+
+
+
+    /* Settings tabs */
+    .settingsHeader {
+        font-size: 14px;
+        justify-content: left;
+
+    }
+
+    .settingsHeader h2 {
+        margin-left: 10%;
+    }
+
+
+
+    .toggleSwitch {
+        margin-left: 10%;
+
+    }
+
+    .settingsContainerClicked {
+        width: 100%;
+    }
+
+ 
+ 
+/* Common settings for all tabs */
+.basicSettingsLanguageTab, 
+.basicSettingsMediaLibraryTab, 
+.basicSettingsMediaFoldersTab, 
+.basicSettingsPlaylistsTab, 
+.basicSettingsRescanMediaTab, 
+.basicSettingsSecurityTab,
+.interfaceSettingsDisplayTab,
+.interfaceSettingsFormatTab,
+.interfaceSettingsTimingTab,
+.saveSettings
+{
+    margin: 0 auto;
+    margin-right: 30%;
+    width: 100%;
+    overflow-y: auto; /* Adds scroll bar */
+    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
+
+
+}
+
+/* Save Settings Button */
+.saveSettings {
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 30%;
+}
+
+/* Play, more, add to playlist */
+.browsedbLeftControls {
+    text-align: left;
+    margin-right: 100%;
+}
+
+}
+
+/* 890px or less */
+@media only screen and (max-width: 890px) {
+    .animationBtn, .animationBtn:hover {
+        transform: translateX(40%);
+        margin-bottom: 80%;
+        border-radius: 50%;
+        z-index: 100; 
+        background-color: #0456C6;
+    }
+    .animationBtn svg {
+        width: 2em;
+        height: 2em;
+    }
     .overallPlaylistContainer {
         position: fixed;
         top: 0;
@@ -1126,16 +1251,8 @@ transform: translate3d(0, 0, 0);
 
     }
 
-    /* Container that holds 'My music' 'myApps' etc */
-    .accordionContainer {
-        
-    }
 
-    .accordionPanel {
-
-    }
-    /* Panels that pop up when clicked i.e Songs under My Music*/
-    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked {
+    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked, .newRadioTuneInContainer, .newFavouritesContainer {
         position: fixed;
         top: 0;
         left: 0;
@@ -1196,7 +1313,7 @@ transform: translate3d(0, 0, 0);
 
 /* Save Settings Button */
 .saveSettings {
-    padding: 0px;
+    padding: 10px;
     font-size: 14px;
     margin-bottom: 30%;
 
@@ -1209,121 +1326,3 @@ transform: translate3d(0, 0, 0);
 }
 
   }
-
-
-  /* 480 px or less */
-@media only screen and (max-width: 480px){
-    .animationBtn {
-        transform: translateX(60%);
-        margin-bottom: 120%;
-        border-radius: 50%;
-        z-index: 100; 
-        background-color: red;
-    }
-
-    .animationBtn svg {
-        width: 2em;
-        height: 2em;
-    }
-
-    /* The container that holds all the divs*/
-    .overallPlaylistContainer {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vh;
-        height: 100%;
-        z-index: 90;
-
-    }
-    /* Container that hold 'Home' and 'Settings' Button */
-    .overallHeadersContainer {
-        font-size: 15px;
-        margin-top: 20px;
-        margin-right: 20%;
-
-    }
-
-    /* Container that holds 'My music' 'myApps' etc */
-    .accordionContainer {
-        
-    }
-
-    .accordionPanel {
-
-    }
-    /* Panels that pop up when clicked i.e Songs under My Music*/
-    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 95;
-        overflow-y: auto; /* Adds scroll bar */
-        overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
-
-    }
-
-
-
-    /* Settings tabs */
-    .settingsHeader {
-        font-size: 14px;
-        justify-content: left;
-
-    }
-
-    .settingsHeader h2 {
-        margin-left: 10%;
-    }
-
-
-
-    .toggleSwitch {
-        margin-left: 10%;
-
-    }
-
-    .settingsContainerClicked {
-        width: 100%;
-    }
-
- 
- 
-/* Common settings for all tabs */
-.basicSettingsLanguageTab, 
-.basicSettingsMediaLibraryTab, 
-.basicSettingsMediaFoldersTab, 
-.basicSettingsPlaylistsTab, 
-.basicSettingsRescanMediaTab, 
-.basicSettingsSecurityTab,
-.interfaceSettingsDisplayTab,
-.interfaceSettingsFormatTab,
-.interfaceSettingsTimingTab,
-.saveSettings
-{
-    margin: 0 auto;
-    margin-right: 30%;
-    width: 100%;
-    overflow-y: auto; /* Adds scroll bar */
-    overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
-
-
-}
-
-/* Save Settings Button */
-.saveSettings {
-    padding: 0px;
-    font-size: 14px;
-    margin-bottom: 30%;
-}
-
-/* Play, more, add to playlist */
-.browsedbLeftControls {
-    text-align: left;
-    margin-right: 100%;
-}
-
-}
-
