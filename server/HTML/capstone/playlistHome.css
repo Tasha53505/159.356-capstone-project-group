@@ -1071,9 +1071,11 @@ transform: translate3d(0, 0, 0);
     color: #ffffff;
 }
 /* ----------- Tooltips --------------- */
-.tooltipContainer {
+.tooltipContainer {   
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
     position: relative;
-    display: inline-block;
     cursor: pointer;
     z-index: 100000;
 }
