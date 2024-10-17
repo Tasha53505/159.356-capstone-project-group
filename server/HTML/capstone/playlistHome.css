@@ -1100,15 +1100,15 @@ transform: translate3d(0, 0, 0);
 @media only screen and (max-width: 450px){
     .animationBtn, .animationBtn:hover {
         transform: translateX(75%);
-        margin-bottom: 140%;
+        margin-bottom: 130%;
         border-radius: 50%;
         z-index: 100; 
         background-color: #0456C6;
     }
 
     .animationBtn svg {
-        width: 2.2em;
-        height: 2.2em;
+        width: 2em;
+        height: 2em;
     }
 
 
@@ -1127,9 +1127,18 @@ transform: translate3d(0, 0, 0);
     .overallHeadersContainer {
         font-size: 15px;
         margin-top: 20px;
-        margin-right: 20%;
+      }
 
-    }
+
+      .homeTitleContainer {
+        width: 100%;
+
+      }
+      .settingsButton {
+        margin-left: 15rem;
+
+
+      }
 
     /* Container that holds 'My music' 'myApps' etc */
     .accordionContainer {
@@ -1140,7 +1149,7 @@ transform: translate3d(0, 0, 0);
 
     }
     /* Panels that pop up when clicked i.e Songs under My Music*/
-    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked {
+    .newAllSongsContainer, .newAllAlbumsContainer, .newAllArtistsContainer, .settingsContainerClicked, .newRadioTuneInContainer, .newFavouritesContainer {
         position: fixed;
         top: 0;
         left: 0;
@@ -1149,7 +1158,6 @@ transform: translate3d(0, 0, 0);
         z-index: 95;
         overflow-y: auto; /* Adds scroll bar */
         overflow-x: hidden; /* Makes it so you can't horizontal scroll*/
-
     }
 
 
@@ -1201,7 +1209,7 @@ transform: translate3d(0, 0, 0);
 
 /* Save Settings Button */
 .saveSettings {
-    padding: 0px;
+    padding: 10px;
     font-size: 14px;
     margin-bottom: 30%;
 }
