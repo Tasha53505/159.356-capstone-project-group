@@ -1,3 +1,4 @@
+
 // From strings.txt
 
 var accordion = document.getElementsByClassName("accordion");
@@ -3537,10 +3538,6 @@ function getPref(display, listElementId){
 
 
 
-// // Export fucntions for testing
-// module.exports = {
-//     rescanMedia,
-// };
-
 
 // ADJUSTED ANIMATRIOINS
+
