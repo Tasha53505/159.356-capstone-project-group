@@ -52,39 +52,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
     var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
-    var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
-    var MusiclistContainer = document.querySelector('.MusiclistContainer');
     var musicInfoPanel = document.querySelector('.musicInfoPanel');
     var infoPanelBtn = document.querySelector('.infoPanelBtn');
 
-    animationMusiclistBtn.addEventListener('click', function () {
-        if (MusiclistContainer.classList.contains('show')) {
-            MusiclistContainer.classList.remove('show');
-            animationMusiclistBtn.style.bottom = '0';
-        } else {
-            MusiclistContainer.classList.add('show');
-            animationMusiclistBtn.style.bottom = '50vh';
-
-            // hide left bar
-            overallPlaylistContainer.classList.add('hidden');
-            animationBtn.classList.add('hidden');
-                overallContainer.style.display = 'none';
-
-            // hide right bar
-            if(!musicInfoPanel.classList.contains('hidden')) {
-                musicInfoPanel.classList.add('hidden');
-            }
-        }
-    });
-    
-
 
     infoPanelBtn.addEventListener('click', function () {
-        if(MusiclistContainer.classList.contains('show')) {
-            MusiclistContainer.classList.remove('show');
-            animationMusiclistBtn.style.bottom = '0';
-        }
-
         if(!overallPlaylistContainer.classList.contains('hidden')) {
             overallPlaylistContainer.classList.add('hidden');
             animationBtn.classList.add('hidden');
@@ -104,8 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
     var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
-    var MusiclistContainer = document.querySelector('.MusiclistContainer');
-    var animationMusiclistBtn = document.querySelector('.animationMusiclistBtn');
     var musicInfoPanel = document.querySelector('.musicInfoPanel');
     
     // Set initial state (only the button should be visible)
@@ -121,11 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Toggle the display of the overallContainer
         if (overallContainer.style.display === 'none') {
             overallContainer.style.display = 'flex';
-                overallPlaylistContainer.classList.remove('hidden');
-
-            // hide bottom bar
-            MusiclistContainer.classList.remove('show');
-            animationMusiclistBtn.style.bottom = '0';
+            overallPlaylistContainer.classList.remove('hidden');
 
             // hide right bar
 
@@ -140,22 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
         animationBtn.classList.toggle('hidden');
 
     });
-
-
-    // // // Media query handling
-    // // function updateAnimationBtnMargin() {
-    // //     if (window.matchMedia("(max-width: 800px)").matches) {
-    // //         animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '60%';
-    // //     } else {
-    // //         animationBtn.style.marginLeft = overallPlaylistContainer.classList.contains('hidden') ? '0' : '27%';
-    // //     }
-    // // }
-
-    // // Initial call
-    // updateAnimationBtnMargin();
-
-    // Update on window resize
-    // window.addEventListener('resize', updateAnimationBtnMargin);
 });
 
 // ------------------------ Code to fetch all Songs ------------------------
@@ -1333,7 +1283,7 @@ function updateSecuritySetting(passwordProtection, username, password, blockInco
 }
 
 function playlistsDirectoryForm(form) {
-    console.log("playList Direrctor button clicked");
+    console.log("playList Directory button clicked");
 
 
     let folderPath = form["pref_playlistdir0"].value;
@@ -1384,7 +1334,7 @@ function updatePlaylistPath(folderPath) {
 // --------------------------------  Media Library Name  --------------------------------
 
 function libraryNameForm(form) {
-    console.log("playList Direrctor button clicked");
+    console.log("playList Directory button clicked");
 
 
     let libraryName = form["pref_libraryname0"].value;
