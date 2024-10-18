@@ -1,69 +1,25 @@
-import { JSDOM } from 'jsdom';
-const jsdom = require('@jsdom')
 const fs = require('fs');
 const path = require('path');
-const { screen, fireEvent } = require('@testing-library/dom');
+const { screen } = require('@testing-library/dom');
 require('@testing-library/jest-dom');
 
-const html = `
-<div class="basicSettingsLanguageTab active" id="language">
-    <form action="" id="languageSettingForm" class="languageSettingForm">
-        <div class="language">     
-            <h4>Change Language</h4>
-            <select class="stdedit" name="pref_language" id="languageSelect">
-                <option value="DA">Dansk</option>
-                <option value="DE">Deutsch</option>
-                <option value="EN">English</option>
-                <option value="FR">Français</option>
-            </select>
-        </div>                 
-        <input name="saveSettings" id="saveSettings" type="button" class="saveSettings" value="Save Language" style="width: 100%;" onclick="updateLanguageSettingForm(this.form)">
-    </form>
-</div>
-`;
+// Load the HTML file into the test environment
+const html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
 
-describe('Language Setting Tests', () => {
-    let dom;
-    let document;
+// Add the HTML content to the document body before each test (Otherwise ERROR will occur wheere it can't find any ids)
+beforeEach(() => {
+  document.body.innerHTML = html;
+});
 
-    beforeEach(() => {
-        // Set up JSDOM
-        dom = new JSDOM(html);
-        document = dom.window.document;
-
-        // Mock localStorage
-        global.localStorage = {
-            getItem: jest.fn(),
-            setItem: jest.fn(),
-            clear: jest.fn(),
-            removeItem: jest.fn(),
-        };
-    });
-
-    it('should save and load the selected language', () => {
-        const languageSelect = document.getElementById('languageSelect');
-        const saveButton = document.getElementById('saveSettings');
-
-        // Change the language to French
-        languageSelect.value = 'FR';
-        
-        // Simulate the click event on the save button
-        saveButton.onclick = () => {
-            const selectedLanguage = languageSelect.value;
-            localStorage.setItem('selectedLanguage', selectedLanguage);
-        };
-        saveButton.click();
-
-        // Check that localStorage.setItem was called with the expected value
-        expect(localStorage.setItem).toHaveBeenCalledWith('selectedLanguage', 'FR');
-
-        // Simulate refreshing the page by mocking the return value of localStorage.getItem
-        localStorage.getItem.mockReturnValue('FR');
-
-        // Simulate calling your function to set the language select after refresh
-        languageSelect.value = localStorage.getItem('selectedLanguage');
-
-        // Verify that the selected value is correctly set after refreshing
-        expect(languageSelect.value).toBe('FR');
-    });
+describe('Language dropdown', () => {
+  test('should have at least one value selected', () => {
+    // Select the dropdown element by its data-testid
+    const languageSelect = screen.getByTestId('languageSelect');
+    
+    // Check if the dropdown exists
+    expect(languageSelect).toBeInTheDocument();
+    
+    // Check if the selected value is not empty (meaning there's a selection)
+    expect(languageSelect.value).not.toBe('');
+  });
 });
