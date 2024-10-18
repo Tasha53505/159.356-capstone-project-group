@@ -160,8 +160,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ------------------------ Code to fetch all Songs ------------------------
-document.getElementById('allSongs').addEventListener('click', function() {
-    // Create a new container for the songs
+const allSongsButton = document.getElementById('allSongs');
+
+if (allSongsButton) {
+    allSongsButton.addEventListener('click', function() {
     var newAllSongsContainer = document.createElement('div');
     newAllSongsContainer.classList.add('newAllSongsContainer');
 
@@ -201,15 +203,19 @@ document.getElementById('allSongs').addEventListener('click', function() {
             animationBtn.style.display = 'block';
         }, 500); // Animation time + back functionality
     });
+    
 
 });
-
+}
 
 
 
 
 
 // ------------------------ Code to fetch all Albums ------------------------
+const allAlbumsButton = document.getElementById('allAlbums');
+
+if(allAlbumsButton) {
 document.getElementById('allAlbums').addEventListener('click', function() {
     // Create a new container for the songs
     var newAllAlbumsContainer = document.createElement('div');
@@ -254,10 +260,14 @@ document.getElementById('allAlbums').addEventListener('click', function() {
         }, 500); // Animation time + back functionality
     });
 });
+}
 
 
 
 // ------------------------ Code to fetch all Artists  ------------------------
+const allArtistsButton = document.getElementById('allArtists');
+
+if(allArtistsButton) {
 document.getElementById('allArtists').addEventListener('click', function() {
     // Create a new container for the songs
     var newAllArtistsContainer = document.createElement('div');
@@ -301,6 +311,7 @@ document.getElementById('allArtists').addEventListener('click', function() {
         }, 500); // Animation time + back functionality
     });
 });
+}
 
 // // ------------------------ Radio Tune in ------------------------
 document.addEventListener('DOMContentLoaded', function() {
@@ -407,23 +418,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// --------------------------- Iframe --------------------------------------
-const iframe = document.getElementById('songsIframe');
+// // --------------------------- Iframe --------------------------------------
+// const iframe = document.getElementById('songsIframe');
 
-// Send a message to the iframe once it loads
-iframe.onload = function() {
-    iframe.contentWindow.postMessage({ color: '#adffc3', font: 'Arial' }, '*');
-};
+// // Send a message to the iframe once it loads
+// iframe.onload = function() {
+//     iframe.contentWindow.postMessage({ color: '#adffc3', font: 'Arial' }, '*');
+// };
 
-window.addEventListener('message', function(event) {
-    document.body.style.backgroundColor = event.data.color; // Set text color
-    document.body.style.fontFamily = event.data.font; // Set font family
-});
+// window.addEventListener('message', function(event) {
+//     document.body.style.backgroundColor = event.data.color; // Set text color
+//     document.body.style.fontFamily = event.data.font; // Set font family
+// });
 
 
 
 // --------------- Settings Button ------------------------
 // Event listener for the settings button
+document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('settingsButton').addEventListener('click', function() {
     var existingContainer = document.querySelector('.settingsContainerClicked');
     
@@ -1027,6 +1039,7 @@ advancedSettingsTabsButtons.forEach(button => {
     document.querySelector('.tabButton[data-tab="music"]').click();
 
 
+});
 });
 
 
