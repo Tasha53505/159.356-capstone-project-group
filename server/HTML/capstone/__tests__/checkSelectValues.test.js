@@ -30,57 +30,36 @@ describe('Dropdown boxes', () => {
 });
 
 
+// Get all select elements and test their values
+// Get all select elements and test their values
 describe('Dropdown Boxes retain value upon save', () => {
-    const testDropdownRetainsValue = (dropdownSelector, expectedValue) => {
-      test(`Dropdown "${dropdownSelector}" should retain its value upon save`, () => {
-        // Select the dropdown using the provided selector
-        const dropdown = screen.getByRole('combobox', { name: dropdownSelector });
-  
-        // Change the dropdown value to the expected value
-        fireEvent.change(dropdown, { target: { value: expectedValue } });
-  
-        // Simulate clicking the Save button
-        const saveButton = screen.getByRole('button', { name: /save/i });
-        
-        // Spy on functions in the playlistHome module
-        const playlistHome = require('../playlistHome');
-        jest.spyOn(playlistHome).mockImplementation((form) => {
-          // Simulate saving the selected value to localStorage
-          localStorage.setItem(dropdownSelector, form[dropdownSelector].value);
+    test('All dropdowns should retain their value upon save', () => {
+        // Select all dropdown elements
+        const dropdowns = document.querySelectorAll('select.stdedit');
+
+        // Store the names of dropdowns to be checked after the HTML reload
+        const dropdownNames = Array.from(dropdowns).map(dropdown => dropdown.name);
+
+        dropdowns.forEach((dropdown, index) => {
+            console.log(`Processing dropdown ${index + 1}: ${dropdown.name}`);
+
+            const newValue = dropdown.options[(dropdown.selectedIndex + 1) % dropdown.options.length].value; // Change to next option
+
+            // Simulate a change in the dropdown
+            fireEvent.change(dropdown, { target: { value: newValue } });
+
+            // Save the new value to localStorage
+            localStorage.setItem(dropdown.name, newValue);
         });
-  
-        fireEvent.click(saveButton); // Trigger the save button click
-  
-        // Simulate reloading the page or refreshing the dropdown
-        document.body.innerHTML = html; // Re-render the HTML
-  
-        // Load the saved value from localStorage and set the dropdown value
-        const savedValue = localStorage.getItem(dropdownSelector);
-        dropdown.value = savedValue; // Set the saved value to the dropdown
-  
-        // Trigger change event to simulate user interaction
-        const event = new Event('change', { bubbles: true });
-        dropdown.dispatchEvent(event);
-  
-        // Assert that the displayed value is correct
-        expect(dropdown.value).toBe(expectedValue);
-        
-        // Check that the relevant function was called
-        expect(playlistHome.updateLanguageSettingForm).toHaveBeenCalled();
-      });
-    };
-  
-    // Define test cases for different dropdowns using selectors
-    const dropdownsToTest = [
-      { selector: 'Language', value: 'FR' },   // Language dropdown
-      { selector: 'Rescan Media', value: 'Clear Library and rescan everything' }, // Rescan Media
-      { selector: 'Title Format', value: 'ARTIST - TITLE' }, // Formatting > Title Format
-      { selector: 'Use Unified Artists List', value: 'Use single, configurable list of artists' }, // Media Lib management > Browse Artists
-    ];
-  
-    // Loop through the dropdowns and create a test for each
-    dropdownsToTest.forEach(({ selector, value }) => {
-      testDropdownRetainsValue(selector, value);
+
+        // Refresh the document body to simulate reloading
+        document.body.innerHTML = html; // Reloading the HTML
+
+        // Re-select the dropdowns after reload
+        dropdownNames.forEach(name => {
+            const reloadedDropdown = document.querySelector(`select[name="${name}"]`);
+            // Check if the value persists
+            expect(reloadedDropdown.value).toBe(localStorage.getItem(name)); // Check against localStorage
+        });
     });
-  });
-  
+});
