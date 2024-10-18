@@ -30,45 +30,57 @@ describe('Dropdown boxes', () => {
 });
 
 
-
 describe('Dropdown Boxes retain value upon save', () => {
-    test('All dropdowns should retain their selected value upon save', () => {
-        // Select all dropdown elements
-        const dropdowns = screen.getAllByRole('combobox');
-
-        dropdowns.forEach((dropdown) => {
-            const originalValue = dropdown.value; // Store the original value
-            
-            // Change the dropdown value to the first option (or any value you want)
-            fireEvent.change(dropdown, { target: { value: dropdown.options[1].value } }); // Choose the second option for testing
-
-            // Simulate clicking the Save button
-            const saveButtons = screen.getAllByRole('button', { name: /save/i });
-            const saveButton = saveButtons[0]; // Assuming the first save button is relevant
-
-            // Spy on the module functions
-            const playlistHome = require('../playlistHome');
-            jest.spyOn(playlistHome, 'updateLanguageSettingForm').mockImplementation((form) => {
-                // Simulate saving the selected value to localStorage
-                localStorage.setItem(dropdown.dataset.testid, form[dropdown.dataset.testid].value);
-            });
-
-            // Save the dropdown value
-            fireEvent.click(saveButton); // Trigger the save button click
-
-            // Simulate reloading the page or refreshing the dropdown
-            document.body.innerHTML = html; // Re-render the HTML
-
-            // Load the saved value from localStorage and set the dropdown value
-            const savedValue = localStorage.getItem(dropdown.dataset.testid);
-            dropdown.value = savedValue; // Set the saved value to the dropdown
-
-            // Trigger change event to simulate user interaction
-            const event = new Event('change', { bubbles: true });
-            dropdown.dispatchEvent(event);
-
-            // Assert that the displayed value is the same as the one saved
-            expect(dropdown.value).toBe(dropdown.options[1].value); // Check if it retains the new value
+    const testDropdownRetainsValue = (dropdownSelector, expectedValue) => {
+      test(`Dropdown "${dropdownSelector}" should retain its value upon save`, () => {
+        // Select the dropdown using the provided selector
+        const dropdown = screen.getByRole('combobox', { name: dropdownSelector });
+  
+        // Change the dropdown value to the expected value
+        fireEvent.change(dropdown, { target: { value: expectedValue } });
+  
+        // Simulate clicking the Save button
+        const saveButton = screen.getByRole('button', { name: /save/i });
+        
+        // Spy on functions in the playlistHome module
+        const playlistHome = require('../playlistHome');
+        jest.spyOn(playlistHome).mockImplementation((form) => {
+          // Simulate saving the selected value to localStorage
+          localStorage.setItem(dropdownSelector, form[dropdownSelector].value);
         });
+  
+        fireEvent.click(saveButton); // Trigger the save button click
+  
+        // Simulate reloading the page or refreshing the dropdown
+        document.body.innerHTML = html; // Re-render the HTML
+  
+        // Load the saved value from localStorage and set the dropdown value
+        const savedValue = localStorage.getItem(dropdownSelector);
+        dropdown.value = savedValue; // Set the saved value to the dropdown
+  
+        // Trigger change event to simulate user interaction
+        const event = new Event('change', { bubbles: true });
+        dropdown.dispatchEvent(event);
+  
+        // Assert that the displayed value is correct
+        expect(dropdown.value).toBe(expectedValue);
+        
+        // Check that the relevant function was called
+        expect(playlistHome.updateLanguageSettingForm).toHaveBeenCalled();
+      });
+    };
+  
+    // Define test cases for different dropdowns using selectors
+    const dropdownsToTest = [
+      { selector: 'Language', value: 'FR' },   // Language dropdown
+      { selector: 'Rescan Media', value: 'Clear Library and rescan everything' }, // Rescan Media
+      { selector: 'Title Format', value: 'ARTIST - TITLE' }, // Formatting > Title Format
+      { selector: 'Use Unified Artists List', value: 'Use single, configurable list of artists' }, // Media Lib management > Browse Artists
+    ];
+  
+    // Loop through the dropdowns and create a test for each
+    dropdownsToTest.forEach(({ selector, value }) => {
+      testDropdownRetainsValue(selector, value);
     });
-});
+  });
+  
