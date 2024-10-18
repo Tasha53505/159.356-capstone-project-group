@@ -3505,4 +3505,4 @@ function getPref(display, listElementId){
 // ADJUSTED ANIMATRIOINS
 
 
-module.exports = {updateLanguageSetting, updateLanguageSettingForm };
+module.exports = {updateLanguageSetting, updateLanguageSettingForm,  };
