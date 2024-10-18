@@ -31,37 +31,43 @@ describe('Dropdown boxes', () => {
 
 
 describe('Dropdown Boxes retain value upon save', () => {
-    test("All Settings should retain their DISPLAY value in their dropdown box upon save", () => {
-      // Select the dropdown
-      const languageSelect = screen.getByTestId('languageSelect');
+    const testDropdownRetainsValue = (dropdownTestId, expectedValue) => {
+      test(`Dropdown with test ID "${dropdownTestId}" should retain its value upon save`, () => {
+        // Select the dropdown
+        const dropdown = screen.getByTestId(dropdownTestId);
   
-      // Change the dropdown value to French
-      fireEvent.change(languageSelect, { target: { value: 'FR' } });
+        // Change the dropdown value to the expected value
+        fireEvent.change(dropdown, { target: { value: expectedValue } });
   
-      // Simulate clicking the Save button
-      const saveButton = screen.getByRole('button', { name: /save language/i });
-      
-      // Mock the updateLanguageSettingForm function
-      jest.spyOn(require('../playlistHome'), 'updateLanguageSettingForm').mockImplementation((form) => {
-        // Simulate saving the selected value to localStorage
-        localStorage.setItem('selectedLanguage', form['pref_language'].value);
-    });
-    
+        // Simulate clicking the Save button
+        const saveButton = screen.getByRole('button', { name: /save/i }); // Adjust button name if necessary
   
-      fireEvent.click(saveButton); // Trigger the save button click
+        // Mock the updateLanguageSettingForm function
+        jest.spyOn(require('../playlistHome'), 'updateLanguageSettingForm').mockImplementation((form) => {
+          // Simulate saving the selected value to localStorage
+          localStorage.setItem(dropdownTestId, form[dropdownTestId].value);
+        });
   
-      // Simulate reloading the page or refreshing the dropdown
-      document.body.innerHTML = html; // Re-render the HTML
+        fireEvent.click(saveButton); // Trigger the save button click
   
-      // Load the saved value from localStorage and set the dropdown value
-      const savedLanguage = localStorage.getItem('selectedLanguage');
-      languageSelect.value = savedLanguage; // Set the saved value to the dropdown
+        // Simulate reloading the page or refreshing the dropdown
+        document.body.innerHTML = html; // Re-render the HTML
   
-      // Trigger change event to simulate user interaction
-      const event = new Event('change', { bubbles: true });
-      languageSelect.dispatchEvent(event);
+        // Load the saved value from localStorage and set the dropdown value
+        const savedValue = localStorage.getItem(dropdownTestId);
+        dropdown.value = savedValue; // Set the saved value to the dropdown
   
-      // Assert that the displayed value is correct
-      expect(languageSelect.value).toBe('FR');
-    });
+        // Trigger change event to simulate user interaction
+        const event = new Event('change', { bubbles: true });
+        dropdown.dispatchEvent(event);
+  
+        // Assert that the displayed value is correct
+        expect(dropdown.value).toBe(expectedValue);
+      });
+    };
+  
+    // Define test cases for different dropdowns
+    testDropdownRetainsValue('languageSelect', 'FR'); // Example dropdown ID and expected state
+  
   });
+  
