@@ -30,7 +30,7 @@ describe('Dropdown boxes', () => {
 });
 
 
-// Get all select elements and test their values upon refresh
+// Get all select elements and test their values
 describe('Dropdown Boxes retain value upon save', () => {
     test('All dropdowns should retain their value upon save', () => {
         // Select all dropdown elements
@@ -57,8 +57,14 @@ describe('Dropdown Boxes retain value upon save', () => {
         // Re-select the dropdowns after reload
         dropdownNames.forEach(name => {
             const reloadedDropdown = document.querySelector(`select[name="${name}"]`);
+            const expectedValue = localStorage.getItem(name);
+            const actualValue = reloadedDropdown.value;
+
+            // Log the expected and actual values
+            console.log(`Dropdown "${name}" - Expected Value: ${expectedValue}, Actual Value: ${actualValue}`);
+
             // Check if the value persists
-            expect(reloadedDropdown.value).toBe(localStorage.getItem(name)); // Check against localStorage
+            expect(actualValue).toBe(expectedValue); // Check against localStorage
         });
     });
 });
