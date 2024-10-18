@@ -30,8 +30,7 @@ describe('Dropdown boxes', () => {
 });
 
 
-// Get all select elements and test their values
-// Get all select elements and test their values
+// Get all select elements and test their values upon refresh
 describe('Dropdown Boxes retain value upon save', () => {
     test('All dropdowns should retain their value upon save', () => {
         // Select all dropdown elements
