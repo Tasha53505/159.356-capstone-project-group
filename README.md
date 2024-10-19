@@ -184,8 +184,10 @@ which calls Slim::Control::Queries::mediafolderQuery
 
 
 ---
-## Left To-do
+## Left To-do (discussed with Prince) - He will work on upon handover of this project
 - Plugins (Favourites Plugin has been complete though)
 - Plugins Settings
+- advanced search
+- Dark theme
 
 
