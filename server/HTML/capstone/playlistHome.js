@@ -892,42 +892,8 @@ advancedSettingsTabsButtons.forEach(button => {
     
             updateTabListeners();
     
-            advancedButton.click();
-
-            deleteDuplicates('serverStatusIframe')
-            const serverStatusIframe = document.getElementById('serverStatusIframe');
-            serverStatusIframe.src = 'settings/server/status.html'
-            serverStatusIframe.onload = function () {
-                let timerId = setInterval(() => {
-                    const iframeDocument = serverStatusIframe.contentDocument || serverStatusIframe.contentWindow.document;
-
-                    const bodyHeight = iframeDocument.body.scrollHeight;
-                    if (bodyHeight > 0) {
-                        serverStatusIframe.setAttribute('style', 'height: ' + (bodyHeight + 7) + 'px')
-                        clearInterval(timerId)
-                    }
-                }, 100)
-            }
-    
-            deleteDuplicates('securityIframe')
-            const securityIframe = document.getElementById('securityIframe');
-            securityIframe.src = 'settings/server/security.html'
-            securityIframe.onload = function () {
-                // console.log(securityIframe)
-                // console.log('load security iframe')
-                let timerId = setInterval(() => {
-                    const iframeDocument = securityIframe.contentDocument || securityIframe.contentWindow.document;
-
-                    // 获取 body 的高度
-                    const bodyHeight = iframeDocument.body.scrollHeight;
-                    if (bodyHeight > 0) {
-                        // console.log('Iframe 内部 body 的高度:', bodyHeight);
-                        securityIframe.setAttribute('style', 'height: ' + (bodyHeight + 7) + 'px')
-                        clearInterval(timerId)
-                    }
-                }, 100)
-            }
-
+            advancedButton.click();    
+            
             deleteDuplicates('softwareIframe')
             const softwareIframe = document.getElementById('softwareIframe');
             softwareIframe.src = 'settings/server/software.html'

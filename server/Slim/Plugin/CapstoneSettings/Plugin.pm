@@ -23,6 +23,9 @@ if(main::WEBUI) {
     require Slim::Plugin::CapstoneSettings::BasicReleaseTypes;
     require Slim::Plugin::CapstoneSettings::BasicFilters;
     require Slim::Plugin::CapstoneSettings::BasicPlaylists;
+    require Slim::Plugin::CapstoneSettings::AdvancedLmsStatus;
+    require Slim::Plugin::CapstoneSettings::AdvancedSecurity;
+    require Slim::Plugin::CapstoneSettings::AdvancedSoftwareUpdate;
 }
 
 # Subroutine to get the display name for the plugin in the menu
@@ -47,6 +50,9 @@ sub initPlugin {
         Slim::Plugin::CapstoneSettings::BasicReleaseTypes->new;
         Slim::Plugin::CapstoneSettings::BasicFilters->new;
         Slim::Plugin::CapstoneSettings::BasicPlaylists->new;
+        Slim::Plugin::CapstoneSettings::AdvancedLmsStatus->new;
+        Slim::Plugin::CapstoneSettings::AdvancedSecurity->new;
+        Slim::Plugin::CapstoneSettings::AdvancedSoftwareUpdate->new;
     }
 }
 
