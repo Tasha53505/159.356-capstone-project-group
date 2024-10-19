@@ -15,7 +15,7 @@ describe('Interface Settings', () => {
         document.body.innerHTML = `
         <div id="prefsSubmit">
             <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
-        </div>`; // Reset DOM before each test
+        </div>`; 
     });
     afterEach(() => {
         jest.clearAllMocks();
