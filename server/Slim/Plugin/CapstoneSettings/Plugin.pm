@@ -19,6 +19,10 @@ if(main::WEBUI) {
     require Slim::Plugin::CapstoneSettings::BasicDisplay;
     require Slim::Plugin::CapstoneSettings::BasicFormatting;
     require Slim::Plugin::CapstoneSettings::BasicTiming;
+    require Slim::Plugin::CapstoneSettings::BasicBrowseArtists;
+    require Slim::Plugin::CapstoneSettings::BasicReleaseTypes;
+    require Slim::Plugin::CapstoneSettings::BasicFilters;
+    require Slim::Plugin::CapstoneSettings::BasicPlaylists;
 }
 
 # Subroutine to get the display name for the plugin in the menu
@@ -39,6 +43,10 @@ sub initPlugin {
         Slim::Plugin::CapstoneSettings::BasicDisplay->new;
         Slim::Plugin::CapstoneSettings::BasicFormatting->new;
         Slim::Plugin::CapstoneSettings::BasicTiming->new;
+        Slim::Plugin::CapstoneSettings::BasicBrowseArtists->new;
+        Slim::Plugin::CapstoneSettings::BasicReleaseTypes->new;
+        Slim::Plugin::CapstoneSettings::BasicFilters->new;
+        Slim::Plugin::CapstoneSettings::BasicPlaylists->new;
     }
 }
 
