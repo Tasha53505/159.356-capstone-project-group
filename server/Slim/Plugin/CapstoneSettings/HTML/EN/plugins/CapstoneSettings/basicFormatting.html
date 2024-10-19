@@ -1,0 +1,10 @@
+[% PROCESS 'settings/header.html' %]
+
+[% WRAPPER setting title="SETUP_TITLEFORMAT" desc="SETUP_GROUP_TITLEFORMATS_DESC" %]
+    [% FOREACH format = prefs.pref_titleFormat %]
+        <input type=radio [% IF prefs.pref_titleFormatWeb == loop.index %]checked="1" [% END %]value="[% loop.index %]" name="pref_titleFormatWeb">
+        <input type="text" class="stdedit" name="pref_titleFormat[% loop.index %]" id="titleFormat[% loop.index %]" value="[% format | html %]" size="40"><br>
+    [% END %]
+[% END %]
+
+[% PROCESS 'settings/footer.html' %]

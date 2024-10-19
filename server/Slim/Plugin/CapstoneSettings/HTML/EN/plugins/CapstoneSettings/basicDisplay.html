@@ -1,0 +1,26 @@
+[% PROCESS settings/header.html %]
+
+[% WRAPPER settingSection %]
+	[% WRAPPER settingGroup title="SETUP_SHOWARTIST" desc="SETUP_SHOWARTIST_DESC" %]
+		<select class="stdedit" name="pref_showArtist" id="showArtist">
+			<option [% IF NOT prefs.pref_showArtist %]selected [% END %]value="0">[% 'DISABLED' | getstring %]</option>
+			<option [% IF prefs.pref_showArtist %]selected [% END %]value="1">[% 'ENABLED' | getstring %]</option>
+		</select>
+	[% END %]
+	[% WRAPPER settingGroup title="SETUP_SHOWYEAR" desc="SETUP_SHOWYEAR_DESC" %]
+		<select class="stdedit" name="pref_showYear" id="showYear">
+			<option [% IF NOT prefs.pref_showYear %]selected [% END %]value="0">[% 'DISABLED' | getstring %]</option>
+			<option [% IF prefs.pref_showYear %]selected [% END %]value="1">[% 'ENABLED' | getstring %]</option>
+		</select>
+	[% END %]
+[% END %]
+
+[% WRAPPER setting title="SETUP_ITEMSPERPAGE" desc="SETUP_ITEMSPERPAGE_DESC" %]
+	<input type="text" class="stdedit sliderInput_10_500" name="pref_itemsPerPage" id="itemsPerPage" value="[% prefs.pref_itemsPerPage | html %]" size="15">
+[% END %]
+
+[% WRAPPER setting title="SETUP_THUMBSIZE" desc="SETUP_THUMBSIZE_DESC" %]
+<input type="text" class="stdedit sliderInput_25_250" name="pref_thumbSize" id="thumbSize" value="[% prefs.pref_thumbSize | html %]" size="15">
+[% END %]
+
+[% PROCESS settings/footer.html %]
