@@ -65,6 +65,28 @@ describe('Interface Settings', () => {
 
     // Min Max values for thumbSize
     test('thumbnail size min value is 25 and max is 250', () => {
+        document.body.innerHTML +=`
+        <div class="tooltipDrowndown">     
+            <div class="tooltipContainer">
+                <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
+                    <h4 style="display: inline-block; vertical-align: middle;">Thumbnail Size</h4>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
+                        <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
+                    </svg>  
+                </div>
+                    <div class="tooltip">  
+                        Choose the size in pixels (25-250) for the default thumbnail image when browsing by artwork. Default is 100.
+                    </div>
+                </div>
+                <form id="thumbSizeForm">
+                    <input type="number" class="stdedit" name="pref_thumbSize" id="thumbSize" min="25" max="250"><br><br>
+                    <div class="prefs">
+                        <input name="pref_update_thumbSize" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="thumbSizeUpdateButton" onclick="thumbSizeForm(this.form); return false;"  value="Update Thumbnail Size"><br><br>
+                    </div>
+                </form>
+            </div>  
+        </div>
+        `
         const thumbSize = document.getElementById('thumbSize');
         thumbSize.value = 20;
         expect(thumbSize.validity.valid).toBe(false);
