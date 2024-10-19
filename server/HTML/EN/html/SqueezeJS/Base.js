@@ -740,6 +740,15 @@ SqueezeJS.SonginfoParser = {
 		return bitrate;
 	},
 
+	samplerate : function(result, noLink) {
+		var player = SqueezeJS.getPlayer();
+		var link = result.playlist_loop[0].info_link || 'songinfo.html';
+		var id = result.playlist_loop[0].id;
+		var hrefLink = '<a href="' + webroot +'{link}?player={player}&amp;item={id}" target="browser">Song Information</a>'
+
+		return hrefLink.replace('{link}', link).replace('{player}', player).replace('{id}', id);
+	},
+
 	coverart : function(result, noLink, width){
 		var coverart = this.defaultCoverart(0, width);
 		var id = -1;

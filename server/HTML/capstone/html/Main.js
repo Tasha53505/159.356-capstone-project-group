@@ -121,6 +121,11 @@ Main = {
             noLink: true
         });
 
+		new SqueezeJS.UI.Samplerate({
+			el: 'samplerate',
+			noLink: false
+		})
+
 		// this.initPlayerControl();
 		// new SqueezeJS.UI.CurrentIndex('ctrlPlayNum');
 
