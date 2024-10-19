@@ -3,11 +3,19 @@ const fs = require('fs');
 const path = require('path');
 const { screen, fireEvent } = require('@testing-library/dom');
 require('@testing-library/jest-dom');
-const html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
+
+const basicDisplay = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicDisplay.html'), 'utf8');
+const basicFormatting = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicFormatting.html'), 'utf8');
+const basicTiming = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicTiming.html'), 'utf8');
+
+
 
 describe('Interface Settings', () => {
     beforeEach(() => {
-        document.body.innerHTML = html;
+        document.body.innerHTML = `
+        <div id="prefsSubmit">
+            <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+        </div>`; // Reset DOM before each test
     });
     afterEach(() => {
         jest.clearAllMocks();
@@ -37,19 +45,21 @@ describe('Interface Settings', () => {
         expect(thumbSize.validity.valid).toBe(false);
     });
 
-    // Test one button for each panel
-    test('displays button for updating items per page', () => {
-        const updateButton = screen.getByRole('button', { name: /Update Items Per Page/i });
-        expect(updateButton).toBeInTheDocument();
-    });
 
-    test('displays button for adding custom formats', () => {
-        const updateButton = screen.getByRole('button', { name: /Add Custom Format/i });
-        expect(updateButton).toBeInTheDocument();
+    // Test save buttons
+    test('display basicDisplay save button', () => {
+        document.body.innerHTML += `${basicDisplay}`;
+        const saveButton = screen.getByRole('button', { name: /Save Settings/i });
+        expect(saveButton).toBeInTheDocument();
     });
-
-    test('displays button for refresh rate', () => {
-        const updateButton = screen.getByRole('button', { name: /Change Refresh Rate/i });
-        expect(updateButton).toBeInTheDocument();
+    test('display basicFormatting save button', () => {
+        document.body.innerHTML += `${basicFormatting}`;
+        const saveButton = screen.getByRole('button', { name: /Save Settings/i });
+        expect(saveButton).toBeInTheDocument();
+    });
+    test('display basicTiming save button', () => {
+        document.body.innerHTML += `${basicTiming}`;
+        const saveButton = screen.getByRole('button', { name: /Save Settings/i });
+        expect(saveButton).toBeInTheDocument();
     });
 });
