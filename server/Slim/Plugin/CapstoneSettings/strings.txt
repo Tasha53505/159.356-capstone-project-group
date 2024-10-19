@@ -17,6 +17,7 @@ PLUGIN_CAPSTONE_SETTINGS
 	SV	Capstone Settings
 
 PLUGIN_CAPSTONE_SETTINGS_DESC
+
 	CS	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
 	DA	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
 	DE	Einstellungen fur unseren Capstone Skin. *Sollte deaktiviert werden, wenn der passende skin nicht benutzt wird!*
