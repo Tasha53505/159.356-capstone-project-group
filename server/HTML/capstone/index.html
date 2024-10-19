@@ -211,7 +211,7 @@
 
 
                                                 <form action="" id="seperatorMultipleItemsTagsForm">
-                                                    <h4> Separator for Multiple Items in Tags                                                    </h4>
+                                                    <h4> Separator for Multiple Items in Tags</h4>
                                                     <div class="tooltipContainer">
                                                         <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
@@ -1895,195 +1895,17 @@
 
                                         <div class="basicSettingsLanguageTab active" id="language">
 
-                                            <iframe src="settings/server/basicLanguage.html" name="language" height="350px" width="100%" height="" frameborder="0" scrolling="auto" id="languageIframe" style="display: block; width: 100%;"></iframe>
-                                            <!--<form action="" id="languageSettingForm" class="languageSettingForm">
-                                            <div class="language">     
-                                                <h4>Change Language</h4>
-                                                <div class="tooltipContainer">
-                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
-                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
-                                                        </svg>  
-                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
-                                                    </div>
-                                                    
-                                                  
-                                                        <div class="tooltip">  
-                                                          Select the dropdown below, choose a language and click the "Save Settings" Button. You will need to REFRESH upon saving.
-                                                        </div>
-                                                </div>
-                                                
-                                              
-                                                <select class="stdedit" name="pref_language" id="languageSelect" data-testid="languageSelect">
-                                                    <option value="DA">Dansk</option>
-                                                    <option value="DE">Deutsch</option>
-                                                    <option value="EN" selected>English</option>
-                                                    <option value="EN_GB">English (British) *</option>
-                                                    <option value="ES">Español</option>
-                                                    <option value="FR">Français</option>
-                                                    <option value="IT">Italiano</option> 
-                                                    <option value="NL">Nederlands</option>
-                                                    <option value="NO">Norsk</option>
-                                                    <option value="PL">Polski</option>
-                                                    <option value="PT">Português *</option>
-                                                    <option value="FI">Suomi</option>
-                                                    <option value="SV">Svenska</option>
-                                                    <option value="CS">Česky</option>
-                                                    <option value="RU">Русский</option>
-                                                    <option value="HE">עברית *</option>
-                                                    <option value="JA">日本語 *</option>
-                                                    <option value="ZH_CN">简体中文 *</option>
-                                                </select>
-                                                
-
-                                            </div>-->                
-                                            <br>
-                                            <input name="saveSettings" id="saveSettings" type="button"  class="saveSettings" value="Save Language" style="width: 100%; " onclick="updateLanguageSettingForm(this.form)">
-                                        </form>
+                                            <iframe src="plugins/CapstoneSettings/basicLanguage.html" name="language" height="350px" width="100%" height="" frameborder="0" scrolling="auto" id="languageIframe" style="display: block; width: 100%;"></iframe>
                                         </div>
 
                                        
                                         <div class="basicSettingsMediaFoldersTab" id="mediaFolders">
-                                            <div class="mediaLibrary" >
-                                                <h4>Media Library Name</h4>
-                                                <div class="tooltipContainer">
-                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
-                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
-                                                        </svg>  
-                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
-                                                    </div>
-                                                    
-                                                  
-                                                        <div class="tooltip">  
-                                                           [% WRAPPER settingGroup  desc="SETUP_LIBRARY_NAME_DESC" %] 
-                                                        </div>
-                                                </div>
-                                                
-                                                [% WRAPPER settingSection %]
-                                                [% prefs.pref_libraryname | html %]
-                                                [% END %] [% END %] 
-
-                                                
-                                                <form id="libraryNameForm" class="">
-                                                    <input type="text" class="stdedit selectFolder" name="pref_libraryname0" id="libraryName" value="" size="40">
-                                                    
-                                                    
-                                                    <div class="prefs">
-                                                     <input name="pref_update_libraryname" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="libraryNameUpdateButton" onclick="libraryNameForm(this.form); return false;"  value="Save Library Name"><br><br>
-                                                    </div>
-
-
-
-                                            </div>
-                                        </form>
-
-
-                                        <hr />
-
-                                            <div class="mediaFolders">
-                                             
-
-                                                <h4>Media Folders</h4>
-                                                <div class="tooltipContainer">
-                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
-                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
-                                                        </svg>  
-                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
-                                                    </div>
-                                                    
-                                                  
-                                                        <div class="tooltip">  
-                                                            [% WRAPPER setting title="SETUP_MEDIADIRS" desc="SETUP_MEDIADIRS_DESC" %] [% FOREACH mediadir = mediadirs %] [% END %]
-                                                            [% 'FOLDER' | string %]	[% 'MUSIC' | string %]  	 
-                                                            [% mediadir.path %]
-                    
-                                                            [% IF mediadir.path %][% END %]
-                                                            [% END %]  
-            
-                                                        </div>
-                                                </div>
-
-                                                
-                                                
-
-                                                <!-- Input to put in folder to find music -->
-                                                 <form id="rescanMediaForm" class="" data-testid="rescanMediaForm">
-                                                    <input type="text" class="stdedit selectFolder" name="pref_mediadirs0" id="musicInputPath"  data-testid="musicInputPath" value="" size="40" >
-                                                    
-                                                    <div class="prefs">
-                
-                                                        <select class="stdedit disableOnScan" name="pref_rescantype" id="rescantype">
-                                                
-                                                        
-                                                            <option value="1rescan">Look for new and changed media files</option>
-                                                            <option value="2wipedb">Clear library and rescan everything</option>
-                                                            <option value="3playlist">Only rescan playlists</option>
-                                                            <option value="4onlinelibrary">Only rescan online music library</option>
-                                                        </select>
-
-
-                                                        <input name="pref_rescan_mediadir0" type="submit" class="stdclick rescanButton disableOnScan saveSettings" id="rescanButton" data-testid="rescanButton" onclick="rescanMediaForm(this.form); return false;"   value="Rescan"><br><br>
-                                                    <a id="progressLink" href="/capstone/settings/server/status.html?player=">View Previous Scan Details</a>
-                                                
-                                                    &nbsp;</div>
-                                                </form>
-                                    
-                                                
-                                                <br />
-                                                <br />
-
-
-                                                <!-- Button to browse folders-->
-                                                <input type="button" value="Browse" class="browseFolders filesystembrowser saveSettings" onclick="SqueezeJS.UI.FilesystemBrowser.show('mediadirs0', 'foldersonly')" id="ext-gen28">
-                                                <br />
-                                                <br />
-
-
-                                            </div>
+                                            <iframe src="plugins/CapstoneSettings/basicMediaFolder.html" name="basicMediaFolder" height="350px" width="100%" height="" frameborder="0" scrolling="auto" id="basicMediaFolderIframe" style="display: block; width: 100%;"></iframe>
                                         </div>
 
 
                                         <div class="basicSettingsPlaylistsTab" id="playlistsFolder">
-                                            <div class="playListsFolder" style="height: 40vh;">
-
-                                                <h4>Playlists Folder</h4>
-                                                <div class="tooltipContainer">
-                                                    <div class="whatIsThis" style="display: flex; align-items: center; gap: 0.5em;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" class="help-icon" style="display: inline-block; vertical-align: middle;">
-                                                            <path fill="currentColor" d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m-.9-3.85h1.85q0-.825.188-1.3t1.062-1.3q.65-.65 1.025-1.238T15.55 8.9q0-1.4-1.025-2.15T12.1 6q-1.425 0-2.312.75T8.55 8.55l1.65.65q.125-.45.563-.975T12.1 7.7q.8 0 1.2.438t.4.962q0 .5-.3.938t-.75.812q-1.1.975-1.35 1.475t-.25 1.825M12 22q-2.075 0-3.9-.787t-3.175-2.138T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22" />
-                                                        </svg>  
-                                                        <span style="display: inline-block; vertical-align: middle;">What is this?</span>
-                                                    </div>
-                                                    
-                                                  
-                                                        <div class="tooltip">  
-                                                            [% WRAPPER settingSection %] [% WRAPPER settingGroup title="SETUP_PLAYLISTDIR" desc="SETUP_PLAYLISTDIR_DESC" %] 
-                                                            [% prefs.pref_playlistdir | html %]
-                                                         Format it like this (NOTE - the ":" is NEEDED. It will not update if you do not have the ':') <br>  C:\Program Files\SongsCopy</p> 
-            
-                                                            [% END %] [% END %] 
-                                                        </div>
-                                                </div>
-
-
-                                           
-                                                <br>
-
-
-                                                <form id="playlistsDirectoryForm" class="">
-                                                    <input type="text" class="stdedit selectFolder" name="pref_playlistdir0" id="playlistDirPath" value="" size="40">
-                                                    
-                                                    
-                                                    <div class="prefs">
-                                                     <input name="pref_update_playlistdir0" type="button" class="stdclick rescanButton disableOnScan saveSettings" id="playlistDirUpdateButton" onclick="playlistsDirectoryForm(this.form); return false;"  value="Scan for Playlist"><br><br>
-                                                    </div>
-
-                                            
-
-                                            </div>
-                                        </form>
+                                            <iframe src="plugins/CapstoneSettings/basicPlaylistDir.html" name="basicPlaylistDir" height="350px" width="100%" height="" frameborder="0" scrolling="auto" id="basicPlaylistDirIframe" style="display: block; width: 100%;"></iframe>
                                         </div>
                                                              
                                 
@@ -2118,7 +1940,7 @@
                                                     </svg>  
                                                 </div>
                                                     <div class="tooltip">  
-                                                        You may choose to show the artist when browsing by Albums. When enabled, the album's artist will be shown next to the album title.
+                                                        Test You may choose to show the artist when browsing by Albums. When enabled, the album's artist will be shown next to the album title.
                                                     </div>
                                             </div>
                                             <form id="showArtistForm" class="">

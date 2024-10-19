@@ -217,6 +217,7 @@ sub handler {
 			else { 1 }
 		}
 		(
+			'BASIC_LANGUAGE_SETTINGS',
 			'BASIC_SERVER_SETTINGS',
 			'BASIC_PLAYER_SETTINGS',
 			'BEHAVIOR_SETTINGS',

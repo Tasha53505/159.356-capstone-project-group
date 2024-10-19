@@ -1,0 +1,34 @@
+# String file for DateTime plugin
+
+PLUGIN_CAPSTONE_SETTINGS
+	CS	Capstone Settings
+	DA	Capstone Settings
+	DE	Capstone Einstellungen
+	EN	Capstone Settings
+	ES	Capstone Settings
+	FI	Capstone Settings
+	FR	Capstone Settings
+	HE	Capstone Settings
+	IT	Capstone Settings
+	NL	Capstone Settings
+	NO	Capstone Settings
+	PL	Capstone Settings
+	RU	Capstone Settings
+	SV	Capstone Settings
+
+PLUGIN_CAPSTONE_SETTINGS_DESC
+	CS	Settings for our capstone skin
+	DA	Settings for our capstone skin
+	DE	Einstellungen fur unseren Capstone Skin
+	EN	Settings for our capstone skin
+	ES	Settings for our capstone skin
+	FI	Settings for our capstone skin
+	FR	Settings for our capstone skin
+	HE	Settings for our capstone skin
+	IT	Settings for our capstone skin
+	NL	Settings for our capstone skin
+	NO	Settings for our capstone skin
+	PL	Settings for our capstone skin
+	RU	Settings for our capstone skin
+	SV	Settings for our capstone skin
+

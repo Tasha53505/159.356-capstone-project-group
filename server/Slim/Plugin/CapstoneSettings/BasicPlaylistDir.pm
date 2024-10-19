@@ -1,5 +1,4 @@
-package Slim::Web::Settings::Server::Basic;
-
+package Slim::Plugin::CapstoneSettings::BasicPlaylistDir;
 
 # Logitech Media Server Copyright 2001-2020 Logitech.
 # This program is free software; you can redistribute it and/or
@@ -16,15 +15,15 @@ my $prefs = preferences('server');
 my $log = logger('scan.scanner');
 
 sub name {
-	return Slim::Web::HTTP::CSRF->protectName('BASIC_SERVER_SETTINGS');
+    return Slim::Web::HTTP::CSRF->protectName('BASIC_PLAYLISTDIR_SETTINGS');
 }
 
 sub page {
-	return (Slim::Web::HTTP::CSRF->protectURI('settings/server/basic.html'));
+    return (Slim::Web::HTTP::CSRF->protectURI('plugins/CapstoneSettings/basicPlaylistDir.html'));
 }
 
 sub prefs {
-	return ($prefs, qw(language playlistdir libraryname) );
+    return ($prefs, qw(playlistdir) );
 }
 
 sub handler {
@@ -126,24 +125,8 @@ sub handler {
 		}
 	}
 
-	$paramRef->{'newVersion'}  = $::newVersion;
-	$paramRef->{'languageoptions'} = Slim::Utils::Strings::languageOptions();
-
 	my $ignoreFolders = {
 		map { $_, 1 } @{ $prefs->get('ignoreInAudioScan') || [''] },
-	};
-
-	$paramRef->{mediadirs} = [];
-	foreach ( @{  $prefs->get('mediadirs') || [''] } ) {
-		push @{ $paramRef->{mediadirs} }, {
-			path  => $_,
-			audio => $ignoreFolders->{$_},
-		}
-	}
-
-	# add an empty input field for an additional mediadir input field
-	push @{$paramRef->{mediadirs}}, {
-		path  => '',
 	};
 
 	my $scanTypes = Slim::Music::Import->getScanTypes();
