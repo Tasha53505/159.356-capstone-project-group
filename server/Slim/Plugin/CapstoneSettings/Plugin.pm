@@ -16,7 +16,6 @@ if(main::WEBUI) {
     require Slim::Plugin::CapstoneSettings::BasicLanguage;
     require Slim::Plugin::CapstoneSettings::BasicMediaFolder;
     require Slim::Plugin::CapstoneSettings::BasicPlaylistDir;
-
     require Slim::Plugin::CapstoneSettings::BasicDisplay;
     require Slim::Plugin::CapstoneSettings::BasicFormatting;
     require Slim::Plugin::CapstoneSettings::BasicTiming;
@@ -27,6 +26,8 @@ if(main::WEBUI) {
     require Slim::Plugin::CapstoneSettings::AdvancedLmsStatus;
     require Slim::Plugin::CapstoneSettings::AdvancedSecurity;
     require Slim::Plugin::CapstoneSettings::AdvancedSoftwareUpdate;
+    require Slim::Plugin::CapstoneSettings::AdvancedPerformance;
+    require Slim::Plugin::CapstoneSettings::AdvancedNetwork;
 }
 
 # Subroutine to get the display name for the plugin in the menu
@@ -44,7 +45,6 @@ sub initPlugin {
         Slim::Plugin::CapstoneSettings::BasicLanguage->new;
         Slim::Plugin::CapstoneSettings::BasicMediaFolder->new;
         Slim::Plugin::CapstoneSettings::BasicPlaylistDir->new;
-
         Slim::Plugin::CapstoneSettings::BasicDisplay->new;
         Slim::Plugin::CapstoneSettings::BasicFormatting->new;
         Slim::Plugin::CapstoneSettings::BasicTiming->new;
@@ -55,6 +55,8 @@ sub initPlugin {
         Slim::Plugin::CapstoneSettings::AdvancedLmsStatus->new;
         Slim::Plugin::CapstoneSettings::AdvancedSecurity->new;
         Slim::Plugin::CapstoneSettings::AdvancedSoftwareUpdate->new;
+        Slim::Plugin::CapstoneSettings::AdvancedPerformance->new;
+        Slim::Plugin::CapstoneSettings::AdvancedNetwork->new;
     }
 }
 
