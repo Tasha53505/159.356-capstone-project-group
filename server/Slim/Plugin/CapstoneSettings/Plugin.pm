@@ -28,6 +28,9 @@ if(main::WEBUI) {
     require Slim::Plugin::CapstoneSettings::AdvancedSoftwareUpdate;
     require Slim::Plugin::CapstoneSettings::AdvancedPerformance;
     require Slim::Plugin::CapstoneSettings::AdvancedNetwork;
+    require Slim::Plugin::CapstoneSettings::AdvancedMediaLibraryManagement;
+    require Slim::Plugin::CapstoneSettings::AdvancedFormatting;
+    require slim::Plugin::CapstoneSettings::AdvancedFileTypes;
 }
 
 # Subroutine to get the display name for the plugin in the menu
@@ -57,6 +60,9 @@ sub initPlugin {
         Slim::Plugin::CapstoneSettings::AdvancedSoftwareUpdate->new;
         Slim::Plugin::CapstoneSettings::AdvancedPerformance->new;
         Slim::Plugin::CapstoneSettings::AdvancedNetwork->new;
+        Slim::Plugin::CapstoneSettings::AdvancedMediaLibraryManagement->new;
+        Slim::Plugin::CapstoneSettings::AdvancedFormatting->new;
+        Slim::Plugin::CapstoneSettings::AdvancedFileTypes->new;
     }
 }
 

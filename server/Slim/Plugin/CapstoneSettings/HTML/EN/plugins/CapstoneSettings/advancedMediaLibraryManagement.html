@@ -1,0 +1,47 @@
+[% PROCESS settings/header.html %]
+
+    [% WRAPPER settingSection %]
+		[% IF prefs.pref_useUnifiedArtistsList %]
+			[% WRAPPER settingGroup title="SETUP_VARIOUSARTISTS" desc="SETUP_VARIOUSARTISTAUTOIDENTIFICATION_DESC"%]
+				<input type="radio" name="pref_variousArtistAutoIdentification" id="pref_variousArtistAutoIdentification0" value="0" [% IF NOT prefs.pref_variousArtistAutoIdentification %]checked="checked"[% END %] />
+				<label for="pref_variousArtistAutoIdentification0" class="stdlabel">[% 'SETUP_VARIOUSARTISTAUTOIDENTIFICATION_0' | getstring %]</label><br/>
+				<input type="radio" name="pref_variousArtistAutoIdentification" id="pref_variousArtistAutoIdentification1" value="1" [% IF prefs.pref_variousArtistAutoIdentification %]checked="checked"[% END %] />
+				<label for="pref_variousArtistAutoIdentification1" class="stdlabel">[% 'SETUP_VARIOUSARTISTAUTOIDENTIFICATION_1' | getstring %]</label>
+			[% END %]
+		[% END %]
+
+		[% WRAPPER settingGroup title="" desc="SETUP_USETPE2ASALBUMARTIST_DESC"%]
+			<input type="radio" name="pref_useTPE2AsAlbumArtist" id="pref_useTPE2AsAlbumArtist0" value="0" [% IF NOT prefs.pref_useTPE2AsAlbumArtist %]checked="checked"[% END %] />
+			<label for="pref_useTPE2AsAlbumArtist0" class="stdlabel">[% 'SETUP_USETPE2ASALBUMARTIST_0' | getstring %]</label><br/>
+			<input type="radio" name="pref_useTPE2AsAlbumArtist" id="pref_useTPE2AsAlbumArtist1" value="1" [% IF prefs.pref_useTPE2AsAlbumArtist %]checked="checked"[% END %] />
+			<label for="pref_useTPE2AsAlbumArtist1" class="stdlabel">[% 'SETUP_USETPE2ASALBUMARTIST_1' | getstring %]</label><br/>
+		[% END %]
+
+		[% WRAPPER settingGroup title="" desc=""%]
+			<div class="prefDesc">[% "SETUP_VARIOUSARTISTSSTRING_DESC" | string %]</div>
+			<input type="text"class="stdedit" name="pref_variousArtistsString" id="variousArtistsString" value="[% prefs.pref_variousArtistsString | html %]" size="40" placeholder="[% "VARIOUSARTISTS" | string | html %]">
+		[% END %]
+	[% END %]
+
+    [% WRAPPER setting title="SETUP_SEARCHSUBSTRING" desc="SETUP_SEARCHSUBSTRING_DESC"%]
+		<select class="stdedit" name="pref_searchSubString" id="searchSubString">
+
+			<option [% IF NOT prefs.pref_searchSubString %]selected [% END %]value="0">[% 'SETUP_SEARCHSUBSTRING_0' | string %]</option>
+			<option [% IF prefs.pref_searchSubString %]selected [% END %]value="1">[% 'SETUP_SEARCHSUBSTRING_1' | string %]</option>
+
+		</select>
+	[% END %]
+
+	[% WRAPPER setting title="SETUP_IGNOREDARTICLES" desc="SETUP_IGNOREDARTICLES_DESC"%]
+		<input type="text"class="stdedit" name="pref_ignoredarticles" id="ignoredarticles" value="[% prefs.pref_ignoredarticles | html %]" size="40">
+	[% END %]
+
+    [% WRAPPER setting title="SETUP_SKIPSENTINEL" desc="SETUP_SKIPSENTINEL_DESC" %]
+		<input type="text" class="stdedit" name="pref_skipsentinel" id="skipsentinel" value="[% prefs.pref_skipsentinel | html %]" size="40">
+	[% END %]
+
+    [% WRAPPER setting title="SETUP_SPLITLIST" desc="SETUP_SPLITLIST_DESC"%]
+			<input type="text"class="stdedit" name="pref_splitList" id="splitList" value="[% prefs.pref_splitList | html %]" size="40">
+	[% END %]
+
+[% PROCESS settings/footer.html %]

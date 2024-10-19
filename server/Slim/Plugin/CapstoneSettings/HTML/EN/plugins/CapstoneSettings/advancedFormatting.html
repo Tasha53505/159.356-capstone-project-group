@@ -1,0 +1,11 @@
+[% PROCESS settings/header.html %]
+
+    [% WRAPPER setting title="SETUP_COVERART" desc="SETUP_COVERART_DESC" %]
+		<input type="text" class="stdedit" name="pref_coverArt" id="coverArtID" value="[% prefs.pref_coverArt | html %]" size="40">
+	[% END %]
+
+	[% WRAPPER setting title="SETUP_ARTFOLDER" desc="SETUP_ARTFOLDER_DESC" %]
+		<input type="text" class="stdedit selectFolder" name="pref_artfolder" id="artfolder" value="[% prefs.pref_artfolder | html %]" size="40">
+	[% END %]
+    
+[% PROCESS settings/footer.html %]
