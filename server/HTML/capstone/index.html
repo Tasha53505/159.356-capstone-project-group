@@ -2013,7 +2013,7 @@
                                                     
                                                     <div class="prefs">
                 
-                                                        <select class="stdedit disableOnScan" name="pref_rescantype" id="rescantype">
+                                                        <select class="stdedit disableOnScan" name="pref_rescantype" id="rescantype" data-testid="rescantype">
                                                 
                                                         
                                                             <option value="1rescan">Look for new and changed media files</option>
@@ -2226,7 +2226,7 @@
                                             </div>
                                             <div class="prefs">
                                                 <form id="titleFormatWebForm" class="">
-                                                    <select class="stdedit" name="pref_titleFormatWeb" id="titleFormatWeb">
+                                                    <select class="stdedit" name="pref_titleFormatWeb" id="titleFormatWeb" data-testid="titleFormatWeb">
                                                         <option value="0">TITLE</option>
                                                         <option value="1">DISC-TRACKNUM. TITLE</option>
                                                         <option value="2">TRACKNUM. TITLE</option>
@@ -2351,7 +2351,7 @@
 
                                         <form action="" class="unifiedArtistsForm">
                                             [% WRAPPER settingSection %]
-                                                <select class="stdedit" name="pref_useUnifiedArtistsList" id="useUnifiedArtistsList">[% prefs.pref_useUnifiedArtistsList %]
+                                                <select class="stdedit" name="pref_useUnifiedArtistsList" id="useUnifiedArtistsList" data-testid="useUnifiedArtistsList">[% prefs.pref_useUnifiedArtistsList %]
                                     
                                                     <option [% IF prefs.pref_useUnifiedArtistsList %]selected [% END %] value="1">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_ON' | string %]</option>
                                                     <option [% IF NOT prefs.pref_useUnifiedArtistsList%]selected [% END %] value="0">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_OFF' | string %]</option>
