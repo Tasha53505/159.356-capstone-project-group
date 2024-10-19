@@ -126,6 +126,8 @@ https://lyrion.org/reference/cli/using-the-cli/#jsonrpcjs --> Documentation is i
 - Make sure if you're dealing with file paths that they're correct.
 - 0 can be used as a placeholder for playerID --> if the command your sending supports it.
 
+  *NOTE:* This has now been replaced by the use of a perl plugin
+
 -------------------------------------
 ## Generating Songs
 The folder menu is created by
