@@ -12,16 +12,16 @@ const basicMediaFolder = fs.readFileSync(path.resolve(__dirname, '../../../Slim/
 const basicPlaylistDir = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicPlaylistDir.html'), 'utf8');
 
 
-//TODO Uncomment all of this out when merging to main
 
-// const basicDisplay = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicDisplay.html'), 'utf8');
-// const basicInterface = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicInterface.html'), 'utf8');
-// const basicTiming = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicTiming.html'), 'utf8');
-// const basicBrowseArtists = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicBrowseArtists.html'), 'utf8');
-// const basicReleaseTypes = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicReleaseTypes.html'), 'utf8');
-// const basicFilters = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicFilters.html'), 'utf8');
-// const basicPlaylists = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicPlaylists.html'), 'utf8');
+const basicDisplay = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicDisplay.html'), 'utf8');
+const basicTiming = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicTiming.html'), 'utf8');
+const basicBrowseArtists = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicBrowseArtists.html'), 'utf8');
+const basicReleaseTypes = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicReleaseTypes.html'), 'utf8');
+const basicFilters = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicFilters.html'), 'utf8');
+const basicPlaylists = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/basicPlaylists.html'), 'utf8');
 
+
+//TODO Uncomment all of this out when advanced tests are done
 
 // const advancedMediaLibraryManagement = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/advancedMediaLibraryManagement.html'), 'utf8');
 // const advancedFileTypes = fs.readFileSync(path.resolve(__dirname, '../../../Slim/Plugin/CapstoneSettings/HTML/EN/plugins/CapstoneSettings/advancedFileTypes.html'), 'utf8');
@@ -35,9 +35,16 @@ const basicPlaylistDir = fs.readFileSync(path.resolve(__dirname, '../../../Slim/
 // Add the HTML content to the document body before each test
 beforeEach(() => {
     localStorage.clear(); //Clear local storage before each test
-    document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}`;
-    //TODO UNCOMMENT THIS
-     // document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicInterface}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists}${advancedMediaLibraryManagement}${advancedFileTypes}${advancedFormatting}${advancedLmsStatus}${advancedNetwork}${advancedPerformance}${advancedSecurity}${advancedSoftwareUpdate}`;
+     document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists}
+<div id="prefsSubmit">
+        <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+    </div>`;
+
+    //TODO: UNCOMMENT THIS
+     // document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists}${advancedMediaLibraryManagement}${advancedFileTypes}${advancedFormatting}${advancedLmsStatus}${advancedNetwork}${advancedPerformance}${advancedSecurity}${advancedSoftwareUpdate}
+    //  <div id="prefsSubmit">
+    //     <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+    // </div>`;
 
 });
 
@@ -71,28 +78,48 @@ describe('Dropdown Boxes retain value upon save (simulates clicking save, refres
 
                 // Simulate clicking the save button
                 const saveButton = screen.getByText('Save Settings');
+                    // After the dropdown value is changed and the save button is clicked
                 fireEvent.click(saveButton);
 
                 // Simulate saving the selection to local storage
                 localStorage.setItem(dropdown.name, newOption.value);
 
-                // Reload the page (re-render the HTML)
-                document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}`;
-                     // document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicInterface}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists}${advancedMediaLibraryManagement}${advancedFileTypes}${advancedFormatting}${advancedLmsStatus}${advancedNetwork}${advancedPerformance}${advancedSecurity}${advancedSoftwareUpdate}`;
+                // Reload the page (re-render the HTML) and populate the dropdown values from localStorage
+                document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists} 
+                <div id="prefsSubmit">
+                    <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+                </div>`;
 
+                //TODO: Uncomment this!
+                      // document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists}${advancedMediaLibraryManagement}${advancedFileTypes}${advancedFormatting}${advancedLmsStatus}${advancedNetwork}${advancedPerformance}${advancedSecurity}${advancedSoftwareUpdate}
+            //     <div id="prefsSubmit">
+            //     <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+            //  </div>`;
 
                 // Re-select the dropdowns after re-rendering by class
                 const updatedDropdowns = Array.from(document.querySelectorAll('.stdedit')).filter(el => el.tagName === 'SELECT');
+
+                // Set the dropdown value based on localStorage
+                updatedDropdowns.forEach(dropdown => {
+                    const savedValue = localStorage.getItem(dropdown.name);
+                    if (savedValue) {
+                        dropdown.value = savedValue; // Set the value to the saved value
+                    }
+                });
 
                 // Log expected and actual values
                 console.log(`Dropdown ${index + 1}: Expected Value = ${newOption.value}, Actual Value = ${updatedDropdowns[index].value}`);
 
                 // Assert the value is retained
                 expect(updatedDropdowns[index].value).toBe(newOption.value);
+
             }
         });
     });
 });
+
+
+
 
 
 describe('Input Textboxes retain value upon save (simulates typing a value, clicking save, refreshing, and checking expected value)', () => {
@@ -101,7 +128,7 @@ describe('Input Textboxes retain value upon save (simulates typing a value, clic
         const mockServerData = {};
 
         // Set up the initial DOM structure with necessary HTML
-        document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}<div id="prefsSubmit">
+        document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists}<div id="prefsSubmit">
             <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
         </div>`;
 
