@@ -383,3 +383,79 @@ body {
 	background-color: transparent;
 	border-color: transparent;
 }
+
+/* --- MOBILE SETTINGS --- */
+@media only screen and (max-width: 450px) {
+    /* Main player container */
+    .player {
+        width: 100vw;
+        height: 20vh;
+        border-radius: 20px;
+        display: grid;
+        position: relative;
+    }
+
+    /* Control buttons */
+    .control {
+        width: 15vw;
+        height: 15vw;
+        border-radius: 50%;
+        z-index: 100;
+        margin: 10px;
+    }
+
+    /* Buttons */
+    .playButton, .pauseButton, .nextButton, .prevButton, .shuffleButtonInactive, .shuffleButtonPlaylist, .shuffleButtonSong .repeatButtonActivePlaylist, .repeatButtonActiveSong, .repeatButtonInactive {
+        width: 8em; 
+        height: 8em;
+        background-size: contain;
+    }
+    
+    /* Playbar */
+    #playtimePanel {
+        width: 90%;
+        height: 30px;
+        padding-left: 20px;
+        position: relative;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+}
+
+@media only screen and (max-width: 890px) {
+    /* Main player container */
+    .player {
+        width: 95vw;
+        height: 18vh;
+        border-radius: 20px;
+        display: grid;
+        position: relative;
+    }
+
+    /* Control buttons */
+    .control {
+        width: 13vw;
+        height: 13vw;
+        border-radius: 50%;
+        z-index: 100;
+        margin: 5px;
+    }
+
+    /* Buttons */
+    .playButton, .pauseButton, .nextButton, .prevButton, .shuffleButtonInactive, .shuffleButtonPlaylist, .shuffleButtonSong .repeatButtonActivePlaylist, .repeatButtonActiveSong, .repeatButtonInactive {
+        width: 7em;
+        height: 7em;
+        background-size: contain;
+    }
+
+    /* Playbar */
+    #playtimePanel {
+        width: 90%;
+        height: 30px;
+        padding-left: 20px;
+        position: relative;
+        margin-top: 20px;
+        align-items: center;
+    }
+}
