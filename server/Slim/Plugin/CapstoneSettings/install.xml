@@ -1,0 +1,19 @@
+<?xml version='1.0' standalone='yes'?>
+<extension>
+	<id>BB7E7AAF-6587-4733-B12F-DE123AB456ED</id>
+	<name>PLUGIN_CAPSTONE_SETTINGS</name>
+	<module>Slim::Plugin::CapstoneSettings::Plugin</module>
+	<version>0.0.1</version>
+	<description>PLUGIN_CAPSTONE_SETTINGS_DESC</description>
+	<creator>Konrad Kiefersauer</creator>
+
+	<defaultState>enabled</defaultState>
+	
+	<type>2</type>
+
+	<targetApplication>
+		<id>Logitech Media Server</id>
+		<minVersion>7.0a</minVersion>
+		<maxVersion>*</maxVersion>
+	</targetApplication>
+</extension>

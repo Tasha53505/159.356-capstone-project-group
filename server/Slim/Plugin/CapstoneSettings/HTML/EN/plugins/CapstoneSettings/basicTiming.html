@@ -1,0 +1,11 @@
+[% PROCESS settings/header.html %]
+
+[% WRAPPER setting title="SETUP_REFRESHRATE" desc="SETUP_REFRESHRATE_DESC" %]
+	<input type="text" class="stdedit sliderInput_2_300_5" name="pref_refreshRate" id="refreshRate" value="[% prefs.pref_refreshRate | html %]" size="15">
+[% END %]
+
+[% WRAPPER setting title="SETUP_DISPLAYTEXTTIMEOUT" desc="SETUP_DISPLAYTEXTTIMEOUT_DESC"%]
+	<input type="text"class="stdedit sliderInput_1_100" name="pref_displaytexttimeout" id="displaytexttimeout" value="[% prefs.pref_displaytexttimeout || 0 %]" size="15">
+[% END %]
+
+[% PROCESS settings/footer.html %]
