@@ -30,19 +30,17 @@ describe('Dropdown boxes', () => {
 });
 
 
-// Get all select elements and test their values
-describe('Dropdown Boxes retain value upon save', () => {
+describe('Dropdown Boxes retain value upon save (simulates clicking save, refreshing and seeing expected value)', () => {
     test('All dropdowns should retain their value upon save', () => {
-        // Select all dropdown elements
+        // Select all dropdown elements initially
         const dropdowns = document.querySelectorAll('select.stdedit');
 
-        // Store the names of dropdowns to be checked after the HTML reload
-        const dropdownNames = Array.from(dropdowns).map(dropdown => dropdown.name);
-
+        // Store the initial state and simulate changes
         dropdowns.forEach((dropdown, index) => {
             console.log(`Processing dropdown ${index + 1}: ${dropdown.name}`);
 
-            const newValue = dropdown.options[(dropdown.selectedIndex + 1) % dropdown.options.length].value; // Change to next option
+            // Get a new value for this dropdown (change to the next option)
+            const newValue = dropdown.options[(dropdown.selectedIndex + 1) % dropdown.options.length].value;
 
             // Simulate a change in the dropdown
             fireEvent.change(dropdown, { target: { value: newValue } });
@@ -54,16 +52,25 @@ describe('Dropdown Boxes retain value upon save', () => {
         // Refresh the document body to simulate reloading
         document.body.innerHTML = html; // Reloading the HTML
 
-        // Re-select the dropdowns after reload
-        dropdownNames.forEach(name => {
-            const reloadedDropdown = document.querySelector(`select[name="${name}"]`);
-            const expectedValue = localStorage.getItem(name);
-            const actualValue = reloadedDropdown.value;
+        // Re-select all dropdowns after reload
+        const reloadedDropdowns = document.querySelectorAll('select.stdedit');
 
-            // Log the expected and actual values
+        // Collect all results before making assertions (This makes sure it checks all vlaues)
+        const results = [];
+        reloadedDropdowns.forEach((dropdown, index) => {
+            const name = dropdown.name;
+            const expectedValue = localStorage.getItem(name);
+            const actualValue = dropdown.value;
+
+            // Log the expected and actual values for each dropdown
             console.log(`Dropdown "${name}" - Expected Value: ${expectedValue}, Actual Value: ${actualValue}`);
 
-            // Check if the value persists
+            // Store the result in the array
+            results.push({ name, expectedValue, actualValue });
+        });
+
+        // Now assert that all dropdowns have the expected value
+        results.forEach(({ name, expectedValue, actualValue }) => {
             expect(actualValue).toBe(expectedValue); // Check against localStorage
         });
     });
