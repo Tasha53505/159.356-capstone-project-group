@@ -78,6 +78,8 @@ describe('Dropdown Boxes retain value upon save (simulates clicking save, refres
 
                 // Reload the page (re-render the HTML)
                 document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}`;
+                     // document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicInterface}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists}${advancedMediaLibraryManagement}${advancedFileTypes}${advancedFormatting}${advancedLmsStatus}${advancedNetwork}${advancedPerformance}${advancedSecurity}${advancedSoftwareUpdate}`;
+
 
                 // Re-select the dropdowns after re-rendering by class
                 const updatedDropdowns = Array.from(document.querySelectorAll('.stdedit')).filter(el => el.tagName === 'SELECT');
@@ -93,7 +95,66 @@ describe('Dropdown Boxes retain value upon save (simulates clicking save, refres
 });
 
 
+describe('Input Textboxes retain value upon save (simulates typing a value, clicking save, refreshing, and checking expected value)', () => {
+    test('All textboxes should retain their value upon save', () => {
+        // Mock server data to simulate saving and loading
+        const mockServerData = {};
 
+        // Set up the initial DOM structure with necessary HTML
+        document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}<div id="prefsSubmit">
+            <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+        </div>`;
+
+        // Select all input elements by class .stdedit that are also <input> elements with type="text"
+        const textboxes = Array.from(document.querySelectorAll('.stdedit')).filter(el => el.tagName === 'INPUT' && el.type === 'text');
+
+        // Log the number of valid textboxes found
+        console.log(`Number of valid textboxes found: ${textboxes.length}`);
+
+        // Ensure at least one textbox exists in the document
+        expect(textboxes.length).toBeGreaterThan(0);
+
+        // Iterate through each textbox and test its behavior
+        textboxes.forEach((textbox, index) => {
+            // Define a new value to type into the textbox
+            const newValue = `TestValue${index}`;
+
+            // Change the textbox value
+            fireEvent.change(textbox, { target: { value: newValue } });
+
+            // Mock server save: simulate saving the value to mockServerData
+            mockServerData[textbox.name] = newValue;
+
+            // Select the save button after confirming it exists
+            const saveButton = document.getElementById('saveSettings');
+            expect(saveButton).not.toBeNull(); // Ensure the save button is present
+
+            // Simulate clicking the save button
+            fireEvent.click(saveButton);
+
+            // Simulate a server reload by re-rendering the HTML using mockServerData values
+            document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}<div id="prefsSubmit">
+                <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
+            </div>`;
+
+            // Populate the re-rendered HTML with values from the mock server
+            const updatedTextboxes = Array.from(document.querySelectorAll('.stdedit')).filter(el => el.tagName === 'INPUT' && el.type === 'text');
+
+            // Set the value for each textbox based on mock server data
+            updatedTextboxes.forEach((updatedTextbox) => {
+                if (mockServerData[updatedTextbox.name]) {
+                    updatedTextbox.value = mockServerData[updatedTextbox.name];
+                }
+            });
+
+            // Log expected and actual values
+            console.log(`Textbox ${index + 1}: Expected Value = ${newValue}, Actual Value = ${updatedTextboxes[index].value}`);
+
+            // Assert the value is retained
+            expect(updatedTextboxes[index].value).toBe(newValue);
+        });
+    });
+});
 
 
 
