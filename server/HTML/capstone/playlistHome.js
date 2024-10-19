@@ -892,21 +892,51 @@ advancedSettingsTabsButtons.forEach(button => {
     
             updateTabListeners();
     
-            advancedButton.click();    
-            
+            advancedButton.click();
+
+            deleteDuplicates('serverStatusIframe')
+            const serverStatusIframe = document.getElementById('serverStatusIframe');
+            serverStatusIframe.src = 'settings/server/status.html'
+            serverStatusIframe.onload = function () {
+                let timerId = setInterval(() => {
+                    const iframeDocument = serverStatusIframe.contentDocument || serverStatusIframe.contentWindow.document;
+
+                    const bodyHeight = iframeDocument.body.scrollHeight;
+                    if (bodyHeight > 0) {
+                        serverStatusIframe.setAttribute('style', 'height: ' + (bodyHeight + 7) + 'px')
+                        clearInterval(timerId)
+                    }
+                }, 100)
+            }
+    
+            deleteDuplicates('securityIframe')
+            const securityIframe = document.getElementById('securityIframe');
+            securityIframe.onload = function () {
+                // console.log(securityIframe)
+                // console.log('load security iframe')
+                let timerId = setInterval(() => {
+                    const iframeDocument = securityIframe.contentDocument || securityIframe.contentWindow.document;
+
+                    // 获取 body 的高度
+                    const bodyHeight = iframeDocument.body.scrollHeight;
+                    if (bodyHeight > 0) {
+                        securityIframe.setAttribute('style', 'height: ' + (bodyHeight + 7) + 'px')
+                        clearInterval(timerId)
+                    }
+                }, 100)
+            }
+            securityIframe.src = 'settings/server/security.html'
+
             deleteDuplicates('softwareIframe')
             const softwareIframe = document.getElementById('softwareIframe');
-            softwareIframe.src = 'settings/server/software.html'
             softwareIframe.onload = function () {
                 // console.log(softwareIframe)
                 // console.log('load software iframe')
                 let timerId = setInterval(() => {
                     const iframeDocument = softwareIframe.contentDocument || softwareIframe.contentWindow.document;
 
-                    // 获取 body 的高度
                     const bodyHeight = iframeDocument.body.scrollHeight;
                     if (bodyHeight > 0) {
-                        // console.log('Iframe 内部 body 的高度:', bodyHeight);
                         softwareIframe.setAttribute('style', 'height: ' + (bodyHeight + 50) + 'px')
                         const elements = iframeDocument.getElementsByClassName('stdclick')
                         console.log(elements)
@@ -932,6 +962,7 @@ advancedSettingsTabsButtons.forEach(button => {
                     }
                 }, 100)
             }
+            softwareIframe.src = 'settings/server/software.html'
         }
     }
     
@@ -967,28 +998,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let selectedLanguage = document.getElementById("languageSelect").value; 
 
-    // security page
-    // const securityIframe = document.getElementById('securityIframe');
-    // securityIframe.onload = function() {
-    //     const outerDiv = document.getElementsByClassName('settingsContainerClicked')[0];
-    //     const innerDiv = document.getElementById('security');
-
-    //     const outerRect = outerDiv.getBoundingClientRect();
-    //     const outerBottom = outerRect.bottom;
-
-    //     const innerRect = innerDiv.getBoundingClientRect();
-    //     const innerTop = innerRect.top;
-
-    //     const distanceToOuterBottom = outerBottom - innerTop;
-
-    //     console.log('内部 div 顶部到外部 div 底部的距离:', distanceToOuterBottom);
-    // }
-    // securityIframe.src = 'settings/server/security.html';
-
-    
-
-    
-
     // Event delegation for click events
     document.body.addEventListener('click', function(e) {
         // console.log('clicked', e)
@@ -999,27 +1008,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (e.target && e.target.id === "languageSelect") {
             selectedLanguage = e.target.value; // Update variable on change
             console.log("Language select changed to (languageSelect statement):", selectedLanguage);
-        }
-
-
-
-        // security selections
-        function handleInput (type, value) {
-            // console.log(type, e.target.value)
-            switch (type) {
-                case 'username': 
-                    username = value
-                    break
-                case 'password': 
-                    password = value
-                    break
-                case 'allowedHosts': 
-                    allowedIPAddresses = value
-                    break
-                case 'corsAllowedHosts':
-                    corsAllowedHosts = value
-                    break
-            }
         }
 
         if (e.target && e.target.id === "authorize") {
