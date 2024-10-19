@@ -4,7 +4,8 @@
     "chromedriver": "^129.0.2",
     "cors": "^2.8.5",
     "mocha": "^10.7.3",
-    "selenium-webdriver": "^4.25.0"
+    "selenium-webdriver": "^4.25.0",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",

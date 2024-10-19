@@ -16,7 +16,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width">
     <title>Capstone Skin Home</title>
     <link rel="stylesheet" href="playlistHome.css">
     <link rel="stylesheet" href="player.css">
@@ -36,6 +36,7 @@
 
 
     </script>
+
 </head>
 
 <body>
@@ -2049,7 +2050,7 @@
                                             </div>
                                             <div class="prefs">
                                                 <form id="titleFormatWebForm" class="">
-                                                    <select class="stdedit" name="pref_titleFormatWeb" id="titleFormatWeb">
+                                                    <select class="stdedit" name="pref_titleFormatWeb" id="titleFormatWeb" data-testid="titleFormatWeb">
                                                         <option value="0">TITLE</option>
                                                         <option value="1">DISC-TRACKNUM. TITLE</option>
                                                         <option value="2">TRACKNUM. TITLE</option>
@@ -2174,7 +2175,7 @@
 
                                         <form action="" class="unifiedArtistsForm">
                                             [% WRAPPER settingSection %]
-                                                <select class="stdedit" name="pref_useUnifiedArtistsList" id="useUnifiedArtistsList">[% prefs.pref_useUnifiedArtistsList %]
+                                                <select class="stdedit" name="pref_useUnifiedArtistsList" id="useUnifiedArtistsList" data-testid="useUnifiedArtistsList">[% prefs.pref_useUnifiedArtistsList %]
                                     
                                                     <option [% IF prefs.pref_useUnifiedArtistsList %]selected [% END %] value="1">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_ON' | string %]</option>
                                                     <option [% IF NOT prefs.pref_useUnifiedArtistsList%]selected [% END %] value="0">[% 'SETUP_ARTISTS_BROWSE_MODES_UNIFIED_OFF' | string %]</option>
@@ -2671,7 +2672,7 @@
                                                     <li><a href="[% link.value | html %]player=[% playerURI %]">[% link.key | getstring | html %]</a></li>
                                                 [%- END; END %]
                                                 </ul>
-                                            </div> -->
+                 </div> -->
 
                 </div>
             </div>
