@@ -17,18 +17,18 @@ PLUGIN_CAPSTONE_SETTINGS
 	SV	Capstone Settings
 
 PLUGIN_CAPSTONE_SETTINGS_DESC
-	CS	Settings for our capstone skin
-	DA	Settings for our capstone skin
-	DE	Einstellungen fur unseren Capstone Skin
-	EN	Settings for our capstone skin
-	ES	Settings for our capstone skin
-	FI	Settings for our capstone skin
-	FR	Settings for our capstone skin
-	HE	Settings for our capstone skin
-	IT	Settings for our capstone skin
-	NL	Settings for our capstone skin
-	NO	Settings for our capstone skin
-	PL	Settings for our capstone skin
-	RU	Settings for our capstone skin
-	SV	Settings for our capstone skin
+	CS	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	DA	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	DE	Einstellungen fur unseren Capstone Skin. *Sollte deaktiviert werden, wenn der passende skin nicht benutzt wird!*
+	EN	Settings for our capstone skin. *Should be disabled if matching skin is not used!*
+	ES	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	FI	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	FR	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	HE	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	IT	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	NL	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	NO	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	PL	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	RU	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
+	SV	Settings for our capstone skin.  *Should be disabled if matching skin is not used!*
 

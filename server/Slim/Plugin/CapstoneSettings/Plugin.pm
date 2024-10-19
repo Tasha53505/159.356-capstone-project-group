@@ -16,6 +16,9 @@ if(main::WEBUI) {
     require Slim::Plugin::CapstoneSettings::BasicLanguage;
     require Slim::Plugin::CapstoneSettings::BasicMediaFolder;
     require Slim::Plugin::CapstoneSettings::BasicPlaylistDir;
+    require Slim::Plugin::CapstoneSettings::BasicDisplay;
+    require Slim::Plugin::CapstoneSettings::BasicFormatting;
+    require Slim::Plugin::CapstoneSettings::BasicTiming;
 }
 
 # Subroutine to get the display name for the plugin in the menu
@@ -33,6 +36,9 @@ sub initPlugin {
         Slim::Plugin::CapstoneSettings::BasicLanguage->new;
         Slim::Plugin::CapstoneSettings::BasicMediaFolder->new;
         Slim::Plugin::CapstoneSettings::BasicPlaylistDir->new;
+        Slim::Plugin::CapstoneSettings::BasicDisplay->new;
+        Slim::Plugin::CapstoneSettings::BasicFormatting->new;
+        Slim::Plugin::CapstoneSettings::BasicTiming->new;
     }
 }
 
