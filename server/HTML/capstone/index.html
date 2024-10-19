@@ -29,12 +29,35 @@
     <!-- <script type="text/javascript">[% PROCESS html/SqueezeJS/Strings.js %]</script> -->
     <script type="text/javascript" src="/html/SqueezeJS/UI.js?r=[% revision %]"></script>
     <script type="text/javascript">[% PROCESS html/Main.js %]</script>
+    <script type="text/javascript">[% PROCESS Browse.js %]</script>
     <script type ="text/javascript">
         Ext.onReady(function(){
             Main.init()
         });
 
+        function addAllSongs() {
+                const data = {
+                    id: 13,
+                    method: "slim.request",
+                    params: [ "", ["playlist", "insert", "C:/music/Cars.mp3"]]
 
+                };
+
+                fetch("http://localhost:9000/capstone/jsonrpc.js", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("playlist updated", data);
+                })
+                .catch(error => {
+                    console.error("Error updating playlist:", error);
+                });
+            }
     </script>
 
 </head>
@@ -2692,7 +2715,7 @@
                             
                                             You have: [% song_count %] total. <br>
 
-                                            <iframe src="http://localhost:9000/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/" frameborder="0" class="songsIframe" id="songsIframe">
+                                            <iframe src="/capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/" frameborder="0" class="songsIframe" id="songsIframe">
                                                     
                                             </iframe>
                                 
@@ -2942,9 +2965,11 @@
     <div class="musicInfoPanel">
         <div class="QueuePanelRight">
             <h2>Music Play List</h2>
+            <button onclick="addAllSongs()">add all songs</button>
+             <!-- <a href="javascript:RandomPlay.mix('track', '0');">add all songs</a> -->
             </div>
             
-            <div id="playlistPanel" style="height: 90%; overflow: auto;">
+            <div id="playlistPanel" style="height: 90%; overflow: auto; ">
                 <div id="playList">
                     <div class="noPlayerPanel" style="display:none">
                         [% PROCESS status_noclients.html ajaxUpdate=1 %]

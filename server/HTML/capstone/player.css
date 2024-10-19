@@ -378,3 +378,8 @@ body {
     flex-direction: column;
     gap: 1em;
 }
+
+.playlistControls button {
+	background-color: transparent;
+	border-color: transparent;
+}

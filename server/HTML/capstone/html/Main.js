@@ -121,6 +121,9 @@ Main = {
             noLink: true
         });
 
+		// this.initPlayerControl();
+		// new SqueezeJS.UI.CurrentIndex('ctrlPlayNum');
+
 		SqueezeJS.UI.FilesystemBrowser = {
 			init: function(){
 				var inputEl, btnEl, filter, classes, start;

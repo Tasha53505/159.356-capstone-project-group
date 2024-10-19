@@ -114,7 +114,7 @@ div#browsedbList {
 
 .playlistControls button {
 	background-color: transparent;
-	border: transparent;
+	border-color: transparent;
 }
 
 .browsedbControls {
