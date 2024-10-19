@@ -119,9 +119,6 @@ describe('Dropdown Boxes retain value upon save (simulates clicking save, refres
 });
 
 
-
-
-
 describe('Input Textboxes retain value upon save (simulates typing a value, clicking save, refreshing, and checking expected value)', () => {
     test('All textboxes should retain their value upon save', () => {
         // Mock server data to simulate saving and loading
@@ -160,12 +157,16 @@ describe('Input Textboxes retain value upon save (simulates typing a value, clic
             fireEvent.click(saveButton);
 
             // Simulate a server reload by re-rendering the HTML using mockServerData values
-            document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}<div id="prefsSubmit">
+            document.body.innerHTML = `${basicLanguage}${basicMediaFolder}${basicPlaylistDir}${basicDisplay}${basicTiming}${basicBrowseArtists}${basicReleaseTypes}${basicFilters}${basicPlaylists}<div id="prefsSubmit">
                 <input name="saveSettings" id="saveSettings" type="submit" class="stdclick" value="Save Settings">
             </div>`;
 
+        
+
             // Populate the re-rendered HTML with values from the mock server
             const updatedTextboxes = Array.from(document.querySelectorAll('.stdedit')).filter(el => el.tagName === 'INPUT' && el.type === 'text');
+
+      
 
             // Set the value for each textbox based on mock server data
             updatedTextboxes.forEach((updatedTextbox) => {
@@ -175,13 +176,15 @@ describe('Input Textboxes retain value upon save (simulates typing a value, clic
             });
 
             // Log expected and actual values
-            console.log(`Textbox ${index + 1}: Expected Value = ${newValue}, Actual Value = ${updatedTextboxes[index].value}`);
+            console.log(`Textbox ${index + 1}: Expected Value = ${newValue}, Actual Value = ${updatedTextboxes[index]?.value}`);
 
             // Assert the value is retained
-            expect(updatedTextboxes[index].value).toBe(newValue);
+            expect(updatedTextboxes[index]?.value).toBe(newValue);
         });
     });
 });
+
+
 
 
 
