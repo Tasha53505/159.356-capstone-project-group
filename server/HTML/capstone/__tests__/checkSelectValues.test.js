@@ -55,7 +55,7 @@ describe('Dropdown Boxes retain value upon save (simulates clicking save, refres
         // Re-select all dropdowns after reload
         const reloadedDropdowns = document.querySelectorAll('select.stdedit');
 
-        // Collect all results before making assertions (This makes sure it checks all vlaues)
+        // Collect all results before making assertions (This makes sure it checks all values THEN displays the wrong tests. Otherwise Expected value is only available for one)
         const results = [];
         reloadedDropdowns.forEach((dropdown, index) => {
             const name = dropdown.name;
@@ -75,3 +75,4 @@ describe('Dropdown Boxes retain value upon save (simulates clicking save, refres
         });
     });
 });
+
