@@ -1,0 +1,33 @@
+[% PROCESS settings/header.html %]
+[% WRAPPER setting title="SETUP_NOGENREFILTER" desc="SETUP_NOGENREFILTER_DESC"%]
+<select class="stdedit" name="pref_noGenreFilter" id="noGenreFilter">
+
+    <option [% IF NOT prefs.pref_noGenreFilter %]selected [% END %]value="0">[% 'SETUP_NOGENREFILTER_0' | string %]</option>
+    <option [% IF prefs.pref_noGenreFilter %]selected [% END %]value="1">[% 'SETUP_NOGENREFILTER_1' | string %]</option>
+
+</select>
+[% END %]
+
+[% WRAPPER setting title="SETUP_NOROLEFILTER" desc="SETUP_NOROLEFILTER_DESC"%]
+<select class="stdedit" name="pref_noRoleFilter" id="noRoleFilter">
+
+    <option [% IF NOT prefs.pref_noRoleFilter %]selected [% END %]value="0">[% 'SETUP_NOROLEFILTER_0' | string %]</option>
+    <option [% IF prefs.pref_noRoleFilter %]selected [% END %]value="1">[% 'SETUP_NOROLEFILTER_1' | string %]</option>
+
+</select>
+[% END %]
+
+[% WRAPPER setting title="SETUP_BROWSEAGELIMIT" desc="SETUP_BROWSEAGELIMIT_DESC"%]
+<input type="text"class="stdedit" name="pref_browseagelimit" id="browseagelimit" value="[% prefs.pref_browseagelimit || 0 %]" size="15">
+[% END %]
+
+[% WRAPPER setting title="SETUP_GROUPDISCS" desc="SETUP_GROUPDISCS_DESC"%]
+<select class="stdedit" name="pref_groupdiscs" id="groupdiscs">
+
+<option [% IF NOT prefs.pref_groupdiscs %]selected [% END %]value="0">[% 'SETUP_GROUPDISCS_0' | string %]</option>
+<option [% IF prefs.pref_groupdiscs %]selected [% END %]value="1">[% 'SETUP_GROUPDISCS_1' | string %]</option>
+
+</select>
+[% END %]
+
+[% PROCESS settings/footer.html %]

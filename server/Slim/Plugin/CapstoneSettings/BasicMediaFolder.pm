@@ -1,5 +1,4 @@
-package Slim::Web::Settings::Server::Basic;
-
+package Slim::Plugin::CapstoneSettings::BasicMediaFolder;
 
 # Logitech Media Server Copyright 2001-2020 Logitech.
 # This program is free software; you can redistribute it and/or
@@ -16,15 +15,15 @@ my $prefs = preferences('server');
 my $log = logger('scan.scanner');
 
 sub name {
-	return Slim::Web::HTTP::CSRF->protectName('BASIC_SERVER_SETTINGS');
+	return Slim::Web::HTTP::CSRF->protectName('BASIC_MEDIAFOLDER_SETTINGS');
 }
 
 sub page {
-	return (Slim::Web::HTTP::CSRF->protectURI('settings/server/basic.html'));
+	return (Slim::Web::HTTP::CSRF->protectURI('plugins/CapstoneSettings/basicMediaFolder.html'));
 }
 
 sub prefs {
-	return ($prefs, qw(language playlistdir libraryname) );
+	return ($prefs, qw(libraryname) );
 }
 
 sub handler {
@@ -34,31 +33,6 @@ sub handler {
 	# this is neede to prevent multiple scans to be triggered by change handlers for paths etc.
 	Slim::Music::Import->doQueueScanTasks(1);
 	my $runScan;
-
-	if ($paramRef->{'pref_rescan'}) {
-
-		my $rescanType = Slim::Music::Import->getScanCommand($paramRef->{'pref_rescantype'});
-
-		for my $pref (qw(playlistdir)) {
-
-			my (undef, $ok) = $prefs->set($pref, $paramRef->{"pref_$pref"});
-
-			if ($ok) {
-				$paramRef->{'validated'}->{$pref} = 1;
-			}
-			else {
-				$paramRef->{'warning'} .= sprintf(Slim::Utils::Strings::string('SETTINGS_INVALIDVALUE'), $paramRef->{"pref_$pref"}, $pref) . '<br/>';
-				$paramRef->{'validated'}->{$pref} = 0;
-			}
-		}
-
-		if ( main::INFOLOG && $log->is_info ) {
-			$log->info(sprintf("Initiating scan of type: %s", join(' ', @$rescanType)));
-		}
-
-		Slim::Control::Request::executeRequest(undef, $rescanType);
-		$runScan = 1;
-	}
 
 	if ( $paramRef->{'saveSettings'} ) {
 		my $curLang = $prefs->get('language');
@@ -125,10 +99,6 @@ sub handler {
 			$runScan = 1;
 		}
 	}
-
-	$paramRef->{'newVersion'}  = $::newVersion;
-	$paramRef->{'languageoptions'} = Slim::Utils::Strings::languageOptions();
-
 	my $ignoreFolders = {
 		map { $_, 1 } @{ $prefs->get('ignoreInAudioScan') || [''] },
 	};
