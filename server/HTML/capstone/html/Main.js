@@ -291,6 +291,34 @@ Main = {
 				}
 			}
 		};
+
+		document.getElementById('addAllSongsButton').addEventListener('click', () => {
+			const iframe = document.getElementById('clixmlbrowserIframe');
+			iframe.src = 'capstone/clixmlbrowser/clicmd=browselibrary+items&linktitle=BROWSE_MUSIC_FOLDER&mode=bmf/index.html?action=addall';
+			const data = {
+				id: 1,
+				method: "slim.request",
+				params: [ "00:0c:29:b9:b9:4e", ["status", "-", 1, "tags:uB"]]
+			};
+			// location.reload();
+
+			// fetch("/capstone/jsonrpc.js", {
+			// 	method: "POST",
+			// 	headers: {
+			// 		"Content-Type": "application/json"
+			// 	},
+			// 	body: JSON.stringify(data)
+			// })
+			// .then(response => response.json())
+			// .then(data => {
+			// 	console.log("Playlist updated:", data);
+			// })
+			// .catch(error => {
+			// 	console.error("Error updating playlist:", error);
+			// });
+			if (this.playlist)
+				this.playlist.load()
+		});
 	},
 
 	onResize : function(width, height) {
