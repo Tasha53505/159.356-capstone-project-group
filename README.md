@@ -191,5 +191,6 @@ which calls Slim::Control::Queries::mediafolderQuery
 - Plugins Settings
 - advanced search
 - Dark theme
+- Testing with Backend (At the moment, it's not testing the full backend Perl side, but rather the HTML and processing blocks) --> We think that this is out of our scope, We'd need the server to inject values automatically. 
 
 
