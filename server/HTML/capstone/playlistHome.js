@@ -53,21 +53,21 @@ document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
     var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
-    var musicInfoPanel = document.querySelector('.musicInfoPanel');
-    var infoPanelBtn = document.querySelector('.infoPanelBtn');
+    var queuePanelContainer = document.querySelector('.queuePanelContainer');
+    var queuePanelBtn = document.querySelector('.queuePanelBtn');
 
 
-    infoPanelBtn.addEventListener('click', function () {
+    queuePanelBtn.addEventListener('click', function () {
         if(!overallPlaylistContainer.classList.contains('hidden')) {
             overallPlaylistContainer.classList.add('hidden');
             animationBtn.classList.add('hidden');
                 overallContainer.style.display = 'none';
         }
 
-        if(musicInfoPanel.classList.contains('hidden')) {
-            musicInfoPanel.classList.remove('hidden');
+        if(queuePanelContainer.classList.contains('hidden')) {
+            queuePanelContainer.classList.remove('hidden');
         } else {
-            musicInfoPanel.classList.add('hidden');
+            queuePanelContainer.classList.add('hidden');
         }
             
     });
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
     var overallContainer = document.querySelector('.overallContainer');
     var animationBtn = document.querySelector('.animationBtn');
-    var musicInfoPanel = document.querySelector('.musicInfoPanel');
+    var queuePanelContainer = document.querySelector('.queuePanelContainer');
     
     // Set initial state (only the button should be visible)
     overallContainer.style.display = 'none';  // overallContainer is hidden initially
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     overallPlaylistContainer.classList.add('hidden');
     animationBtn.classList.remove('hidden');
     
-    musicInfoPanel.classList.add('hidden');
+    queuePanelContainer.classList.add('hidden');
 
     // Event listener for the animation button
     animationBtn.addEventListener('click', function () {
@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // hide right bar
 
-            if(!musicInfoPanel.classList.contains('hidden')) {
-                musicInfoPanel.classList.add('hidden');
+            if(!queuePanelContainer.classList.contains('hidden')) {
+                queuePanelContainer.classList.add('hidden');
             }
         } else {
             overallPlaylistContainer.classList.add('hidden');

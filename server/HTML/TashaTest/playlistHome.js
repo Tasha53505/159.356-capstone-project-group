@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 500); // Wait for the animation to finish before hiding
 
             // hide right bar
-            // infoPanelBtn.classList.add('hidden')
+            // queuePanelBtn.classList.add('hidden')
             infoPanel.classList.remove('active')
         }
     });

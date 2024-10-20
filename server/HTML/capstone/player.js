@@ -2,10 +2,10 @@
 
 // TODO: Remove commented out code if not needed
 // IMAGE CODE
-//var infoPanelBtn = document.querySelector('.infoPanelBtn');
+//var queuePanelBtn = document.querySelector('.queuePanelBtn');
 var infoPanel = document.querySelector('.infoPanel');
 var artistPanel = document.querySelector('.infoArtistPanel');
-var musicInfoPanel = document.querySelector('.musicInfoPanel');
+var queuePanelContainer = document.querySelector('.queuePanelContainer');
 var artist = true;
 
 // Cover -> Artist -> Cover...
@@ -23,7 +23,7 @@ document.querySelector('.album').addEventListener('click', function() {
         album.style.transform = 'scale(1)';
     }, 200)
 
-    if(!musicInfoPanel.classList.contains('hidden')){
+    if(!queuePanelContainer.classList.contains('hidden')){
         artistPanel.classList.toggle('hidden');
         infoPanel.classList.toggle('hidden');
     }
@@ -200,7 +200,7 @@ input.addEventListener("input", (event) => {
 
 
 // // STEVES CODE
-// infoPanelBtn.addEventListener('click', function () {
+// queuePanelBtn.addEventListener('click', function () {
 //     if (!infoPanel.classList.contains('hidden')){
 //         // hide left bar
 //         let overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
@@ -219,7 +219,7 @@ input.addEventListener("input", (event) => {
 //         animationMusiclistBtn.style.bottom = '0';
 //     }
     
-//     if (!(infoPanelBtn.classList.contains('hidden')) && (artist)) {
+//     if (!(queuePanelBtn.classList.contains('hidden')) && (artist)) {
 //         infoPanel.classList.toggle('active');
 //     } else if (!(infoPanelBtn.classList.contains('hidden')) && (!artist)) {
 //         artistPanel.classList.toggle('active');

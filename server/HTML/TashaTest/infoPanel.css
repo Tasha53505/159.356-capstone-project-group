@@ -6,7 +6,7 @@
     color: #EFF8EF
 } */
 
-.musicInfoPanel {
+.queuePanelContainer {
     float: right;
 }
 
@@ -84,7 +84,7 @@
     text-align: center;
 }
 
-.infoPanelBtn {
+.queuePanelBtn {
     float: right;
     background-color: #0456C6;
     border: none;

@@ -333,7 +333,7 @@ transform: translate3d(0, 0, 0);
 }
 }
 
-.musicInfoPanel {
+.queuePanelContainer {
     float: right;
     width: 100%;
     background-color: #20294B;
@@ -341,7 +341,7 @@ transform: translate3d(0, 0, 0);
     padding: 20px;
 }
 
-.musicInfoPanel.hidden {
+.queuePanelContainer.hidden {
     display: none;
 }
 
@@ -353,7 +353,7 @@ transform: translate3d(0, 0, 0);
     border-radius: 1em;
 }
 
-.infoPanelBtn {
+.queuePanelBtn {
     float: right;
     background-color: #0456C6;
     border: none;

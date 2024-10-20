@@ -1,5 +1,5 @@
 // IMAGE CODE
-var infoPanelBtn = document.querySelector('.infoPanelBtn');
+var queuePanelBtn = document.querySelector('.queuePanelBtn');
 var infoPanel = document.querySelector('.infoPanel');
 var artistPanel = document.querySelector('.infoArtistPanel');
 var coverDisplay = document.querySelector('.album');
@@ -182,8 +182,8 @@ document.getElementById('shuffleButton').addEventListener('click', function(){
 
 
 // STEVES CODE
-infoPanelBtn.addEventListener('click', function () {
-    if (!infoPanelBtn.classList.contains('active')){
+queuePanelBtn.addEventListener('click', function () {
+    if (!queuePanelBtn.classList.contains('active')){
         // hide left bar
         let overallPlaylistContainer = document.querySelector('.overallPlaylistContainer');
         let animationBtn = document.querySelector('.animationBtn');
@@ -201,9 +201,9 @@ infoPanelBtn.addEventListener('click', function () {
         animationMusiclistBtn.style.bottom = '0';
     }
     
-    if (!(infoPanelBtn.classList.contains('hidden')) && (artist)) {
+    if (!(queuePanelBtn.classList.contains('hidden')) && (artist)) {
         infoPanel.classList.toggle('active');
-    } else if (!(infoPanelBtn.classList.contains('hidden')) && (!artist)) {
+    } else if (!(queuePanelBtn.classList.contains('hidden')) && (!artist)) {
         artistPanel.classList.toggle('active');
     } else {
         //do nothing
