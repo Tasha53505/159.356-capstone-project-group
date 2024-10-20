@@ -1107,7 +1107,7 @@ transform: translate3d(0, 0, 0);
 
   /* 480 px or less */
 @media only screen and (max-width: 450px){
-    .animationBtn, .animationBtn:hover, .queuePanelBtn, .queuePanelBtn:hover {
+    .animationBtn, .animationBtn:hover {
         transform: translateX(75%);
         margin-bottom: 130%;
         border-radius: 50%;
@@ -1115,6 +1115,13 @@ transform: translate3d(0, 0, 0);
         background-color: #0456C6;
     }
 
+    .queuePanelBtn, .queuePanelBtn:hover {
+        transform: translateX(-75%);
+        margin-bottom: 130%;
+        border-radius: 50%;
+        z-index: 100; 
+        background-color: #0456C6;
+    }
     
 
     .animationBtn svg, .queuePanelBtn svg {
@@ -1235,13 +1242,22 @@ transform: translate3d(0, 0, 0);
 
 /* 890px or less */
 @media only screen and (max-width: 890px) {
-    .animationBtn, .animationBtn:hover, .queuePanelBtn, .queuePanelBtn:hover {
+    .animationBtn, .animationBtn:hover {
         transform: translateX(40%);
         margin-bottom: 80%;
         border-radius: 50%;
         z-index: 100; 
         background-color: #0456C6;
     }
+
+    .queuePanelBtn, .queuePanelBtn:hover {
+        transform: translateX(-40%);
+        margin-bottom: 80%;
+        border-radius: 50%;
+        z-index: 100; 
+        background-color: #0456C6;
+    }
+
     .animationBtn svg, .queuePanelBtn svg {
         width: 2em;
         height: 2em;
