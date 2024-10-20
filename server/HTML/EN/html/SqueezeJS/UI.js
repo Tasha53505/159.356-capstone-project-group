@@ -1601,11 +1601,11 @@ SqueezeJS.UI.Bitrate = Ext.extend(SqueezeJS.UI.Component, {
 	}
 });
 
-SqueezeJS.UI.Samplerate = Ext.extend(SqueezeJS.UI.Component, {
-	onPlayerStateChange : function(result) {
-		this.el.update(SqueezeJS.SonginfoParser.samplerate(result, this.noLink));
-	}
-})
+// SqueezeJS.UI.Samplerate = Ext.extend(SqueezeJS.UI.Component, {
+// 	onPlayerStateChange : function(result) {
+// 		this.el.update(SqueezeJS.SonginfoParser.samplerate(result, this.noLink));
+// 	}
+// });
 
 SqueezeJS.UI.Playtime = Ext.extend(SqueezeJS.UI.Component, {
 	initComponent : function(config){

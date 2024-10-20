@@ -604,7 +604,8 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.advancedSettingsNetworkTabButton',
             '.advancedSettingsPerformanceTabButton',
             '.advancedSettingsSecurityTabButton',
-            '.advancedSettingsSoftwareUpdateTabButton'
+            '.advancedSettingsSoftwareUpdateTabButton',
+            '.advancedSettingsLoggingTabButton'
         ];
         const advancedSettingsTabsButtons = settingsContainer.querySelectorAll(advancedSettingsButtonClasses.join(', '));
 
@@ -616,7 +617,8 @@ document.getElementById('settingsButton').addEventListener('click', function() {
             '.advancedSettingsNetworkTab', //
             '.advancedSettingsPerformanceTab',
             '.advancedSettingsSecurityTab',
-            '.advancedSettingsSoftwareUpdateTab'
+            '.advancedSettingsSoftwareUpdateTab',
+            '.advancedSettingsLoggingTab'
         ];
         const advancedSettingsTabContent = settingsContainer.querySelectorAll(advancedSettingsContentClasses.join(', '));
     

@@ -362,6 +362,12 @@ transform: translate3d(0, 0, 0);
     z-index: 5;
 }
 
+.queuePanelBtn:hover {
+    background-color: #20294B; /* Darken the background color */
+    transform: scale(1.05); /* Slightly make bigger */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
 /* ------------------------------ SETTINGS AREA ------------------------------ */
 .settingsContainerClicked {
     background-color: #1b2444;
@@ -549,7 +555,8 @@ transform: translate3d(0, 0, 0);
 .interfaceSettingsTimingTab,
 .advancedSettingsServerStatusTab,
 .advancedSettingsPerformanceTab,
-.advancedSettingsNetworkTab {
+.advancedSettingsNetworkTab,
+.advancedSettingsLoggingTab {
 
     display: none; /* Hide all tabs by default */
     background-color: #3A456D; /* Darker background for inactive tabs */
@@ -614,7 +621,8 @@ transform: translate3d(0, 0, 0);
 .interfaceSettingsTimingTab,
 .advancedSettingsServerStatusTab,
 .advancedSettingsPerformanceTab,
-.advancedSettingsNetworkTab {
+.advancedSettingsNetworkTab,
+.advancedSettingsLoggingTab {
     background-color: #3A456D; 
 }
 
@@ -639,7 +647,8 @@ transform: translate3d(0, 0, 0);
 .interfaceSettingsTimingTabButton,
 .advancedSettingsServerStatusTabButton,
 .advancedSettingsPerformanceTabButton,
-.advancedSettingsNetworkTabButton  {
+.advancedSettingsNetworkTabButton,
+.advancedSettingsLoggingTabButton {
     background-color: #1b2444; /* Darker background for inactive buttons */
     border: none;
     padding: 0.5em 1em;
@@ -669,7 +678,8 @@ transform: translate3d(0, 0, 0);
 .interfaceSettingsTimingTabButton.active,
 .advancedSettingsServerStatusTabButton.active,
 .advancedSettingsPerformanceTabButton.active,
-.advancedSettingsNetworkTabButton.active  {
+.advancedSettingsNetworkTabButton.active,
+.advancedSettingsLoggingTabButton.active {
     background-color: #0456C6;
     border-radius: 0.5em;
 }
@@ -784,7 +794,8 @@ transform: translate3d(0, 0, 0);
         .basicSettingsRescanMediaTabButton,
         .advancedSettingsServerStatusTabButton,
         .advancedSettingsPerformanceTabButton,
-        .advancedSettingsNetworkTabButton {
+        .advancedSettingsNetworkTabButton,
+        .advancedSettingsLoggingTabButton {
             display: inline;
             background-color: #1b2444;
             border: none;
@@ -814,7 +825,8 @@ transform: translate3d(0, 0, 0);
         .interfaceSettingsTimingTabButton.active,
         .advancedSettingsServerStatusTabButton.active,
         .advancedSettingsPerformanceTabButton.active,
-        .advancedSettingsNetworkTabButton.active {
+        .advancedSettingsNetworkTabButton.active,
+        .advancedSettingsLoggingTabButton.active {
 
             background-color: #0456C6;
             border: none;
@@ -1095,7 +1107,7 @@ transform: translate3d(0, 0, 0);
 
   /* 480 px or less */
 @media only screen and (max-width: 450px){
-    .animationBtn, .animationBtn:hover {
+    .animationBtn, .animationBtn:hover, .queuePanelBtn, .queuePanelBtn:hover {
         transform: translateX(75%);
         margin-bottom: 130%;
         border-radius: 50%;
@@ -1103,7 +1115,9 @@ transform: translate3d(0, 0, 0);
         background-color: #0456C6;
     }
 
-    .animationBtn svg {
+    
+
+    .animationBtn svg, .queuePanelBtn svg {
         width: 2em;
         height: 2em;
     }
@@ -1111,7 +1125,7 @@ transform: translate3d(0, 0, 0);
 
     
     /* The container that holds all the divs*/
-    .overallPlaylistContainer {
+    .overallPlaylistContainer, .queuePanelContainer {
         position: fixed;
         top: 0;
         left: 0;
@@ -1221,18 +1235,18 @@ transform: translate3d(0, 0, 0);
 
 /* 890px or less */
 @media only screen and (max-width: 890px) {
-    .animationBtn, .animationBtn:hover {
+    .animationBtn, .animationBtn:hover, .queuePanelBtn, .queuePanelBtn:hover {
         transform: translateX(40%);
         margin-bottom: 80%;
         border-radius: 50%;
         z-index: 100; 
         background-color: #0456C6;
     }
-    .animationBtn svg {
+    .animationBtn svg, .queuePanelBtn svg {
         width: 2em;
         height: 2em;
     }
-    .overallPlaylistContainer {
+    .overallPlaylistContainer, .queuePanelContainer {
         position: fixed;
         top: 0;
         left: 0;

@@ -121,8 +121,8 @@ Main = {
             noLink: true
         });
 
-		new SqueezeJS.UI.Samplerate({
-			el: 'samplerate',
+		new SqueezeJS.UI.SongInformation({
+			el: 'songinformation',
 			noLink: false
 		})
 

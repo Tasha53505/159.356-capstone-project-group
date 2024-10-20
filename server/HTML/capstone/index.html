@@ -99,6 +99,7 @@
                                             <button class="advancedSettingsPerformanceTabButton" data-tab="advancedSettingsPerformance">Performance</button>
                                             <button class="advancedSettingsSecurityTabButton active" data-tab="security">Security</button>
                                             <button class="advancedSettingsSoftwareUpdateTabButton active" data-tab="software">Software Update</button>
+                                            <button class="advancedSettingsLoggingTabButton" data-tab="logging">Logging</button>
                                         </div>
                                             
                                         <div class="advancedSettingsMediaLibraryManagementTab active" id="advancedSettingsMediaLibraryManagement">
@@ -128,8 +129,11 @@
                                         <div class="advancedSettingsSecurityTab active" id="security">
                                             <iframe src="plugins/CapstoneSettings/advancedSecurity.html" name="advancedSecurity" height="350px" width="100%"  frameborder="0" scrolling="auto" id="advancedSecurityIframe" style="display: block; width: 100%;"></iframe>
                                         </div>
-                                        <div class="advancedSettingsSoftwareUpdateTab" id="software" style="display: none;">
+                                        <div class="advancedSettingsSoftwareUpdateTab" id="software">
                                             <iframe src="plugins/CapstoneSettings/advancedSoftwareUpdate.html" name="advancedSoftwareUpdate" height="350px" width="100%"  frameborder="0" scrolling="auto" id="advancedSoftwareUpdateIframe" style="display: block; width: 100%;"></iframe>
+                                        </div>
+                                        <div class="advancedSettingsLoggingTab" id="logging" >
+                                            <iframe src="plugins/CapstoneSettings/advancedLogging.html" name="advancedLogging" height="350px" width="100%"  frameborder="0" scrolling="auto" id="advancedLoggingIframe" style="display: block; width: 100%;"></iframe>
                                         </div>
 
                                     </div>
@@ -441,11 +445,6 @@
             </g>
         </svg>
     </button>
-
-
-
-
-
     <div class="mainContainer">
         <div class="albumContainer">
             <div class="album">
@@ -456,7 +455,7 @@
             <h1 id ="title"></h1>
             <h2 id ="artist"></h2>
             <h2 id ="bitrate"></h2>
-            <h2 id ="samplerate"></h2>
+            <h2 id ="songinformation"></h2>
         </div>
         <div class="playerContainer">
             <div class="player">
@@ -498,7 +497,7 @@
         </div>
     </div>
     <button class="queuePanelBtn">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3em" height="6em" viewBox="0 0 24 24" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="6em" viewBox="0 0 24 24">
             <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                 <!--horizontal lines-->
                 <path d="M 3 9 L 21 9" />

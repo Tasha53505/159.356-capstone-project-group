@@ -1600,6 +1600,12 @@ SqueezeJS.UI.Bitrate = Ext.extend(SqueezeJS.UI.Component, {
 	}
 });
 
+SqueezeJS.UI.SongInformation = Ext.extend(SqueezeJS.UI.Component, {
+	onPlayerStateChange : function(result) {
+		this.el.update(SqueezeJS.SonginfoParser.songInformation(result, this.noLink));
+	}
+});
+
 SqueezeJS.UI.Playtime = Ext.extend(SqueezeJS.UI.Component, {
 	initComponent : function(config){
 		if (typeof config == 'string')
