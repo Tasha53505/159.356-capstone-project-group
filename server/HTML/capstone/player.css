@@ -118,7 +118,6 @@ body {
     border-radius: 20px;
     display:grid;
     background-color: #20294B;
-    position: relative;
 }
 
 .timeInfo{
@@ -454,4 +453,4 @@ body {
         margin-top: 20px;
         align-items: center;
     }
-}
+}*/
