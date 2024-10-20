@@ -408,11 +408,14 @@ body {
         background-size: contain;
     }
     
+    .album {
+        width: 75vw;
+    }
+    
     /* Playbar */
     #playtimePanel {
         width: 90%;
         height: 30px;
-        padding-left: 20px;
         position: relative;
         margin-top: 20px;
         align-items: center;
@@ -437,6 +440,10 @@ body {
         margin: 5px;
     }
 
+    .album {
+        width: 75vw;
+    }
+
     /* Buttons */
     .playButton, .pauseButton, .nextButton, .prevButton, .shuffleButtonInactive, .shuffleButtonPlaylist, .shuffleButtonSong .repeatButtonActivePlaylist, .repeatButtonActiveSong, .repeatButtonInactive {
         width: 7em;
@@ -448,9 +455,8 @@ body {
     #playtimePanel {
         width: 90%;
         height: 30px;
-        padding-left: 20px;
         position: relative;
         margin-top: 20px;
         align-items: center;
     }
-}*/
+}
