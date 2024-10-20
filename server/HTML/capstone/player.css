@@ -399,8 +399,6 @@ body {
     .control {
         width: 15vw;
         height: 15vw;
-        border-radius: 50%;
-        z-index: 100;
         margin: 10px;
     }
 
@@ -437,8 +435,6 @@ body {
     .control {
         width: 13vw;
         height: 13vw;
-        border-radius: 50%;
-        z-index: 100;
         margin: 5px;
     }
 
