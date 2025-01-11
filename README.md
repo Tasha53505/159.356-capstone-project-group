@@ -1,7 +1,7 @@
 # Audio Player
 By Tasha, Ben, Steve and Konrad
 ---
-#Installation Instructions
+# Installation Instructions
 
 To run the server on your local machine
 - Clone the repository https://github.com/Tasha53505/159.356-capstone-project-group
