@@ -1,6 +1,19 @@
 # Audio Player
 By Tasha, Ben, Steve and Konrad
 ---
+#Installation Instructions
+
+To run the server on your local machine
+- Clone the repository https://github.com/Tasha53505/159.356-capstone-project-group
+- At the current state of development, it has to be cloned into C:\Program Files and the folder then needs to be renamed to Squeezebox (Windows)
+- For Mac and Linux, download the LMS from https://lyrion.org/getting-started/ for your respective system and add the /server/html/capstone folder from the repository to your local install in the same location
+- Run the file SqzSvcMgr.exe and follow instructions to configure server
+- Open browser on http://localhost:9000/capstone/
+
+#Installation Instructions Via Video
+https://www.youtube.com/watch?v=BJuWqi9ydz4 
+
+---
 # Documentation
 ---
 
