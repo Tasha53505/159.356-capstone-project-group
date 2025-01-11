@@ -10,7 +10,7 @@ To run the server on your local machine
 - Run the file SqzSvcMgr.exe and follow instructions to configure server
 - Open browser on http://localhost:9000/capstone/
 
-#Installation Instructions Via Video
+# Installation Instructions Via Video
 https://www.youtube.com/watch?v=BJuWqi9ydz4 
 
 ---
